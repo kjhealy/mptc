@@ -1,0 +1,22 @@
+---
+title: "Modern Plain Text Computing"
+---
+
+```{r set-dependencies, include=FALSE}
+# Site-wide targets dependencies
+# withr::with_dir(here::here(), {
+#   targets::tar_load(project_zips)
+#   targets::tar_load(xaringan_slides)
+#   targets::tar_load(xaringan_pdfs)
+# })
+```
+
+![](assets/pdp11.gif "A working scale model of a DEC PDP 11/70.")
+
+This is the course website for the Fall 2023 mini-seminar SOCIOL 880-1 Modern Plain Text Computing, taught at [Duke University](https://duke.edu) by [Kieran Healy](https://kieranhealy.org/).
+
+## About this seminar
+
+- Consult the [syllabus](/syllabus/) for details about the class.
+
+- Consult the [schedule](/schedule/) for weekly topics and readings.

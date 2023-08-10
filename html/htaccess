@@ -1,0 +1,6 @@
+Options -Indexes
+
+<ifmodule mod_rewrite.c="">RewriteEngine on
+  RewriteCond %{HTTP_HOST} ^www\.visualizingsociety\.com$ [NC]
+  RewriteRule ^(.*)$ https://visualizingsociety.com/$1 [L,R=301]</ifmodule>
+

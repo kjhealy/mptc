@@ -1,0 +1,255 @@
+<?xml version="1.0" encoding="utf-8"?>
+  <style class="in-text" version="1.0" and="text" demote-non-dropping-particle="never" xmlns="http://purl.org/net/xbiblio/csl">
+    <info>
+    <title>Mark Sample Syllabus Citation Style</title>
+    <title-short>Syllabus</title-short>
+    <id>http://www.samplereality.com</id>
+    <link href="http://www.samplereality.com" rel="self"/>
+      <author>
+      <name>Mark Sample</name>
+      </author>
+      <category citation-format="author"/>
+        <category field="generic-base"/>
+          <summary>A modified version of the MLA 8th edition handbook style, for citing readings on syllabuses.</summary>
+          <updated>2017-08-19T13:45:54+00:00</updated>
+          <rights license="http://creativecommons.org/licenses/by-sa/3.0/">This work is licensed under a Creative Commons Attribution-ShareAlike 3.0 License</rights>
+            </info>
+            <locale xml:lang="en">
+              <date form="text">
+                <date-part name="day" suffix=" "/>
+                  <date-part name="month" suffix=" " form="short"/>
+                    <date-part name="year"/>
+                      </date>
+                      <terms>
+                      <term name="month-01" form="short">Jan.</term>
+                        <term name="month-02" form="short">Feb.</term>
+                          <term name="month-03" form="short">Mar.</term>
+                            <term name="month-04" form="short">Apr.</term>
+                              <term name="month-05" form="short">May</term>
+                                <term name="month-06" form="short">June</term>
+                                  <term name="month-07" form="short">July</term>
+                                    <term name="month-08" form="short">Aug.</term>
+                                      <term name="month-09" form="short">Sept.</term>
+                                        <term name="month-10" form="short">Oct.</term>
+                                          <term name="month-11" form="short">Nov.</term>
+                                            <term name="month-12" form="short">Dec.</term>
+                                              <term name="translator" form="short">trans.</term>
+                                                </terms>
+                                                </locale>
+                                                <macro name="author">
+                                                  <names variable="author" suffix=", ">
+                                                    <name and="text" delimiter-precedes-et-al="always" initialize="false" initialize-with=". " sort-separator=","/>
+                                                      <label prefix=","/>
+                                                        <substitute>
+                                                        <names variable="editor"/>
+                                                          <names variable="translator"/>
+                                                            <text macro="title-short"/>
+                                                              </substitute>
+                                                              </names>
+                                                              </macro>
+                                                              <macro name="author-short">
+                                                                <group delimiter=", ">
+                                                                  <names variable="author">
+                                                                    <name form="short" initialize-with=". " and="text"/>
+                                                                      <substitute>
+                                                                      <names variable="editor"/>
+                                                                        <names variable="translator"/>
+                                                                          <text macro="title-short"/>
+                                                                            </substitute>
+                                                                            </names>
+                                                                            <choose>
+                                                                            <if disambiguate="true">
+                                                                              <text macro="title-short"/>
+                                                                                </if>
+                                                                                </choose>
+                                                                                </group>
+                                                                                </macro>
+                                                                                <macro name="title">
+                                                                                  <choose>
+                                                                                  <if variable="container-title" match="any">
+                                                                                    <text variable="title" text-case="title" quotes="true"/>
+                                                                                      </if>
+                                                                                      <else>
+                                                                                      <text variable="title" font-style="italic" text-case="title"/>
+                                                                                        </else>
+                                                                                        </choose>
+                                                                                        </macro>
+                                                                                        <macro name="title-short">
+                                                                                          <choose>
+                                                                                          <if variable="container-title" match="any">
+                                                                                            <text variable="title" form="short" quotes="true" text-case="title"/>
+                                                                                              </if>
+                                                                                              <else>
+                                                                                              <text variable="title" form="short" font-style="italic" text-case="title"/>
+                                                                                                </else>
+                                                                                                </choose>
+                                                                                                </macro>
+                                                                                                <macro name="container-title">
+                                                                                                  <text variable="container-title" text-case="title" font-style="italic" prefix="from "/>
+                                                                                                    </macro>
+                                                                                                    <macro name="other-contributors">
+                                                                                                      <choose>
+                                                                                                      <if variable="container-title" match="any">
+                                                                                                        <names variable="editor" delimiter=", " prefix=" ">
+                                                                                                          <label form="verb" suffix=" "/>
+                                                                                                            <name and="text"/>
+                                                                                                              </names>
+                                                                                                              </if>
+                                                                                                              <else>
+                                                                                                              <names variable="editor translator" delimiter=", ">
+                                                                                                                <label form="verb" suffix=" " text-case="capitalize-first"/>
+                                                                                                                  <name and="text"/>
+                                                                                                                    </names>
+                                                                                                                    </else>
+                                                                                                                    </choose>
+                                                                                                                    </macro>
+                                                                                                                    <macro name="version">
+                                                                                                                      <group delimiter=", ">
+                                                                                                                        <text variable="version"/>
+                                                                                                                          </group>
+                                                                                                                          </macro>
+                                                                                                                          <macro name="number">
+                                                                                                                            <group delimiter=", ">
+                                                                                                                              <group>
+                                                                                                                              <choose>
+                                                                                                                              <if variable="edition container-title" match="any">
+                                                                                                                                <group delimiter=" "/>
+                                                                                                                                  </if>
+                                                                                                                                  <else-if variable="author editor" match="all">
+                                                                                                                                    <group delimiter=" ">
+                                                                                                                                      <text term="volume" form="short"/>
+                                                                                                                                        <text variable="volume"/>
+                                                                                                                                          </group>
+                                                                                                                                          </else-if>
+                                                                                                                                          <else>
+                                                                                                                                          <group delimiter=" ">
+                                                                                                                                            <text term="volume" form="short" text-case="capitalize-first"/>
+                                                                                                                                              <text variable="volume"/>
+                                                                                                                                                </group>
+                                                                                                                                                </else>
+                                                                                                                                                </choose>
+                                                                                                                                                </group>
+                                                                                                                                                <group delimiter=" "/>
+                                                                                                                                                  <choose>
+                                                                                                                                                  <if type="report">
+                                                                                                                                                    <text variable="genre"/>
+                                                                                                                                                      </if>
+                                                                                                                                                      </choose>
+                                                                                                                                                      <text variable="number"/>
+                                                                                                                                                        </group>
+                                                                                                                                                        </macro>
+                                                                                                                                                        <macro name="publisher">
+                                                                                                                                                          <text variable="publisher"/>
+                                                                                                                                                            </macro>
+                                                                                                                                                            <macro name="publication-date">
+                                                                                                                                                              <choose>
+                                                                                                                                                              <if type="book chapter paper-conference motion_picture" match="any">
+                                                                                                                                                                <date date-parts="year" form="numeric" variable="issued" prefix=" (" suffix=")"/>
+                                                                                                                                                                  </if>
+                                                                                                                                                                  <else-if type="article-journal article-magazine webpage" match="any">
+                                                                                                                                                                    <date date-parts="year" form="text" variable="issued" prefix=" (" suffix=")"/>
+                                                                                                                                                                      </else-if>
+                                                                                                                                                                      <else-if type="speech" match="none">
+                                                                                                                                                                        <date variable="issued" form="text"/>
+                                                                                                                                                                          </else-if>
+                                                                                                                                                                          </choose>
+                                                                                                                                                                          </macro>
+                                                                                                                                                                          <macro name="location">
+                                                                                                                                                                            <group delimiter=", ">
+                                                                                                                                                                              <group delimiter=" " prefix=", ">
+                                                                                                                                                                                <label variable="page" form="short"/>
+                                                                                                                                                                                  <text variable="page"/>
+                                                                                                                                                                                    </group>
+                                                                                                                                                                                    <choose>
+                                                                                                                                                                                    <if variable="source" match="none">
+                                                                                                                                                                                      <choose>
+                                                                                                                                                                                      <if variable="URL">
+                                                                                                                                                                                        <text macro="URI"/>
+                                                                                                                                                                                          </if>
+                                                                                                                                                                                          </choose>
+                                                                                                                                                                                          </if>
+                                                                                                                                                                                          </choose>
+                                                                                                                                                                                          </group>
+                                                                                                                                                                                          </macro>
+                                                                                                                                                                                          <macro name="container2-title">
+                                                                                                                                                                                            <group delimiter=", ">
+                                                                                                                                                                                              <choose>
+                                                                                                                                                                                              <if type="speech">
+                                                                                                                                                                                                <text variable="event"/>
+                                                                                                                                                                                                  <date variable="event-date" form="text"/>
+                                                                                                                                                                                                    <text variable="event-place"/>
+                                                                                                                                                                                                      </if>
+                                                                                                                                                                                                      </choose>
+                                                                                                                                                                                                      <text variable="archive"/>
+                                                                                                                                                                                                        <text variable="archive-place"/>
+                                                                                                                                                                                                          <text variable="archive_location"/>
+                                                                                                                                                                                                            </group>
+                                                                                                                                                                                                            </macro>
+                                                                                                                                                                                                            <macro name="container2-location">
+                                                                                                                                                                                                              <choose>
+                                                                                                                                                                                                              <if variable="source URL" match="all">
+                                                                                                                                                                                                                <group delimiter=", ">
+                                                                                                                                                                                                                  <text variable="source" font-style="italic"/>
+                                                                                                                                                                                                                    <text macro="URI"/>
+                                                                                                                                                                                                                      </group>
+                                                                                                                                                                                                                      </if>
+                                                                                                                                                                                                                      </choose>
+                                                                                                                                                                                                                      </macro>
+                                                                                                                                                                                                                      <macro name="URI"/>
+                                                                                                                                                                                                                        <macro name="accessed">
+                                                                                                                                                                                                                          <choose>
+                                                                                                                                                                                                                          <if variable="issued" match="none">
+                                                                                                                                                                                                                            <group delimiter=" ">
+                                                                                                                                                                                                                              <text term="accessed" text-case="capitalize-first"/>
+                                                                                                                                                                                                                                <date variable="accessed" form="text"/>
+                                                                                                                                                                                                                                  </group>
+                                                                                                                                                                                                                                  </if>
+                                                                                                                                                                                                                                  </choose>
+                                                                                                                                                                                                                                  </macro>
+                                                                                                                                                                                                                                  <citation et-al-min="3" et-al-use-first="1" disambiguate-add-names="true" disambiguate-add-givenname="true">
+                                                                                                                                                                                                                                    <layout prefix="(" suffix=")" delimiter="; ">
+                                                                                                                                                                                                                                      <choose>
+                                                                                                                                                                                                                                      <if locator="page">
+                                                                                                                                                                                                                                        <group delimiter=" ">
+                                                                                                                                                                                                                                          <text macro="author-short"/>
+                                                                                                                                                                                                                                            <text variable="locator"/>
+                                                                                                                                                                                                                                              </group>
+                                                                                                                                                                                                                                              </if>
+                                                                                                                                                                                                                                              <else>
+                                                                                                                                                                                                                                              <group delimiter=", ">
+                                                                                                                                                                                                                                                <text macro="author-short"/>
+                                                                                                                                                                                                                                                  <group>
+                                                                                                                                                                                                                                                  <label variable="locator" form="short"/>
+                                                                                                                                                                                                                                                    <text variable="locator"/>
+                                                                                                                                                                                                                                                      </group>
+                                                                                                                                                                                                                                                      </group>
+                                                                                                                                                                                                                                                      </else>
+                                                                                                                                                                                                                                                      </choose>
+                                                                                                                                                                                                                                                      </layout>
+                                                                                                                                                                                                                                                      </citation>
+                                                                                                                                                                                                                                                      <bibliography et-al-min="3" et-al-use-first="1" subsequent-author-substitute="---" entry-spacing="0" line-spacing="2">
+                                                                                                                                                                                                                                                        <sort>
+                                                                                                                                                                                                                                                        <key macro="author"/>
+                                                                                                                                                                                                                                                          <key variable="title"/>
+                                                                                                                                                                                                                                                            </sort>
+                                                                                                                                                                                                                                                            <layout>
+                                                                                                                                                                                                                                                            <group delimiter=" ">
+                                                                                                                                                                                                                                                              <text macro="author"/>
+                                                                                                                                                                                                                                                                <text macro="title"/>
+                                                                                                                                                                                                                                                                  <date variable="original-date" form="numeric" date-parts="year"/>
+                                                                                                                                                                                                                                                                    <group>
+                                                                                                                                                                                                                                                                    <text macro="container-title"/>
+                                                                                                                                                                                                                                                                      <text macro="other-contributors"/>
+                                                                                                                                                                                                                                                                        <text macro="version"/>
+                                                                                                                                                                                                                                                                          <text macro="number"/>
+                                                                                                                                                                                                                                                                            <text macro="publication-date"/>
+                                                                                                                                                                                                                                                                              <text macro="location"/>
+                                                                                                                                                                                                                                                                                </group>
+                                                                                                                                                                                                                                                                                <group delimiter=", ">
+                                                                                                                                                                                                                                                                                  <text macro="container2-title"/>
+                                                                                                                                                                                                                                                                                    <text macro="container2-location"/>
+                                                                                                                                                                                                                                                                                      </group>
+                                                                                                                                                                                                                                                                                      </group>
+                                                                                                                                                                                                                                                                                      </layout>
+                                                                                                                                                                                                                                                                                      </bibliography>
+                                                                                                                                                                                                                                                                                      </style>

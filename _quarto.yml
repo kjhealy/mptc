@@ -1,0 +1,106 @@
+project:
+  type: website
+  resources:
+    - "files/"
+  preview:
+    port: 27514
+
+## Freeze seems to interact badly with the schedule.qmd / schedule.csv relation
+# execute:
+#   freeze: auto  # Re-render only when source changes
+
+bibliography: files/bib/references.bib
+link-citations: false
+csl: files/bib/chicago-syllabus-no-bib.csl
+description-meta: "A mini-seminar on the tools you use every day but no-one teaches you about."
+
+website:
+  title: "Modern Plain Text Computing"
+  site-url: "https://mptc.io"
+  navbar:
+    pinned: true
+    right:
+      - text: "Syllabus"
+        file: syllabus/index.qmd
+      - text: "Schedule"
+        file: schedule/index.qmd
+      - text: "Content"
+        file: content/index.qmd
+      - text: "Examples"
+        file: example/index.qmd
+      - text: "Assignments"
+        file: assignment/index.qmd
+
+  sidebar:
+    - title: "Content"
+      style: "docked"
+      search: false
+      background: dark
+      contents:
+        - section: "Overview"
+          contents:
+            - content/index.qmd
+        - section: "Topics"
+          contents:
+            - text: "01: "
+              file: content/01-.qmd
+            - text: "02: "
+              file: content/02-.qmd
+            - text: "03: "
+              file: content/03-.qmd
+            - text: "04: "
+              file: content/04-.qmd
+            - text: "05: "
+              file: content/05-content.qmd
+            - text: "06: "
+              file: content/06-.qmd
+
+    - title: "Assignments"
+      contents:
+        - section: "Overview"
+          contents:
+            - assignment/index.qmd
+        - section: "Problem sets"
+          contents:
+            - assignment/01-problem-set.qmd
+            - assignment/02-problem-set.qmd
+            - assignment/03-problem-set.qmd
+            - assignment/04-problem-set.qmd
+            - assignment/05-problem-set.qmd
+            - assignment/06-problem-set.qmd
+
+    - title: "Examples"
+      contents:
+        - section: "Overview"
+          contents:
+            - example/index.qmd
+        - section: "How-To"
+          contents:
+            - text: "01: "
+              file: example/01-example.qmd
+            - text: "02: "
+              file: example/02-example.qmd
+            - text: "03: "
+              file: example/03-example.qmd
+            - text: "04: "
+              file: example/04-example.qmd
+            - text: "05: "
+              file: example/05-example.qmd
+            - text: "06: "
+              file: example/06-example.qmd
+
+  page-footer:
+    left: |
+      Content {{< fa copyright >}} {{< var course.copyright_year >}} by [{{< var instructor.name_no_title >}}]({{< var instructor.url >}}) <br>
+      See the [About page](/about/) page for credit information.
+    right: |
+      Made with {{< fa brands r-project >}} and [Quarto](https://quarto.org/)<br>
+      [View the source at {{< fa brands github >}} GitHub]({{< var course.github >}})
+
+format:
+  html:
+    theme: html/custom.scss
+    highlight-style: html/catppuccin-macchiato.theme
+    toc: true
+    css: html/tenso-berkeley.css
+

@@ -1,0 +1,29 @@
+author: Kieran Healy
+
+instructor:
+  name: Kieran Healy
+  name_no_title: Kieran Healy
+  email: kieran.healy@duke.edu
+  url: "https://www.kieranhealy.org"
+  mastodon: kjhealy
+  github: kjhealy
+  office: "268 Reuben-Cooke"
+
+course:
+  number: "SOCIOL 880-1"
+  semester: "Fall 2023"
+  days: "Tuesdays"
+  time: "1:25pm--3:55pm"
+  location: "Trent Hall 038B"
+  dates: "08/28/2023 -- 10/14/2023"
+  github: "https://www.github.com/kjhealy/mptc"
+  url: "https://mptc.io"
+  copyright_year: "2023"
+
+university:
+  name: Duke University
+  url: "https://www.duke.edu"
+
+school:
+  name: Sociology Department
+  url: "https://sociology.duke.edu/"
