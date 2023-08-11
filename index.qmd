@@ -11,12 +11,29 @@ title: "Modern Plain Text Computing"
 # })
 ```
 
-![](assets/pdp11.gif "A working scale model of a DEC PDP 11/70.")
-
 This is the course website for the Fall 2023 mini-seminar SOCIOL 880-1 Modern Plain Text Computing, taught at [Duke University](https://duke.edu) by [Kieran Healy](https://kieranhealy.org/).
 
-## About this seminar
+## Motivation
 
-- Consult the [syllabus](/syllabus/) for details about the class.
+Researchers depend on computers to get their work done. But they do not understand how to effectively use their computers. I do not mean that it's a shame that everyone is not a computer scientist or an electrical engineer ready and able to *make* tools themselves from the ground up. Rather, as researchers working with data and records (both of a "quantitative" and "qualitative" nature) we have a set of devices and tools that we are more or less obliged to work with, but we are very rarely explicitly taught how to use them or why they work that way. Instead, we are left to fend for ourselves and pick things up informally; or instructors in statistics and methods courses have to spend time instructing people on how they work; or we end up adopting an attitude of sullen resentment towards devices we will be sitting in front of for hours every day for the rest of our professional lives.
 
-- Consult the [schedule](/schedule/) for weekly topics and readings.
+![A working scale replica of a Digital Equipment Corporation PDP-11/70, one of the mainstays of computing in the 1970s.](assets/pdp11-800.gif "A working scale model of a DEC PDP 11/70."){#fig-pdp11}
+
+
+That is bad. This course is meant to help. The coding and data analysis tools we have are powerful and for the most part meant to allow research products to be opened up and inspected. But the way they work runs against the grain of everyday which (for good reasons) hides implementation details and focuses on single-purpose tasks. We have a suite of powerful and very useful tools, some of which are very old and very stable, most of which are developed in the open, many of which are supported by helpful communities, and almost all of which are available for free. But people tend not to be familiar with how to use them when they are just starting out. This is not their fault, but it does waste a great deal of time and cause immense frustration all round.
+
+![A Macintosh SE/30, made in 1989, running one of the first-available versions of R, written in 1995.](assets/se-30-r.jpg "A Macintosh SE/30, made in 1989, running one of the first-available versions of R, written in 1995."){#fig-pdp11}
+
+Over the six weeks of this mini-seminar we will learn about the elements of plain-text computing tools that every graduate student in the social sciences should have some basic knowledge of. These include: 
+
+- The Unix shell and the file system
+- Text editing and editors
+- The command line environment
+- Version control
+- Build systems
+
+Throughout the course we will move back and forth between two levels. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. At this level we will focus on examples that come up in our everyday work. Second, and more generally, we will try to develop a *way of thinking* about these tools. That is, we will try to understand *why they work the way they do*. We need to develop this sense for how things work because there are far too many particular tools to learn at once, and we don't need to learn them all at once in any case. Rather, we should develop the second-order ability---and fortitude---to learn how to learn more, and strategies to figure out problems as they (inevitably) arise, even when they are extremely annoying.
+
+## Schedule
+
+Consult the [course schedule page](/schedule/) for weekly topics, readings, and assignments.
