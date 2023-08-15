@@ -19,7 +19,7 @@ tar_option_set(
 # Deployment flag—one of two tests to deploy_site target.
 # See deploy_site below for the user condition
 
-Sys.setenv(DEPLOY_MPTC = FALSE)
+Sys.setenv(DEPLOY_MPTC = TRUE)
 
 # There's no way to get a relative path directly out of here::here(), but
 # fs::path_rel() works fine with it (see
