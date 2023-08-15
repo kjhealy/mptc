@@ -5,3 +5,27 @@
 
 /.quarto/
 /_site/
+
+/_freeze/
+/_targets/
+
+about/*.pdf
+about/*.html
+assignment/*.html
+example/*.html
+schedule/*.html
+syllabus/*.html
+
+slides/*.pdf
+slides/*.html
+slides/**/*_cache/*
+slides/libs/*
+projects/*.zip
+
+# knitr and caching
+**/*_files/*
+**/*_cache/*
+
+README.html
+
+/.luarc.json

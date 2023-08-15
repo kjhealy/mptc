@@ -1,5 +1,7 @@
-# Modern Plain Text Computing
+# README File
 
-## Kieran Healy
+<!-- README.md is generated from README.qmd. Please edit that file -->
 
-Website for Fall 2023 mini-seminar. 
+# SOCIOL 880-1 / Modern Plain Text Computing / Fall 2023
+
+## Kieran Healy / Duke University

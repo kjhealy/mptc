@@ -1,3 +1,4 @@
+version: 1.3
 author: Kieran Healy
 
 instructor:
@@ -11,6 +12,7 @@ instructor:
 
 course:
   number: "SOCIOL 880-1"
+  title: "Modern Plain Text Computing"
   semester: "Fall 2023"
   days: "Tuesdays"
   time: "1:25pm--3:55pm"

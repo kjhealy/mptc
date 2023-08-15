@@ -5,11 +5,9 @@ title: "Modern Plain Text Computing"
 ```{r set-dependencies, include=FALSE}
 # Site-wide targets dependencies
 # withr::with_dir(here::here(), {
-#   targets::tar_load(project_zips)
-#   targets::tar_load(xaringan_slides)
-#   targets::tar_load(xaringan_pdfs)
 # })
 ```
+
 
 This is the course website for the Fall 2023 mini-seminar SOCIOL 880-1, Modern Plain Text Computing, taught at [Duke University](https://duke.edu) by [Kieran Healy](https://kieranhealy.org/).
 
@@ -28,14 +26,25 @@ The fragmented, messy, and multifacted tasks associated with scholarly research 
 
 Over the six weeks of this mini-seminar we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are: 
 
-- The file system and the Unix way of thinking _or_  **The Idea of Your Computer**  
-- The command line environment and the terminal _or_ **The Idea of a Shell**
-- Editors and regular expressions _or_ **The Idea of Plain Text** 
-- Git and GitHub _or_ **The Idea of Version Control**
-- Make and {{targets}} _or_  **The Idea of a Build System**
-- Servers and APIs _or_ **The Idea of a Network**
+1. **The Idea of Your Computer**  
+    The file system and the Unix way of thinking
 
-The reason I list them in this way is that throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. At this level we will focus on examples that come up in our everyday work. But second, and more generally, we will try to develop a *way of thinking* about them. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. That way, we can foster strategies to solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating. As we shall hopefully see, each of the particular thing we learn about is really an example of one way to solve a specific sort of recurring problem in our work. 
+2. **The Idea of a Shell**  
+    The terminal and the command line environment
+
+3. **The Idea of Plain Text**  
+    Text editors and regular expressions
+
+4. **The Idea of Version Control**  
+    Git and GitHub    
+
+5. **The Idea of a Build System**  
+    Make, targets, and Quarto
+
+6. **The Idea of the Network**  
+    Servers, websites, and APIs
+
+Or to put the topics a little differently, we will try to learn the elements of (1) How to name things, (2) How to find things, (3) How to slice and dice things, (4) How to keep track of things, (5) How to assemble things, and (6) How to talk to things. The reason I list them with a header and a tag line is that throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. That's the stuff mentioned in the tag lines. At this level we will focus on examples that come up in our everyday work. But second, and more generally, we will try to develop a *way of thinking* about them. That's the idea in the header. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. That way, we can foster strategies to solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating. As we shall hopefully see, each of the particular thing we learn about is really an example of one way to solve a specific sort of recurring problem in our work. The 
 
 ## Schedule
 

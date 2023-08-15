@@ -1,0 +1,27 @@
+---
+title: "README File"
+format: gfm
+---
+
+```{r}
+#| include: false
+yaml_vars <- yaml::read_yaml(here::here("_variables.yml"))
+```
+
+
+<!-- README.md is generated from README.qmd. Please edit that file -->
+
+# `r yaml_vars$course$number` / `r yaml_vars$course$title` / `r yaml_vars$course$semester`
+
+## `r yaml_vars$instructor$name` / `r yaml_vars$university$name`
+
+
+
+```{r}
+#| echo: false
+#| eval: true
+withr::with_dir(here::here(), {
+  targets::tar_load(workflow_graph)
+})
+```
+

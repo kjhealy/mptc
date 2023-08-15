@@ -17,6 +17,7 @@ description-meta: "A mini-seminar on the tools you use every day but no-one teac
 website:
   title: "Modern Plain Text Computing"
   site-url: "https://mptc.io"
+  repo-url: "https://github.com/kjhealy/mptc"
   navbar:
     pinned: true
     right:
@@ -44,16 +45,6 @@ website:
           contents:
             - text: "01: "
               file: content/01-.qmd
-            - text: "02: "
-              file: content/02-.qmd
-            - text: "03: "
-              file: content/03-.qmd
-            - text: "04: "
-              file: content/04-.qmd
-            - text: "05: "
-              file: content/05-content.qmd
-            - text: "06: "
-              file: content/06-.qmd
 
     - title: "Assignments"
       contents:
@@ -63,11 +54,6 @@ website:
         - section: "Problem sets"
           contents:
             - assignment/01-problem-set.qmd
-            - assignment/02-problem-set.qmd
-            - assignment/03-problem-set.qmd
-            - assignment/04-problem-set.qmd
-            - assignment/05-problem-set.qmd
-            - assignment/06-problem-set.qmd
 
     - title: "Examples"
       contents:
@@ -78,16 +64,6 @@ website:
           contents:
             - text: "01: "
               file: example/01-example.qmd
-            - text: "02: "
-              file: example/02-example.qmd
-            - text: "03: "
-              file: example/03-example.qmd
-            - text: "04: "
-              file: example/04-example.qmd
-            - text: "05: "
-              file: example/05-example.qmd
-            - text: "06: "
-              file: example/06-example.qmd
 
   page-footer:
     left: |
@@ -99,6 +75,8 @@ website:
 
 format:
   html:
+    code-fold: true
+    code-tools: true
     theme: html/custom.scss
     highlight-style: html/catppuccin-macchiato.theme
     toc: true
