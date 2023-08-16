@@ -37,3 +37,14 @@ withr::with_dir(here::here(), {
 })
 ```
 
+```{r}
+#| echo: false
+#| results: asis
+
+# Make sure there are newlines between the code block boundaries and the output
+# from `workflow`, which also needs to be separated by newlines
+cat("``` mermaid\n")
+cat(workflow_graph, sep = "\n")
+cat("\n```")
+```
+
