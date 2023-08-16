@@ -13,7 +13,7 @@ This is the course website for the {{< var course.semester >}} mini-seminar {{< 
 
 ## Motivation
 
-Researchers depend on computer software to get their work done. But often, they do not know enough about how their computers work. This makes their lives more difficult. I don't mean it's a shame not everyone is a software engineer ready and able to write applications from the ground up. Rather, as researchers working with data of various kinds, we just don't make the best use our computers. Nor are we encouraged to reflect on why they work the way they do. Instead we end up fending for ourselves and picking things up informally. Or instead of getting on with the task at hand course instructors are forced to spend time bringing people up to speed about where that document went, or what a file is, or why the stupid thing stopped working just now. In the worst case, we never get a feel for this stuff at all and end up marinading in an admixture of magical thinking and sour resentment towards the machines we sit in front of for hours each day.
+Researchers depend on computer software to get their work done. But often, they do not know enough about how their computers work. This makes their lives more difficult. I don't mean it's a shame not everyone is a software engineer ready and able to write applications from the ground up. Rather, as researchers working with data of various kinds, we just don't make the best use our computers. Nor are we encouraged to reflect on why they work the way they do. Instead we end up fending for ourselves and picking things up informally. Or instead of getting on with the task at hand course instructors are forced to spend time bringing people up to speed about where that document went, or what a file is, or why the stupid thing stopped working just now. In the worst case, we never get a feel for this stuff at all and end up marinating in an admixture of magical thinking and sour resentment towards the machines we sit in front of for hours each day.
 
 ![A working [scale replica of a Digital Equipment Corporation PDP-11/70](https://kieranhealy.org/blog/archives/2021/10/09/building-a-pdp-11/70-kit/), one of the mainstays of computing in the 1970s. As annoying as your laptop undoubtedly is, be grateful that you do not have to program this machine using the bank of switches at the front, or interpret its output by reading the [blinkenlights](https://en.wikipedia.org/wiki/Blinkenlights).](assets/00-site/00-pdp11-800.gif "A working scale model of a DEC PDP 11/70."){#fig-pdp11}
 
@@ -29,24 +29,24 @@ To help address these challenges, modern computing platforms provide us with a s
 Over the six weeks of this mini-seminar we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are: 
 
 1. **The Idea of Your Computer**  
-    The file system and the Unix way of thinking
+    The file system; the Unix way of thinking
 
 2. **The Idea of a Shell**  
-    The terminal and the command line environment
+    The terminal; finding, listing, and inspecting things
 
 3. **The Idea of Plain Text**  
-    Text editors and regular expressions
+    Text editors; editing; regular expressions
 
 4. **The Idea of Version Control**  
     Git and GitHub    
 
 5. **The Idea of a Build System**  
-    Make, targets, and Quarto
+    Make, targets, and Quarto; IDEs
 
 6. **The Idea of the Network**  
     Servers, websites, and APIs
 
-Or to put the topics a little differently, we will try to learn the elements of (1) How to name things, (2) How to find things, (3) How to slice and dice things, (4) How to keep track of things, (5) How to assemble things, and (6) How to talk to things. The reason I list them with a header and a tag line is that throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. That's the stuff mentioned in the tag lines. At this level we will focus on examples that come up in our everyday work. But second, and more generally, we will try to develop a *way of thinking* about them. That's the idea in the header. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. That way, we can foster strategies to solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating. As we shall hopefully see, each particular thing we learn about is really a means of solving a common problem we face in our work. 
+Or to put the topics a little differently, we will try to learn the elements of (1) How to name things, (2) How to find and inspect things, (3) How to slice and dice things, (4) How to keep track of things, (5) How to assemble things, and (6) How to talk to things. The reason I list them with a header and a tag line is that throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. That's the stuff mentioned in the tag lines. At this level we will focus on examples that come up in our everyday work. As we shall see, each particular thing we learn about is a means of doing something useful. But second, and more generally, we will try to develop a *way of thinking*. That's the idea in the header. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. We want to cultivate an attitude of determined curiosity that will help us solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating.  
 
 ## Schedule
 
