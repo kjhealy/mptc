@@ -9,7 +9,7 @@ title: "Modern Plain Text Computing"
 ```
 
 
-This is the course website for the Fall 2023 mini-seminar SOCIOL 880-1, Modern Plain Text Computing, taught at [Duke University](https://duke.edu) by [Kieran Healy](https://kieranhealy.org/).
+This is the course website for the {{< var course.semester >}} mini-seminar {{< var course.number >}}, {{< var course.title >}}, taught at [{{< var university.name >}}]({{< var university.url >}}) by [{{< var instructor.name >}}]({{< var instructor.url >}}).
 
 ## Motivation
 
