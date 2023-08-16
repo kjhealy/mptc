@@ -30,7 +30,10 @@ Here is the dependency graph for the site build.
 ```{r}
 #| echo: false
 #| eval: true
-#| results: asis
-cat(c("```{mermaid}", targets::tar_mermaid(), "```"), sep = "\n")
+#| collapse: true
+
+withr::with_dir(here::here(), {
+  targets::tar_load(workflow_graph)
+})
 ```
 
