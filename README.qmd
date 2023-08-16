@@ -5,23 +5,32 @@ format: gfm
 
 ```{r}
 #| include: false
+
+## Using the {{< var >}} shortcode doesn't work in the README for some reason. 
 yaml_vars <- yaml::read_yaml(here::here("_variables.yml"))
 ```
 
 
 <!-- README.md is generated from README.qmd. Please edit that file -->
 
-# `r yaml_vars$course$number` / `r yaml_vars$course$title` / `r yaml_vars$course$semester`
 
-## `r yaml_vars$instructor$name` / `r yaml_vars$university$name`
+# `r yaml_vars$course$number`: `r yaml_vars$course$title` 
 
+- Taught by `r yaml_vars$instructor$name`, `r yaml_vars$university$name`
+- `r yaml_vars$course$semester`
 
+This is the source code for the course website at <`r yaml_vars$course$url`>
+
+The site is a [Quarto](https://quarto.org) project. It uses [{{renv}}](https://rstudio.github.io/renv/) to manage dependencies and [{{targets}}](https://docs.ropensci.org/targets/) to manage the site building. 
+
+## Everything is a DAG now
+
+Here is the dependency graph for the site build.
 
 ```{r}
 #| echo: false
 #| eval: true
-withr::with_dir(here::here(), {
-  targets::tar_load(workflow_graph)
-})
+#| results: asis
+cat(c("```{mermaid}", targets::tar_mermaid(), "```"), sep = "\n")
 ```
 
