@@ -8,16 +8,15 @@ save_ical <- function(df, path) {
   return(path)
 }
 
-
 format_days <- function(date, day2, date_end) {
   case_when(
     is.na(date_end) & !is.na(date) & !is.na(day2) ~
-      glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'),
+      glue('{format.Date(date, "%b %e")} / {format.Date(day2, "%b %e")}'),
     is.na(date_end) & !is.na(date) & is.na(day2) ~
-      glue('{format(date, "%b %e")}</strong>'),
+      glue('{format.Date(date, "%b %e")}</strong>'),
     !is.na(date_end) & !is.na(date) & is.na(day2) ~
-      glue('Due <strong>{format(date_end, "%b %e")}</strong>'),
-    TRUE ~ glue('{format(date, "%b %e")} / {format(day2, "%b %e")}')
+      glue('Due <strong>{format.Date(date_end, "%b %e")}</strong>'),
+    .default = glue('{format.Date(date, "%b %e")} / {format.Date(day2, "%b %e")}')
   )
 }
 
@@ -27,6 +26,7 @@ format_days <- function(date, day2, date_end) {
 # having to edit the file as the schedule changed; just easier to do in Excel
 build_schedule_for_page <- function(schedule_file) {
   schedule <- readxl::read_xlsx(schedule_file) %>%
+    mutate(col_date = format_days(date, day2, date_end)) %>%
     mutate(group = fct_inorder(group)) %>%
     mutate(subgroup = fct_inorder(subgroup)) %>%
     mutate(var_note = ifelse(!is.na(note),
@@ -47,11 +47,8 @@ build_schedule_for_page <- function(schedule_file) {
     mutate(var_assignment = ifelse(!is.na(assignment),
                                    glue('<a href="{assignment}.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>'),
                                    glue('<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>'))) %>%
-    # mutate(col_date = ifelse(is.na(date_end),
-    #                          glue('<strong>{format(date, "%B %e")}</strong>'),
-    #                          glue('<strong>{format(date, "%B %e")}</strong>–<strong>{format(date_end, "%B %e")}</strong>'))) %>%
     mutate(col_date = format_days(date, day2, date_end)) %>%
-    mutate(col_title = glue('{var_title}{var_deadline}{var_note}')) %>%
+    mutate(col_title = glue('<strong>{var_title}</strong>{var_deadline}{var_note}')) %>%
     mutate(col_content = var_content,
            col_example = var_example,
            col_assignment = var_assignment)
