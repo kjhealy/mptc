@@ -1,0 +1,29 @@
+---
+title: "Assignments"
+---
+
+The main goals of this class are to help you design, critique, code, and run rigorous, valid, and feasible evaluations of public sector programs. Each type of assignment in this class is designed to help you achieve one or more of these goals.
+
+
+## Problem sets
+
+As we go through the semester we will be thinking about kinds of data visualization and figuring out how to make our visualizations in R. Most weeks you will complete a problem set that will let you practice what you have learned. 
+
+You need to show that you made a good faith effort to work each question. I will not grade these in detail. The problem sets will be graded using a check system:
+
+- ✔+: Assignment is fully completed. Every question was attempted and answered, and most answers are correct. Document is clean and easy to follow. Work is very good or better. I will not assign these often.
+- ✔: Assignment is mostly complete; most answers are correct. **This is the expected level of performance.**
+- ✔−: Assignment is less than 70% complete and/or most answers are incorrect. This indicates that you need to improve next time. 
+- No grade: Assignment was not turned in on time, or at all. 
+
+You may work together on the problem sets, but *you must turn in your own answers.* If you collaborate with someone you must note who participated in the group in your assignment.
+
+
+## Midterm
+
+
+## Final project
+
+[Details for the final project will appear here.](/assignment/final-project.qmd)
+
+There is no final exam. This project is your final exam.

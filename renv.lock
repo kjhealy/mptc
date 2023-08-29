@@ -514,6 +514,30 @@
       "Repository": "CRAN",
       "Hash": "f7736a18de97dea803bde0a2daaafb27"
     },
+    "flipbookr": {
+      "Package": "flipbookr",
+      "Version": "0.2.0",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "flipbookr",
+      "RemoteUsername": "kjhealy",
+      "RemoteRef": "quarto",
+      "RemoteSha": "adc923cd17a8c65cd4840336127a97d1d5d4acd2",
+      "Requirements": [
+        "dplyr",
+        "glue",
+        "knitr",
+        "magrittr",
+        "purrr",
+        "rmarkdown",
+        "stringi",
+        "stringr",
+        "tibble",
+        "tidyr"
+      ],
+      "Hash": "df3ecc1856840f49594d47f02d7eb730"
+    },
     "fontawesome": {
       "Package": "fontawesome",
       "Version": "0.5.1",
@@ -1071,8 +1095,15 @@
     },
     "kjhslides": {
       "Package": "kjhslides",
-      "Version": "0.0.11.9000",
-      "Source": "unknown",
+      "Version": "0.0.12.9000",
+      "Source": "GitHub",
+      "Remotes": "kjhealy/myriad, jumpingrivers/namer, gadenbuie/xaringanExtra",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "kjhslides",
+      "RemoteUsername": "kjhealy",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "1a7e4185e26a12878ff816cd8e08a32fe19e5212",
       "Requirements": [
         "dplyr",
         "fs",
@@ -1093,7 +1124,7 @@
         "tools",
         "xaringan"
       ],
-      "Hash": "a4eb9fbb2ce7c0daf07b451f39e1eccb"
+      "Hash": "56b573c1a4c1c995a3c9b7c30845c0dc"
     },
     "knitr": {
       "Package": "knitr",
@@ -1277,8 +1308,13 @@
     "namer": {
       "Package": "namer",
       "Version": "0.1.6",
-      "Source": "Repository",
-      "Repository": "CRAN",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "namer",
+      "RemoteUsername": "jumpingrivers",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "311c5a82e08f4c0dd699b1e2b3ab1bbfa5099f0c",
       "Requirements": [
         "cli",
         "dplyr",
@@ -1289,7 +1325,7 @@
         "rstudioapi",
         "tibble"
       ],
-      "Hash": "14eedfb618c9e7dd4813dbead28935f3"
+      "Hash": "adcf0a31a84fc754ccde8d0c1d9654c9"
     },
     "nlme": {
       "Package": "nlme",
@@ -1314,6 +1350,16 @@
         "askpass"
       ],
       "Hash": "273a6bb4a9844c296a459d2176673270"
+    },
+    "palmerpenguins": {
+      "Package": "palmerpenguins",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "6c6861efbc13c1d543749e9c7be4a592"
     },
     "parallelly": {
       "Package": "parallelly",
@@ -1700,6 +1746,22 @@
         "utils"
       ],
       "Hash": "c12e756cf947e58b0f2c2a520521a5a8"
+    },
+    "socviz": {
+      "Package": "socviz",
+      "Version": "1.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "fs",
+        "graphics",
+        "magrittr",
+        "rlang",
+        "tibble"
+      ],
+      "Hash": "dc589d0ae9a2979124f11cc825bfe2f2"
     },
     "stringi": {
       "Package": "stringi",

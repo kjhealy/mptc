@@ -1,0 +1,33 @@
+├── Applications
+├── bin
+├── Box
+├── Creative Cloud Files
+├── Desktop
+├── Documents
+│  ├── bibs -> /Users/kjhealy/Library/texmf/bibtex/bib
+│  ├── bookdown
+│  ├── comments
+│  ├── completed
+│  ├── courses
+│  ├── data
+│  ├── letters
+│  ├── misc
+│  ├── nonsense
+│  ├── ordinal-society
+│  ├── papers
+│  ├── sites
+│  ├── source
+│  ├── talks
+│  ├── teaching
+│  ├── templates
+│  ├── vita
+├── Downloads
+├── Dropbox
+├── Library
+├── Movies
+├── Music
+├── Pictures
+├── Public
+├── scratch
+├── tmp
+└── Zotero

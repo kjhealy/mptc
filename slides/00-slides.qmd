@@ -1,0 +1,248 @@
+---
+title: "TEMPLATE"
+subtitle: "Modern Plain Text Social Science: Week FIXME"
+format: kjhslides-revealjs
+filters: 
+  - invert-h1
+  - include-code-files
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(flipbookr)
+```
+
+
+# This is an H1-level header
+
+Hello there! I am just some regular text. You can see an H1-level slide is meant for section separation and big callouts and the like. The background color of H1 slides, and the color of H1 text, is set via a lua filter.
+
+## This is an H2 header
+
+I am more your regular topical slide.
+
+- It will appear in the overview hierarchy correctly 
+- i.e. below the earlier H1
+
+## This is also an H2-level header
+
+- Hello there! I am a bullet point
+- Everyone hates bullet points
+- And yet here we are
+
+## This is another H2-level header
+
+I create a new slide when invoked. 
+
+### This is an H3-level header
+
+I do not create a new slide when invoked.
+
+#### And this is H4
+
+Me neither.
+
+
+#### And this is H5
+
+You get the idea.
+
+#### And this is H6
+
+The humblest header level
+
+# Another First Level Header {.fg-lblue}
+
+This time the foreground is light blue, but this text is off-white
+
+## Followed by an H2
+
+With some content
+
+
+# Hello I'm `green()`?
+
+Code should set up as green on this sort of H1 slide.
+
+
+## Does subhead structure still work?
+
+- Yes it does: things appear in the correct hierarchy when you press `O`
+
+
+# Testing [classed]{.fg-pink} [styling]{.fg-lblue} of [words]{.fg-orange}
+
+## [Classed]{.fg-pink} [styling]{.fg-lblue} in [H2]{.fg-orange}
+
+## Is `green()` or not?
+
+---
+
+:::{.huge}
+There's a class for huge text that's not a header
+
+[We can specify its color, too]{.fg-orange}
+:::
+
+::: aside
+We can set the line-height in the enclosing containiner with a `:::` block, but the classed styling of individual elements [like text]{.fg-red} is done with spans, and span elements do not have line-heights or similar. 
+:::
+---
+
+---
+
+## Three dashes makes a slide break too
+
+Use two to give a blank slide. 
+
+```{.zsh}
+---
+
+---
+```
+
+
+# Markdown
+
+## Standard Markdown Stuff
+
+Unordered lists:
+
+- Bullet points again 
+    - You cannot escape me 
+    - Next slide please
+
+Or ordered lists
+
+1. This is the first item
+    1. Nesting lists is not a good idea on the whole
+    2. You're giving a talk, not reading a contract
+2. Just don't do it.   
+
+## Standard Markdown Stuff
+
+Format text in **bold**, *italic*, or [include URLs](https://socviz.co).
+
+## Maths
+
+Inline mode: $c^2 = a^2 + b^2$
+
+Or in Display mode: 
+
+$$p(x) \sim \frac{1}{\sqrt{2\pi\sigma^2}} \exp{ \bigg[-\frac{1}{2}\bigg( \frac{x-\mu}{\sigma}\bigg)^2 \bigg] }$$
+
+## Static Images {.fg-yellow}
+
+![](../assets/01-file-system/01_garage_workbench.png)
+
+
+# {background-color="black" background-image="../assets/01-file-system/01_ide_control_room.png"}
+
+:::{.huge}
+[Image as background]{.fg-yellow .absolute top=25}
+:::
+
+# Code
+
+## Code
+
+The dot syntax for codeblocks we don't want to run is nice.
+
+```{.r}
+gss_svy |> 
+  group_by(year) |> 
+  group_map_dfr(possibly(~ tidy(svyglm(fefam_n ~ age + sex + race, 
+                       design = .x, 
+                       family = quasibinomial(),
+                       na.action = na.omit),
+                       conf.int = TRUE), 
+                    otherwise = NULL))
+```
+
+::: aside
+<https://quarto.org/docs/presentations/revealjs/#code-blocks>
+:::
+
+
+## Executable Code
+
+And we can run it in the usual way:
+
+```{r}
+letters 
+```
+
+
+## Executable Code
+
+```{r}
+#| label: tidyverse
+#| warning: false
+#| message: false
+
+library(tidyverse)
+library(socviz)
+```
+
+## Executable Code
+
+```{r}
+#| label: gss-fig
+#| warning: false
+#| message: false
+#| fig-width: 12
+#| fig-cap: "GSS Plot"
+
+gss_sm |> 
+  group_by(bigregion, religion) |> 
+  tally() |> 
+  mutate(pct = round((n/sum(n))*100, 1)) |> 
+  drop_na() |> 
+  ggplot(mapping = aes(x = pct, y = reorder(religion, -pct), fill = religion)) +
+  geom_col() +
+    labs(x = "Percent", y = NULL) +
+    guides(fill = "none") + 
+    facet_wrap(~ bigregion, nrow = 1)
+
+```
+
+
+## Executable Code, but smaller 
+
+:::{.smallcode}
+
+```{r}
+#| label: gss-fig-2
+#| warning: false
+#| message: false
+#| fig-width: 12
+#| fig-height: 3
+#| fig-cap: "GSS Plot"
+
+gss_sm |> 
+  group_by(bigregion, religion) |> 
+  tally() |> 
+  mutate(pct = round((n/sum(n))*100, 1)) |> 
+  drop_na() |> 
+  ggplot(mapping = aes(x = pct, y = reorder(religion, -pct), fill = religion)) +
+  geom_col() +
+    labs(x = "Percent", y = NULL) +
+    guides(fill = "none") + 
+    facet_wrap(~ bigregion, nrow = 1)
+
+```
+
+:::
+

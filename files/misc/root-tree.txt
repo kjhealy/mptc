@@ -1,0 +1,30 @@
+├── Applications
+├── bin
+├── cores
+├── dev
+├── etc -> private/etc
+├── home -> /System/Volumes/Data/home
+├── Library
+├── opt
+│  ├── homebrew
+├── private
+│  ├── etc
+│  ├── tftpboot
+│  ├── tmp
+│  └── var
+├── sbin
+├── System
+├── tmp -> private/tmp
+├── Users
+│  ├── kjhealy
+│  └── Shared
+├── usr
+│  ├── bin
+│  ├── lib
+│  ├── libexec
+│  ├── local
+│  ├── sbin
+│  ├── share
+│  ├── standalone
+├── var -> private/var
+└── Volumes

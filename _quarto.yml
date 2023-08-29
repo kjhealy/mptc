@@ -21,8 +21,6 @@ website:
   navbar:
     pinned: true
     right:
-      - text: "Syllabus"
-        file: syllabus/index.qmd
       - text: "Schedule"
         file: schedule/index.qmd
       - text: "Content"
@@ -43,8 +41,8 @@ website:
             - content/index.qmd
         - section: "Topics"
           contents:
-            - text: "01: "
-              file: content/01-.qmd
+            - text: "01: The Idea of Your Computer"
+              file: content/01-content.qmd
 
     - title: "Assignments"
       contents:

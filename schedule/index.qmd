@@ -25,9 +25,9 @@ Here's a tentative outline. It's subject to change. There are up to three kinds 
 
 - [**Content**](/content/) ({{< fa book-open-reader >}}): These pages contain links to the readings and other material for each week. Read these **before** class. Lecture slide decks will also appear on these pages. 
 
-- [**Example**](/example/) ({{< fa laptop-code >}}): These pages contain annotated R code and other supplementary information that you can use as a reference for your assignments and projects. It is also where any impromptu stuff we do in class will end up.  
+- [**Example**](/example/) ({{< fa laptop-code >}}): These pages contain annotated code and other supplementary information that you can use as a reference. It is also where any impromptu stuff we do in class will end up.  
 
-- [**Assignment**](/assignment/) ({{< fa pen-ruler >}}): These pages contain the instructions for each problem set. The problem set assiged in any given week is due the following _Sunday_ by *6:00pm*. 
+- [**Assignment**](/assignment/) ({{< fa pen-ruler >}}): These pages contain the instructions for each problem set. In any given week, assignments are due the following _Sunday_ by *6:00pm*. 
 
 
 

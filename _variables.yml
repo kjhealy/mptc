@@ -29,3 +29,11 @@ university:
 school:
   name: Sociology Department
   url: "https://sociology.duke.edu/"
+
+schedule:
+  wk1: 2023-08-29
+  wk2: 2023-09-05
+  wk3: 2023-09-12
+  wk4: 2023-09-19
+  wk5: 2023-09-26
+  wk6: 2023-10-03

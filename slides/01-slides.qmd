@@ -1,0 +1,876 @@
+---
+title: "The Idea of Your Computer"
+subtitle: "Modern Plain Text Social Science: Week 1"
+format: kjhslides-revealjs
+filters: 
+  - invert-h1
+  - include-code-files
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(flipbookr)
+```
+
+
+## Technical Computing is frustrating
+
+![](../assets/01-file-system/01_stock_sad_mac.png){width=100%}
+
+
+## Can we make it fun?
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+![](../assets/01-file-system/01_stock_happy_people_computer_2.png){width=100%}
+
+::: 
+
+::: {.column width="45%" .right .incremental}
+
+:::: {.fragment fragment-index=1}
+### [No.]{.fg-red}
+::::
+
+
+:::: {.fragment fragment-index=2}
+### &nbsp; ⇦ Not _this_ much fun, at any rate {.incremental}
+::::
+
+:::
+
+:::: 
+
+
+## OK but can we eliminate frustration? 
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+
+![](../assets/01-file-system/01_stock_happy_woman_computer_2.png)
+
+:::
+
+::: {.column width="45%" .right}
+
+:::: {.fragment fragment-index=1}
+### [Also no.]{.fg-red}
+::::
+
+:::: {.fragment fragment-index=2}
+### (Sorry.) 
+::::
+
+:::
+
+::::
+
+
+---
+
+:::{.huge .center}
+::::{.absolute top="25%"}
+But we can make it [work]{.fg-lblue}
+::::
+:::
+
+
+::: aside 
+Also it's weirdly satisfying once you get into it. 
+:::
+
+
+
+# Two Revolutions in Computing
+
+
+## What everyday computing is now
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+![](../assets/01-file-system/01_stock_phone_and_tablet.png)
+
+:::
+
+::: {.column width="45%" .right}
+
+- Touch\-based user interface
+- Foregrounds a single application
+- Dislikes multi-tasking\*
+- Hides the file system
+
+
+:::
+
+::::
+
+
+---
+
+[[_Multitasking_]{.fg-orange}: I mean, “Making different specialized applications and resources work together in the service of a single but multi-dimensional project”, not “Checking social media while also listening to a talk and waiting for an update from the school nurse.”]{.larger .center .absolute top="30%"}
+
+
+## Where technical computing lives
+
+:::: {.columns}
+
+::: {.column width="35%"}
+
+![](../assets/01-file-system/01_stock_mac_and_imac.png)
+
+:::
+
+::: {.column width="55%" .right}
+
+- Windows and pointers.
+- Multi-tasking, multiple windows.
+- Exposes and leverages the file system.
+- Many specialized tools in concert.
+- Underneath, it's the 1970s, UNIX, and the command-line. 
+
+:::
+
+::::
+
+
+## Where technical computing lives
+
+:::: {.columns}
+
+::: {.column width="35%"}
+
+![](../assets/01-file-system/01_stock_mac_and_imac.png)
+
+:::
+
+::: {.column width="55%" .right}
+
+- This toolset is by now really good!
+- Free! Open! Powerful!
+- Friendly communities! Lots of information! Many resources!
+- But: grounded in a UI paradigm that is increasingly far away from the everyday use of computing devices 
+- So why do we use this stuff?
+:::
+
+::::
+
+# {background-color="black" background-image="../assets/01-file-system/01_control.png"}
+
+## "Office" vs "Engineering" approaches
+
+### What is "real" in your project?
+
+### What is the final output?
+
+### How is it produced?
+
+### How are changes managed?
+
+
+## Different Answers
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+### Office model
+
+- Formatted documents are real.
+- Intermediate outputs are cut and pasted into documents.
+- Changes are tracked inside files.
+- Final output is often in the same format you've been working in, e.g. a Word file, or a PDF.
+
+:::
+
+::: {.column width="45%" .right}
+
+::::: {.fragment fragment-index=1}
+
+### Engineering model {.right}
+
+- Plain-text files are real.
+- Intermediate outputs are produced via code, often inside documents.
+- Changes are tracked outside files, at the level of a project.
+- Final outputs are assembled programatically and converted to some desired format.
+
+:::::
+
+:::
+
+::::
+
+## Different strengths and weaknesses
+
+:::: {.columns}
+
+::: {.column width="45%"}
+
+### Office model
+
+- Everyone knows Word, Excel, or Google Docs.
+- "Track changes" is powerful and easy.
+- Hm, I can't remember how I made this figure
+- Where did this table of results come from?
+- `Paper_edits_FINAL_kh-1.docx`
+
+:::
+
+::: {.column width="45%" .right}
+
+::::: {.fragment fragment-index=1}
+
+### Engineering model
+
+- Plain text is highly portable.
+- Push button, recreate analysis.
+- JFC Why can't I do this simple thing?
+- `Object of type 'closure' is not subsettable`
+
+:::::
+
+:::
+
+::::
+
+---
+
+:::{.huge .center}
+::::{.absolute top="20%"}
+Each approach generates solutions to its own problems
+::::
+:::
+
+
+# The File System
+
+
+## The traditional analog {.smaller}
+
+
+:::: {.columns}
+
+::: {.column width="60%"}
+
+![](../assets/01-file-system/01_file_cabinet_hierarchy.png){width=90%}
+
+
+:::
+
+::: {.column width="35%"}
+
+You may never have actually used one of these. 
+
+:::
+
+::::
+
+::: aside
+
+Illustration: @peek02:_unix_power_tools [p. 21]
+
+:::
+
+
+## The file cabinet!
+
+![](../assets/01-file-system/01_filing_cabinet.png){width=90%}
+
+::: {.notes}
+"The ubiquity of the filing cabinet in the twentieth-century office space, along with its noticeable absence of style, has obscured its transformative role in the histories of both information technology and work. In the first in-depth history of this neglected artifact, Craig Robertson explores how the filing cabinet profoundly shaped the way that information and data have been sorted, stored, retrieved, and used.
+
+Invented in the 1890s, the filing cabinet was a result of the nineteenth-century faith in efficiency. Previously, paper records were arranged haphazardly: bound into books, stacked in piles, curled into slots, or impaled on spindles. The filing cabinet organized loose papers in tabbed folders that could be sorted alphanumerically, radically changing how people accessed, circulated, and structured information.
+
+Robertson’s unconventional history of the origins of the information age posits the filing cabinet as an information storage container, an “automatic memory” machine that contributed to a new type of information labor privileging manual dexterity over mental deliberation. Gendered assumptions about women’s nimble fingers helped to naturalize the changes that brought women into the workforce as low-level clerical workers. The filing cabinet emerges from this unexpected account as a sophisticated piece of information technology and a site of gendered labor that with its folders, files, and tabs continues to shape how we interact with information and data in today’s digital world."
+
+:::
+
+## The file cabinet!
+
+![](../assets/01-file-system/01_filing_cabinet_manual.png){width=90%}
+
+::: {.notes}
+"The ubiquity of the filing cabinet in the twentieth-century office space, along with its noticeable absence of style, has obscured its transformative role in the histories of both information technology and work. In the first in-depth history of this neglected artifact, Craig Robertson explores how the filing cabinet profoundly shaped the way that information and data have been sorted, stored, retrieved, and used.
+
+Invented in the 1890s, the filing cabinet was a result of the nineteenth-century faith in efficiency. Previously, paper records were arranged haphazardly: bound into books, stacked in piles, curled into slots, or impaled on spindles. The filing cabinet organized loose papers in tabbed folders that could be sorted alphanumerically, radically changing how people accessed, circulated, and structured information.
+
+Robertson’s unconventional history of the origins of the information age posits the filing cabinet as an information storage container, an “automatic memory” machine that contributed to a new type of information labor privileging manual dexterity over mental deliberation. Gendered assumptions about women’s nimble fingers helped to naturalize the changes that brought women into the workforce as low-level clerical workers. The filing cabinet emerges from this unexpected account as a sophisticated piece of information technology and a site of gendered labor that with its folders, files, and tabs continues to shape how we interact with information and data in today’s digital world."
+
+:::
+
+
+## Index cards
+
+![](../assets/01-file-system/01_library_index-card_shelf.png){width=90%}
+
+
+## Index cards
+
+![](../assets/01-file-system/01_library_index_cards.png){width=90%}
+
+
+## Automating information processing
+
+![](../assets/01-file-system/01_music_box.png){width=100%}
+
+## Automating information processing
+
+![](../assets/01-file-system/01_jacquard_loom.png){width=100%}
+
+
+## Automating information processing
+
+![](../assets/01-file-system/01_jacquard_loom_card_2.png){width=100%}
+
+
+## Hollerith machines
+
+![](../assets/01-file-system/01_hollerith_card.png){width=100%}
+
+
+::: {.notes}
+"At the end of the 1800s Herman Hollerith invented the recording of data on a medium that could then be read by a machine,[dubious – discuss][13][14][15][16] developing punched card data processing technology for the 1890 U.S. census.[17] His tabulating machines read and summarized data stored on punched cards and they began use for government and commercial data processing.
+Initially, these electromechanical machines only counted holes, but by the 1920s they had units for carrying out basic arithmetic operations.[18]: 124  Hollerith founded the Tabulating Machine Company (1896) which was one of four companies that were amalgamated via stock acquisition to form a fifth company, Computing-Tabulating-Recording Company (CTR) (1911), later renamed International Business Machines Corporation (IBM) (1924). Other companies entering the punched card business included The Tabulator Limited (Britain, 1902), Deutsche Hollerith-Maschinen Gesellschaft mbH (Dehomag) (Germany, 1911), Powers Accounting Machine Company (US, 1911), Remington Rand (US, 1927), and H.W. Egli Bull (France, 1931).[19] These companies, and others, manufactured and marketed a variety of punched cards and unit record machines for creating, sorting, and tabulating punched cards, even after the development of electronic computers in the 1950s."
+:::
+
+## Hollerith Machines
+
+![](../assets/01-file-system/01_hollerith_tabulator.png){width=100%}
+
+
+## Hollerith machines
+
+![](../assets/01-file-system/01_hollerith_card_1890_yellow.png){width=100%}
+
+
+## Hollerith machines
+
+![](../assets/01-file-system/01_hollerith_card_1890_decoder_fields.png){width=100%}
+
+::: {.notes}
+|               |                              |                                                           |                                     |
+|---------------|------------------------------|-----------------------------------------------------------|-------------------------------------|
+| Field 1       | Civil War Veterans           | CM, CL, CS: Marine, Sailor, Soldier                       | Confederate Army                    |
+|               |                              | UM, UL, US: Marine, Sailor, Soldier                       | United States Army                  |
+| Field 2       | Relationship (family)        | Hd: Head of Household                                     | Mb: Member of family                |
+|               |                              | Wf: Wife                                                  | O: Other                            |
+| Field 3       | Race                         | Jp: Japanese                                              | In: Civilized Indian (taxpaying)    |
+|               |                              | Ch: Chinese                                               | Mu: Mulatto                         |
+|               |                              | B: Negro                                                  | Qd: Quadroon                        |
+|               |                              | W: White                                                  | Oc: Octoroon                        |
+| Field 4       | Gender                       | Male or Female                                            |                                     |
+| Field 5 & 6   | Your Age                     | Combination of numbers                                    | 0: if under 1 year old              |
+|               |                              | Un: Unknown                                               | Mo: \# of months if a baby          |
+| Field 7       | Conjugal Condition           | Dv: Divorced                                              | Mr: Married more than 1 year        |
+|               |                              | Un: Unknown                                               | CY: Married this year               |
+|               |                              | Wd: Widow/Widower                                         | (in the Census Year)                |
+|               |                              | Sg: Single                                                |                                     |
+| Field 8       | \# of Children born          | Up to 19 children                                         |                                     |
+| Field 9       | \# of Children alive         | Up to 19 children                                         |                                     |
+| Field 10 & 11 | Your birthplace              | Combination of upper case letters                         | St: birth was in state of residence |
+|               |                              | and lower case letters                                    | Un: Unknown                         |
+| Field 12      | Mother’s birthplace          | Two Letter Country Codes                                  |                                     |
+| Field 13      | Father’s birthplace          | Two Letter Country Codes                                  |                                     |
+| Field 14      | \# of years in the US        |                                                           |                                     |
+| Field 15      | Citizenship for Foreign-born | Al: Alien                                                 | Pa: First Papers submitted          |
+|               |                              | Na: Naturalized citizen                                   | Un: Unknown                         |
+| Field 16 & 17 | Occupation                   | Combination of upper case letters  and lower case letters | NG: Not Gainfully employed or       |
+|               |                              |                                                           | in School                           |
+| Field 18      | Unemployed                   | 1-12: Months unemployed                                   | Oc                                  |
+|               |                              |                                                           | O                                   |
+| Field 19      | Education                    | OK: Can read and write                                    | ————-OR———–                         |
+|               |                              | W: Can read but not write                                 | 1-9: Number of months in school     |
+|               |                              | R: : Can write but not read                               | 0: : Not in school                  |
+| Field 20      | Language Spoken              | Un: Understand English?                                   | Ft: Father’s language               |
+|               |                              | En: English                                               | Mt: Mother’s language               |
+|               |                              | Ot: Other                                                 |                                     |
+| Field 21      | Tenure                       | Fh: Farm Hired (Rented)                                   | Hh: Home Hired (Rented)             |
+|               |                              | FM: Farm Owned (w/ mortgage)                              | Hf: Home owned Free and clear       |
+|               |                              | Ff: Farm owned Free and clear                             | Hm: Home Owned (w/ mortgage)        |
+|               |                              | X: : Does not apply                                       |                                     |
+| Far Left Side | Location                     | State, county, city,: local divisions and                 | Enumerator District                 |
+|               |                              |                                                           |                                     |
+:::
+
+## Hollerith Operators
+
+![](../assets/01-file-system/01_hollerith_operator_01.png){width=100%}
+
+
+## Hollerith Operators
+
+![](../assets/01-file-system/01_hollerith_operator_02.png){width=100%}
+
+
+## IBM punch cards
+
+![](../assets/01-file-system/01_ibm_card.png){width=100%}
+
+
+
+## IBM punch cards
+![](../assets/01-file-system/01_ibm_operator.png){width=100%}
+
+
+## Big Iron
+
+![](../assets/01-file-system/01_ibm_system_360.png){width=100%}
+
+
+## Storage
+
+![](../assets/01-file-system/01_bryant_hard_drive1.png){width=100%}
+
+## Storage
+
+![](../assets/01-file-system/01_bryant_hard_drive_2.png){width=100%}
+
+
+## Input/Output
+
+### A late-model teletype (TTY) machine
+
+![](../assets/01-file-system/01_teletype_telex_machine.png)
+
+
+## Input/Output
+
+### The DEC VT-100 Terminal
+
+![](../assets/01-file-system/01_dec_vt100.png)
+
+
+## Input/Output
+
+![](../assets/01-file-system/01_macos_terminal_icon.png)
+
+
+# Back to the file system
+
+## File system hierarchy {.smaller}
+
+![](../assets/01-file-system/01_file_system_example.png){width="70%"}
+
+::: aside
+
+Illustration: @peek02:_unix_power_tools [p. 23]
+
+:::
+
+## Standard locations 
+
+- `/` : root. Everything lives inside or under the root.
+- `/bin/`  : For _binaries_. Core user executable programs and tools.
+- `/sbin/` : System binaries. Essential executables for the super user (who is also called `root`)
+- `/lib/` : Support files for executables. 
+- `/usr/` : Conventionally, stuff installed "locally" for users in addition to the core system. Will contain its own `bin/` and `lib/` subdirs.
+- `/usr/local` : Files that the local user has compiled or installed
+- `/opt/` : Like `/usr/`, another place for locally installed software to go.
+
+
+## Standard locations
+
+- These locations get mapped together in the `$PATH`, which is an _environment variable_ that tells the system where executables can be found. 
+
+```{.bash}
+❯ echo $PATH
+/home/kjhealy/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin
+```
+
+- Delimited by `:` and searched in order from left to right.
+- To learn where a command is being executed from, use `which`
+
+```{.bash}
+❯ which R
+/usr/local/bin/R
+```
+
+## Standard locations 
+
+- `/` : root. Everything lives inside or under the root.
+- `/bin/`  : For _binaries_. Core user executable programs and tools.
+- `/sbin/` : System binaries. Essential executables for the super user (who is also called `root`)
+- `/lib/` : Support files for executables. 
+- `/usr/` : Conventionally, stuff installed "locally" for users in addition to the core system. Will contain its own `bin/` and `lib/` subdirs.
+- `/usr/local` : Files that the local user has compiled or installed
+- `/opt/` : Like `/usr/`, another place for locally installed software to go.
+- `/etc/` : Editable text configuration. Config files often go here. 
+
+
+## Standard locations 
+
+-  `/home/` or `/Users/` : Where the accounts of individual system users live, like `/Users/kjhealy/`
+
+
+```{.bash}
+❯ pwd
+/home/kjhealy
+❯  ls
+bin  certbot.log  logrotate.conf  old  projects  public  staging
+```
+
+## File system hierarchy {.smaller}
+
+- An edited version of the root `/` tree
+
+```{.text include="../files/misc/root-tree.txt"}
+```
+
+## File system hierarchy {.smaller}
+
+- An edited version of the user or home tree
+
+```{.text include="../files/misc/home-tree.txt"}
+```
+
+## Navigating the tree
+
+Who am I?
+
+```{.bash}
+❯ whoami
+kjhealy
+```
+
+
+Where am I?
+
+```{.bash}
+❯ pwd
+/Users/kjhealy/Documents/courses
+```
+
+What is in here?
+
+```{.bash}
+❯ ls
+assets             data_visualization mptc               soc101             soc880             vsd_notes
+contemp-theory     data_wrangling     old                soc110             theory             vsd_proj_template
+data_management    grad-theory        other_people       soc355             vsd                workshops
+```
+
+
+## Navigating the tree
+
+```{.bash}
+❯ cd mptc
+❯ ls                                                                                              
+R              _extensions    _targets.R     assignment     example        mptc.Rproj     slides
+README.md      _quarto.yml    _variables.yml content        files          renv
+README.qmd     _site          about          data           html           renv.lock
+README_files   _targets       assets         deploy.sh      index.qmd      schedule
+```
+
+
+## Navigating the tree
+
+
+```{.bash}
+
+❯ ls -l                                                                                           
+
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+-rw-r--r--@  1 kjhealy  staff   1206 Aug 15 20:24 README.qmd
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 15 20:29 README_files
+drwxr-xr-x@  4 kjhealy  staff    128 Aug 11 21:11 _extensions
+-rw-r--r--@  1 kjhealy  staff   2239 Aug 16 16:06 _quarto.yml
+drwxr-xr-x@ 15 kjhealy  staff    480 Aug 29 10:12 _site
+drwxr-xr-x@  6 kjhealy  staff    192 Aug 29 10:12 _targets
+-rw-r--r--@  1 kjhealy  staff   3548 Aug 16 13:37 _targets.R
+-rw-r--r--@  1 kjhealy  staff    799 Aug 16 13:53 _variables.yml
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 about
+drwxr-xr-x@  6 kjhealy  staff    192 Aug 14 06:58 assets
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 assignment
+drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 10:12 content
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 17 08:41 data
+-rwxr-xr-x@  1 kjhealy  staff    369 Aug 15 19:55 deploy.sh
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 example
+drwxr-xr-x@  5 kjhealy  staff    160 Aug 28 15:16 files
+drwxr-xr-x@ 13 kjhealy  staff    416 Aug 10 17:00 html
+-rw-r--r--@  1 kjhealy  staff   6244 Aug 16 12:34 index.qmd
+-rw-r--r--@  1 kjhealy  staff    258 Aug 21 20:26 mptc.Rproj
+drwxr-xr-x@  7 kjhealy  staff    224 Aug 15 17:04 renv
+-rw-r--r--@  1 kjhealy  staff  48102 Aug 21 08:15 renv.lock
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 schedule
+drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 10:12 slides
+```
+
+Note the idea of commands having options, or _switches_. 
+
+## Navigating the tree
+
+
+```{.bash}
+
+❯ cd /
+❯ ls
+bin  boot  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var
+```
+
+The `~` character is a shortcut to the top of your home directory:
+
+```{.bash}
+
+❯ cd ~
+❯ ls
+bin  certbot.log  logrotate.conf  old  projects  public  staging
+```
+
+
+##  Path rules
+
+- If the path name begins with `/`, it is an _absolute_ path, starting from the root.
+- If the path name begins with `~`, it will usually be expanded into an absolute path name starting at your home directory (`~`).
+
+##  Path rules
+
+- If the pathname does not begin with a `/` or `~`
+  - The path name is relative to the current directory. Two relative special cases use entries that are in every Unix directory:
+    a. If the path name begins with ./, the path is relative to the current directory, e.g., ./textfile, though this can also execute the file if it is given executable file permissions.
+    b. If the path name begins with ../, the path is relative to the parent of the current directory. For example, if your current directory is `/Users/kjhealy/Documents/papers` then `../data` means `/Users/kjhealy/Documents/data`
+
+
+## File permissions
+
+```{.bash}
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+```
+
+
+## File permissions
+
+```{.bash}
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+```
+
+In Unix systems there are three kinds of owner: the _user_ (here `kjhealy`), the _group_ (here `staff`), and _others_ or other users on the system.
+
+## File permissions
+
+```{.bash}
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+```
+
+
+Three things you can do: 
+
+### [r]{.fg-lblue}ead
+### [w]{.fg-orange}rite
+### e[x]{.fg-red}ecute
+
+- For files, "read" means _open_; "write" means _edit, save, or delete_; "execute" means _run_ if it's an application or script.
+- For directories, "read" means _list contents_ with ls, "write' means _create, delete, or rename_; "execute" means access or enter using `cd`
+
+
+## File permissions
+
+#### `❯ ls -l README.md`
+#### `-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md`
+
+These permissions say `rw-r--r--` or 
+
+- The _user_ can `rw-` read and write this file
+- The _group_ can `r--` read this file
+- The _world_ can `r--` read this file
+
+Executable permissions are irrelevant here because it's a text file.
+
+
+## File permissions
+
+![](../assets/01-file-system/01_unix_permission_bits.png){width="70%"}
+
+
+- We change file permissions with the `chmod` command. So e.g. `chmod 644 README.md` means "change the permissions to `rw-r--r--`".
+
+
+# The Unix way of thinking
+
+## Stepping back
+
+- Your computer stores files and runs commands
+- The files are stored in a large hierarchy
+- The commands are many and varied but there's a core set of them that are most useful
+- Unix commands and utilities generally try to do a _specific_ thing to files or running processes 
+- The Unix conception of a 'file' is very flexible. Connections to other computers or processes can act like files.
+- Unix commands are often _composable_ using _pipes_
+
+## The Unix pipe
+
+- Unix commands work with some _input_ and may produce some _output_
+- Unix systems have the concepts of "standard input", "standard output", and "standard error" as streams where things come from, where they go to, and where problems are reported.
+
+## The Unix pipe
+
+- More on this next week, but for now think about the output of a command like `ls`: 
+
+
+```{.bash}
+❯ ls -l                                                                                           ✱ ◼
+
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+-rw-r--r--@  1 kjhealy  staff   1206 Aug 15 20:24 README.qmd
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 15 20:29 README_files
+drwxr-xr-x@  4 kjhealy  staff    128 Aug 11 21:11 _extensions
+-rw-r--r--@  1 kjhealy  staff   2239 Aug 16 16:06 _quarto.yml
+drwxr-xr-x@ 15 kjhealy  staff    480 Aug 29 11:50 _site
+drwxr-xr-x@  6 kjhealy  staff    192 Aug 29 11:50 _targets
+-rw-r--r--@  1 kjhealy  staff   3548 Aug 16 13:37 _targets.R
+-rw-r--r--@  1 kjhealy  staff    799 Aug 16 13:53 _variables.yml
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 about
+drwxr-xr-x@  6 kjhealy  staff    192 Aug 14 06:58 assets
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 assignment
+drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 11:50 content
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 17 08:41 data
+-rwxr-xr-x@  1 kjhealy  staff    369 Aug 15 19:55 deploy.sh
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 example
+drwxr-xr-x@  5 kjhealy  staff    160 Aug 28 15:16 files
+drwxr-xr-x@ 13 kjhealy  staff    416 Aug 10 17:00 html
+-rw-r--r--@  1 kjhealy  staff   6244 Aug 16 12:34 index.qmd
+-rw-r--r--@  1 kjhealy  staff    258 Aug 21 20:26 mptc.Rproj
+drwxr-xr-x@  7 kjhealy  staff    224 Aug 15 17:04 renv
+-rw-r--r--@  1 kjhealy  staff  48102 Aug 21 08:15 renv.lock
+drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 schedule
+drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 11:50 slides
+```
+
+## The Unix pipe
+
+We can send, or _pipe_, this output to another command, instead of to the terminal:
+
+```{.bash}
+❯ ls -l | wc -l                                                                                   ✱ ◼
+      26
+```
+
+- The `wc` command counts the number of words in a file, or in whatever is sent to it via `STDIN`. 
+- The `-l` switch to `wc` means 'just count lines instead of words'
+
+## The Unix pipe
+
+Like with pipelines in R, we can compose sequences of actions at the prompt:
+
+```{.bash}
+❯ ls -lh access.log
+-rw-r--r-- 1 root root 7.0M Aug 29 16:00 access.log
+```
+
+
+```{.bash}
+❯ head access.log
+192.195.49.31 - - [27/Aug/2023:00:01:11 +0000] "GET / HTTP/1.1" 200 19219 "https://www.google.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /libs/tufte-css-2015.12.29/tufte.css HTTP/1.1" 200 2025 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /libs/tufte-css-2015.12.29/envisioned.css HTTP/1.1" 200 888 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /css/tablesaw-stackonly.css HTTP/1.1" 200 1640 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /css/nudge.css HTTP/1.1" 200 1675 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /css/sourcesans.css HTTP/1.1" 200 1492 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:13 +0000] "GET /js/jquery.js HTTP/1.1" 200 30464 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:13 +0000] "GET /js/tablesaw-stackonly.js HTTP/1.1" 200 2996 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:13 +0000] "GET /js/nudge.min.js HTTP/1.1" 200 937 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+52.13.187.67 - - [27/Aug/2023:00:01:13 +0000] "GET /dataviz-pdfl_files/figure-html4/ch-03-fig-lexp-gdp-10-1.png HTTP/1.1" 200 308830 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0"
+```
+
+
+## The Unix pipe
+
+Like with pipelines in R, we can compose sequences of actions at the prompt:
+
+```{.bash}
+❯ head access.log | awk '// {print $11}'
+
+"https://www.google.com/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"-"
+```
+
+## The Unix pipe
+
+Like with pipelines in R, we can compose sequences of actions at the prompt:
+
+```{.bash}
+❯ awk '// {print $11}' access.log | sort | uniq -c | sort -nr | head -n 20
+
+   9729 "https://socviz.co/lookatdata.html"
+   4851 "-"
+   4212 "https://socviz.co/"
+   1719 "https://socviz.co/makeplot.html"
+   1477 "https://bookdown.org/"
+   1466 "https://socviz.co/gettingstarted.html"
+   1373 "https://socviz.co/groupfacettx.html"
+    864 "https://socviz.co/workgeoms.html"
+    794 "https://socviz.co/maps.html"
+    733 "https://socviz.co/refineplots.html"
+    671 "https://socviz.co/index.html"
+    349 "https://socviz.co/appendix.html"
+    228 "https://socviz.co/modeling.html"
+    153 "https://www.google.com/"
+     50 "http://vissoc.co/"
+     39 "https://socviz.co/lookatdata.html?zarsrc=30&utm_source=zalo&utm_medium=zalo"
+     31 "http://vissoc.co"
+     31 "http://socviz.co/"
+     27 "https://www.bookdown.org/"
+     23 "https://bookdown.org/home/"
+
+```
+
+## The Unix pipe
+
+We can do a lot with a pipeline:
+
+```{.bash}
+curl -s 'http://api.citybik.es/v2/networks/citi-bike-nyc' |
+   jq '.network.stations[].free_bikes' | 
+  gpaste -sd+ | 
+  bc
+  
+30222
+```
+
+::: aside
+CitiBike example courtesy of Jeroen Janssens
+:::
+
+
+# Things to do for next week
+
+## Setup
+
+### On a Mac
+- Install macOS command line tools: From the command line, run `xcode-select –install`
+- Install the Homebrew package manager. see `https://brew.sh`
+
+
+### On Windows
+- Install the Windows Subsystem for Linux: `https://learn.microsoft.com/en-us/windows/wsl/install`
+
+
+
