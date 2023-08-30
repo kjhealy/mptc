@@ -60,7 +60,7 @@ website:
             - example/index.qmd
         - section: "How-To"
           contents:
-            - text: "01: "
+            - text: "01: The file system"
               file: example/01-example.qmd
 
   page-footer:
@@ -73,7 +73,7 @@ website:
 
 format:
   html:
-    code-fold: true
+    code-fold: false
     code-tools: true
     theme: html/custom.scss
     highlight-style: html/catppuccin-macchiato.theme

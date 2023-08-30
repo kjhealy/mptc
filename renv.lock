@@ -1351,16 +1351,6 @@
       ],
       "Hash": "273a6bb4a9844c296a459d2176673270"
     },
-    "palmerpenguins": {
-      "Package": "palmerpenguins",
-      "Version": "0.1.1",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "6c6861efbc13c1d543749e9c7be4a592"
-    },
     "parallelly": {
       "Package": "parallelly",
       "Version": "1.36.0",

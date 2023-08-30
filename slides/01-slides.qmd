@@ -2,6 +2,7 @@
 title: "The Idea of Your Computer"
 subtitle: "Modern Plain Text Social Science: Week 1"
 format: kjhslides-revealjs
+engine: knitr
 filters: 
   - invert-h1
   - include-code-files
@@ -490,7 +491,7 @@ Illustration: @peek02:_unix_power_tools [p. 23]
 
 - These locations get mapped together in the `$PATH`, which is an _environment variable_ that tells the system where executables can be found. 
 
-```{.bash}
+```{.zsh}
 ❯ echo $PATH
 /home/kjhealy/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin
 ```
@@ -498,7 +499,7 @@ Illustration: @peek02:_unix_power_tools [p. 23]
 - Delimited by `:` and searched in order from left to right.
 - To learn where a command is being executed from, use `which`
 
-```{.bash}
+```{.zsh}
 ❯ which R
 /usr/local/bin/R
 ```
@@ -520,7 +521,7 @@ Illustration: @peek02:_unix_power_tools [p. 23]
 -  `/home/` or `/Users/` : Where the accounts of individual system users live, like `/Users/kjhealy/`
 
 
-```{.bash}
+```{.zsh}
 ❯ pwd
 /home/kjhealy
 ❯  ls
@@ -545,27 +546,27 @@ bin  certbot.log  logrotate.conf  old  projects  public  staging
 
 Who am I?
 
-```{bash}
+```{zsh}
 whoami
 ```
 
 
 Where am I?
 
-```{bash}
+```{zsh}
 pwd
 ```
 
 What is in here?
 
-```{bash}
+```{zsh}
 ls
 ```
 
 
 ## Navigating the tree
 
-```{bash}
+```{zsh}
 cd files
 ls  
 cd ..
@@ -575,7 +576,7 @@ cd ..
 ## Navigating the tree
 
 
-```{bash}
+```{zsh}
 ls -l                                                                                           
 ```
 
@@ -584,13 +585,13 @@ Note the idea of commands having options, or _switches_.
 ## Navigating the tree
 
 
-```{bash}
+```{zsh}
 ls / 
 ```
 
 The `~` character is a shortcut to the top of your home directory:
 
-```{.bash}
+```{.zsh}
 ❯ cd ~
 ❯ ls
 bin  certbot.log  logrotate.conf  old  projects  public  staging
@@ -612,7 +613,7 @@ bin  certbot.log  logrotate.conf  old  projects  public  staging
 
 ## File permissions
 
-```{.bash}
+```{.zsh}
 drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
 -rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
 ```
@@ -620,7 +621,7 @@ drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
 
 ## File permissions
 
-```{.bash}
+```{.zsh}
 drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
 -rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
 ```
@@ -629,7 +630,7 @@ In Unix systems there are three kinds of owner: the _user_ (here `kjhealy`), the
 
 ## File permissions
 
-```{.bash}
+```{.zsh}
 drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
 -rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
 ```
@@ -688,7 +689,7 @@ Executable permissions are irrelevant here because it's a text file.
 - More on this next week, but for now think about the output of a command like `ls`: 
 
 
-```{bash}
+```{zsh}
 ls 
 ```
 
@@ -696,7 +697,7 @@ ls
 
 We can send, or _pipe_, this output to another command, instead of to the terminal:
 
-```{bash}
+```{zsh}
 ls | wc -l
 ```
 
@@ -707,13 +708,13 @@ ls | wc -l
 
 Like with pipelines in R, we can compose sequences of actions at the prompt:
 
-```{.bash}
+```{.zsh}
 ❯ ls -lh access.log
 -rw-r--r-- 1 root root 7.0M Aug 29 16:00 access.log
 ```
 
 
-```{.bash}
+```{.zsh}
 ❯ head access.log
 192.195.49.31 - - [27/Aug/2023:00:01:11 +0000] "GET / HTTP/1.1" 200 19219 "https://www.google.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
 192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /libs/tufte-css-2015.12.29/tufte.css HTTP/1.1" 200 2025 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
@@ -732,7 +733,7 @@ Like with pipelines in R, we can compose sequences of actions at the prompt:
 
 Like with pipelines in R, we can compose sequences of actions at the prompt:
 
-```{.bash}
+```{.zsh}
 ❯ head access.log | awk '// {print $11}'
 
 "https://www.google.com/"
@@ -751,7 +752,7 @@ Like with pipelines in R, we can compose sequences of actions at the prompt:
 
 Like with pipelines in R, we can compose sequences of actions at the prompt:
 
-```{.bash}
+```{.zsh}
 ❯ awk '// {print $11}' access.log | sort | uniq -c | sort -nr | head -n 15
 
    9729 "https://socviz.co/lookatdata.html"
@@ -775,7 +776,7 @@ Like with pipelines in R, we can compose sequences of actions at the prompt:
 
 We can do a lot with a pipeline:
 
-```{bash}
+```{zsh}
 curl -s 'http://api.citybik.es/v2/networks/citi-bike-nyc' |
    jq '.network.stations[].free_bikes' | 
   gpaste -sd+ | 

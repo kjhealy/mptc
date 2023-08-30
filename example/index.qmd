@@ -1,38 +1,18 @@
 ---
 title: "Code examples"
+engine: knitr
 ---
 
-This section contains worked examples in R together with supplementary information that will be useful as you work on your problem sets and project. You will see both chunks of code and the output the code produces as well. For example: 
+This section contains worked examples related to what we've been covering. You will see both chunks of code and the output the code produces as well. For example here are some shell commands:
 
-```{r}
-letters
+```{zsh}
+ls
 ```
 
-The code comes first, the output comes second. 
+The command comes first, the output comes second. 
 
-```{r}
-length(letters)
-       
-letters |> 
-  length() |> 
-  sqrt()
-       
-```
-
-
-The same goes for graphs. E.g., 
-
-
-```{r, warning=FALSE}
-library(ggplot2)
-
-palmerpenguins::penguins |> 
-  ggplot(mapping = aes(x = body_mass_g, 
-                       y = bill_length_mm, 
-                       color = species)) +
-  geom_point() + 
-  labs(title = "Bill length vs Body mass by Species")
-  
+```{zsh}
+ls | wc -l
 ```
 
 
