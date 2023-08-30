@@ -24,6 +24,7 @@ kjh_set_slide_theme()
 library(flipbookr)
 ```
 
+# Motivation
 
 ## Technical Computing is frustrating
 
@@ -544,73 +545,38 @@ bin  certbot.log  logrotate.conf  old  projects  public  staging
 
 Who am I?
 
-```{.bash}
-❯ whoami
-kjhealy
+```{bash}
+whoami
 ```
 
 
 Where am I?
 
-```{.bash}
-❯ pwd
-/Users/kjhealy/Documents/courses
+```{bash}
+pwd
 ```
 
 What is in here?
 
-```{.bash}
-❯ ls
-assets             data_visualization mptc               soc101             soc880             vsd_notes
-contemp-theory     data_wrangling     old                soc110             theory             vsd_proj_template
-data_management    grad-theory        other_people       soc355             vsd                workshops
+```{bash}
+ls
 ```
 
 
 ## Navigating the tree
 
-```{.bash}
-❯ cd mptc
-❯ ls                                                                                              
-R              _extensions    _targets.R     assignment     example        mptc.Rproj     slides
-README.md      _quarto.yml    _variables.yml content        files          renv
-README.qmd     _site          about          data           html           renv.lock
-README_files   _targets       assets         deploy.sh      index.qmd      schedule
+```{bash}
+cd files
+ls  
+cd ..
 ```
 
 
 ## Navigating the tree
 
 
-```{.bash}
-
-❯ ls -l                                                                                           
-
-drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
--rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
--rw-r--r--@  1 kjhealy  staff   1206 Aug 15 20:24 README.qmd
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 15 20:29 README_files
-drwxr-xr-x@  4 kjhealy  staff    128 Aug 11 21:11 _extensions
--rw-r--r--@  1 kjhealy  staff   2239 Aug 16 16:06 _quarto.yml
-drwxr-xr-x@ 15 kjhealy  staff    480 Aug 29 10:12 _site
-drwxr-xr-x@  6 kjhealy  staff    192 Aug 29 10:12 _targets
--rw-r--r--@  1 kjhealy  staff   3548 Aug 16 13:37 _targets.R
--rw-r--r--@  1 kjhealy  staff    799 Aug 16 13:53 _variables.yml
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 about
-drwxr-xr-x@  6 kjhealy  staff    192 Aug 14 06:58 assets
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 assignment
-drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 10:12 content
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 17 08:41 data
--rwxr-xr-x@  1 kjhealy  staff    369 Aug 15 19:55 deploy.sh
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 example
-drwxr-xr-x@  5 kjhealy  staff    160 Aug 28 15:16 files
-drwxr-xr-x@ 13 kjhealy  staff    416 Aug 10 17:00 html
--rw-r--r--@  1 kjhealy  staff   6244 Aug 16 12:34 index.qmd
--rw-r--r--@  1 kjhealy  staff    258 Aug 21 20:26 mptc.Rproj
-drwxr-xr-x@  7 kjhealy  staff    224 Aug 15 17:04 renv
--rw-r--r--@  1 kjhealy  staff  48102 Aug 21 08:15 renv.lock
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 10:12 schedule
-drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 10:12 slides
+```{bash}
+ls -l                                                                                           
 ```
 
 Note the idea of commands having options, or _switches_. 
@@ -618,17 +584,13 @@ Note the idea of commands having options, or _switches_.
 ## Navigating the tree
 
 
-```{.bash}
-
-❯ cd /
-❯ ls
-bin  boot  dev  etc  home  lib  lib64  lost+found  media  mnt  opt  proc  root  run  sbin  snap  srv  sys  tmp  usr  var
+```{bash}
+ls / 
 ```
 
 The `~` character is a shortcut to the top of your home directory:
 
 ```{.bash}
-
 ❯ cd ~
 ❯ ls
 bin  certbot.log  logrotate.conf  old  projects  public  staging
@@ -726,43 +688,16 @@ Executable permissions are irrelevant here because it's a text file.
 - More on this next week, but for now think about the output of a command like `ls`: 
 
 
-```{.bash}
-❯ ls -l                                                                                           ✱ ◼
-
-drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
--rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
--rw-r--r--@  1 kjhealy  staff   1206 Aug 15 20:24 README.qmd
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 15 20:29 README_files
-drwxr-xr-x@  4 kjhealy  staff    128 Aug 11 21:11 _extensions
--rw-r--r--@  1 kjhealy  staff   2239 Aug 16 16:06 _quarto.yml
-drwxr-xr-x@ 15 kjhealy  staff    480 Aug 29 11:50 _site
-drwxr-xr-x@  6 kjhealy  staff    192 Aug 29 11:50 _targets
--rw-r--r--@  1 kjhealy  staff   3548 Aug 16 13:37 _targets.R
--rw-r--r--@  1 kjhealy  staff    799 Aug 16 13:53 _variables.yml
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 about
-drwxr-xr-x@  6 kjhealy  staff    192 Aug 14 06:58 assets
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 assignment
-drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 11:50 content
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 17 08:41 data
--rwxr-xr-x@  1 kjhealy  staff    369 Aug 15 19:55 deploy.sh
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 example
-drwxr-xr-x@  5 kjhealy  staff    160 Aug 28 15:16 files
-drwxr-xr-x@ 13 kjhealy  staff    416 Aug 10 17:00 html
--rw-r--r--@  1 kjhealy  staff   6244 Aug 16 12:34 index.qmd
--rw-r--r--@  1 kjhealy  staff    258 Aug 21 20:26 mptc.Rproj
-drwxr-xr-x@  7 kjhealy  staff    224 Aug 15 17:04 renv
--rw-r--r--@  1 kjhealy  staff  48102 Aug 21 08:15 renv.lock
-drwxr-xr-x@  3 kjhealy  staff     96 Aug 29 11:50 schedule
-drwxr-xr-x@  4 kjhealy  staff    128 Aug 29 11:50 slides
+```{bash}
+ls 
 ```
 
 ## The Unix pipe
 
 We can send, or _pipe_, this output to another command, instead of to the terminal:
 
-```{.bash}
-❯ ls -l | wc -l                                                                                   ✱ ◼
-      26
+```{bash}
+ls | wc -l
 ```
 
 - The `wc` command counts the number of words in a file, or in whatever is sent to it via `STDIN`. 
@@ -817,7 +752,7 @@ Like with pipelines in R, we can compose sequences of actions at the prompt:
 Like with pipelines in R, we can compose sequences of actions at the prompt:
 
 ```{.bash}
-❯ awk '// {print $11}' access.log | sort | uniq -c | sort -nr | head -n 20
+❯ awk '// {print $11}' access.log | sort | uniq -c | sort -nr | head -n 15
 
    9729 "https://socviz.co/lookatdata.html"
    4851 "-"
@@ -834,26 +769,20 @@ Like with pipelines in R, we can compose sequences of actions at the prompt:
     228 "https://socviz.co/modeling.html"
     153 "https://www.google.com/"
      50 "http://vissoc.co/"
-     39 "https://socviz.co/lookatdata.html?zarsrc=30&utm_source=zalo&utm_medium=zalo"
-     31 "http://vissoc.co"
-     31 "http://socviz.co/"
-     27 "https://www.bookdown.org/"
-     23 "https://bookdown.org/home/"
-
 ```
 
 ## The Unix pipe
 
 We can do a lot with a pipeline:
 
-```{.bash}
+```{bash}
 curl -s 'http://api.citybik.es/v2/networks/citi-bike-nyc' |
    jq '.network.stations[].free_bikes' | 
   gpaste -sd+ | 
   bc
-  
-30222
 ```
+
+This is the number of Citi Bikes available in New York City at the time these slides were made.
 
 ::: aside
 CitiBike example courtesy of Jeroen Janssens
@@ -866,11 +795,10 @@ CitiBike example courtesy of Jeroen Janssens
 
 ### On a Mac
 - Install macOS command line tools: From the command line, run `xcode-select –install`
-- Install the Homebrew package manager. see `https://brew.sh`
+- Install the Homebrew package manager. See `https://brew.sh`
 
 
 ### On Windows
 - Install the Windows Subsystem for Linux: `https://learn.microsoft.com/en-us/windows/wsl/install`
-
-
+- _Or_ install Cygwin: `https://www.cygwin.com`
 

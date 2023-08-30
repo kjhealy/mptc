@@ -14,6 +14,17 @@ The site is a [Quarto](https://quarto.org) project. It uses
 [{{targets}}](https://docs.ropensci.org/targets/) to manage the site
 building.
 
+To build the site from scratch, first you have to ~create the universe~
+open the project in RStudio by clicking on `mptc.Rproj`.
+
+- If it’s not installed already, R should try to install the {renv}
+  package when you open the RStudio Project for the first time.
+- If you don’t see a message about package installation, install it
+  yourself by running install.packages(“renv”) at the R console.
+- Run renv::restore() in the R console to install all the required
+  packages for this project.
+- Run targets::tar_make() in the R console to build everything.
+
 ## Everything is a DAG now
 
 Here is the dependency graph for the site build.
