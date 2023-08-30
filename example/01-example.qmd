@@ -1,0 +1,94 @@
+---
+title: "Example 01: the File system"
+engine: knitr
+---
+
+On a Mac or Linux system, or on Windows with the WSL or Cygwin installed, try some commands:
+
+
+### Who are you?
+
+```{zsh}
+whoami
+```
+
+
+### Where in the filesystem are you right now?
+
+```{zsh}
+pwd
+```
+
+### File listing
+
+```{zsh}
+ls
+```
+
+
+### File listing with switches
+
+`l` for long form, `t` for order by last modified, `h` for show sizes in human-readable units.
+
+```{zsh}
+ls -lth
+```
+
+
+### Piping output
+
+```{zsh}
+ls | wc -l
+```
+
+
+### The file system structure
+
+```{zsh}
+# Show the directory structure (excluding files) for this project
+# up to three levels deep. Your version of tree may need a lower-case
+# d for the -D switch: tree -d -L 3 
+tree -D -L 3
+```
+
+
+### Moving around
+
+```{zsh}
+## Enter a directory
+cd files
+ls
+```
+
+```{zsh}
+## Move up to parent directory
+cd ..
+ls
+```
+
+```{zsh}
+## Move directly to top of home directory
+cd ~
+```
+
+```{zsh}
+## Move back to the previous directory, wherever that was
+cd - 
+ls
+```
+
+```{zsh}
+## Move down a path relative to where you are now
+cd files/bib
+ls
+```
+
+```{zsh}
+## Move down then back up two levels
+cd files/bib
+cd ../../
+ls
+```
+
+
+
