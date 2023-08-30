@@ -4,5 +4,5 @@ title: "About"
 
 Site and slides made with [Quarto](https://quarto.org), [RStudio](https://posit.co/downloads/) and [R](https://www.r-project.org). The build environment is manged with [`{targets}`](https://books.ropensci.org/targets/) and [`{renv}`](https://rstudio.github.io/renv/index.html). Thanks to the indefatigable [Andrew Heiss](https://www.andrewheiss.com) for leading by example with the `{targets}` setup and for making his configuration available. 
 
-The main typeface used on the site and slides is [Tenso Slab](https://www.fontspring.com/fonts/exljbris/tenso-slab). The monospace font is [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/)
+The main typeface used on the site and slides is [Tenso Slab](https://www.fontspring.com/fonts/exljbris/tenso-slab). The monospace font is [Berkeley Mono](https://berkeleygraphics.com/typefaces/berkeley-mono/).
 
