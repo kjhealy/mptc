@@ -73,6 +73,7 @@ website:
 
 format:
   html:
+    embed-resources: false
     code-fold: false
     code-tools: true
     theme: html/custom.scss
