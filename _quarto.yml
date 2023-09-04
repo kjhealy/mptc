@@ -43,6 +43,8 @@ website:
           contents:
             - text: "01: The Idea of Your Computer"
               file: content/01-content.qmd
+            - text: "02: The Idea of a Shell"
+              file: content/02-content.qmd
 
     - title: "Assignments"
       contents:
@@ -62,6 +64,8 @@ website:
           contents:
             - text: "01: The file system"
               file: example/01-example.qmd
+            - text: "02: The shell environment"
+              file: example/02-example.qmd
 
   page-footer:
     left: |
