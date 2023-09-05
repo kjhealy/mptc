@@ -54,7 +54,7 @@ website:
         - section: "Things to do"
           contents:
           - text: "02: The Idea of a Shell"
-            file: content/02-problem-set.qmd
+            file: assignment/02-problem-set.qmd
 
     - title: "Examples"
       contents:

@@ -228,23 +228,23 @@ ls
 
 ```{zsh}
 ## The kind of thing you can do ... just use <tree -d -L 2> at the console though
-find . -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
+find ../. -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
 ```
 
 ## Changing directories
 
 ```{zsh}
 ## Change directory and list files
-cd files
+cd ../files
 ls  
-cd ..
+cd ../slides
 ```
 
 
 ## More detail
 
 ```{zsh}
-ls -l                                                                                           
+ls -l ../                                                                                           
 ```
 
 Note the idea of commands having options, or _switches_. 
@@ -282,14 +282,13 @@ bin  certbot.log  logrotate.conf  old  projects  public  staging
 ## `wc`, `cat`, `head`, and `tail`
 
 ```{zsh}
-# Rough words, lines, characters
-wc files/examples/alice_in_wonderland.txt
+wc ../files/examples/alice_in_wonderland.txt
 ```
 
 We can ask for a count of lines only:
 
 ```{zsh}
-wc -l files/examples/alice_in_wonderland.txt
+wc -l ../files/examples/alice_in_wonderland.txt
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -297,7 +296,7 @@ wc -l files/examples/alice_in_wonderland.txt
 `cat` _concatenates_ and _prints_ the files given to it. 
 
 ```{zsh}
-cat files/examples/jabberwocky.txt
+cat ../files/examples/jabberwocky.txt
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -305,13 +304,13 @@ cat files/examples/jabberwocky.txt
 The top:
 
 ```{zsh}
-head files/examples/alice_in_wonderland.txt 
+head ../files/examples/alice_in_wonderland.txt 
 ```
 
 The bottom:
 
 ```{zsh}
-tail files/examples/alice_in_wonderland.txt 
+tail ../files/examples/alice_in_wonderland.txt 
 ```
 
 
@@ -320,7 +319,7 @@ tail files/examples/alice_in_wonderland.txt
 There are 29 lines of boilerplate at the start of the book:
 
 ```{zsh}
-head -n 29 files/examples/alice_in_wonderland.txt
+head -n 29 ../files/examples/alice_in_wonderland.txt
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -328,7 +327,7 @@ head -n 29 files/examples/alice_in_wonderland.txt
 And 351 at the end:
 
 ```{zsh}
-tail -n 351 files/examples/alice_in_wonderland.txt | head -n 20
+tail -n 351 ../files/examples/alice_in_wonderland.txt | head -n 20
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -336,7 +335,7 @@ tail -n 351 files/examples/alice_in_wonderland.txt | head -n 20
 We can use `tail` to skip the boilerplate at the top:
 
 ```{zsh}
-tail -n +29 files/examples/alice_in_wonderland.txt | head
+tail -n +29 ../files/examples/alice_in_wonderland.txt | head
 ```
 
 
@@ -351,14 +350,14 @@ HEADSKIP=29
 ENDSKIP=351
 
 # The backticks ` ` here mean "Evaluate this command"; then put the result in a variable
-BOOKLINES=`cat files/examples/alice_in_wonderland.txt| wc -l | tr ' ' '\n' | tail -1`
+BOOKLINES=`cat ../files/examples/alice_in_wonderland.txt| wc -l | tr ' ' '\n' | tail -1`
 
 # This line does the arithmetic using expr and makes the result a variable
 GOODLINES=$(expr $BOOKLINES - $HEADSKIP - $ENDSKIP)
 
 # Now we use $HEADKSIP and $GOODLINES and create a new file 
-tail -n +$HEADSKIP files/examples/alice_in_wonderland.txt | 
-  head -n $GOODLINES > files/examples/alice_noboiler.txt
+tail -n +$HEADSKIP ../files/examples/alice_in_wonderland.txt | 
+  head -n $GOODLINES > ../files/examples/alice_noboiler.txt
 ```
 
 
@@ -367,9 +366,9 @@ tail -n +$HEADSKIP files/examples/alice_in_wonderland.txt |
 Now our `wc` will be different:
 
 ```{zsh}
-wc files/examples/alice_in_wonderland.txt 
+wc ../files/examples/alice_in_wonderland.txt 
 
-wc files/examples/alice_noboiler.txt
+wc ../files/examples/alice_noboiler.txt
 ```
 
 
@@ -378,19 +377,19 @@ wc files/examples/alice_noboiler.txt
 A data file: 
 
 ```{zsh}
-head files/examples/countries.csv
+head ../files/examples/countries.csv
 ```
 
 How many lines?
 
 ```{zsh}
-wc -l files/examples/countries.csv 
+wc -l ../files/examples/countries.csv 
 ```
 
 How many unique lines?
 
 ```{zsh}
-uniq files/examples/countries.csv | wc -l
+uniq ../files/examples/countries.csv | wc -l
 ```
 
 
@@ -398,7 +397,7 @@ uniq files/examples/countries.csv | wc -l
 
 ```{zsh}
 # Omit the header line 
-tail -n +2 files/examples/countries.csv | sort -r | head
+tail -n +2 ../files/examples/countries.csv | sort -r | head
 ```
 
 
@@ -407,17 +406,17 @@ tail -n +2 files/examples/countries.csv | sort -r | head
 This doesn't _quite_ work because of the way the data is coded:
 
 ```{zsh}
-tail -n +2 files/examples/countries.csv | sort -t , -k4 -k1
+tail -n +2 ../files/examples/countries.csv | sort -t , -k4 -k1
 ```
 
 
 ## `uniq`, `sort`, and `cut`
 
-`cut` slices out columns or fields defined by a delimiter (by default `\t` or tab)
+`cut` slices out columns defined by a delimiter (by default `\t` or tab)
 
 
 ```{zsh}
-cut -d , -f 2,4 files/examples/countries.csv 
+cut -d , -f 2,4 ../files/examples/countries.csv 
 ```
 
 Again in this case it doesn't quite behave as you might think! 
@@ -430,7 +429,7 @@ Again in this case it doesn't quite behave as you might think!
 
 ```{zsh}
 # Everything in the `files/` subdirectory
-find files
+find ../files
 ```
 
 
@@ -441,7 +440,7 @@ We can use _globbing_ (or _wildcards_) to narrow our search:
 ```{zsh}
 # Everything underneath the `files/` subdirectory 
 # whose name ends in `.csl`
-find files -name "*.csl"
+find ../files -name "*.csl"
 ```
 
 
@@ -450,8 +449,7 @@ find files -name "*.csl"
 Here we use the `.` to mean "Search in the current folder"
 
 ```{zsh}
-# Searches everything underneath the working directory
-find . -name "*.xlsx"
+find ../. -name "*.xlsx"
 ```
 
 
@@ -463,7 +461,7 @@ find . -name "*.xlsx"
 - The quoted semicolon `";"` or `\;` is required to end the line
 
 ```{zsh}
-find files -name "*.png" -exec echo rm {} ";"
+find ../files -name "*.png" -exec echo rm {} ";"
 ```
 
 If we omitted the `echo` here the found files would be deleted one at a time.
@@ -476,7 +474,7 @@ We can also use `xargs` to act on search results:
 ```{zsh}
 # Everything underneath the `files/` subdirectory 
 # whose name ends in `.png`
-find files -name "*.png"
+find ../files -name "*.png"
 ```
 
 Convert all these `png` files to `jpg`:
@@ -484,7 +482,7 @@ Convert all these `png` files to `jpg`:
 ```{zsh}
 # Everything underneath the `files/` subdirectory 
 # whose name ends in `.png`
-find files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
+find ../files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
 ```
 
 ## `find` and `grep`
@@ -492,13 +490,13 @@ find files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
 Check:
 
 ```{zsh}
-find files -name '*.png' -o -name '*.jpg'
+find ../files -name '*.png' -o -name '*.jpg'
 ```
 
 Delete them (with another method of deletion):
 
 ```{zsh}
-find files  -name '*.jpg' -type f -delete
+find ../files  -name '*.jpg' -type f -delete
 ```
 
 
@@ -508,14 +506,14 @@ find files  -name '*.jpg' -type f -delete
 To search _inside_ files we use `grep`.
 
 ```{zsh}
-grep Stately files/examples/ulysses.txt 
+grep Stately ../files/examples/ulysses.txt 
 ```
 
 Search more than one file:
 
 ```{zsh}
 ## -i for case-insensitive search
-grep -i jabber files/examples/*.txt
+grep -i jabber ../files/examples/*.txt
 ```
 
 ## `find` and `grep`
@@ -541,16 +539,18 @@ Eventually you will accumulate a history of shell commands you have typed, many 
 
 ## Aside: Standard Modifier Key Symbols
 
-| Symbol | Key         | Unicode    | Symbol | Key         | Unicode    |
-|--------|-------------|------------|--------|-------------|------------|
-| ⎋      | (escape)    | `U+238B` | ⌫      | (backspace) | `U+232B` |
-| ⇥      | (tab)       | `U+21E5` | ⌦      | (delete)    | `U+2326` |
-| ⇪      | (caps lock) | `U+21EA` | ⇱      | (home)      | `U+21F1` |
-| ⇧      | (shift)     | `U+21E7` | ⇲      | (end)       | `U+21F2` |
-| ⌃      | (control)   | `U+2303` | ⇞      | (page up)   | `U+21DE` |
-| ⌥      | (option/alt)| `U+2325` | ⇟      | (page down) | `U+21DF` |
-| ⌘      | (command)   | `U+2318` | ⌤      | (enter)     | `U+2324` |
-| ⏎      | (return)    | `U+23CE` | ␣      | (space)     | `U+2423` |
+| Symbol | Key       | Unicode  | Symbol | Key       | Unicode  |
+|:------:|-----------|----------|:------:|-----------|----------|
+| ⎋      | Escape    | `U+238B` | ⌫      | Backspace | `U+232B` |
+| ⇥      | Tab       | `U+21E5` | ⌦      | Delete    | `U+2326` |
+| ⇪      | Caps Lock | `U+21EA` | ⇱      | Home      | `U+21F1` |
+| ⇧      | Shift     | `U+21E7` | ⇲      | End       | `U+21F2` |
+| ⌃      | Control   | `U+2303` | ⇞      | Page Up   | `U+21DE` |
+| ⌥      | Option/Alt| `U+2325` | ⇟      | Page Down | `U+21DF` |
+| ⌘      | Command   | `U+2318` | ⌤      | Enter     | `U+2324` |
+| ⏎      | Return    | `U+23CE` | ␣      | Space     | `U+2423` |
+
+: {.striped}
 
 ## Integrate `rg` and `fzf`
 
@@ -567,13 +567,138 @@ brew install fzf
 
 # Naming things
 
+## Naming files
+
+- The better your names for things, the easier they will be to find (and programmatically work with)
+- In civilized operating systems, names containing spaces and special characters (such as `? ! , . # $ * <space>` and the like) are not a problem. 
+- However, the more you work programatically, the more you will want to avoid them. 
+- Jenny Bryan's 5 minute Normconf talk is a good overview of good habits
 
 ## Naming files
 
-The better your names for things, the easier they will be to find (and programmatically work with)
+- Names should tell you something about what the file is
+- Names should follow some reasonable convention
+- Names should avoid spaces and punctuation
+- Names with numbers should sort in useful ways
+- Names should not be used to track the versions of files
 
+## Naming files
+
+Find all files in or below the project directory that end in `.qmd`:
+
+```{zsh}
+find .. -name "*.qmd"
+```
+
+
+## Naming files
+
+Find all files in or below the current directory that start with two characters followed by `-example` and end with any other number of characters:
+
+```{zsh}
+find .. -name "??-example*"
+```
+
+
+## Sort order
+
+```{zsh}
+mkdir tmp
+touch tmp/{1..15}.txt
+```
+
+See how these sort:
+
+```{zsh}
+ls tmp/
+```
+
+Not what we want. 
+
+## Sort order
+
+```{zsh}
+rm -f tmp/*.txt
+touch tmp/{01..15}.txt
+ls tmp/
+```
+
+## Sort order 
+
+```{zsh}
+rm -f tmp/*.txt
+touch tmp/{a..d}{01..03}.txt
+ls -l tmp/
+rm -rf tmp/
+```
+
+In general keep your names lower-case.
+
+## Dates 
+
+### Use the one true YMD format, **ISO 8601**: 
+
+### [YYYY-MM-DD]{.fg-orange}
+
+## Naming files
+
+- Be consistent in your use of naming conventions
+- No need to get too clever, but ...
+
+```{.zsh}
+data_clean/
+data_raw/
+docs/
+figures/
+R/01_clean-data.R
+R/02_process-data.R
+R/03_descriptive-figs-tables.R
+R/04_brms-model.R
+paper/
+README.md
+```
+
+
+## Unix naming conventions
+
+- Dotfiles and underscores
+
+```{zsh}
+#| class: scrollout
+ls -l ../
+```
+
+## Unix naming conventions
+
+```{zsh}
+#| class: scrollout
+ls -la ../
+```
+
+## Unix naming conventions
+
+- Files and folders beginning with a period, `.`, are "hidden"
+- They won't show up via `ls`
+- By convention they are often used for configuration information
+- Files or folders beginning with an underscore, `_`, are often "generated" (though this is a weak convention)
+- The structure of plain-text config files will depend on the thing they are configuring. It might just a list of words or options, or it might be a structured file based on a Markup language like YAML or TOML, or it might be written to be parsed in R or Python, etc.
+
+## Unix naming conventions {.smaller}
+
+Here's the `.gitignore` file for this project:
+
+```{.zsh include="../.gitignore"}
+```
+
+## Unix naming conventions {.smaller}
+
+A `.bashrc` file to configure non-login shells for Bash:
+
+```{.bash include="../files/examples/bashrc.txt"}
+#| class: scrollout
+```
 
 # Scripting the Shell
 
-## Shell scripts
+## Utility scripts
 

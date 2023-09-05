@@ -355,23 +355,27 @@ pre.text, pre.sourceCode, .cell-output pre {
   margin: 0 0 1em;
 }
 
-// Remove margin on pre in output
-.cell-output pre {
-  margin-bottom: 0;
-  color: #ffffff;
-}
-
 // Format output and plain text blocks like code
-.cell-output, pre.text {
-  border: none;
-  padding: .4em;
-  background-color: $monokai-bg;
-  border: 1px solid $monokai-bg;
-  border-radius: .25rem;
+.cell-output, .cell-output-stdout pre code {
+  background-color: $chunk-background;
+  margin-top: 0.15em;
 }
 
-pre.text {
-  color: #ffffff;
+.text pre, .text code {
+  border-left: 2px;
+  border-left-color: $my-lblue;
+  background-color: $chunk-background;
+}
+
+
+.smallcode pre, .smallcode code {
+  font-size: 0.78rem;
+}
+
+// Allow content to scroll in output chunks
+.scrollout {
+max-height: 500px;
+overflow-y: scroll;
 }
 
 
