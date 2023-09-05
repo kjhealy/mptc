@@ -228,14 +228,14 @@ ls
 
 ```{zsh}
 ## The kind of thing you can do ... just use <tree -d -L 2> at the console though
-find ../. -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
+find . -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
 ```
 
 ## Changing directories
 
 ```{zsh}
 ## Change directory and list files
-cd ../files
+cd files
 ls  
 cd ../slides
 ```
@@ -244,7 +244,7 @@ cd ../slides
 ## More detail
 
 ```{zsh}
-ls -l ../                                                                                           
+ls -l                                                                                        
 ```
 
 Note the idea of commands having options, or _switches_. 
@@ -282,13 +282,13 @@ bin  certbot.log  logrotate.conf  old  projects  public  staging
 ## `wc`, `cat`, `head`, and `tail`
 
 ```{zsh}
-wc ../files/examples/alice_in_wonderland.txt
+wc files/examples/alice_in_wonderland.txt
 ```
 
 We can ask for a count of lines only:
 
 ```{zsh}
-wc -l ../files/examples/alice_in_wonderland.txt
+wc -l files/examples/alice_in_wonderland.txt
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -296,7 +296,7 @@ wc -l ../files/examples/alice_in_wonderland.txt
 `cat` _concatenates_ and _prints_ the files given to it. 
 
 ```{zsh}
-cat ../files/examples/jabberwocky.txt
+cat files/examples/jabberwocky.txt
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -304,13 +304,13 @@ cat ../files/examples/jabberwocky.txt
 The top:
 
 ```{zsh}
-head ../files/examples/alice_in_wonderland.txt 
+head files/examples/alice_in_wonderland.txt 
 ```
 
 The bottom:
 
 ```{zsh}
-tail ../files/examples/alice_in_wonderland.txt 
+tail files/examples/alice_in_wonderland.txt 
 ```
 
 
@@ -319,7 +319,7 @@ tail ../files/examples/alice_in_wonderland.txt
 There are 29 lines of boilerplate at the start of the book:
 
 ```{zsh}
-head -n 29 ../files/examples/alice_in_wonderland.txt
+head -n 29 files/examples/alice_in_wonderland.txt
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -327,7 +327,7 @@ head -n 29 ../files/examples/alice_in_wonderland.txt
 And 351 at the end:
 
 ```{zsh}
-tail -n 351 ../files/examples/alice_in_wonderland.txt | head -n 20
+tail -n 351 files/examples/alice_in_wonderland.txt | head -n 20
 ```
 
 ## `wc`, `cat`, `head`, and `tail`
@@ -335,7 +335,7 @@ tail -n 351 ../files/examples/alice_in_wonderland.txt | head -n 20
 We can use `tail` to skip the boilerplate at the top:
 
 ```{zsh}
-tail -n +29 ../files/examples/alice_in_wonderland.txt | head
+tail -n +29 files/examples/alice_in_wonderland.txt | head
 ```
 
 
@@ -350,14 +350,14 @@ HEADSKIP=29
 ENDSKIP=351
 
 # The backticks ` ` here mean "Evaluate this command"; then put the result in a variable
-BOOKLINES=`cat ../files/examples/alice_in_wonderland.txt| wc -l | tr ' ' '\n' | tail -1`
+BOOKLINES=`cat files/examples/alice_in_wonderland.txt| wc -l | tr ' ' '\n' | tail -1`
 
 # This line does the arithmetic using expr and makes the result a variable
 GOODLINES=$(expr $BOOKLINES - $HEADSKIP - $ENDSKIP)
 
 # Now we use $HEADKSIP and $GOODLINES and create a new file 
-tail -n +$HEADSKIP ../files/examples/alice_in_wonderland.txt | 
-  head -n $GOODLINES > ../files/examples/alice_noboiler.txt
+tail -n +$HEADSKIP files/examples/alice_in_wonderland.txt | 
+  head -n $GOODLINES > files/examples/alice_noboiler.txt
 ```
 
 
@@ -366,9 +366,9 @@ tail -n +$HEADSKIP ../files/examples/alice_in_wonderland.txt |
 Now our `wc` will be different:
 
 ```{zsh}
-wc ../files/examples/alice_in_wonderland.txt 
+wc files/examples/alice_in_wonderland.txt 
 
-wc ../files/examples/alice_noboiler.txt
+wc files/examples/alice_noboiler.txt
 ```
 
 
@@ -377,19 +377,19 @@ wc ../files/examples/alice_noboiler.txt
 A data file: 
 
 ```{zsh}
-head ../files/examples/countries.csv
+head files/examples/countries.csv
 ```
 
 How many lines?
 
 ```{zsh}
-wc -l ../files/examples/countries.csv 
+wc -l files/examples/countries.csv 
 ```
 
 How many unique lines?
 
 ```{zsh}
-uniq ../files/examples/countries.csv | wc -l
+uniq files/examples/countries.csv | wc -l
 ```
 
 
@@ -397,7 +397,7 @@ uniq ../files/examples/countries.csv | wc -l
 
 ```{zsh}
 # Omit the header line 
-tail -n +2 ../files/examples/countries.csv | sort -r | head
+tail -n +2 files/examples/countries.csv | sort -r | head
 ```
 
 
@@ -406,7 +406,7 @@ tail -n +2 ../files/examples/countries.csv | sort -r | head
 This doesn't _quite_ work because of the way the data is coded:
 
 ```{zsh}
-tail -n +2 ../files/examples/countries.csv | sort -t , -k4 -k1
+tail -n +2 files/examples/countries.csv | sort -t , -k4 -k1
 ```
 
 
@@ -416,7 +416,7 @@ tail -n +2 ../files/examples/countries.csv | sort -t , -k4 -k1
 
 
 ```{zsh}
-cut -d , -f 2,4 ../files/examples/countries.csv 
+cut -d , -f 2,4 files/examples/countries.csv 
 ```
 
 Again in this case it doesn't quite behave as you might think! 
@@ -429,7 +429,7 @@ Again in this case it doesn't quite behave as you might think!
 
 ```{zsh}
 # Everything in the `files/` subdirectory
-find ../files
+find files
 ```
 
 
@@ -440,7 +440,7 @@ We can use _globbing_ (or _wildcards_) to narrow our search:
 ```{zsh}
 # Everything underneath the `files/` subdirectory 
 # whose name ends in `.csl`
-find ../files -name "*.csl"
+find files -name "*.csl"
 ```
 
 
@@ -449,7 +449,7 @@ find ../files -name "*.csl"
 Here we use the `.` to mean "Search in the current folder"
 
 ```{zsh}
-find ../. -name "*.xlsx"
+find . -name "*.xlsx"
 ```
 
 
@@ -461,7 +461,7 @@ find ../. -name "*.xlsx"
 - The quoted semicolon `";"` or `\;` is required to end the line
 
 ```{zsh}
-find ../files -name "*.png" -exec echo rm {} ";"
+find files -name "*.png" -exec echo rm {} ";"
 ```
 
 If we omitted the `echo` here the found files would be deleted one at a time.
@@ -474,7 +474,7 @@ We can also use `xargs` to act on search results:
 ```{zsh}
 # Everything underneath the `files/` subdirectory 
 # whose name ends in `.png`
-find ../files -name "*.png"
+find files -name "*.png"
 ```
 
 Convert all these `png` files to `jpg`:
@@ -482,7 +482,7 @@ Convert all these `png` files to `jpg`:
 ```{zsh}
 # Everything underneath the `files/` subdirectory 
 # whose name ends in `.png`
-find ../files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
+find files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
 ```
 
 ## `find` and `grep`
@@ -490,13 +490,13 @@ find ../files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
 Check:
 
 ```{zsh}
-find ../files -name '*.png' -o -name '*.jpg'
+find files -name '*.png' -o -name '*.jpg'
 ```
 
 Delete them (with another method of deletion):
 
 ```{zsh}
-find ../files  -name '*.jpg' -type f -delete
+find files  -name '*.jpg' -type f -delete
 ```
 
 
@@ -506,14 +506,14 @@ find ../files  -name '*.jpg' -type f -delete
 To search _inside_ files we use `grep`.
 
 ```{zsh}
-grep Stately ../files/examples/ulysses.txt 
+grep Stately files/examples/ulysses.txt 
 ```
 
 Search more than one file:
 
 ```{zsh}
 ## -i for case-insensitive search
-grep -i jabber ../files/examples/*.txt
+grep -i jabber files/examples/*.txt
 ```
 
 ## `find` and `grep`
@@ -577,8 +577,8 @@ brew install fzf
 ## Naming files
 
 - Names should tell you something about what the file is
-- Names should follow some reasonable convention
 - Names should avoid spaces and punctuation
+- Names should follow some reasonable convention
 - Names with numbers should sort in useful ways
 - Names should not be used to track the versions of files
 
@@ -587,7 +587,7 @@ brew install fzf
 Find all files in or below the project directory that end in `.qmd`:
 
 ```{zsh}
-find .. -name "*.qmd"
+find . -name "*.qmd"
 ```
 
 
@@ -596,7 +596,7 @@ find .. -name "*.qmd"
 Find all files in or below the current directory that start with two characters followed by `-example` and end with any other number of characters:
 
 ```{zsh}
-find .. -name "??-example*"
+find . -name "??-example*"
 ```
 
 
@@ -630,6 +630,7 @@ rm -f tmp/*.txt
 touch tmp/{a..d}{01..03}.txt
 ls -l tmp/
 rm -rf tmp/
+rm -rf ../tmp/
 ```
 
 In general keep your names lower-case.
@@ -665,14 +666,14 @@ README.md
 
 ```{zsh}
 #| class: scrollout
-ls -l ../
+ls -l 
 ```
 
 ## Unix naming conventions
 
 ```{zsh}
 #| class: scrollout
-ls -la ../
+ls -la 
 ```
 
 ## Unix naming conventions
