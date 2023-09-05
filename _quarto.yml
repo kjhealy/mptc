@@ -51,9 +51,10 @@ website:
         - section: "Overview"
           contents:
             - assignment/index.qmd
-        - section: "Problem sets"
+        - section: "Things to do"
           contents:
-            - assignment/01-problem-set.qmd
+          - text: "02: The Idea of a Shell"
+            file: content/02-problem-set.qmd
 
     - title: "Examples"
       contents:
@@ -62,9 +63,9 @@ website:
             - example/index.qmd
         - section: "How-To"
           contents:
-            - text: "01: The file system"
+            - text: "01: The File System"
               file: example/01-example.qmd
-            - text: "02: The shell environment"
+            - text: "02: The Shell"
               file: example/02-example.qmd
 
   page-footer:

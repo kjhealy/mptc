@@ -2,3 +2,4 @@
 title: "Assignments"
 ---
 
+Assignments, things to do between class meetings, and so on.
