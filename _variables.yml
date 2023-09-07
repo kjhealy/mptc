@@ -30,6 +30,10 @@ school:
   name: Sociology Department
   url: "https://sociology.duke.edu/"
 
+deploy:
+  user: "kjhealy"
+  site: true
+
 schedule:
   wk1: 2023-08-29
   wk2: 2023-09-05

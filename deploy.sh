@@ -1,5 +1,4 @@
 ## MPTC deploy
-## Requires if (Sys.info()["user"] == "kjhealy") to be TRUE in _targets.R
 PUBLIC_DIR='_site/'
 SSH_USER='kjhealy@kjhealy.co'
 DOCUMENT_ROOT='~/public/mptc.io/public_html'
