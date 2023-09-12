@@ -24,6 +24,7 @@ slide_details <- tibble::tribble(
 - @robbins05:_class_shell_scrip
 - @neil15:_pract_vim
 - @petersen22:_master_emacs
+- @friedl06:_master_regul_expres
 
 ## Slides
 
