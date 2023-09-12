@@ -501,6 +501,45 @@ rg Kieran .
 rg -t yaml "url:" .
 ```
 
+## Regexes in the Shell
+
+- Standard shell tools like `sed`, `awk`, and `grep` can all use some version of regular expressions. 
+
+```{zsh}
+grep -E "^The sky|night.$" files/examples/sentences.txt
+```
+
+<br />
+
+```{zsh}
+grep -E "^The sky|night.$" files/examples/sentences.txt
+```
+
+## Regexes in the Shell
+
+- There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings. 
+- One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. 
+
+```{.zsh}
+# Find every Rmarkdown file beneath the current directory
+# Then edit each one in place to replace every instance of 
+# `percent_format` with `label_percent`
+find . -name "*.Rmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
+```
+
+## Regexes in the Shell
+
+- You can protect a bit against the dangers of doing this by making the `-i` option create backup files of everything it touches:
+
+```{.zsh}
+# Find every Rmarkdown file beneath the current directory
+# Then edit each one in place to replace every instance of 
+# `percent_format` with `label_percent`
+find . -name "*.Rmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
+```
+
+- Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. 
+- For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/)
 
 # Text Editors
 
@@ -527,9 +566,16 @@ rg -t yaml "url:" .
 - The RStudio IDE has many of the features of a good editor built in, as well as doing other things.
 - Several of the other editors also have good support for R and many other languages.
 
-## Danger, Will Robinson
+## Danger, Will Robinson 
 
 ![One view of things](../assets/03-editors/03_learning_curves_editors.png)
+
+## Danger, Will Robinson {.smaller}
+
+![](../assets/03-editors/03_emacs_setup.png){width=90% fig-align="center"}
+
+- Endlessly futzing with your text editor's setup is a displacement activity. 
+- The tools are not magic. They cannot by themselves make you do good work. Or any work.
 
 ## Things any good text editor will do
 
@@ -543,8 +589,8 @@ rg -t yaml "url:" .
 ::: {.fragment}
 ### Edit text!
 
-- Easy keyboard movement with shortcuts 
-- Keyboard-based selection and movement of text and lines
+- Easy navigation with keyboard shortcuts 
+- Keyboard-based selection and movement of text, lines, and logical sections
 - Search and replace using regular expressions
 
 :::
@@ -557,22 +603,11 @@ rg -t yaml "url:" .
 - Rectangular / Columnar editing
 - A snippet system of some sort
 
-::: {.fragment}
-
-### IDE-like functionality
-
-- Integration with documentation
-- Static analysis and Linting
-- Integration with a REPL
-- Diffing files
-- Integration with version control systems
-- Remote editing
-
-:::
-
-
-
 ::: {.notes}
+
+VS Code: 
+  cmd-shift-L for example
+
 
 Emacs: 
 
@@ -594,9 +629,23 @@ The command C-x SPC (rectangle-mark-mode) toggles whether the region-rectangle o
 
 :::
 
-## Other things to think about
+
+## Things most good text editors also do
+
+### IDE-like functionality
+
+- Integration with documentation
+- Static analysis and Linting
+- Integration with a REPL
+- Diffing files
+- Integration with version control systems
+- Remote editing
+
+
+## Other things
 
 ### Specifically for academia
 
 - Citation and reference management
 - Integration with Zotero
+- Connection to [Pandoc](https://pandoc.org)
