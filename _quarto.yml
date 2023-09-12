@@ -41,10 +41,13 @@ website:
             - content/index.qmd
         - section: "Topics"
           contents:
-            - text: "01: The Idea of Your Computer"
+            - text: "01: Your Computer"
               file: content/01-content.qmd
-            - text: "02: The Idea of a Shell"
+            - text: "02: The Shell"
               file: content/02-content.qmd
+            - text: "03: Text Editing"
+              file: content/03-content.qmd
+
 
     - title: "Assignments"
       contents:
@@ -53,7 +56,7 @@ website:
             - assignment/index.qmd
         - section: "Things to do"
           contents:
-          - text: "02: The Idea of a Shell"
+          - text: "02: The Shell"
             file: assignment/02-problem-set.qmd
 
     - title: "Examples"
@@ -67,6 +70,9 @@ website:
               file: example/01-example.qmd
             - text: "02: The Shell"
               file: example/02-example.qmd
+            - text: "03: Text Editing"
+              file: example/03-example.qmd
+
 
   page-footer:
     left: |

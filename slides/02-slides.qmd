@@ -1,5 +1,5 @@
 ---
-title: "The Idea of a Shell"
+title: "The Shell"
 subtitle: "Modern Plain Text Social Science: Week 2"
 format: kjhslides-revealjs
 engine: knitr
@@ -698,8 +698,4 @@ A `.bashrc` file to configure non-login shells for Bash:
 ```{.bash include="../files/examples/bashrc.txt"}
 #| class: scrollout
 ```
-
-# Scripting the Shell
-
-## Utility scripts
 

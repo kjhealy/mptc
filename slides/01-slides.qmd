@@ -1,5 +1,5 @@
 ---
-title: "The Idea of Your Computer"
+title: "Your Computer"
 subtitle: "Modern Plain Text Social Science: Week 1"
 format: kjhslides-revealjs
 engine: knitr

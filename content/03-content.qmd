@@ -1,6 +1,6 @@
 ---
-title: "2. The Shell"
-date: 2023-09-04
+title: "3. Text Editing"
+date: 2023-09-12
 date-format: full
 ---
 
@@ -15,17 +15,15 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-## Readings
+- A little more on shell scripting
+- Regular expressions
+- Text Editors
 
-- For more information about the shell, see @barrett22:_effic_linux
+## Background and Related Reading
 
-
-## Video
-
-- Five minutes from Jenny Bryan on how to name things:
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/ES1LTlnpLMk?si=hP_4NHRcqGe3KYUo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
-
+- @robbins05:_class_shell_scrip
+- @neil15:_pract_vim
+- @petersen22:_master_emacs
 
 ## Slides
 
@@ -45,9 +43,9 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<iframe class="slide-deck" id="quartoframe" src="../slides/02-slides.html"></iframe>
+<iframe class="slide-deck" id="quartoframe" src="../slides/03-slides.html"></iframe>
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/02-slides")
+slide_win_button("/slides/03-slides")
 ```

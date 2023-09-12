@@ -4,8 +4,8 @@ suppressPackageStartupMessages(library(tidyverse))
 
 ## Variables and options
 class_number <- "SOCIOL 880-1"
-base_url <- "https://mptc.io/"
 page_suffix <- ".html"
+base_url <- "https://mptc.io/"
 
 options(tidyverse.quiet = TRUE,
         dplyr.summarise.inform = FALSE)
