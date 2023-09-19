@@ -1,0 +1,538 @@
+---
+title: "Version Control with Git"
+subtitle: "Modern Plain Text Social Science: Week 4"
+format: kjhslides-revealjs
+engine: knitr
+filters: 
+  - invert-h1
+  - include-code-files
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(flipbookr)
+```
+
+# Plain Text Credo Again
+
+## 
+
+![](../assets/04-git/04_three_rules.png){width=100%}
+
+##
+
+![](../assets/04-git/04_four_rules.png){width=100%}
+
+# Knowing what you did
+
+##
+
+### ... O that I were as great
+### As is my grief, or lesser than my name!
+### Or that I could forget what I have been,
+### Or not remember what I must be now!
+
+::: aside 
+Richard II, Act 3, Scene iii 
+:::
+
+## We need to keep track 
+
+- In the "Engineering" model, changes are tracked outside of files, at the level of the project
+- When you get down to it a "project" is a folder that contains a bunch of files and subfolders
+- There's a long history of tools that keep track of what happens to the files in projects and who did things to which files
+- A tool like this is called a _Version Control System_ or a _Revision Control System_
+
+## Git
+
+- Git is the industry-standard VCS
+- It's very powerful
+- It's used to run the software development projects of gigantic corporations that must coordinate huge projects with contributions by hundreds or thousands of developers
+- It can be a real pain in the ass
+
+## Git
+
+- We can start by using a _very small fraction_ of git's functionality
+
+
+
+# Git as a Logbook
+
+## Our sample project
+
+![](../assets/04-git/04-git-covid-project-folder-01.png){width=100%}
+
+- This project can be found at <https://github.com/kjhealy/covid-project>
+
+## What must we track?
+
+![](../assets/04-git/04-git-covid-project-folder-02.png){width=100%}
+
+## This is our local folder
+
+![](../assets/04-git/04-git-covid-project-folder-03.png){width=100%}
+
+## This is what we need to track
+
+:::: {.columns}
+::: {.column width="45%"}
+![](../assets/04-git/04-git-covid-project-folder-04.png){width=100%}
+:::
+
+::: {.column width="45%" .right}
+  - Even though they are generated, for figures and tables (and final outputs like papers) we will often want to know which version of the code and data they were produced with.
+  - We'll come back to this in more detail later on. But in essence we'll write an R function to stamp a version identifier on the output.
+:::
+::::
+
+
+
+## Initialise a repository
+
+![](../assets/04-git/04-git-covid-project-folder-05.png){width=50%}
+
+## Initialise a repository
+
+:::: {.columns}
+::: {.column width="35%"}
+  ![](../assets/04-git/04-git-covid-project-folder-06.png){width=100%}
+:::
+
+::: {.column width="45%" .right}
+  - The `.git` folder is "hidden" because its name begins with a dot.  
+  - Inside it contains its own file and folder hierarchy for keeping track of changes to our project. 
+  - Now we need to tell git what to track. 
+:::
+::::
+
+## Staging a file
+
+:::: {.columns}
+::: {.column width="60%"}
+  ![](../assets/04-git/04-git-covid-project-folder-07.png){width=100%}
+:::
+
+::: {.column width="35%" .right}
+  - The first step is to "stage" a file with the command `git add <filename>`
+  - This adds the file to the index of things git is going to manage
+:::
+::::
+
+
+
+## Staging a file
+
+:::: {.columns}
+::: {.column width="60%"}
+  ![](../assets/04-git/04-git-covid-project-folder-07.png){width=100%}
+:::
+
+::: {.column width="35%" .right}
+  - No permanent record of changes is made at this point
+  - As the name suggests, conceptually the staging area is preparatory
+  - ... Preparatory to what?
+
+:::
+::::
+
+
+## Committing a file
+
+![](../assets/04-git/04-git-covid-project-folder-08.png){width=100%}
+
+
+- Committing a file makes a record of it in our local repository.
+
+## Committing a file
+
+![](../assets/04-git/04-git-covid-project-folder-09.png){width=100%}
+
+- The 64-bit hexadecimal number is an **SHA Hash**. 
+- It's derived from the file(s) being committed and it uniquely identifies the changes associated with that commit. 
+- The message is for our benefit and should be terse and informative about what's new, fixed, or changed.
+
+## Committing a file
+
+![](../assets/04-git/04-git-covid-project-folder-10.png){width=100%}
+
+- Inside the `.git` folder, a compressed version of the file is created.
+
+## Staging several files ...
+
+![](../assets/04-git/04-git-covid-project-folder-11.png){width=100%}
+
+## ... and committing them
+
+![](../assets/04-git/04-git-covid-project-folder-12.png){width=100%}
+
+## Committing several files
+
+![](../assets/04-git/04-git-covid-project-folder-13.png){width=100%}
+
+## Remember ... 
+
+- The _Local Folder_ is our project as we (and the file system) can see it
+- The _Local Repository_ lives inside the special `.git` folder that sits at the root of our project
+- We can move files and folders in and out of our local folder
+- But for git to track any of these changes we need to _add_ and _commit_ them
+
+## Editing and committing
+
+![](../assets/04-git/04-git-covid-project-folder-14a.png){width=100%}
+
+## Editing and committing
+
+![](../assets/04-git/04-git-covid-project-folder-14b.png){width=100%}
+
+
+## Storing the changes
+
+![](../assets/04-git/04-git-covid-project-folder-15.png){width=100%}
+
+## Remember ... 
+
+- The _Local Folder_ is our project as we (and the file system) can see it
+- The _Local Repository_ lives inside the special `.git` folder that sits at the root of our project
+- We can move files and folders in and out of our local folder
+- But for git to track any of these changes we need to _add_ and _commit_ them
+
+## Git as a Log Book
+
+- Working this way, our project contains a special hidden folder 
+- Every time we decide to make a change to a tracked file in the project we do `git add <filename>` and `git commit -m "Message"`
+- We write `git add -u` to stage any changes to every already-tracked file
+- _Newly-created_ files that we want to stage and commit are not picked up by `git add -u`
+- They must be added by name, either one at a time or with shell-style paths and globs (wildcards)
+
+# GitHub
+
+## Keeping a remote Log
+
+- We can keep a copy of our repository wherever we like
+- In [the Cloud]{.fg-lblue}, for example ...
+
+--- 
+
+:::{.huge}
+There's no such thing as [the Cloud]{.fg-lblue}
+
+<br />
+[It's just someone else's computer]{.fg-orange}
+:::
+
+::: aside
+Probably a computer in a big shed in rural North Carolina or Texas or California, etc
+:::
+
+---
+
+## Keeping a remote log
+
+![](../assets/04-git/04-git-covid-project-folder-16.png){width=100%}
+
+- We proceed as before but then `push` changes to GitHub or wherever our remote repository is located. 
+
+## Workflow: GitHub Round Trip
+
+![](../assets/04-git/04-git-covid-project-folder-17.png){width=100%}
+
+- We'll deal separately with getting GitHub set up, but see [Happy Git with R](https://happygitwithr.com)
+
+## Workflow: GitHub Round Trip
+
+![](../assets/04-git/04-git-covid-project-folder-18.png){width=100%}
+
+
+
+## Workflow: GitHub Round Trip
+
+![](../assets/04-git/04-git-covid-project-folder-19.png){width=100%}
+
+## Workflow: GitHub Round Trip
+
+![](../assets/04-git/04-git-covid-project-folder-20.png){width=100%}
+
+## Workflow: GitHub Round Trip
+
+![](../assets/04-git/04-git-covid-project-folder-21.png){width=100%}
+
+## Workflow: GitHub Round Trip
+
+![](../assets/04-git/04-git-covid-project-folder-22.png){width=100%}
+
+## Workflow: GitHub Round Trip
+
+![](../assets/04-git/04-git-covid-project-folder-23.png){width=100%}
+
+## `git pull`  
+
+![](../assets/04-git/04-git-covid-project-folder-24.png){width=100%}
+
+
+# Branches
+
+## Our project again
+
+```{.zsh}
+❯ git log
+commit 6df6d6b10b127e87115dceac06c869150b67e800 (HEAD -> main, origin/main)
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 17:49:33 2023 -0400
+
+    Began writeup
+
+commit ef0772106fe4d6f10ee62afd3c951ff14b16efb1
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 17:38:55 2023 -0400
+
+    Data and Rproj files
+
+commit f43f6f10ba5cd1a57430c032c8c14f056b154e9b
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 17:34:08 2023 -0400
+
+    Added covidcases
+```
+
+## Our project again
+
+- Individual commits can be referenced by their `SHA` hash
+- Usually the first few bits are sufficient to ID the commit in a single project
+
+```{.zsh}
+> git log --oneline
+
+6df6d6b (HEAD -> main, origin/main) Began writeup
+ef07721 Data and Rproj files
+f43f6f1 Added covidcases
+```
+
+- The current commit is called the `HEAD`
+
+## Our project again
+
+- The SHA or commit id always refers to the same code. 
+- Zooming out from the various files changed in each case to the level of commits, our project looks like this:
+
+![](../assets/04-git/04-git-branch-01.png){width=100%}
+
+## We're on a branch
+
+- By default we're on the `main` branch
+
+![](../assets/04-git/04-git-branch-02.png){width=100%}
+
+## We can create branches
+
+```{.zsh}
+> git branch figtest 
+> git checkout figtest
+
+Switched to branch 'figtest'
+
+```
+
+## We make some edits in `covidcases.qmd`
+
+```{.r}
+mtcars |> 
+  ggplot(mapping = aes(x = hp, 
+                       y = mpg)) + 
+  geom_point() + 
+  geom_smooth()
+```
+
+## What's our status?
+
+```{.zsh}
+# Back at the shell here
+> git status
+On branch figtest
+Changes not staged for commit:
+  (use "git add <file>..." to update what will be committed)
+  (use "git restore <file>..." to discard changes in working directory)
+	modified:   covidcases.qmd
+
+no changes added to commit (use "git add" and/or "git commit -a")
+```
+
+## Commit changes on the new branch
+
+```{.zsh}
+> git add covidcases.qmd
+> git commit -m "Checking ggplot code"
+
+[figtest 912aed7] Checking ggplot code
+ 1 file changed, 12 insertions(+)
+```
+
+## Schematically
+
+![](../assets/04-git/04-git-branch-03.png){width=100%}
+
+## Look at the whole log
+
+```{.zsh}
+> git log --abbrev-commit
+commit 912aed7 (HEAD -> figtest)
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 20:25:42 2023 -0400
+
+    Checking ggplot code
+
+commit 6df6d6b (origin/main, main)
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 17:49:33 2023 -0400
+
+    Began writeup
+
+commit ef07721
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 17:38:55 2023 -0400
+
+    Data and Rproj files
+
+commit f43f6f1
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 17:34:08 2023 -0400
+
+    Added covidcases
+```
+
+
+## Status?
+
+```{.zsh}
+git status
+On branch figtest
+nothing to commit, working tree clean
+```
+
+## Make some more changes ...
+
+```{.zsh}
+> git log --abbrev-commit
+
+commit 4a77b2f (HEAD -> figtest)
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 20:33:57 2023 -0400
+
+    Fixed the plot
+
+commit 912aed7
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 20:25:42 2023 -0400
+
+    Checking ggplot code
+```
+
+## Schematically
+
+![](../assets/04-git/04-git-branch-04.png){width=100%}
+
+## Merge it back in to `main`
+
+```{.zsh}
+> git checkout main
+Switched to branch 'main'
+```
+
+- None of the code we wrote in the last two commits is on this branch
+
+```{.zsh}
+> git merge figtest
+
+Updating 6df6d6b..4a77b2f
+Fast-forward
+ covidcases.qmd | 13 +++++++++++++
+ 1 file changed, 13 insertions(+)
+```
+
+- Now it is
+
+## Schematically
+
+![](../assets/04-git/04-git-branch-05.png){width=100%}
+
+
+## Write some more
+
+- Make some more edits and commit those changes
+
+```{.r}
+## Read in the data
+df <- read_csv(here::here("data", "uscases.csv"))
+```
+
+
+## Schematically
+
+![](../assets/04-git/04-git-branch-06.png){width=100%}
+
+## Where are we?
+
+```{.zsh}
+> git log --abbrev-comit
+
+commit 06677f4 (HEAD -> main, origin/main)
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 20:45:10 2023 -0400
+
+    Load the US data
+
+commit 4a77b2f (origin/figtest, figtest)
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 20:33:57 2023 -0400
+
+    Fixed the plot
+
+commit 912aed7
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 20:25:42 2023 -0400
+
+    Checking ggplot code
+
+commit 6df6d6b
+Author: Kieran Healy <kjhealy@gmail.com>
+Date:   Mon Sep 18 17:49:33 2023 -0400
+
+    Began writeup
+```
+
+
+# Summary
+
+## It's a log book
+
+- For single person projects you can go a _long_ way with a very basic git workflow
+- Essentially do your work then `add`, `commit`, and `push` the results. 
+- At a minimum you will be left with a record of your project's development where you can revist _any_ commit and see what the state of the project was at that point
+
+## It's a testbed
+
+- A little discipline with branching will let you experiment with new lines of work or code without getting lost or losing the ability to revert to what was there before, all in the same project folder
+- Successful lines of inquiry can be merged into the main branch, unsuccessful ones kept for the record or discarded altogether
+
+## It's a collaboration tool
+
+- Branching and merging generalizes to multiple contributors
+- Again, Git requires a bit of discipline about this---a team should have rules about branch naming, task prioritization, bug fix procedures, etc. 
+- Services like GitHub provide most of their value by offering ways to manage these tasks in the context of a git-based way of working.
+
+## It's a pain in the butt
+
+- Underneath Git is kind of a mess
+- Various design features make it easy to be confused or misled
+- Start with the Sylor-Miller & Evans zine

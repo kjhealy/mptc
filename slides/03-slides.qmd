@@ -61,9 +61,10 @@ echo I am sending this sentence to the clipboard | pbcopy
 pbpaste | wc -c
 ```
 
-:: aside
+
+::: aside
 On Windows with Cygwin the corresponding commands are `getclip` and `putclip`. 
-::
+:::
 
 # Regular Expressions
 
@@ -104,6 +105,9 @@ Or,
 :::
 
 ::::
+
+
+
 
 ## Searching for patterns 
 
@@ -466,20 +470,20 @@ Backreferences and grouping are very useful for string _replacements_.
 
 - Grep searches for text _inside_ files
 
-```{zsh}
+```{.zsh}
 # Search recursively through all subdirs below the current one
 grep -r "Grep searches for text" . 
 ```
 
 <br />
 
-```{zsh}
+```{.zsh}
 grep "format: " *.qmd
 ```
 
 <br />
 
-```{zsh}
+```{.zsh}
 # Count the number of matches
 grep -c "format: " *.qmd
 ```
@@ -489,7 +493,7 @@ grep -c "format: " *.qmd
 
 - Ripgrep, or `rg` is quicker than `grep` and has some nice features
 
-```{zsh}
+```{.zsh}
 rg Kieran .
 ```
 
@@ -497,7 +501,7 @@ rg Kieran .
 
 - Ripgrep, or `rg` is quicker than `grep` and has some nice features
 
-```{zsh}
+```{.zsh}
 rg -t yaml "url:" .
 ```
 
@@ -505,13 +509,13 @@ rg -t yaml "url:" .
 
 - Standard shell tools like `sed`, `awk`, and `grep` can all use some version of regular expressions. 
 
-```{zsh}
+```{.zsh}
 grep -E "^The sky|night.$" files/examples/sentences.txt
 ```
 
 <br />
 
-```{zsh}
+```{.zsh}
 grep -E "^The sky|night.$" files/examples/sentences.txt
 ```
 

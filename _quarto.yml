@@ -47,6 +47,8 @@ website:
               file: content/02-content.qmd
             - text: "03: Text Editing"
               file: content/03-content.qmd
+            - text: "04: Version Control"
+              file: content/04-content.qmd
 
 
     - title: "Assignments"
