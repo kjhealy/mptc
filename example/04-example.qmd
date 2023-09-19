@@ -1,0 +1,166 @@
+---
+title: "Example 04: Git"
+engine: knitr
+---
+
+
+## Getting git set up
+
+Like many Unix tools, git is configured via a dotfile. Git's user dotfile is named `.gitconfig` and lives at the top of your home directory, `~/`. Configuration can be set per project, but some things will apply to all of your projects. 
+
+### Your name and email address
+
+You can configure it at the command line, like this:
+
+```{.zsh}
+git config --global user.name 'Jane Doe'
+git config --global user.email 'jane@example.com'
+```
+
+### See all git settings
+
+To see what your global git configuration looks like you can write
+
+```{.zsh}
+git config --global --list
+```
+
+### Your preferred editor
+
+This the editor git will hand off to if it needs you to write in a text file (e.g. when amending a commit).
+
+```{.zsh}
+git config --global core.editor "emacs"
+```
+
+### The default initial branch name
+
+The older convention was `master`, implicitly contrasting `master` with `copy`, but this has changed in recent years and now the most common name is `main`. Turn this on like this:
+
+```{.zsh}
+git config --global init.defaultBranch main
+```
+
+## The `.gitignore` file
+
+Many projects will have files (e.g. generated html, `_site` folders in Quarto, etc) that we will not want git to track. We also do not want git noticing they are there and constantly reminding us when we write `git status` that they are not tracked. We can make a list of those files and folders in a `.gitignore` file. This lives at the root of the project. For example, here's the `.gitignore` file for this project:
+
+```{.zsh}
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+
+/.quarto/
+/_site/
+
+/_freeze/
+/_targets/
+
+about/*.pdf
+about/*.html
+assignment/*.html
+example/*.html
+schedule/*.html
+syllabus/*.html
+
+slides/*.pdf
+slides/*.html
+slides/**/*_cache/*
+slides/libs/*
+projects/*.zip
+
+# knitr and caching
+**/*_files/*
+**/*_cache/*
+
+README.html
+
+/.luarc.json
+
+```
+
+
+Notes: 
+
+- Specific files are just given by their name
+- If a file has no path, then implicitly that file is at the root of the project folder. E.g. `README.html` or `.Rdata`.
+- File paths are given according to shell globbing (wildcard) conventions. So for example `example/*.html` means all html files in the `example/` folder will be ignored. 
+- A path like `/_site/` means the entire contents of the `_site` directory will be ignored. 
+- A path like `slides/**/*_cache/*`, which has a `**` in it, says "Go into the `slides` folder, and then in _every_ subfolder of `slides`, ignore everything inside any folder with `_cache` at the end of its name." This saves us from having to write out the name of every single cache folder we want to ignore. (Especially handy because cache folders may be generated automatically by `knitr` as part of the process of building our quarto site.)
+
+
+## For R users
+
+The [`{usethis}` package](https://usethis.r-lib.org) is very handy. It has a bunch of helper functions that, amongst other things, help your R projects get set up with git. [Read the Git Article](https://usethis.r-lib.org/articles/git-credentials.html) on the package's website (or in RStudio via its package documentation). You should learn what `{usethis}` has to offer in general.
+
+And as before, read and follow the advice in [Happy Git with R](https://happygitwithr.com)
+
+
+## Some fancier configuration
+
+You can define aliases to git commands and also customize them. For example:
+
+```{.zsh}
+## Segment of a .gitconfig file
+[user]
+        email = kjhealy@gmail.com
+        name = Kieran Healy
+
+[alias]
+        st = status
+        co = checkout
+        br = branch
+        ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate
+        ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --numstat
+        lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
+```
+
+## Getting the branch and short SHA of the current commit from inside R
+
+At a minimum we can do something like this:
+
+```{r}
+branch_name <- system("git rev-parse --abbrev-ref HEAD", 
+                      intern = TRUE)
+current_sha <- system("git rev-parse --short HEAD", 
+                      intern = TRUE)
+current_date <- format(Sys.Date(), "%m/%d/%Y")
+
+git_stamp <- paste0(branch_name, ":", current_sha, " on ", current_date)
+
+git_stamp
+
+```
+
+We could then use that stamp as, e.g., a caption for a figure. If we wanted we could wrap it in a function and call that when needed. 
+
+First the function: 
+
+```{r}
+git_stamp <- function() {
+  branch_name <- system("git rev-parse --abbrev-ref HEAD", 
+                      intern = TRUE)
+  current_sha <- system("git rev-parse --short HEAD", 
+                      intern = TRUE)
+  current_date <- format(Sys.Date(), "%m/%d/%Y")
+  paste0(branch_name, ":", current_sha, " on ", current_date)
+}
+```
+
+And in use:
+
+```{r}
+#| message: false
+library(ggplot2)
+
+mtcars |> 
+  ggplot(mapping = aes(x = disp, y = mpg)) + 
+  geom_point() + 
+  geom_smooth() + 
+  labs(title = "It's mtcars", 
+       subtitle = "Everyone loves mtcars", 
+       caption = git_stamp())
+```
+
+To make things even more automatic you could write, e.g., a ggplot theme that put the stamp in automatically and then use that theme by default in your drafts.

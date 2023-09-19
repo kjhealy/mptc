@@ -74,6 +74,8 @@ website:
               file: example/02-example.qmd
             - text: "03: Text Editing"
               file: example/03-example.qmd
+            - text: "04: Git"
+              file: example/04-example.qmd
 
 
   page-footer:
