@@ -5,6 +5,7 @@
 
 /.quarto/
 /_site/
+/renv/
 
 /_freeze/
 /_targets/
