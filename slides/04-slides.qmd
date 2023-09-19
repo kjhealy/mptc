@@ -110,7 +110,7 @@ Richard II, Act 3, Scene iii
   ![](../assets/04-git/04-git-covid-project-folder-06.png){width=100%}
 :::
 
-::: {.column width="45%" .right}
+::: {.column width="55%" .right}
   - The `.git` folder is "hidden" because its name begins with a dot.  
   - Inside it contains its own file and folder hierarchy for keeping track of changes to our project. 
   - Now we need to tell git what to track. 
@@ -126,7 +126,8 @@ Richard II, Act 3, Scene iii
 
 ::: {.column width="35%" .right}
   - The first step is to "stage" a file with the command `git add <filename>`
-  - This adds the file to the index of things git is going to manage
+  - This adds the file to an index of things git is going to manage
+  - Git keeps this index inside the `.git` folder
 :::
 ::::
 
@@ -139,8 +140,10 @@ Richard II, Act 3, Scene iii
   ![](../assets/04-git/04-git-covid-project-folder-07.png){width=100%}
 :::
 
-::: {.column width="35%" .right}
-  - No permanent record of changes is made at this point
+::: {.column width="40%" .right}
+  - No changes are recorded at this point
+  - Nothing changes in our local folder
+  - We've just added a file to a list of items to be tracked
   - As the name suggests, conceptually the staging area is preparatory
   - ... Preparatory to what?
 
@@ -161,7 +164,7 @@ Richard II, Act 3, Scene iii
 
 - The 64-bit hexadecimal number is an **SHA Hash**. 
 - It's derived from the file(s) being committed and it uniquely identifies the changes associated with that commit. 
-- The message is for our benefit and should be terse and informative about what's new, fixed, or changed.
+- The message added with `-m` is for our benefit. It should be terse and informative about what's new, fixed, or changed in the commit.
 
 ## Committing a file
 
