@@ -50,21 +50,21 @@ Richard II, Act 3, Scene iii
 
 ## We need to keep track 
 
-- In the "Engineering" model, changes are tracked outside of files, at the level of the project
-- When you get down to it a "project" is a folder that contains a bunch of files and subfolders
-- There's a long history of tools that keep track of what happens to the files in projects and who did things to which files
-- A tool like this is called a _Version Control System_ or a _Revision Control System_
+- In the "Engineering" model, changes are tracked outside of files, at the level of the project.
+- When you get down to it a "project" is a folder that contains a bunch of files and subfolders.
+- There's a long history of tools that keep track of what happens to the files in projects and who did things to which files.
+- A tool like this is called a _Version Control System_ or a _Revision Control System_.
 
 ## Git
 
-- Git is the industry-standard VCS
-- It's very powerful
-- It's used to run the software development projects of gigantic corporations that must coordinate huge projects with contributions by hundreds or thousands of developers
-- It can be a real pain in the ass
+- Git is the industry-standard VCS.
+- It's very powerful.
+- It's used to run the software development projects of gigantic corporations that must coordinate huge projects with contributions by hundreds or thousands of developers.
+- It makes professionals and amateurs alike cry on the regular.
 
 ## Git
 
-- We can start by using a _very small fraction_ of git's functionality
+- We can start by using a _very small fraction_ of git's functionality.
 
 
 
@@ -126,8 +126,8 @@ Richard II, Act 3, Scene iii
 
 ::: {.column width="35%" .right}
   - The first step is to "stage" a file with the command `git add <filename>`
-  - This adds the file to an index of things git is going to manage
-  - Git keeps this index inside the `.git` folder
+  - This adds the file to an index of things git is going to manage.
+  - Git keeps this index inside the `.git` folder.
 :::
 ::::
 
@@ -141,10 +141,10 @@ Richard II, Act 3, Scene iii
 :::
 
 ::: {.column width="40%" .right}
-  - No changes are recorded at this point
-  - Nothing changes in our local folder
-  - We've just added a file to a list of items to be tracked
-  - As the name suggests, conceptually the staging area is preparatory
+  - No changes are recorded at this point.
+  - Nothing changes in our local folder.
+  - We've just added a file to a list of items to be tracked.
+  - As the name suggests, conceptually the staging area is preparatory.
   - ... Preparatory to what?
 
 :::
@@ -186,10 +186,10 @@ Richard II, Act 3, Scene iii
 
 ## Remember ... 
 
-- The _Local Folder_ is our project as we (and the file system) can see it
-- The _Local Repository_ lives inside the special `.git` folder that sits at the root of our project
-- We can move files and folders in and out of our local folder
-- But for git to track any of these changes we need to _add_ and _commit_ them
+- The _Local Folder_ is our project as we (and the file system) can see it.
+- The _Local Repository_ lives inside the special `.git` folder that sits at the root of our project. Conceptually we think of it as its own separate thing that git is managing for us.
+- We can move files and folders in and out of our local folder, edit them, and so on, just as we normally would.
+- But for git to track and manage any of these files or changes to them we need to _add_ and _commit_ them to the local repository.
 
 ## Editing and committing
 
@@ -204,26 +204,28 @@ Richard II, Act 3, Scene iii
 
 ![](../assets/04-git/04-git-covid-project-folder-15.png){width=100%}
 
-## Remember ... 
+## Remember (again) ... 
 
-- The _Local Folder_ is our project as we (and the file system) can see it
-- The _Local Repository_ lives inside the special `.git` folder that sits at the root of our project
-- We can move files and folders in and out of our local folder
-- But for git to track any of these changes we need to _add_ and _commit_ them
+- The _Local Folder_ is our project as we (and the file system) can see it.
+- The _Local Repository_ lives inside the special `.git` folder that sits at the root of our project. Conceptually we think of it as its own separate thing that git is managing for us.
+- We can move files and folders in and out of our local folder, edit them, and so on, just as we normally would.
+- But for git to track and manage any of these files or changes to them we need to _add_ and _commit_ them to the local repository.
 
 ## Git as a Log Book
 
-- Working this way, our project contains a special hidden folder 
+- Working this way, we treat git as managing the files we want to track. 
+- Physically these changes are managed in the `.git` folder inside the project, but think of it as a separate entity, the _local repository_. 
 - Every time we decide to make a change to a tracked file in the project we do `git add <filename>` and `git commit -m "Message"`
-- We write `git add -u` to stage any changes to every already-tracked file
+- We write `git add -u` to stage any changes to every already-tracked file.
 - _Newly-created_ files that we want to stage and commit are not picked up by `git add -u`
-- They must be added by name, either one at a time or with shell-style paths and globs (wildcards)
+- They must be added by name, either one at a time or with shell-style paths and globs (wildcards).
 
 # GitHub
 
 ## Keeping a remote Log
 
-- We can keep a copy of our repository wherever we like
+- We have a local repository, but ...
+- We can also keep copies of it wherever we like.
 - In [the Cloud]{.fg-lblue}, for example ...
 
 --- 
@@ -241,7 +243,7 @@ Probably a computer in a big shed in rural North Carolina or Texas or California
 
 ---
 
-## Keeping a remote log
+## Keeping a remote copy
 
 ![](../assets/04-git/04-git-covid-project-folder-16.png){width=100%}
 
@@ -311,8 +313,8 @@ Date:   Mon Sep 18 17:34:08 2023 -0400
 
 ## Our project again
 
-- Individual commits can be referenced by their `SHA` hash
-- Usually the first few bits are sufficient to ID the commit in a single project
+- Individual commits can be referenced by their `SHA` hash.
+- Usually the first few bits are sufficient to ID the commit in a single project.
 
 ```{.zsh}
 > git log --oneline
@@ -452,7 +454,7 @@ Date:   Mon Sep 18 20:25:42 2023 -0400
 Switched to branch 'main'
 ```
 
-- None of the code we wrote in the last two commits is on this branch
+- None of the code we wrote in the last two commits is on this branch.
 
 ```{.zsh}
 > git merge figtest
@@ -463,7 +465,7 @@ Fast-forward
  1 file changed, 13 insertions(+)
 ```
 
-- Now it is
+- And now it is.
 
 ## Schematically
 
@@ -472,7 +474,7 @@ Fast-forward
 
 ## Write some more
 
-- Make some more edits and commit those changes
+- Make some more edits and commit those changes.
 
 ```{.r}
 ## Read in the data
@@ -519,23 +521,23 @@ Date:   Mon Sep 18 17:49:33 2023 -0400
 
 ## It's a log book
 
-- For single person projects you can go a _long_ way with a very basic git workflow
+- For single person projects you can go a _long_ way with a very basic git workflow.
 - Essentially do your work then `add`, `commit`, and `push` the results. 
-- At a minimum you will be left with a record of your project's development where you can revist _any_ commit and see what the state of the project was at that point
+- At a minimum you will be left with a record of your project's development where you can revist _any_ commit and see what the state of the project was at that point.
 
 ## It's a testbed
 
-- A little discipline with branching will let you experiment with new lines of work or code without getting lost or losing the ability to revert to what was there before, all in the same project folder
-- Successful lines of inquiry can be merged into the main branch, unsuccessful ones kept for the record or discarded altogether
+- A little discipline with branching will let you experiment with new lines of work or code without getting lost or losing the ability to revert to what was there before, all in the same project folder.
+- Successful lines of inquiry can be merged into the main branch, unsuccessful ones kept for the record or discarded altogether.
 
 ## It's a collaboration tool
 
-- Branching and merging generalizes to multiple contributors
+- The combination of multiple copies of the repository on the one hand and the act of branching and merging on the other generalizes to working with multiple contributors to a repository and managing all of their work.
 - Again, Git requires a bit of discipline about this---a team should have rules about branch naming, task prioritization, bug fix procedures, etc. 
 - Services like GitHub provide most of their value by offering ways to manage these tasks in the context of a git-based way of working.
 
-## It's a pain in the butt
+## It's often a pain in the butt
 
-- Underneath Git is kind of a mess
-- Various design features make it easy to be confused or misled
-- Start with the Sylor-Miller & Evans zine
+- Underneath Git is kind of a mess.
+- Various design features make it easy to be confused or misled.
+- Start with the Sylor-Miller & Evans zine.
