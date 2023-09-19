@@ -89,14 +89,6 @@ Notes:
 - A path like `/_site/` means the entire contents of the `_site` directory will be ignored. 
 - A path like `slides/**/*_cache/*`, which has a `**` in it, says "Go into the `slides` folder, and then in _every_ subfolder of `slides`, ignore everything inside any folder with `_cache` at the end of its name." This saves us from having to write out the name of every single cache folder we want to ignore. (Especially handy because cache folders may be generated automatically by `knitr` as part of the process of building our quarto site.)
 
-
-## For R users
-
-The [`{usethis}` package](https://usethis.r-lib.org) is very handy. It has a bunch of helper functions that, amongst other things, help your R projects get set up with git. [Read the Git Article](https://usethis.r-lib.org/articles/git-credentials.html) on the package's website (or in RStudio via its package documentation). You should learn what `{usethis}` has to offer in general.
-
-And as before, read and follow the advice in [Happy Git with R](https://happygitwithr.com)
-
-
 ## Some fancier configuration
 
 You can define aliases to git commands and also customize them. For example:
@@ -116,7 +108,17 @@ You can define aliases to git commands and also customize them. For example:
         lds = log --pretty=format:"%C(yellow)%h\\ %ad%Cred%d\\ %Creset%s%Cblue\\ [%cn]" --decorate --date=short
 ```
 
-## Getting the branch and short SHA of the current commit from inside R
+## For R users
+
+### {usethis}
+
+The [`{usethis}` package](https://usethis.r-lib.org) is very handy. It has a bunch of helper functions that, amongst other things, help your R projects get set up with git. [Read the Git Article](https://usethis.r-lib.org/articles/git-credentials.html) on the package's website (or in RStudio via its package documentation). You should learn what `{usethis}` has to offer in general.
+
+And as before, read and follow the advice in [Happy Git with R](https://happygitwithr.com)
+
+
+
+### Getting the branch and short SHA of the current commit from inside R
 
 At a minimum we can do something like this:
 
