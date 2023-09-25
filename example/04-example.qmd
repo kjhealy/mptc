@@ -127,7 +127,7 @@ branch_name <- system("git rev-parse --abbrev-ref HEAD",
                       intern = TRUE)
 current_sha <- system("git rev-parse --short HEAD", 
                       intern = TRUE)
-current_date <- format(Sys.Date(), "%m/%d/%Y")
+current_date <- format(Sys.Date(), "%Y-%m-%d")
 
 git_stamp <- paste0(branch_name, ":", current_sha, " on ", current_date)
 
