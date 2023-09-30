@@ -174,7 +174,17 @@ Also it's weirdly satisfying once you get into it.
 
 ::::
 
-# {background-color="black" background-image="../assets/01-file-system/01_control.png"}
+---
+
+## {background-color="black" background-image="../assets/01-file-system/01_control.png"}
+
+## Control, not Productivity
+
+### Productivity is great and everything, but not why we do all this
+
+### &nbsp;
+
+### The most important thing is to be able to [_know and show what it was that you did_]{.fg-red}
 
 ## "Office" vs "Engineering" approaches
 

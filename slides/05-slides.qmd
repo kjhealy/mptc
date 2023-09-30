@@ -1,0 +1,205 @@
+---
+title: "Build Systems"
+subtitle: "Modern Plain Text Social Science: Week 5"
+format: kjhslides-revealjs
+engine: knitr
+filters: 
+  - invert-h1
+  - include-code-files
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(flipbookr)
+```
+
+
+# The idea of a build system
+
+## The problem
+
+- Many moving parts in a project
+- Many things to check
+- Many places things can change
+- Many actions to take
+
+## git's DAG
+
+- Gives us the history of changes in the project
+- Branches and merges here (if any) are usually based on lines of inquiry, trying out different methods or writeups, contributions by different people etc
+- But there's a second sort of DAG as well, that is a picture of how the outputs get produced in any given run
+
+## Targets and Prerequisites
+
+- For `the_paper.pdf` to be successfully produced, 
+- `03_make_figures.R` needs to have run and created `01_descriptives.png` and `02_coefs_of-interest.png`
+- For `03_make_figures.R` to run, `02_clean_data.R` needs to have run
+- For `02_clean_data.R` to successfully run, `01_setup.R` needs to run
+
+## This project's graph
+
+![Mermaid graph for the `mptc` project](../assets/05-build/05_mermaid_graph.png)
+- This graph is produced via `{targets}` about which more in a bit.
+- For now just focus on the idea of targets (outputs) having prerequisites
+
+
+# Make
+
+## `make` manages builds
+
+- GNU `make` has been around for a long time
+- Its role is to efficiently manage build pipelines by only doing what needs to be done each time a project is updated or changed
+- Recipes for building things are controlled via a `Makefile`
+
+## Makefiles
+
+```{.zsh}
+## The output file `mypaper.pdf` depends on 
+## `mypaper.md` and `fig1.pdf`
+mypaper.pdf: mypaper.md fig1.pdf 
+  pandoc mypaper.md -o mypaper.pdf
+
+## The output file `fig1.pdf` depends on `fig1.r`
+fig1.pdf: fig1.r
+  R CMD BATCH fig1.r
+
+```
+
+## Makefiles
+
+- Make is a little language; it has variables and macros and other features
+
+```{.zsh}
+R_OPTS=--vanilla
+
+
+mypaper.pdf: mypaper.md fig1.pdf fig2.pdf fig3.pdf
+  pandoc mypaper.md -o mypaper.pdf
+
+fig1.pdf: fig1.r
+  R CMD BATCH $(R_OPTS) fig1.r
+  
+fig2.pdf: fig2.r
+  R CMD BATCH $(R_OPTS) fig2.r
+  
+fig3.pdf: fig3.r
+  R CMD BATCH $(R_OPTS) fig3.r  
+```
+
+## Makefiles
+
+- Some variables are built-in
+
+- `$@`    the file name of the target
+- `$<`    the name of the first prerequisite (i.e., dependency)
+- `$^`    the names of all prerequisites (i.e., dependencies)
+- `$(@D)`    the directory part of the target
+- `$(@F)`    the file part of the target
+- `$(<D)`    the directory part of the first prerequisite (i.e., dependency)
+- `$(<F)`    the file part of the first prerequisite (i.e., dependency)
+
+## A more complex Makefile {.smaller}
+
+```{.zsh}
+## All Rmarkdown files in the working directory
+SRC = $(wildcard *.Rmd)
+
+## Location of Pandoc binaries
+PANDOC = /opt/homebrew/bin
+
+## Location of Pandoc support files.
+PREFIX = /Users/kjhealy/.pandoc
+
+## Location of your working bibliography file
+BIB = /Users/kjhealy/Documents/bibs/socbib-pandoc.bib
+
+## CSL stylesheet (located in the csl folder of the PREFIX directory).
+CSL = apsa
+
+## Pandoc options to use
+OPTIONS = markdown+simple_tables+table_captions+yaml_metadata_block+smart
+
+## MS Word template
+DOCXTEMPLATE = /Users/kjhealy/.pandoc/templates/rmd-minion-reference.docx
+
+MD=$(SRC:.Rmd=.md)
+PDFS=$(SRC:.Rmd=.pdf)
+HTML=$(SRC:.Rmd=.html)
+TEX=$(SRC:.Rmd=.tex)
+DOCX=$(SRC:.Rmd=.docx)
+
+all:	$(MD) $(PDFS) $(HTML) $(TEX) $(DOCX)
+
+pdf:	clean $(PDFS)
+html:	clean $(HTML)
+tex:	clean $(TEX)
+docx:	clean $(DOCX)
+md:	clean $(MD)
+
+%.md: %.Rmd
+	R --no-echo -e "set.seed(100);knitr::knit('$<')"
+
+%.html: %.Rmd
+	R --no-echo -e "set.seed(100);rmarkdown::render('$<',  output_format = distill::distill_article(), encoding = 'UTF-8')"
+
+%.tex:	%.md
+	$(PANDOC)/pandoc -r $(OPTIONS) -w latex -s  --pdf-engine=pdflatex --template=$(PREFIX)/templates/rmd-latex.template --citeproc --csl=$(PREFIX)/csl/ajps.csl --bibliography=$(BIB) --filter $(PANDOC)/pandoc-crossref  -o $@ $<
+
+# PDFs are generated directly from Rmd with render(), and not indirectly vita knit() to md
+%.pdf:	%.Rmd
+	R --no-echo -e "set.seed(100);rmarkdown::render('$<', output_format = 'bookdown::pdf_book')"
+
+%.docx:	%.md
+	$(PANDOC)/pandoc -r $(OPTIONS) -s --citeproc --csl=$(PREFIX)/csl/$(CSL).csl --bibliography=$(BIB) --reference-doc=$(DOCXTEMPLATE) --filter $(PANDOC)/pandoc-crossref  -o $@ $<
+
+clean:
+	rm -f *.md *.html *.pdf *.tex *.bbl *.bcf *.blg *.aux *.log *.docx
+	rm -f cache/*.*
+
+.PHONY:	clean
+```
+
+## `make` tips
+
+- The manual is very clear, though it does naturally focus on the original use case 
+- `<TAB>` not spaces. It has to be tabs. 
+- `cd` and line continuation gotchas
+- Look to see if there are Makefiles in other people's projects
+- `make --dry-run <target>` is your friend
+
+# Quarto
+
+## Quarto as a publishing system
+
+- Quarto replaces a lot of stuff you might previously have done with `make`, especially for building single documents
+- Its project structure is flexible and extensible too
+- But it isn't quite a build system
+
+# Targets
+
+## `{targets}` is `make` for inside R
+
+- The idea of make gets rewritten and reimplemented a lot
+
+# Virtual Environments
+
+![Carl Sagan](../assets/05-build/05_carlsaganpie.png)
+
+
+# GitHub Actions
+
+
+
+

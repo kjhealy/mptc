@@ -49,6 +49,9 @@ website:
               file: content/03-content.qmd
             - text: "04: Version Control"
               file: content/04-content.qmd
+            - text: "05: Build Systems"
+              file: content/05-content.qmd
+
 
 
     - title: "Assignments"
