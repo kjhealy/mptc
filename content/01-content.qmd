@@ -17,7 +17,7 @@ slide_details <- tibble::tribble(
 
 ## Readings
 
-- Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
+-   Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
 
 ## Slides
 
@@ -39,7 +39,6 @@ window.addEventListener('DOMContentLoaded', function(e) {
 </script>
 <iframe class="slide-deck" id="quartoframe" src="../slides/01-slides.html"></iframe>
 ```
-
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_win_button("/slides/01-slides")
 ```
