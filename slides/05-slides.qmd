@@ -191,14 +191,47 @@ clean:
 
 ## `{targets}` is `make` for inside R
 
-- The idea of make gets rewritten and reimplemented a lot
+- The idea of make gets rewritten and re-implemented a lot
+- Targets is a recent and well-done version of this in R
+- The project folder for this seminar is managed with `{targets}`
+
 
 # Virtual Environments
 
+---
+
 ![Carl Sagan](../assets/05-build/05_carlsaganpie.png)
 
+## `renv` 
 
-# GitHub Actions
+- This puts all the R packages you use under control for any particular project
+- It draws (and depends) on the existence of [CRAN package archives](https://cran.r-project.org/src/contrib/Archive)
+- This means you don't have to keep and version the packages yourself, just a list of them, which then is used to fetch them
+- Let's try this out with the current project
+
+
+---
+
+![Docker](../assets/05-build/05_docker_my_machine.png)
+
+## You can go even further
+
+- [Docker](https://docker.com) and also [Rocker](https://rocker-project.org)
+- [Nix](https://nix.dev) (see [Bruno Rodrigues](https://www.brodrigues.co/blog/2023-07-13-nix_for_r_part1/) making the case for this)
+- Dirk Eddelbuettel's [r2u](https://eddelbuettel.github.io/r2u/) in conjunction with [GitHub Codespaces](https://eddelbuettel.github.io/r2u/vignettes/Codespaces/) or [gitpod](https://gitpod.io)
+- For most ordinary projects, especially when you're starting out, this sort of thing is probably overkill. _But_ see the next section. 
+- Also notice that you still need a "social infrastructure" of active development and maintenance for the long-term use of these tools to make any sense.
+
+# Clean rooms and Continuous Integration
+
+## Reproducibility
+
+- Ultimately, there can't really be a purely mechanical approach to reproducibility, if that means that the person reproducing the analysis just wants to push a button and have everything magically happen without understanding anything about the code or why it works that way.
+- But well before we get to the limit cases, there's a lot to be said for trying to smooth the path as much as is reasonable 
+- And in particular for seeing if your code or analysis can be run in a "clean room" environment
+- Codespaces and GitPod for development
+- GitHub Actions for testing code, especially in the context of packaging it
+- Helpers, as is often the case, can be found in the [`{usethis}` package](https://usethis.r-lib.org)
 
 
 
