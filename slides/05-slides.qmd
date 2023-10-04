@@ -202,17 +202,24 @@ clean:
 
 ![Carl Sagan](../assets/05-build/05_carlsaganpie.png)
 
-## `renv` 
-
-- This puts all the R packages you use under control for any particular project.
-- It draws (and depends) on the existence of [CRAN package archives](https://cran.r-project.org/src/contrib/Archive).
-- This means you don't have to keep and version the packages yourself, just a list of them, which then is used to fetch them.
-- Let's try this out with the current project.
 
 
 ---
 
 ![Docker](../assets/05-build/05_docker_my_machine.png)
+
+## `renv` 
+
+- This puts all the R packages you use under control for any particular project.
+- It draws (and depends) on the existence of [CRAN package archives](https://cran.r-project.org/src/contrib/Archive).
+- This means you don't have to keep and version the packages yourself, just a list of them, which then is used to fetch them.
+
+## `renv`
+
+![renv workflow, from the `renv` package homepage](../assets/05-build/05_renv.png)
+
+- Let's try this out with this project and see what happens.
+
 
 ## You can go even further
 
@@ -227,13 +234,14 @@ clean:
 ## The idea of Reproducibility
 
 - Ultimately, there can't really be a purely mechanical approach to reproducibility, if that means that the person reproducing the analysis just wants to push a button and have everything magically happen without understanding anything about the code or why it works that way.
-- But well before we get to the limit cases, there's a lot to be said for trying to smooth the path as much as is reasonable 
+- But well before we get to the limit cases, there's a lot to be said for trying to smooth the path as much as is reasonable.
 - And in particular for seeing if your code or analysis can be run in a "clean room" environment
 
 ## Specific Tools
 
-- Codespaces and GitPod for development
-- GitHub Actions for testing code, especially in the context of packaging it
+- [Codespaces](https://github.com/features/codespaces) and [GitPod](https://gitpod.io) for development
+- [GitHub Actions](https://github.com/features/actions) for testing code, especially in the context of packaging it
+- [GitHub Actions for R specifically](https://github.com/r-lib/actions)
 - Helpers, as is often the case, can be found in the [`{usethis}` package](https://usethis.r-lib.org)
 
 

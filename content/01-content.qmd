@@ -15,7 +15,11 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-## Readings
+## General Background Reading
+
+- @christensen19:_trans_reprod_social_scien_resear
+
+## Also ... 
 
 -   Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
 

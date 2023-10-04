@@ -1,5 +1,18 @@
 ---
 title: "Slides and Course Materials"
+bibliography: ../files/bib/references.bib
+csl: ../files/bib/american-political-science-association.csl
+nocite: |
+  @*
 ---
 
-Follow the links in the menu to the left for weekly course readings, notes, and slides. 
+## Navigation
+
+Follow the links under the Topics menu to the left for weekly course readings, notes, and slides. 
+
+The bibliography below is a general reading list. Specific items to look at from week to week will be listed in each week's topic page. 
+
+## Course Bibliography
+
+::: {#refs}
+:::
