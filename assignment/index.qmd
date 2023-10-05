@@ -2,4 +2,4 @@
 title: "Assignments"
 ---
 
-Assignments, things to do between class meetings, and so on.
+This section has links to any assignments, things to do between class meetings, and so on.
