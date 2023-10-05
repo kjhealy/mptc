@@ -19,6 +19,15 @@ slide_details <- tibble::tribble(
 
 - @christensen19:_trans_reprod_social_scien_resear
 
+## Video
+
+- The Unix Operating System (1982)
+
+This documentary is both very much of its time and also still immensely relevant. Pay attention epecially to minutes 5 to 10 (on the Unix way of thinking) and minutes 12 to 17 or so (on the file system and shell). Brian Kernighan, the guy in the light blue sweater, is extremely lucid throughout on how and why Unix is designed the way it is. At its core, this way of doing things is still how things work in the world of technical computing.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tc4ROCJYbm0?si=PLR4KlEq3CSMDF3Q&amp;start=297" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
+
+
 ## Also ... 
 
 -   Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.

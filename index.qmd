@@ -28,19 +28,19 @@ To help address these challenges, modern computing platforms provide us with a s
 
 Over the six weeks of this mini-seminar we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are: 
 
-1. **The Idea of Your Computer**  
+1. [**The Idea of Your Computer**](content/01-content.html)  
     The file system; naming things; the Unix way of thinking
 
-2. **The Idea of a Shell**  
+2. [**The Idea of a Shell**](content/02-content.html)  
     The terminal; finding, listing, and inspecting things
 
-3. **The Idea of Plain Text**  
+3. [**The Idea of Plain Text**](content/03-content.html)  
     Text editors; editing; regular expressions
 
-4. **The Idea of Version Control**  
+4. [**The Idea of Version Control**](content/04-content.html)  
     Git and GitHub    
 
-5. **The Idea of a Build System**  
+5. [**The Idea of a Build System**](content/05-content.html)  
     Make, targets, and Quarto; IDEs
 
 6. **The Idea of the Network**  
