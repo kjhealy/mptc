@@ -77,12 +77,23 @@ ls files/examples/_make-example
 
 You can make any target in this way, by writing `make <target_name>`. Here we have two output targets, `fig1.pdf` and `mypaper.pdf`. So we could type, for example, `make fig1.pdf` and only that target would be produced (and only its prerequisites would be evaluated). 
 
-Here I've made the names of the targets the same as the names of the files that eventually get produced, but that is not required. It's the commands that produce the outputs and the targets can be called whatever makes sense for the actions being performed. So for example we could call the `fig1.pdf` target `figures` and write `make figures`, or the `mypaper.pdf` target `paper` and write `make paper`. 
+Here I've made the names of the targets the same as the names of the files that eventually get produced, but that is not required. It's the commands associated with the targets that produce the outputs. Those targets can be named whatever makes sense for the actions being performed. So for example we could call the `fig1.pdf` target `figures` and write `make figures`, or the `mypaper.pdf` target `paper` and write `make paper`. 
+
+Finally, the `.PHONY` line says "`clean` is a target that should be run if called, even though there are no files named `clean`. This is to get around the problem that `make` targets are usually files that get created, but for some operations (like cleaning up) no files are made, we just want `make` to run some necessary commands.
+
+### Things to try
 
 - As a next step, change some text in `mypaper.md`, for example by replacing my name with yours. What does `make --dry-run` show now?
 
 - Next, try editing the R code in `fig1.r` to make a slightly different figure. Now what does it show? 
 
-- The `.PHONY` line says "`clean` is a target that should be run if called, even though there are no files named `clean`. This is to get around the problem that `make` targets are usually files that get created, but for some operations (like cleaning up) no files are made, we just want `make` to run some necessary commands. 
+- Makefiles can get much more complex, but the complexity is more or less (1) all along the lines of making your dependency graph more complex, with more steps in the chain before the final output is created, or (2) introducing variables that allow you to act on more than one file in a shorthand way. The [`make` manual](https://www.gnu.org/software/make/manual/) is well-written and clear. The only barrier is that many of its examples are focused on the chain of targets and prerequisites associated with compiling C programs.
 
+```{r}
+#| echo: false
+#| message: false
+#| include: false
+
+system("rm -f fig1.pdf", intern = TRUE)
+```
 
