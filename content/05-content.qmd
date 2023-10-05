@@ -31,7 +31,7 @@ slide_details <- tibble::tribble(
 
 ## Examples
 
-[This week's examples and demos](example/05-example.qmd).
+[This week's examples and demos](/example/05-example.qmd).
 
 ## Slides
 

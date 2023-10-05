@@ -34,7 +34,7 @@ This documentary is both very much of its time and also still immensely relevant
 
 ## Examples
 
-[This week's examples and demos](example/01-example.qmd).
+[This week's examples and demos](/example/01-example.qmd).
 
 ## Slides
 

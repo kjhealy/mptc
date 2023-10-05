@@ -30,7 +30,7 @@ Git!
 
 ## Examples
 
-[This week's examples and demos](example/04-example.qmd).
+[This week's examples and demos](/example/04-example.qmd).
 
 ## Slides
 

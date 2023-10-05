@@ -10,7 +10,7 @@ Remember that (very annoyingly) the indented bits of Makefiles must use a `<TAB>
 
 A basic Makefile:
 
-```{.Make}
+```{.make}
 # NOTE: install the pandoc-crossref filter if you don't already have it
 # e.g. brew install pandoc-crossref
 
