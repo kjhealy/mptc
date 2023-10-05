@@ -10,7 +10,7 @@ Remember that (very annoyingly) the indented bits of Makefiles must use a `<TAB>
 
 A basic Makefile:
 
-```{.make}
+```{.cell-output}
 # NOTE: install the pandoc-crossref filter if you don't already have it
 # e.g. brew install pandoc-crossref
 
@@ -36,8 +36,10 @@ clean:
 We can see what `make` will do with this by running `make --dry-run`. You can try this yourself with this [sample make project](https://github.com/kjhealy/make_example). If we have not created any files before we should see this:
 
 ```{.zsh}
-> make --dry-run
+make --dry-run
+```
 
+```{.cell-output}
 R CMD BATCH fig1.r
 pandoc mypaper.md -o mypaper.pdf
 ```
@@ -49,8 +51,10 @@ If we just type `make` and hit enter, these commands will be executed and `fig1.
 Now if we type `make` again (without editing either `mypaper.md` or `fig1.r`) we will get this:
 
 ```{.zsh}
-> make
+make
+```
 
+```{.cell-output}
 make: `mypaper.pdf' is up to date.
 ```
 
