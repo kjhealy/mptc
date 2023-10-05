@@ -26,6 +26,10 @@ slide_details <- tibble::tribble(
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ES1LTlnpLMk?si=hP_4NHRcqGe3KYUo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+## Examples
+
+[This week's examples and demos](example/02-example.qmd).
+
 
 ## Slides
 

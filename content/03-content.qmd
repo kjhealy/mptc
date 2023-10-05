@@ -26,6 +26,11 @@ slide_details <- tibble::tribble(
 - @petersen22:_master_emacs
 - @friedl06:_master_regul_expres
 
+## Examples
+
+[This week's examples and demos](example/03-example.qmd).
+
+
 ## Slides
 
 ```{=html}

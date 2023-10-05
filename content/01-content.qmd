@@ -32,6 +32,10 @@ This documentary is both very much of its time and also still immensely relevant
 
 -   Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
 
+## Examples
+
+[This week's examples and demos](example/01-example.qmd).
+
 ## Slides
 
 ```{=html}

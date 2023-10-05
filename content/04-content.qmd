@@ -28,6 +28,10 @@ Git!
 
 - [Happy Git with R](https://happygitwithr.com) provides detailed instructions on getting Git and GitHub set up to work smoothly for R users.
 
+## Examples
+
+[This week's examples and demos](example/04-example.qmd).
+
 ## Slides
 
 ```{=html}
