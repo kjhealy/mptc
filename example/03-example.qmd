@@ -62,7 +62,7 @@ Standard shell tools like `sed`, `awk`, and `grep` can all use some version of r
 
 There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings. 
 
-One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. 
+One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. For example, imagine you have a project with a bunch of `.Rmd` files that have code in them for graphs. And imagine further that many of these files have bits of code that uses the `percent_format` function from the `{scales}` package. Then one day the `{scales}` maintainer announces that `percent_format` is now deprecated and you should use `label_percent` instead. How can you change _all_ instances of one to the other across _all_ `.Rmd` files in your project folder (or a series of project folders)?
 
 ```{.zsh}
 # Find every Rmarkdown file beneath the current directory
