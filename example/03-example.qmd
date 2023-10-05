@@ -1,6 +1,202 @@
 ---
-title: "Example 03: Text Manipulation"
+title: "Example 03: Text Manipulation and Comparison"
 engine: knitr
 ---
 
+
+## Regexes in the Shell and elsewhere
+
+Grep searches for text _inside_ files
+
+```{zsh}
+# Search recursively through all subdirs below the current one
+grep -r "Grep searches for text" . 
+```
+
+<br />
+
+```{zsh}
+# Search for the string "format: " in all qmd files in the current directory
+grep "format: " *.qmd
+```
+
+<br />
+
+```{zsh}
+# Count the number of matches
+grep -c "format: " *.qmd
+```
+
+```{zsh}
+# -E for "extended regular expression" form
+grep -E "^The sky|night.$" files/examples/sentences.txt
+```
+
+<br />
+
+```{zsh}
+grep -E "^The sky|night.$" files/examples/sentences.txt
+```
+
+ 
+## ripgrep
+
+Ripgrep, or `rg` is quicker than `grep` and has some nice features, such as ignoring things in your `.gitignore` file by default
+
+```{zsh}
+rg Kieran .
+```
+
+<br />
+
+```{zsh}
+# You can sepecify /types/ of files to look at with -t
+rg -t yaml "url:" .
+```
+
+
+Standard shell tools like `sed`, `awk`, and `grep` can all use some version of regular expressions. 
+
+
+## Perl
+
+There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings. 
+
+One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. 
+
+```{.zsh}
+# Find every Rmarkdown file beneath the current directory
+# Then edit each one in place to replace every instance of 
+# `percent_format` with `label_percent`
+find . -name "*.Rmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
+```
+
+You can protect a bit against the dangers of doing this by making the `-i` option create backup files of everything it touches:
+
+```{.zsh}
+# Find every Rmarkdown file beneath the current directory
+# Then edit each one in place to replace every instance of 
+# `percent_format` with `label_percent`
+find . -name "*.Rmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
+```
+
+Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. 
+
+For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/)
+
+## Diffing
+
+Comparing the differences between two files is called _diffing_ them, and `diff` is the command that does it for you. This is best done inside a text editor or dedicated diffing application, because usually it arises when we want to interactively choose one or other version to accept or reject. But you can still do a fair amount just at the console. For example here we compare the two versions of Tennyson's "The Lady of Shalott", the one he wrote in 1832 versus the one he revised ten years later. (The output here is messier than it would appear at the console.)
+
+```{.diff}
+diff --suppress-common-lines --side-by-side \ 
+  files/examples/shalott_1832.txt \ 
+  files/examples/shalott_1842.txt 
+  
+The yellow-leaved waterlily					|       And up and down the people go,
+The green-sheathed daffodilly					|       Gazing where the lilies blow
+Tremble in the water chilly					|       Round an island there below,
+       Round about Shalott.					|              The island of Shalott.
+Willows whiten, aspens shiver.					|       Willows whiten, aspens quiver,
+The sunbeam showers break and quiver				|       Little breezes dusk and shiver
+In the stream that runneth ever					|       Thro' the wave that runs for ever
+Four gray walls, and four gray towers				|       Four gray walls, and four gray towers,
+Underneath the bearded barley,					|       By the margin, willow veil'd,
+The reaper, reaping late and early,				|       Slide the heavy barges trail'd
+Hears her ever chanting cheerly,				|       By slow horses; and unhail'd
+Like an angel, singing clearly,					|       The shallop flitteth silken-sail'd
+       O'er the stream of Camelot.				|              Skimming down to Camelot:
+Piling the sheaves in furrows airy,				|       But who hath seen her wave her hand?
+Beneath the moon, the reaper weary				|       Or at the casement seen her stand?
+Listening whispers, ' 'Tis the fairy,				|       Or is she known in all the land,
+       Lady of Shalott.'					|              The Lady of Shalott?
+The little isle is all inrail'd					|       Only reapers, reaping early
+With a rose-fence, and overtrail'd				|       In among the bearded barley,
+With roses: by the marge unhail'd				|       Hear a song that echoes cheerly
+The shallop flitteth silken sail'd,				|       From the river winding clearly,
+       Skimming down to Camelot.				|              Down to tower'd Camelot:
+A pearl garland winds her head:					|       And by the moon the reaper weary,
+She leaneth on a velvet bed,					|       Piling sheaves in uplands airy,
+Full royally apparelled,					|       Listening, whispers " 'Tis the fairy
+       The Lady of Shalott.					|              Lady of Shalott."
+No time hath she to sport and play:				|       There she weaves by night and day
+A charmed web she weaves alway.					|       A magic web with colours gay.
+A curse is on her, if she stay					|       She has heard a whisper say,
+Her weaving, either night or day,				|       A curse is on her if she stay
+She knows not what the curse may be;				|       She knows not what the curse may be,
+Therefore she weaveth steadily,					|       And so she weaveth steadily,
+Therefore no other care hath she,				|       And little other care hath she,
+She lives with little joy or fear.				|       And moving thro' a mirror clear
+Over the water, running near,					|       That hangs before her all the year,
+The sheepbell tinkles in her ear.				|       Shadows of the world appear.
+Before her hangs a mirror clear,				|       There she sees the highway near
+       Reflecting tower'd Camelot.				|              Winding down to Camelot:
+And as the mazy web she whirls,					|       There the river eddy whirls,
+She sees the surly village churls,				|       And there the surly village-churls,
+And the red cloaks of market girls				|       And the red cloaks of market girls,
+Sometimes a curly shepherd lad,					|       Sometimes a curly shepherd-lad,
+       Goes by to tower'd Camelot:				|              Goes by to tower'd Camelot;
+       And music, came from Camelot:				|              And music, went to Camelot:
+Or when the moon was overhead					|       Or when the moon was overhead,
+Came two young lovers lately wed;				|       Came two young lovers lately wed:
+'I am half sick of shadows,' said				|       "I am half sick of shadows," said
+And flam'd upon the brazen greaves				|       And flamed upon the brazen greaves
+       As he rode down from Camelot:				|              As he rode down to Camelot:
+       As he rode down from Camelot.				|              As he rode down to Camelot.
+       Moves over green Shalott.				|              Moves over still Shalott.
+       As he rode down from Camelot.				|              As he rode down to Camelot.
+'Tirra lirra, tirra lirra:'					|       "Tirra lirra," by the river
+She left the web, she left the loom				|       She left the web, she left the loom,
+She made three paces thro' the room				|       She made three paces thro' the room,
+She saw the water-flower bloom,					|       She saw the water-lily bloom,
+'The curse is come upon me,' cried				|       "The curse is come upon me," cried
+Outside the isle a shallow boat					|       Down she came and found a boat
+Beneath a willow lay afloat,					|       Beneath a willow left afloat,
+Below the carven stern she wrote,				|       And round about the prow she wrote
+A cloudwhite crown of pearl she dight,				|       And down the river's dim expanse
+All raimented in snowy white					|       Like some bold seër in a trance,
+That loosely flew (her zone in sight				|       Seeing all his own mischance—
+Clasp'd with one blinding diamond bright)			|       With a glassy countenance
+       Her wide eyes fix'd on Camelot,				|              Did she look to Camelot.
+Though the squally east-wind keenly				|       And at the closing of the day
+Blew, with folded arms serenely					|       She loosed the chain, and down she lay;
+By the water stood the queenly					<
+       Lady of Shalott.						<
+								<
+With a steady stony glance—					<
+Like some bold seer in a trance,				<
+Beholding all his own mischance,				<
+Mute, with a glassy countenance—				<
+       She look'd down to Camelot.				<
+It was the closing of the day:					<
+She loos'd the chain, and down she lay;				<
+As when to sailors while they roam,				|       Lying, robed in snowy white
+By creeks and outfalls far from home,				|       That loosely flew to left and right—
+Rising and dropping with the foam,				|       The leaves upon her falling light—
+From dying swans wild warblings come,				|       Thro' the noises of the night
+       Blown shoreward; so to Camelot				|              She floated down to Camelot:
+Still as the boathead wound along				|       And as the boat-head wound along
+They heard her chanting her deathsong,				|       They heard her singing her last song,
+A longdrawn carol, mournful, holy,				|       Heard a carol, mournful, holy,
+She chanted loudly, chanted lowly,				|       Chanted loudly, chanted lowly,
+Till her eyes were darken'd wholly,				|       Till her blood was frozen slowly,
+And her smooth face sharpen'd slowly,				|       And her eyes were darken'd wholly,
+       Turn'd to tower'd Camelot:				|              Turn'd to tower'd Camelot.
+By garden wall and gallery,					|       By garden-wall and gallery,
+A pale, pale corpse she floated by,				|       A gleaming shape she floated by,
+Deadcold, between the houses high,				|       Dead-pale between the houses high,
+       Dead into tower'd Camelot.				|              Silent into Camelot.
+								>       Out upon the wharfs they came,
+To the planked wharfage came:					|       And round the prow they read her name,
+Below the stern they read her name,				<
+They cross'd themselves, their stars they blest,		|       Who is this? and what is here?
+Knight, minstrel, abbot, squire, and guest.			|       And in the lighted palace near
+There lay a parchment on her breast,				|       Died the sound of royal cheer;
+That puzzled more than all the rest,				|       And they cross'd themselves for fear,
+       The wellfed wits at Camelot.				|              All the knights at Camelot:
+'The web was woven curiously,					|       But Lancelot mused a little space;
+The charm is broken utterly,					|       He said, "She has a lovely face;
+Draw near and fear not,—this is I,				|       God in his mercy lend her grace,
+       The Lady of Shalott.'					|              The Lady of Shalott."  
+```
 
