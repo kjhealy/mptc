@@ -26,6 +26,7 @@ slide_details <- tibble::tribble(
 
 - @broman23:_minim_make
 - @landau22:_r
+- @rodrigues23:_build_r
 - @ushey24:_introd
 
 ## Slides
