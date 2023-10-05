@@ -9,8 +9,8 @@ engine: knitr
 Grep searches for text _inside_ files
 
 ```{zsh}
-# Search recursively through all subdirs below the current one
-grep -r "Grep searches for text" . 
+# Search recursively through all subdirs below files/ in the project folder
+grep -r "Kieran" ./files
 ```
 
 <br />
@@ -80,7 +80,7 @@ You can protect a bit against the dangers of doing this by making the `-i` optio
 find . -name "*.Rmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
 ```
 
-Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. 
+Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. Note that you don't put a space between the `-i` part and the `.orig` backup extension. (You can choose any extension you like.)
 
 For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/)
 
@@ -88,7 +88,7 @@ For more on Perl oneliners see, for example, the [Perl one-liners cookbook](http
 
 Comparing the differences between two files is called _diffing_ them, and `diff` is the command that does it for you. This is best done inside a text editor or dedicated diffing application, because usually it arises when we want to interactively choose one or other version to accept or reject. But you can still do a fair amount just at the console. For example here we compare the two versions of Tennyson's "The Lady of Shalott", the one he wrote in 1832 versus the one he revised ten years later. (The output here is messier than it would appear at the console.)
 
-```{.diff}
+```{.txt}
 diff --suppress-common-lines --side-by-side \ 
   files/examples/shalott_1832.txt \ 
   files/examples/shalott_1842.txt 
