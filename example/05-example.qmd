@@ -1,0 +1,67 @@
+---
+title: "Example 05: Build systems"
+engine: knitr
+---
+
+
+## Make
+
+Remember that (very annoyingly) the indented bits of Makefiles must use a `<TAB>` and not spaces.
+
+A basic Makefile:
+
+```{.Make}
+# NOTE: install the pandoc-crossref filter if you don't already have it
+# e.g. brew install pandoc-crossref
+
+# The output file `mypaper.pdf` depends on `mypaper.md` and `fig1.pdf`
+mypaper.pdf: mypaper.md fig1.pdf
+        pandoc -F pandoc-crossref mypaper.md -o mypaper.pdf
+
+# The output file `fig1.pdf` depends on `fig1.r`
+fig1.pdf: fig1.r
+        R CMD BATCH fig1.r
+
+
+# Clean target
+.PHONY: clean
+
+clean:
+        rm -f mypaper.pdf
+        rm -f fig1.pdf
+        rm -f fig1.r.Rout
+
+```
+
+We can see what `make` will do with this by running `make --dry-run`. You can try this yourself with this [sample make project](https://github.com/kjhealy/make_example). If we have not created any files before we should see this:
+
+```{.zsh}
+> make --dry-run
+
+R CMD BATCH fig1.r
+pandoc mypaper.md -o mypaper.pdf
+```
+
+This is the sequence of commands make will run. 
+
+If we just type `make` and hit enter, these commands will be executed and `fig1.pdf` and `mypaper.pdf` will be created. 
+
+Now if we type `make` again (without editing either `mypaper.md` or `fig1.r`) we will get this:
+
+```{.zsh}
+> make
+
+make: `mypaper.pdf' is up to date.
+```
+
+And nothing will be re-run, because nothing needs to be done. 
+
+- As a next step, change some text in `mypaper.md`, for example by replacing my name with yours. What does `make --dry-run` show now?
+
+- Next, try editing the R code in `fig1.r` to make a slightly different figure. Now what does it show? 
+
+- Finally, `make clean` is for when you want to return the project to a state where no targets have been made. You have to specify what that is. Here you can see we define the `clean` target to mean "delete (without asking for confirmation) the files `mypaper.pdf`, `fig1.pdf`, and the R log file `fig1.r.Rout`". 
+
+- The `.PHONY` line says "`clean` is a target that should be run if called, even though there are no files named `clean`. This is to get around the problem that `make` targets are usually files that get created, but for some operations (like cleaning up) no files are made, we just want `make` to run some necessary commands. 
+
+
