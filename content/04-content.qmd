@@ -15,14 +15,15 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-Git!
+The most important thing is to have some record of what you did. This has two components. First, you need a reliable way of storing your work. That means you need regular, redundant, automatic, off-site backups of your work. Beyond that, you need an organized logbook, ledger, or archive of how your projects have developed. That is what a revision control system is for.
 
 ## Sample project
 
-- The sample project used in the slides can be found at <https://github.com/kjhealy/covid-project>
+- The sample git project used in the slides can be found at <https://github.com/kjhealy/covid-project>
 
 ## Background and Related Reading
 
+- @healy20:_plain_person_guide_plain_text_social_scien, "2. Keep a Record"
 - @chacon14:_pro_git
 - @sylor-miller21:_oh_shit_git
 

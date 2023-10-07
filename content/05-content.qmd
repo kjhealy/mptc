@@ -15,6 +15,8 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
+Half the point of computers is to perform stupid and repetitive tasks quickly, tirelessly, and without error. This week we cover some tools that try to help you reproduce your work as needed in a way that is reliable and efficient.
+
 - The idea of a build system.
 - GNU Make
 - Quarto projects

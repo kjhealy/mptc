@@ -15,8 +15,10 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
+Most of our work is not done interactively. We write things down as "code" in its broadest sense: just sequences of instructions and commentary on them. We need a good set of tools for editing and manipulating all the text we produce. So this week we will cover
+
 - A little more on shell scripting
-- Regular expressions
+- The idea of text search and manipulation via regular expressions
 - Text Editors
 
 ## Background and Related Reading
