@@ -3,7 +3,7 @@ title: "Code examples"
 engine: knitr
 ---
 
-This section contains worked examples related to what we've been covering. Material for specific weeks can be accessed via the menu to the left. In the examples, you will see both chunks of code and the output the code produces. For instance here are some shell commands:
+This section contains worked examples related to what we've been covering. Material for specific weeks can be accessed via the menu. In the examples, you will see both chunks of code and the output the code produces. For instance here are some shell commands:
 
 ```{zsh}
 ls

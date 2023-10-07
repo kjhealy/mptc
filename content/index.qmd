@@ -6,7 +6,7 @@ nocite: |
   @*
 ---
 
-This section has links to each week's materials. Follow the links under the Topics menu to the left for weekly course readings, notes, slides, and so on. The bibliography below is a general reading list. Specific items to look at from week to week will be listed in each week's topic page. 
+This section has links to each week's materials. Follow the links under the Topics menu for weekly course readings, notes, slides, and so on. The bibliography below is a general reading list. Specific items to look at from week to week will be listed in each week's topic page. 
 
 ### Course Bibliography
 
