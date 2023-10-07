@@ -46,9 +46,9 @@ ls | wc -l
 
 ```{zsh}
 # Show the directory structure (excluding files) for this project
-# up to three levels deep. Your version of tree may need a lower-case
-# d for the -D switch: tree -d -L 3 
-tree -D -L 3
+# up to two levels deep. Just use "tree -d -L 2" at the console. 
+# I can't use that here without getting some font rendering errors.
+find . -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
 ```
 
 
