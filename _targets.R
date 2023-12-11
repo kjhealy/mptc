@@ -3,9 +3,11 @@ library(tarchetypes)
 suppressPackageStartupMessages(library(tidyverse))
 
 ## Variables and options
-class_number <- "SOCIOL 880-1"
+yaml_vars <- yaml::read_yaml(here::here("_variables.yml"))
+
+class_number <- yaml_vars$course$number
 page_suffix <- ".html"
-base_url <- "https://mptc.io/"
+base_url <- yaml_vars$course$url
 
 options(tidyverse.quiet = TRUE,
         dplyr.summarise.inform = FALSE)
@@ -15,11 +17,6 @@ tar_option_set(
   format = "rds",
   workspace_on_error = TRUE
 )
-
-# Deployment variables:
-# See deploy_site below for how these are applied
-yaml_vars <- yaml::read_yaml(here::here("_variables.yml"))
-
 
 # There's no way to get a relative path directly out of here::here(), but
 # fs::path_rel() works fine with it (see
