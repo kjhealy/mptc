@@ -20,7 +20,7 @@ library(pander)
 
 # About this course
 
-This course is an introduction to modern plain-text methods of data analysis, data management, and coding. It is requried for first-year graduate students in the Sociology department. It introduces a suite or "stack" of computing tools and techniques that are widely used in the department, the discipline, across the social sciences, and beyond. We will learn to use these tools and also learn why they exist and why they are important for producing work that is reliable, reproducible, and open to inspection. 
+This course is an introduction to modern plain-text methods of data analysis, data management, and coding. It is required for first-year graduate students in the Sociology department. It introduces a suite or "stack" of computing tools and techniques that are widely used in the department, the discipline, across the social sciences, and beyond. We will learn to use these tools and also learn why they exist and why they are important for producing work that is reliable, reproducible, and open to inspection. 
 
 # Motivation 
 
