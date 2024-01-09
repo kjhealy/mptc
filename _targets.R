@@ -43,9 +43,9 @@ list(
 
 
   ## README ----
-  tar_target(workflow_graph, tar_mermaid(targets_only = TRUE, outdated = FALSE,
-                                         legend = FALSE, color = FALSE)),
-  tar_quarto(readme, here_rel("README.qmd")),
+  # tar_target(workflow_graph, tar_mermaid(targets_only = TRUE, outdated = FALSE,
+  #                                        legend = FALSE, color = FALSE)),
+  # tar_quarto(readme, here_rel("README.qmd")),
 
 
   ## Build site ----

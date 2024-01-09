@@ -5,13 +5,13 @@ engine: knitr
 
 This section contains worked examples related to what we've been covering. Material for specific weeks can be accessed via the menu. In the examples, you will see both chunks of code and the output the code produces. For instance here are some shell commands:
 
-```{zsh}
+```{.zsh}
 ls
 ```
 
 The command comes first, the output comes second. 
 
-```{zsh}
+```{.zsh}
 ls | wc -l
 ```
 

@@ -1,0 +1,131 @@
+---
+title: "Modern Plain Text Computing" 
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+    affiliations: 
+      - id: duke
+        name: Duke University
+format:
+  html: default
+  minion-pdf: default
+
+---
+
+```{r setup, message=FALSE, warning=FALSE, include=FALSE}
+library(dplyr)
+library(tibble)
+library(pander)
+```
+
+# About this course
+
+This course will teach you the elements of data wrangling and data visualization, mostly in R. 
+
+For the data wrangling side, we will not not focus on particular statistical methods or modeling techniques. Rather, we will learn how to accomplish everyday tasks that have to happen before you get to that part. These include topics such as getting your own data into R, rearranging and recoding it, exploring its structure, munging and reshaping tables, and presenting summary tabulations and graphs of this work. We will also examine some more advanced versions of these topics such as managing large datasets, parallelizing tasks, and some of the rudiments of writing functions and maintaining code that any social scientist working with quantitiative data should know a bit about.
+
+For the visualization side we we will emphasize the importance of being able to look at and learn from your data yourself and also the best way to present it visually to others. Throughout the course we will emphasize how R and the tidyverse "thinks". Every dataset is different, especially at stage where it still needs further cleaning or arranging before it can be easily analyzed or effectively presented. This course will teach you the logic and implicit "flow of action" behind the tidyverse's tools, giving you the ability to apply and extend this way of thinking when working with your own data and its particular challenges. 
+
+# Should I take this course?
+
+You should take this course if you are interested in answering questions like these:
+
+- How can I properly get my data into R?
+- How should I deal with different types of data?
+- How can I explore the structure of my data?
+- How can I manipulate, summarize, and tabulate my data?
+- How can I efficiently clean my data?
+- How can I reshape or reconfigure my data?
+- How can I graph or report on my data?
+
+The course does not presume any prior experience with R. However, if you are an R user and have been annoyed with questions like these:
+
+- How can I get these 50 CSV files into R?
+- Why can’t I get the right answer when summarizing this grouped data?
+- How can I tell R that my categorical measure is ordered?
+- How can I clean up this textual data?
+- How can I neatly calculate summary statistics for all the measures in my data?
+- How can I arrange this table to print in a nice way?
+- How can I get my Stata data files into R?
+- What do I do if I have more data than RAM?
+- How can I make this code run faster?
+- How can I write my own functions?
+- Why doesn’t the answer I found on Stack Overflow work properly?
+- Why _does_ the answer I found on Stack Overflow work properly?
+- Why does R keep telling me “Object of type ‘closure’ is not subsettable”?
+
+… then this course will be worthwhile for you, too.
+
+
+# Core texts
+
+I recommend (but do not require you buy) three books. Draft versions of all of
+them are available for free online.
+
+- [@healy:2019] The print version can be purchased at [Amazon](https://amzn.to/2vfAixM) and other bookshops.
+- [@wickham23:_r_data_scien] The print version can be purchased at [Amazon](https://www.amazon.com/R-Data-Science-Hadley-Wickham/dp/1491910399/) and other bookshops.
+- [@wilke:2019] The print version can be purchased at [Amazon](https://www.amazon.com/gp/product/1492031089) and other bookshops.
+
+# Software
+
+We will do all of our visualization work in this class using
+[R](https://cran.r-project.org/) and use  [RStudio](https://www.rstudio.com/) to
+manage our code and projects. [R](https://cran.r-project.org/) is a
+freely-available programming language that is designed for statistical computing
+and widely used across the natural and social sciences, as well as in the
+rapidly-growing world of "data science" generally.
+[RStudio](https://www.rstudio.com/) is an integrated development environment, or
+IDE, for R, a kind of control center from which you can manage the engine-room
+of R itself. It is also freely available.
+If you haven't used these tools before, don't worry. The course does not
+presuppose any familiarity with them. We will get up and running with them
+during the first week.
+
+# Schedule
+
+The [weekly schedule](/schedule/) can be viewed on its [own page](/schedule/), which has more details on readings, examples, and problem sets.
+
+```{r,echo=FALSE}
+readxl::read_xlsx(here::here("data", "schedule.xlsx")) |> 
+  dplyr::mutate(date = lubridate::ymd(date), 
+                day2 = lubridate::ymd(day2),
+                date = glue::glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'), 
+                date = stringr::str_replace_all(date, "NA", "-")) |> 
+  dplyr::select(subgroup, title) |> 
+  dplyr::rename(Week = subgroup, Topic = title) |> 
+  kableExtra::kbl(booktabs = TRUE)
+```
+
+
+# Course policies
+
+- Attendance is required, and important. I am a reasonable person; if you need to be absent please _let me know in advance_ insofar as that is possible.
+- Do the assigned readings in advance of class.
+- Submit problem sets, or other assignments, on time.
+
+# Required work and grading
+
+Weekly **Class Participation** and **Problem Sets** will let you reflect on the reading and practice your coding and visualization skills. Problem sets are due by end of day the _Monday_ after they are assigned.
+
+# How you should approach this course
+
+The material covered in the course has a lot of _continuity_ and it is
+_cumulative_. You will be learning a set of practical skills. This means that
+techniques we learn early on will be necessary for understanding things that
+come later. It also means that regular practice will help you a lot. So, this is
+not a "Topic of the week" course where you can tune out for a few weeks while
+expecting to be able to easily drop back in later. The material we cover each
+week will not be overwhelming. If you participate during class and keep up with
+the weekly assignments you'll be in a very strong position to do well in the
+class. If you don't, it'll be harder than you expected.
+
+# Duke community standard
+
+Like all classes at the university, this course is conducted under the Duke
+Community Standard. Duke University is a community dedicated to scholarship,
+leadership, and service and to the principles of honesty, fairness, respect, and accountability. Citizens of this community commit to reflect upon and uphold
+these principles in all academic and nonacademic endeavors, and to protect and
+promote a culture of integrity. To uphold the Duke Community Standard you will
+not lie, cheat, or steal in academic endeavors; you will conduct yourself
+honorably in all your endeavors; and you will act if the Standard is
+compromised.

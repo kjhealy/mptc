@@ -12,7 +12,7 @@ Remember that (very annoyingly) the indented bits of Makefiles must use a `<TAB>
 
 Let's start with a toy project that contains R code to create a figure in PDF format, a markdown file for an article that includes that figure, and a `Makefile` that contains instructions to produce the articlea as a PDF file. It lives in `files/examples/_make-example/` and looks like this:
 
-```{zsh}
+```{.zsh}
 ls files/examples/_make-example
 ```
 
@@ -33,7 +33,7 @@ Meanwhile `fig1.pdf` is created by an R script called `fig1.R`, which is what th
 
 In class and on the slides we covered the idea of targets (intermediate or final output files) and their prerequisites in more detail. A Makefile is a recipe for producing outputs from targets. We can see what `make` will do with our project by running `make --dry-run`. If we have not done anything get should see this:
 
-```{zsh}
+```{.zsh}
 # Rendering live means we have to switch into the project directory
 cd files/examples/_make-example
 make --dry-run
@@ -41,14 +41,14 @@ make --dry-run
 
 This is the sequence of shell commands make will run we type `make` at the console and hit enter. The result will be that first  `fig1.pdf` and then `mypaper.pdf` will be created. In order to produce `mypaper.pdf` we first need to make `fig1.pdf` and so the command associated with the `fig1.pdf` target gets run first. The `--dry-run` switch means they are just echoed to the console, not executed. Once we're happy with how they look, we can do it for real:
 
-```{zsh}
+```{.zsh}
 cd files/examples/_make-example
 make
 ```
 
 And our output files have been created, along with a log for the R script:
 
-```{zsh}
+```{.zsh}
 ls files/examples/_make-example
 ```
 
@@ -63,14 +63,14 @@ Nothing is re-run, because nothing needs to be done.
 
 The other target in the Makefile above is called `clean` and is associated with a list of commands that remove the output targets and some intermediate files too. You run `make clean` when you want to return the project to a state where no targets have been made and there are no extraneous log files (etc) hanging around the project folder. You have to specify what that clean state is, in the sense that you must write the commands to remove the specific files or folders you want gone. Here you can see we define the `clean` target to mean "delete (without asking for confirmation) the files `mypaper.pdf`, `fig1.pdf`, and the R log file `fig1.r.Rout`". 
 
-```{zsh}
+```{.zsh}
 cd files/examples/_make-example
 make clean
 ```
 
 And now the outputs are gone:
 
-```{zsh}
+```{.zsh}
 ls files/examples/_make-example
 ```
 

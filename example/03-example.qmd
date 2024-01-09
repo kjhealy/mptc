@@ -8,33 +8,33 @@ engine: knitr
 
 Grep searches for text _inside_ files
 
-```{zsh}
+```{.zsh}
 # Search recursively through all subdirs below files/ in the project folder
 grep -r "Kieran" ./files
 ```
 
 <br />
 
-```{zsh}
+```{.zsh}
 # Search for the string "format: " in all qmd files in the current directory
 grep "format: " *.qmd
 ```
 
 <br />
 
-```{zsh}
+```{.zsh}
 # Count the number of matches
 grep -c "format: " *.qmd
 ```
 
-```{zsh}
+```{.zsh}
 # -E for "extended regular expression" form
 grep -E "^The sky|night.$" files/examples/sentences.txt
 ```
 
 <br />
 
-```{zsh}
+```{.zsh}
 grep -E "^The sky|night.$" files/examples/sentences.txt
 ```
 
@@ -43,13 +43,13 @@ grep -E "^The sky|night.$" files/examples/sentences.txt
 
 Ripgrep, or `rg` is quicker than `grep` and has some nice features, such as ignoring things in your `.gitignore` file by default
 
-```{zsh}
+```{.zsh}
 rg Kieran .
 ```
 
 <br />
 
-```{zsh}
+```{.zsh}
 # You can sepecify /types/ of files to look at with -t
 rg -t yaml "url:" .
 ```

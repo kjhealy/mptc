@@ -6,11 +6,11 @@ engine: knitr
 
 We start in the home directory for this seminar's website:
 
-```{zsh}
+```{.zsh}
 pwd
 ```
 
-```{zsh}
+```{.zsh}
 ls
 ```
 
@@ -18,7 +18,7 @@ ls
 Make a temporary directory:
 
 
-```{zsh}
+```{.zsh}
 mkdir tmp
 ```
 
@@ -26,19 +26,19 @@ mkdir tmp
 
 Use `touch` to create an empty file:
 
-```{zsh}
+```{.zsh}
 touch tmp/my-file.txt
 ```
 
 List it:
 
-```{zsh}
+```{.zsh}
 ls -l tmp
 ```
 
 Echo some text into some files:
 
-```{zsh}
+```{.zsh}
 echo Hello > tmp/01-my-file.txt
 echo There > tmp/02-my-file.txt
 
@@ -47,14 +47,14 @@ ls -l tmp
 
 Cat the files
 
-```{zsh}
+```{.zsh}
 cat tmp/01-my-file.txt tmp/02-my-file.txt
 ```
 
 
 Cat the files into a new file:
 
-```{zsh}
+```{.zsh}
 cat tmp/01-my-file.txt tmp/02-my-file.txt > tmp/03-my-file.txt
 
 cat tmp/03-my-file.txt
@@ -62,13 +62,13 @@ cat tmp/03-my-file.txt
 
 _Append_ to a file with `>>` instead of `>`:
 
-```{zsh}
+```{.zsh}
 cat tmp/01-my-file.txt tmp/02-my-file.txt >> tmp/03-my-file.txt
 ```
 
 Result:
 
-```{zsh}
+```{.zsh}
 cat tmp/03-my-file.txt
 ```
 
@@ -77,7 +77,7 @@ cat tmp/03-my-file.txt
 
 You can do this:
 
-```{zsh}
+```{.zsh}
 #| class: scrollout
 
 touch tmp/{a..z}.txt
@@ -88,7 +88,7 @@ ls tmp/
 
 Or this:
 
-```{zsh}
+```{.zsh}
 #| class: scrollout
 
 touch tmp/{A..Z}{0..10}.txt
@@ -100,7 +100,7 @@ ls tmp/
 
 You can write loops in the shell as well:
 
-```{zsh}
+```{.zsh}
 for f in {a..z}{0..10}
 do
     echo hello > "tmp/$f.txt"
@@ -108,12 +108,12 @@ done
 ```
 
 
-```{zsh}
+```{.zsh}
 #| class: scrollout
 ls tmp/
 ```
 
-```{zsh}
+```{.zsh}
 cat tmp/u3.txt
 ```
 
@@ -122,7 +122,7 @@ cat tmp/u3.txt
 
 We can cut files or `STDIN`. Here we get a long listing of the files in a directory, cut the output using whitespace as the field delimiter (`-w`), select fields 6 and 7 (`-f6-7`) which are the modification dates of the file and then get the unique values with a count of their frequency.
 
-```{zsh}
+```{.zsh}
 ls -lt assets/01-file-system/ | cut -w -f6-7 | uniq -c
 ```
 
@@ -137,7 +137,7 @@ The `rm` command deletes the named files. `rm -f` forces the deletion without an
 
 :::
 
-```{zsh}
+```{.zsh}
 ## Be VERY CAREFUL with the syntax of this command
 rm -rf tmp/
 ```
