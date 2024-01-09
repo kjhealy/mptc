@@ -1,0 +1,37 @@
+$if(biblatex)$
+% ----------
+% BibLaTeX
+% ----------
+$if(biblatex-chicago)$
+\usepackage[$if(biblio-style)$$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex-chicago}
+$else$
+\usepackage[$if(biblio-style)$style=$biblio-style$,$endif$$for(biblatexoptions)$$biblatexoptions$$sep$,$endfor$]{biblatex}
+$endif$
+
+\setlength\bibitemsep{0pt}  % No space between bib entries
+\renewcommand*{\bibfont}{\footnotesize}  % Use smaller font
+\setlength\bibhang{\parindent}  % Match document indentation
+
+% Fix biblatex's odd preference for using In: by default.
+\renewbibmacro{in:}{%
+  \ifentrytype{article}{}{%
+  \printtext{\bibstring{}\intitlepunct}}}
+
+\addbibresource{$bibliography$}
+$endif$
+
+
+$if(title)$
+\title{\bigskip \bigskip $title$$if(thanks)$\thanks{$thanks$} $endif$ }
+$endif$
+
+\author{
+$for(by-author)$
+{\large $it.name.literal$$if(it.orcid)$~\orcidlink{$it.orcid$}$endif$}%
+$if(it.attributes.corresponding)$\thanks{Corresponding author.}$endif$ \\%
+$for(it.affiliations)${\normalsize\emph{$it.name$}} \\$endfor$%
+{\footnotesize \texttt{\url{$it.email$}}}\vspace*{0.2in}\newline $sep$ \and
+$endfor$
+}
+
+\date{}

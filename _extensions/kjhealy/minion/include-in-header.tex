@@ -1,0 +1,72 @@
+% -----------------
+% Typography
+% -----------------
+% Indent size
+\setlength{\parindent}{1pc}  % 1p0
+
+% Fix widows and orphans
+\usepackage[all,defaultlines=2]{nowidow}
+
+% List things
+\usepackage{enumitem}
+% Same document-level indentation for ordered and ordered lists
+\setlist[1]{labelindent=\parindent}
+\setlist[itemize]{leftmargin=*}
+\setlist[enumerate]{leftmargin=*}
+
+% Wrap definition list terms
+% https://tex.stackexchange.com/a/9763/11851
+\setlist[description]{style=unboxed}
+
+
+% For better TOCs
+\usepackage{tocloft}
+
+% Remove left margin in lists inside longtables
+% https://tex.stackexchange.com/a/378190/11851
+\AtBeginEnvironment{longtable}{\setlist[itemize]{nosep, wide=0pt, leftmargin=*, before=\vspace*{-\baselineskip}, after=\vspace*{-\baselineskip}}}
+
+
+% -----------------
+% Title block
+% -----------------
+
+
+% --------
+% Macros
+% --------
+% pandoc will not convert text within \begin{} XXX \end{} to Markdown and will
+% treat it as regular TeX. Because of this, it's impossible to do stuff like
+% this:
+
+% \begin{landscape}
+%
+% | One | Two   |
+% |-----+-------|
+% | my  | table |
+% | is  | nice  |
+%
+% \end{landscape}
+%
+% Since it'll render like: | One | Two | |—–+——-| | my | table | | is | nice |
+%
+% BUT, from this http://stackoverflow.com/a/41945462/120898 we can get around
+% this by creating new commands for \begin and \end, like this:
+\newcommand{\blandscape}{\begin{landscape}}
+\newcommand{\elandscape}{\end{landscape}}
+
+% \blandscape
+%
+% | One | Two   |
+% |-----+-------|
+% | my  | table |
+% | is  | nice  |
+%
+% \elandscape
+
+% Same thing, but for generic groups
+% But can't use \bgroup and \egroup because those are built-in TeX things
+\newcommand{\stgroup}{\begingroup}
+\newcommand{\fingroup}{\endgroup}
+
+
