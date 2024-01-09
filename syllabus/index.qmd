@@ -9,7 +9,6 @@ author:
 format:
   html: default
   minion-pdf: default
-
 ---
 
 ```{r setup, message=FALSE, warning=FALSE, include=FALSE}
