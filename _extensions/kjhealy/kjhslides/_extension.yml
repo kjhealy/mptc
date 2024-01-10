@@ -15,7 +15,7 @@ contributes:
       highlight-style: catppuccin-macchiato.theme
       title-slide-attributes:
         data-background-color: "#252F3E"
-      self-contained: true
+      self-contained: false
       echo: true
       code-tools: true
       code-line-numbers: false
