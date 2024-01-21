@@ -22,7 +22,7 @@ ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
 ::: {.schedule-page}
 
 
-:::: {.callout-danger}
+:::: {.callout-important}
 ### This schedule is not current
 
 The schedule below only links to material for the first five weeks of the course, which is what we covered in the mini-seminar version taught for the first time in Fall 2023. The outline below includes topics slated for the next iteration of this course. It will be taught in Fall 2024 so many of the weeks have no content yet.
