@@ -15,7 +15,7 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-A shell is how we talk to the operating system and see where we are in the file system. In a plain-text world we will spend quite a bit of time talking to the shell via a command-line interface. This week we see the elements of how to do that and what it buys us. We will also see how the shell implements its own version of the sort of thing we see all the time when using R, namely many single-purpose commands (more or less equivalent to functions) chained or pipelined together into sequences that can do quite complex tasks one piece at a time.
+A shell is how we talk to the operating system; it is the thing that executes programs of all kinds for us when we tell it to; and it is how we see where we are in the file system and act on those files. In a plain-text world we will spend quite a bit of time talking to the shell via a command-line interface. This week we see the elements of how to do that, and what it buys us. We will also see how the shell implements its own version of the sort of thing you have already seen when using R, namely, many single-purpose commands (more or less equivalent to R's functions) that can be chained or pipelined together into sequences that can do quite complex tasks one piece at a time.
 
 ## Readings
 

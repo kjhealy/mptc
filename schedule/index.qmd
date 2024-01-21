@@ -21,7 +21,16 @@ ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
 
 ::: {.schedule-page}
 
-Here's a tentative outline. It's subject to change. There are up to three kinds of link each week. 
+
+:::: {.callout-danger}
+### This schedule is not current
+
+The schedule below only links to material for the first five weeks of the course, which is what we covered in the mini-seminar version taught for the first time in Fall 2023. The outline below includes topics slated for the next iteration of this course. It will be taught in Fall 2024 so many of the weeks have no content yet.
+::::
+
+
+
+Here's an outline. It's subject to change. There are up to three kinds of link each week. 
 
 - [**Content**](/content/) ({{< fa book-open-reader >}}): These pages contain links to the readings and other material for each week. Read these **before** class. Lecture slide decks will also appear on these pages. 
 
