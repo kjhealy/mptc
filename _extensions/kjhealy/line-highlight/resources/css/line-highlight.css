@@ -1,0 +1,33 @@
+/*
+modified and reduced from
+https://github.com/quarto-dev/quarto-cli/tree/main/src/resources/formats/revealjs/plugins/line-highlight
+*/
+
+/* For HTML */
+body:not(.modal-open) div.sourceCode pre code.has-line-highlights > span:not(.highlight-line) {
+  opacity: 0.9;
+}
+
+body:not(.modal-open) div.sourceCode pre code.has-line-highlights > span.highlight-line {
+  font-weight: 900;
+  filter: brightness(1.5);
+}
+
+
+/* For reveal */
+.reveal
+  div.sourceCode
+  pre
+  code.has-line-highlights
+  > span:not(.highlight-line) {
+  opacity: 0.9;
+}
+
+.reveal
+  div.sourceCode
+  pre
+  code.has-line-highlights
+  > span.highlight-line {
+  font-weight: 900;
+  filter: brightness(1.5);
+}
