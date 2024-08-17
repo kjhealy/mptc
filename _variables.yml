@@ -1,4 +1,4 @@
-version: 1.3
+version: 2.0
 author: Kieran Healy
 
 instructor:
@@ -11,16 +11,16 @@ instructor:
   office: "268 Reuben-Cooke"
 
 course:
-  number: "SOCIOL 880-1"
+  number: "SOCIOL 703"
   title: "Modern Plain Text Computing"
-  semester: "Fall 2023"
+  semester: "Fall 2024"
   days: "Tuesdays"
-  time: "1:25pm--3:55pm"
+  time: "11:45am--2:15pm"
   location: "Trent Hall 038B"
-  dates: "08/28/2023 -- 10/14/2023"
+  dates: "08/27/2024 -- 12/06/2024"
   github: "https://www.github.com/kjhealy/mptc"
   url: "https://mptc.io"
-  copyright_year: "2023"
+  copyright_year: "2024"
 
 university:
   name: Duke University
@@ -32,12 +32,20 @@ school:
 
 deploy:
   user: "kjhealy"
-  site: true
+  site: false
 
 schedule:
-  wk1: 2023-08-29
-  wk2: 2023-09-05
-  wk3: 2023-09-12
-  wk4: 2023-09-19
-  wk5: 2023-09-26
-  wk6: 2023-10-03
+  wk01: 2024-08-27
+  wk02: 2024-09-03
+  wk03: 2024-09-10
+  wk04: 2024-09-17
+  wk05: 2024-09-24
+  wk06: 2024-10-01
+  wk07: 2024-10-08
+  wk08: 2024-10-15
+  wk09: 2024-10-22
+  wk10: 2024-10-29
+  wk11: 2024-11-05
+  wk12: 2024-11-12
+  wk13: 2024-11-19
+  wk14: 2024-11-26
