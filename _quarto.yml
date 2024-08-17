@@ -4,6 +4,9 @@ project:
     - "files/"
   preview:
     port: 27514
+  render:
+    - "*.qmd"
+    - "!staging/"
 
 filters:
   - line-highlight
@@ -14,7 +17,7 @@ filters:
 execute:
    freeze: auto  # Re-render only when source changes
 
-bibliography: files/bib/references.bib
+bibliography: files/bib/mptc_references.bib
 link-citations: false
 csl: files/bib/chicago-syllabus-no-bib.csl
 description-meta: "A mini-seminar on the tools you use every day but no-one teaches you about."
@@ -45,16 +48,18 @@ website:
             - content/index.qmd
         - section: "Topics"
           contents:
-            - text: "01: Your Computer"
-              file: content/01-content.qmd
-            - text: "02: The Shell"
-              file: content/02-content.qmd
-            - text: "03: Text Editing"
-              file: content/03-content.qmd
-            - text: "04: Version Control"
-              file: content/04-content.qmd
-            - text: "05: Build Systems"
-              file: content/05-content.qmd
+            # - text: "01: Doing Data Analysis Properly"
+            #   file: content/01-content.qmd
+            # - text: "01: Your Computer"
+            #   file: content/01-content.qmd
+            # - text: "02: The Shell"
+            #   file: content/02-content.qmd
+            # - text: "03: Text Editing"
+            #   file: content/03-content.qmd
+            # - text: "04: Version Control"
+            #   file: content/04-content.qmd
+            # - text: "05: Build Systems"
+            #   file: content/05-content.qmd
     - title: "Assignments"
       contents:
         - section: "Overview"
@@ -62,8 +67,8 @@ website:
             - assignment/index.qmd
         - section: "Things to do"
           contents:
-          - text: "02: The Shell"
-            file: assignment/02-problem-set.qmd
+          # - text: "02: The Shell"
+          #   file: assignment/02-problem-set.qmd
 
     - title: "Examples"
       contents:
@@ -72,16 +77,16 @@ website:
             - example/index.qmd
         - section: "How-To"
           contents:
-            - text: "01: The File System"
-              file: example/01-example.qmd
-            - text: "02: The Shell"
-              file: example/02-example.qmd
-            - text: "03: Text Editing"
-              file: example/03-example.qmd
-            - text: "04: Git"
-              file: example/04-example.qmd
-            - text: "05: Make"
-              file: example/05-example.qmd
+            # - text: "01: The File System"
+            #   file: example/01-example.qmd
+            # - text: "02: The Shell"
+            #   file: example/02-example.qmd
+            # - text: "03: Text Editing"
+            #   file: example/03-example.qmd
+            # - text: "04: Git"
+            #   file: example/04-example.qmd
+            # - text: "05: Make"
+            #   file: example/05-example.qmd
 
 
 
