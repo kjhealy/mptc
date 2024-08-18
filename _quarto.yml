@@ -20,7 +20,7 @@ execute:
 bibliography: files/bib/mptc_references.bib
 link-citations: false
 csl: files/bib/chicago-syllabus-no-bib.csl
-description-meta: "A mini-seminar on the tools you use every day but no-one teaches you about."
+description-meta: "A seminar about the tools you'll use every day but no-one teaches."
 
 website:
   title: "Modern Plain Text Computing"
