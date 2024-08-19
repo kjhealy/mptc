@@ -5,15 +5,37 @@ engine: knitr
 
 This section contains worked examples related to what we've been covering. Material for specific weeks can be accessed via the menu. In the examples, you will see both chunks of code and the output the code produces. For instance here are some shell commands:
 
-```{.zsh}
+```{zsh}
+# The absolute path where this project lives on my Mac
+pwd
+```
+
+
+```{zsh}
+# The directory listing for the top-level folder of this project
 ls
 ```
 
+
+```{zsh}
+# Listing all and only the qmd files at the project's top-level folder
+ls *.qmd
+```
+
+
 The command comes first, the output comes second. 
 
-```{.zsh}
-ls | wc -l
+```{zsh}
+# Get a count of the number of lines in all the qmd files in the root folder 
+wc -l *.qmd
 ```
+
+
+```{zsh}
+# Get a count (separately) of the number of lines in every file in the slides folder 
+find ./slides -name '*.qmd' | xargs wc -l 
+```
+
 
 
 You can copy the code used in these examples in one of two ways. First, you can mouse over any code chunk and click the clipboard icon, {{< fa clipboard >}}, that appears. 
