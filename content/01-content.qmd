@@ -1,6 +1,5 @@
 ---
 title: "1. The Idea of Your Computer"
-date: 2023-08-29
 date-format: full
 ---
 
@@ -15,29 +14,18 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-Why is technical computing, in the broadest sense, organized in the way that it is? The specifics are, inevitably, the path-dependent product of particular historical developments, most notably the development of the Unix operating system. The Unix way of doing things remains immensely influential. But we can also motivate the topic more positively in terms of ideas about organization and control through composable actions on files. We need to repeatedly do things with the computer; we want to be able to say and have some record of what we did; and we want to be able to open up and inspect the actions we took in order to change them if needed. 
+Why is technical computing, in the broadest sense, organized in the way that it is? The specifics are, inevitably, the path-dependent product of particular historical developments. But we can also motivate the topic more positively in terms of ideas about organization and control through composable actions on files. We need to repeatedly do things with the computer; we want to be able to say and have some record of what we did; and we want to be able to open up and inspect the actions we took in order to change them if needed. 
 
-## General Background Reading
+## Reading
 
-- @christensen19:_trans_reprod_social_scien_resear
+- @christensen19:_trans_reprod_social_scien_resear, "Introduction" and Chapter 11, "Reproducible Workflow".  
 - @healy20:_plain_person_guide_plain_text_social_scien, "1. Introduction"
-
-## Video
-
-- The Unix Operating System (1982)
-
-This documentary is both very much of its time and also still immensely relevant. Pay attention epecially to minutes 5 to 10 (on the Unix way of thinking) and minutes 12 to 17 or so (on the file system and shell). Brian Kernighan, the guy in the light blue sweater, is extremely lucid throughout on how and why Unix is designed the way it is. At its core, this way of doing things is still how things work in the world of technical computing.
-
-<iframe width="560" height="315" src="https://www.youtube.com/embed/tc4ROCJYbm0?si=PLR4KlEq3CSMDF3Q&amp;start=297" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
 
 ## Also ... 
 
 -   Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
 
-## Examples
-
-[This week's examples and demos](/example/01-example.qmd).
 
 ## Slides
 
@@ -57,8 +45,8 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<iframe class="slide-deck" id="quartoframe" src="../slides/01-slides.html"></iframe>
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/01-slides.html"></iframe-->
 ```
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/01-slides")
+#slide_win_button("/slides/01-slides")
 ```

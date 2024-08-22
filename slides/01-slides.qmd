@@ -271,6 +271,14 @@ Each approach generates solutions to its own problems
 :::
 
 
+# The Whole Game
+
+## A tiny research project
+
+- Go here and download this:  
+- <https://github.com/kjhealy/mptc_oecd>
+- We're going to open it in RStudio and turn it into a document.
+
 # The File System
 
 
@@ -474,7 +482,13 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 ![](../assets/01-file-system/01_macos_terminal_icon.png)
 
 
-# Back to the file system
+# The file system
+
+## What is a file?
+
+## A file is a metaphor
+
+## What is plain text?
 
 ## File system hierarchy {.smaller}
 

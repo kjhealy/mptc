@@ -48,8 +48,8 @@ website:
             - content/index.qmd
         - section: "Topics"
           contents:
-            # - text: "01: Doing Data Analysis Properly"
-            #   file: content/01-content.qmd
+            - text: "01: Doing Data Analysis Properly"
+              file: content/01-content.qmd
             # - text: "01: Your Computer"
             #   file: content/01-content.qmd
             # - text: "02: The Shell"
@@ -67,8 +67,10 @@ website:
             - assignment/index.qmd
         - section: "Things to do"
           contents:
+          - text: "01: Software Setup"
+            file: assignment/01-assignment.qmd
           # - text: "02: The Shell"
-          #   file: assignment/02-problem-set.qmd
+          #   file: assignment/02-assignment.qmd
 
     - title: "Examples"
       contents:
@@ -77,6 +79,8 @@ website:
             - example/index.qmd
         - section: "How-To"
           contents:
+            - text: "01: A Tiny Project"
+              file: example/01-example.qmd
             # - text: "01: The File System"
             #   file: example/01-example.qmd
             # - text: "02: The Shell"

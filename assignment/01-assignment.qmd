@@ -1,0 +1,67 @@
+---
+title: "Tasks for Week 01"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+## Task 1: Install R and RStudio
+
+We will be working with the most recent stable versions of R and RStudio, as well as with a number of additional packages. You will need to install R, RStudio, and the necessary packages on your own computer. 
+
+### Install R on your computer
+
+Begin by installing R (<http://cloud.r-project.org>). Choose the version appropriate for your computing platform: 
+
+
+- If you use macOS with an Apple Silicon processor (i.e. an M1, M2, or M3 processor), then install [R for macOS's Apple Silicon build](https://cran.r-project.org/bin/macosx/big-sur-arm64/base/R-4.4.1-arm64.pkg). This version does not work on older, Intel-based Macs.
+
+- If you use macOS with an Intel processor, then install [R for macOS's Intel build](https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.4.1-x86_64.pkg). 
+
+- If you use Microsoft Windows, then install [R for Windows](https://cran.r-project.org/bin/windows/base/R-4.4.1-win.exe)
+
+- If you use Linux, [choose a distribution](https://cloud.r-project.org/bin/linux/) and install it.
+
+### Install RStudio on your computer
+
+- If you use macOS (whether Apple Silicon or Intel), [install this version of RStudio](https://download1.rstudio.org/electron/macos/RStudio-2024.04.2-764.dmg)
+
+- If you use Windows, [install this version of RStudio](https://download1.rstudio.org/electron/windows/RStudio-2024.04.2-764.exe)
+
+- If you use Linux, [choose your distribution from the download page](https://posit.co/download/rstudio-desktop/)
+
+### Installing some additional packages
+
+- Once R and RStudio are installed, launch RStudio. Either carefully type in or (better) copy and paste the following lines of code at R’s command prompt. The prompt is located in the RStudio window named “Console”. After you paste the lines in, hit return. In the code below, the `<-` arrow is made up of two keystrokes, first `<` and then the short dash or minus symbol, `-`.
+
+
+```R
+my_packages <- c("tidyverse", "babynames", "broom", "drat", "gapminder",  
+                  "here", "janitor", "naniar", "palmerpenguins", "remotes",
+                  "skimr", "slider", "socviz", "usethis", "visdat", "reprex")
+
+install.packages(my_packages, repos = "http://cran.rstudio.com")
+
+# Be patient!
+data_packages <- paste0("kjhealy/", c("covdata", "congress", "nycdogs", "ukelection2019", "uscenpops"))
+remotes::install_github(data_packages)
+
+```
+
+Installing these packages may take a little time. 
+
+## Task 2: Get set up on GitHub
+
+GitHub is a software development platform and service that is widely used by R Developers. You can [read some background on it from an R user's point of view here](https://happygitwithr.com/big-picture.html).
+
+If you do not have one already, create a GitHub account and obtain a GitHub Personal Access Token. After you have installed R and RStudio, read and _carefully follow_ the instructions here:
+
+- Register a [GitHub Account](https://happygitwithr.com/github-acct.html)
+- Install [Git](https://happygitwithr.com/install-git) and a [Git Client](https://happygitwithr.com/git-client.html)
+- Get a [Personal Access Token](https://happygitwithr.com/https-pat)
+- Connect to [GitHub](https://happygitwithr.com/push-pull-github.html)
+
+
+

@@ -1,0 +1,94 @@
+---
+title: "Example 01: the File system"
+engine: knitr
+---
+
+On a Mac or Linux system, or on Windows with the WSL or Cygwin installed, try some commands:
+
+
+### Who are you?
+
+```{.zsh}
+whoami
+```
+
+
+### Where in the filesystem are you right now?
+
+```{.zsh}
+pwd
+```
+
+### File listing
+
+```{.zsh}
+ls
+```
+
+
+### File listing with switches
+
+`l` for long form, `t` for order by last modified, `h` for show sizes in human-readable units.
+
+```{.zsh}
+ls -lth
+```
+
+
+### Piping output
+
+```{.zsh}
+ls | wc -l
+```
+
+
+### The file system structure
+
+```{.zsh}
+# Show the directory structure (excluding files) for this project
+# up to two levels deep. Just use "tree -d -L 2" at the console. 
+# I can't use that here without getting some font rendering errors.
+find . -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
+```
+
+
+### Moving around
+
+```{.zsh}
+## Enter a directory
+cd files
+ls
+```
+
+```{.zsh}
+## Move up to parent directory
+cd ..
+ls
+```
+
+```{.zsh}
+## Move directly to top of home directory
+cd ~
+```
+
+```{.zsh}
+## Move back to the previous directory, wherever that was
+cd - 
+ls
+```
+
+```{.zsh}
+## Move down a path relative to where you are now
+cd files/bib
+ls
+```
+
+```{.zsh}
+## Move down then back up two levels
+cd files/bib
+cd ../../
+ls
+```
+
+
+
