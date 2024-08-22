@@ -48,7 +48,7 @@ website:
             - content/index.qmd
         - section: "Topics"
           contents:
-            - text: "01: Doing Data Analysis Properly"
+            - text: "01: Doing Your Work Properly"
               file: content/01-content.qmd
             # - text: "01: Your Computer"
             #   file: content/01-content.qmd

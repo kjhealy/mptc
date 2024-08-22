@@ -47,4 +47,9 @@ copy_file <- function(original_file, new_folder) {
 #   #                      new_folder = here_rel("projects", "01-problem-set", "data"))),
 # )
 
+# Get resources spreadsheet
+
+build_data_sources_df <- function(data_source_file) {
+  readxl::read_xlsx(data_source_file)
+}
 

@@ -68,7 +68,6 @@ walk(seq(1, nrow(schedule_nested)), ~show_table(.x))
 
 :::
 
-
 Throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. That's the stuff mentioned in the tag lines. At this level we will focus on examples that come up in our everyday work. As we shall see, each particular thing we learn about is a means of doing something useful. But second, and more generally, we will try to develop a *way of thinking*. That's the idea in the header. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. We want to cultivate an attitude of determined curiosity that will help us solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating.  
 
 Consult the [course schedule page](/schedule/) for more detail on weekly topics, readings, and assignments.

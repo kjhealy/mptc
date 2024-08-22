@@ -16,12 +16,11 @@ withr::with_dir(here::here(), {
 })
 
 base_url <- yaml::read_yaml(here::here("_quarto.yml"))$website$`site-url`
-ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
+ical_url_absolute <- paste0(base_url, "/", schedule_ical_file) 
+
 ```
 
 ::: {.schedule-page}
-
-
 
 Here's an outline. It's subject to change. There are up to three kinds of link each week. 
 

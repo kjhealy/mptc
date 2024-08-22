@@ -1,5 +1,5 @@
 ---
-title: "1. The Idea of Your Computer"
+title: "01. Doing Your Work Properly"
 date-format: full
 ---
 

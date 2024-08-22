@@ -6,7 +6,40 @@ nocite: |
   @*
 ---
 
-This section has links to each week's materials. Follow the links under the Topics menu for weekly course readings, notes, slides, and so on. The bibliography below is a general reading list. Specific items to look at from week to week will be listed in each week's topic page. 
+This section has links to each week's materials. Follow the links under the Topics menu for weekly course readings, notes, slides, and so on. The Data section below has links to a variety of data sources that you can practice on. The bibliography is a general reading list. Specific items to look at from week to week will be listed in each week's topic page.
+
+### Practice Data Sources
+
+Some places you can go to get data (as CSVs, Excel files, JSON blobs, or other formats) to play with as you're learning how to work with the tools we're learning about.
+
+```{r resources-data, include=FALSE}
+library(tidyverse)
+library(knitr)
+library(kableExtra)
+
+withr::with_dir(here::here(), {
+  resources_df <- targets::tar_read(data_source_df)
+})
+```
+
+```{r resource-table, include=FALSE}
+show_table <- function(df) {
+  tbl <-  df |> 
+    mutate(name = paste0("[", name, "]", "(", url, ")")) |> 
+    rename(Resource = name, 
+           URL = url) |>  
+    kbl(escape = FALSE, align = "ll", table.attr = 'class="schedule-table"') |>  
+    kable_styling(bootstrap_options = c("striped", "hover")) |>  
+    column_spec(1, width = "30%", extra_css = "padding-right: 20px;") |>  
+    column_spec(2, width = "65%")  
+  cat(tbl)
+}
+```
+
+```{r show-resources, echo=FALSE, results="asis"}
+show_table(resources_df) 
+```
+
 
 ### Course Bibliography
 

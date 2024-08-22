@@ -41,6 +41,9 @@ list(
                        here_rel("files", "schedule.ics")),
              format = "file"),
 
+  ## Data resource list
+  tar_target(data_source_file, here_rel("data", "data_sources.xlsx"), format = "file"),
+  tar_target(data_source_df, build_data_sources_df(data_source_file)),
 
   ## README ----
   # tar_target(workflow_graph, tar_mermaid(targets_only = TRUE, outdated = FALSE,
