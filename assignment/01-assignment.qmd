@@ -54,7 +54,7 @@ Installing these packages may take a little time.
 
 ## Task 2: Get set up on GitHub
 
-GitHub is a software development platform and service that is widely used by R Developers. You can [read some background on it from an R user's point of view here](https://happygitwithr.com/big-picture.html).
+GitHub is a software development platform and service that is widely used by R Developers. You can [read some background on it from an R user's point of view here](https://peerj.com/preprints/3159v2/).
 
 If you do not have one already, create a GitHub account and obtain a GitHub Personal Access Token. After you have installed R and RStudio, read and _carefully follow_ the instructions here:
 
