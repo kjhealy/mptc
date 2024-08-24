@@ -1,5 +1,5 @@
 ---
-title: "Your Computer"
+title: "Text, Files, and the File System"
 subtitle: "Modern Plain Text Social Science: Week 01b"
 format: kjhslides-revealjs
 engine: knitr
@@ -125,13 +125,13 @@ Robertson’s unconventional history of the origins of the information age posit
 ## Index cards
 
 :::: {.columns}
-::: {.column width="80%"}
+::: {.column width="70%"}
 ![](../assets/01-file-system/01_library_index-card_shelf.png){width=90%}
 :::
 
-::: {.column width="20%" .right}
+::: {.column width="30%" .right}
 
-Just like a filing cabinet, but smol
+Like a filing cabinet, but smol
 
 :::
 ::::
@@ -144,7 +144,7 @@ Just like a filing cabinet, but smol
 
 
 
-# Automating information 
+# Automating Information and Control
 
 ## A music box
 
@@ -172,7 +172,7 @@ Just like a filing cabinet, but smol
 Initially, these electromechanical machines only counted holes, but by the 1920s they had units for carrying out basic arithmetic operations.[18]: 124  Hollerith founded the Tabulating Machine Company (1896) which was one of four companies that were amalgamated via stock acquisition to form a fifth company, Computing-Tabulating-Recording Company (CTR) (1911), later renamed International Business Machines Corporation (IBM) (1924). Other companies entering the punched card business included The Tabulator Limited (Britain, 1902), Deutsche Hollerith-Maschinen Gesellschaft mbH (Dehomag) (Germany, 1911), Powers Accounting Machine Company (US, 1911), Remington Rand (US, 1927), and H.W. Egli Bull (France, 1931).[19] These companies, and others, manufactured and marketed a variety of punched cards and unit record machines for creating, sorting, and tabulating punched cards, even after the development of electronic computers in the 1950s."
 :::
 
-## Hollerith Machines
+## Hollerith machines
 
 ![](../assets/01-file-system/01_hollerith_tabulator.png){width=100%}
 
@@ -246,7 +246,7 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 
 
 
-## Hollerith Operators {.smaller}
+## Hollerith operators {.smaller}
 
 :::: {.columns}
 ::: {.column width="70%"}
@@ -437,19 +437,39 @@ readxl::read_xlsx(here::here("files", "examples", "ascii_table.xlsx")) |>
 
 # Back to the file system
 
-## Files
+## Files {.smaller}
 
-- Our data is stored --- or represented as being stored --- in a _file system_
-- This is, again, a way of organizing items for our benefit
+:::: {.columns}
+
+::: {.column width="45%"}
+
+![](../assets/01-file-system/01_file_cabinet_hierarchy.png){width=100%}
+
+
+:::
+
+::: {.column width="55%"}
+
+- Our data is stored --- or represented as being stored --- in a _file system_.
+- This is, again, a way of organizing items for our benefit.
 - The UNIX operating system developed at Bell Labs codifies the modern "file" metaphor. 
-- Files are named items that live in a hierarchical file system. "Ordinary" documents like `notes.txt` are thought of as files, which seems natural to us now.
+- Files are named items that live in a [hierarchical file system]{.fg-lblue}. "Ordinary" documents like `notes.txt` are thought of as files, which seems natural to us now.
+- The hierarchy is made of [folders]{.fg-lblue} or "directories" that, like a filing cabinet, can nest inside one another and inside larger storage units. 
+- By navigating the hierarchy from its [root]{.fg-red},     we can trace a [path]{.fg-lblue} to any particular file.
+
+
+:::
+
+::::
+
+
 
 ## Files
 
-- But a file is just a stream of bytes, of data, some sort of resource that a program can read or interact with.
-- In the UNIX way of thinking, "Everything is a file"
-- That is, lots of things that are not normally thought of as files (such as printers, or terminal screens, or connections to other computers) can be thought of as living in a named place somewhere in the file system
-- The basic set of UNIX utilities can be thought of as tools that accept "files" (as a stream of data), perform some specific action on them (read, print, move, copy, delete, count lines, find text, whatever) and then return something that can also be sent to a "file" of its own.
+- A file is just a stream of bytes, of data, some sort of resource that a program can read or interact with.
+- In the UNIX way of thinking, "[Everything is a file]{.fg-lblue}"
+- That is, lots of things that are not normally thought of as files (such as printers, or terminal screens, or connections to other computers) can be thought of as living in a named place somewhere in the filesystem.
+- The basic set of UNIX utilities can be thought of as tools that accept "files" (as a standard stream of input data), perform some specific action on them (read, print, move, copy, delete, count lines, find text, whatever) and then return a standard stream of output data that can be sent to the console, used as input to another command, or become a file of its own.
 
 ## File system hierarchy {.smaller}
 
@@ -460,6 +480,19 @@ readxl::read_xlsx(here::here("files", "examples", "ascii_table.xlsx")) |>
 Illustration: @peek02:_unix_power_tools [p. 23]
 
 :::
+
+## Path conventions
+
+- `/` represents a division in the file hierarchy. You can think of it as a branch point on a tree, or as a new level of nesting in a series of boxes, or as the action "Go inside" or "Enter".
+
+- On a Unix-like system, a full path to a file looks like this: 
+
+```{r}
+#| echo: false
+fs::fs_path(here::here("slides", "01b-slides.qmd"))
+```
+
+"Go inside the '`Users`' folder, then inside the '`kjhealy`' folder, then inside '`Documents`' then inside '`courses`' then '`mptc`' then '`slides`' and you will find the file `01b-slides.qmd`."
 
 ## Standard locations 
 
@@ -542,6 +575,15 @@ Where am I?
 pwd
 ```
 
+What is my purpose in life?
+
+```{.zsh}
+Sorry, Unix can't help you with this one
+```
+
+
+## Navigating the tree
+
 What is in here?
 
 ```{zsh}
@@ -592,16 +634,20 @@ bin  certbot.log  logrotate.conf  old  projects  public  staging
 
 - If the pathname does not begin with a `/` or `~`
   - The path name is relative to the current directory. Two relative special cases use entries that are in every Unix directory:
-    a. If the path name begins with ./, the path is relative to the current directory, e.g., ./textfile, though this can also execute the file if it is given executable file permissions.
-    b. If the path name begins with ../, the path is relative to the parent of the current directory. For example, if your current directory is `/Users/kjhealy/Documents/papers` then `../data` means `/Users/kjhealy/Documents/data`
+    a. If the path name begins with `./`, the path is relative to the current directory, e.g., `./textfile`, though this can also execute the file if it is given executable file permissions.
+    b. If the path name begins with `../`, the path is relative to the parent of the current directory. For example, if your current directory is `/Users/kjhealy/Documents/papers` then `../data` means `/Users/kjhealy/Documents/data`
 
 
 ## File permissions
+
+Who is using this file system anyway?
 
 ```{.zsh}
 drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
 -rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
 ```
+
+Unix derives from a world there there are multiple users and groups of users who are all using slices (in terms of processor time and available permanent storage) of a large central computer.
 
 
 ## File permissions
@@ -621,7 +667,7 @@ drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
 ```
 
 
-Three things you can do: 
+Three things you can do to a file: 
 
 ### [r]{.fg-lblue}ead
 ### [w]{.fg-orange}rite
@@ -657,9 +703,10 @@ Executable permissions are irrelevant here because it's a text file.
 
 ## Stepping back
 
-- Your computer stores files and runs commands
-- The files are stored in a large hierarchy
+- Your computer [stores files]{.fg-lblue} and [runs commands]{.fg-orange}
+- The files are stored in a large hierarchy called a [filesystem]{.fg-green}
 - The commands are many and varied but there's a core set of them that are most useful
+- You issue instructions to run particluar commands at a [command line]{.fg-lblue} that is provided by a [shell]{.fg-orange}, which is how you the user talk to the [operating system]{.fg-orange}.
 - Unix commands and utilities generally try to do a _specific_ thing to files or running processes 
 - The Unix conception of a 'file' is very flexible. Connections to other computers  can act like files.
 - Unix commands are often _composable_ using _pipes_
@@ -770,7 +817,22 @@ curl -s 'http://api.citybik.es/v2/networks/citi-bike-nyc' |
 
 This is the number of Citi Bikes available in New York City at the time these slides were made.
 
+We usually won't use the Unix command line or shell to things like this. But it remains extremely handy for many more common tasks. 
+
 ::: aside
 CitiBike example courtesy of Jeroen Janssens
 :::
 
+# Envoi
+
+## Why am I doing this?
+
+Unix is old. So is the idea of the command line. So are plain-text files. In an era of Generative AI and Large Language Models and all the rest, why are we covering this stuff?
+
+Two related answers: 
+
+- 1. Because Unix specifically is still everywhere and will be for a long time to come.
+
+- 2. Because as soon as you try to do anything of any sort of complexity, depth, or even basic reliability with even the newest tools, you will almost certainly find yourself in a world governed by the metaphors and methods Unix originated. You will be in some sort of folder-based hierarchy consisting of plain-text files that are used to configure, launch, generate, or capture the output of executable applications by way of some sort of structured set of instructions written down as a series of commands. 
+
+- The details of those instructions (the particular conventions they use to express what they mean) will vary depending on the application and the task at hand. But in essence you will always be doing the same thing. 
