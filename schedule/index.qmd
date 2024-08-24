@@ -22,6 +22,7 @@ ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
 
 ::: {.schedule-page}
 
+
 Here's an outline. It's subject to change. There are up to three kinds of link each week. 
 
 - [**Content**](/content/) ({{< fa book-open-reader >}}): These pages contain links to the readings and other material for each week. Read these **before** class. Lecture slide decks will also appear on these pages. 

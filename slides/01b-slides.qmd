@@ -1,6 +1,6 @@
 ---
 title: "Your Computer"
-subtitle: "Modern Plain Text Social Science: Week 1"
+subtitle: "Modern Plain Text Social Science: Week 01b"
 format: kjhslides-revealjs
 engine: knitr
 filters: 
@@ -15,6 +15,9 @@ date: last-modified
 ```{r}
 #| label: setup
 #| include: false
+#| echo: false
+#| warning: false
+#| message: false
 
 library(kjhslides)
 
@@ -22,268 +25,14 @@ kjh_register_tenso()
 kjh_set_knitr_opts()
 kjh_set_slide_theme()
 
+library(tidyverse)
 library(flipbookr)
+
 ```
 
-# Motivation
+# Files
 
-## Technical Computing is frustrating
-
-![](../assets/01-file-system/01_stock_sad_mac.png){width=100%}
-
-
-## Can we make it fun?
-
-:::: {.columns}
-
-::: {.column width="45%"}
-
-![](../assets/01-file-system/01_stock_happy_people_computer_2.png){width=100%}
-
-::: 
-
-::: {.column width="45%" .right .incremental}
-
-:::: {.fragment fragment-index=1}
-### [No.]{.fg-red}
-::::
-
-
-:::: {.fragment fragment-index=2}
-### &nbsp; ⇦ Not _this_ much fun, at any rate {.incremental}
-::::
-
-:::
-
-:::: 
-
-
-## OK but can we eliminate frustration? 
-
-:::: {.columns}
-
-::: {.column width="45%"}
-
-
-![](../assets/01-file-system/01_stock_happy_woman_computer_2.png)
-
-:::
-
-::: {.column width="45%" .right}
-
-:::: {.fragment fragment-index=1}
-### [Also no.]{.fg-red}
-::::
-
-:::: {.fragment fragment-index=2}
-### (Sorry.) 
-::::
-
-:::
-
-::::
-
-
----
-
-:::{.huge .center}
-::::{.absolute top="25%"}
-But we can make it [work]{.fg-lblue}
-::::
-:::
-
-
-::: aside 
-Also it's weirdly satisfying once you get into it. 
-:::
-
-
-
-# Two Revolutions in Computing
-
-
-## What everyday computing is now
-
-:::: {.columns}
-
-::: {.column width="45%"}
-
-![](../assets/01-file-system/01_stock_phone_and_tablet.png)
-
-:::
-
-::: {.column width="45%" .right}
-
-- Touch\-based user interface
-- Foregrounds a single application
-- Dislikes multi-tasking\*
-- Hides the file system
-
-
-:::
-
-::::
-
-
----
-
-[[_Multitasking_]{.fg-orange}: I mean, “Making different specialized applications and resources work together in the service of a single but multi-dimensional project”, not “Checking social media while also listening to a talk and waiting for an update from the school nurse.”]{.larger .center .absolute top="30%"}
-
-
-## Where technical computing lives
-
-:::: {.columns}
-
-::: {.column width="35%"}
-
-![](../assets/01-file-system/01_stock_mac_and_imac.png)
-
-:::
-
-::: {.column width="55%" .right}
-
-- Windows and pointers.
-- Multi-tasking, multiple windows.
-- Exposes and leverages the file system.
-- Many specialized tools in concert.
-- Underneath, it's the 1970s, UNIX, and the command-line. 
-
-:::
-
-::::
-
-
-## Where technical computing lives
-
-:::: {.columns}
-
-::: {.column width="35%"}
-
-![](../assets/01-file-system/01_stock_mac_and_imac.png)
-
-:::
-
-::: {.column width="55%" .right}
-
-- This toolset is by now really good!
-- Free! Open! Powerful!
-- Friendly communities! Lots of information! Many resources!
-- But: grounded in a UI paradigm that is increasingly far away from the everyday use of computing devices 
-- So why do we use this stuff?
-:::
-
-::::
-
----
-
-## {background-color="black" background-image="../assets/01-file-system/01_control.png"}
-
-## Control, not Productivity
-
-### Productivity is great and everything, but not why we do all this
-
-### &nbsp;
-
-### The most important thing is to be able to [_know and show what it was that you did_]{.fg-red}
-
-## "Office" vs "Engineering" approaches
-
-### What is "real" in your project?
-
-### What is the final output?
-
-### How is it produced?
-
-### How are changes managed?
-
-
-## Different Answers
-
-:::: {.columns}
-
-::: {.column width="45%"}
-
-### Office model
-
-- Formatted documents are real.
-- Intermediate outputs are cut and pasted into documents.
-- Changes are tracked inside files.
-- Final output is often in the same format you've been working in, e.g. a Word file, or a PDF.
-
-:::
-
-::: {.column width="45%" .right}
-
-::::: {.fragment fragment-index=1}
-
-### Engineering model {.right}
-
-- Plain-text files are real.
-- Intermediate outputs are produced via code, often inside documents.
-- Changes are tracked outside files, at the level of a project.
-- Final outputs are assembled programatically and converted to some desired format.
-
-:::::
-
-:::
-
-::::
-
-## Different strengths and weaknesses
-
-:::: {.columns}
-
-::: {.column width="45%"}
-
-### Office model
-
-- Everyone knows Word, Excel, or Google Docs.
-- "Track changes" is powerful and easy.
-- Hm, I can't remember how I made this figure
-- Where did this table of results come from?
-- `Paper_edits_FINAL_kh-1.docx`
-
-:::
-
-::: {.column width="45%" .right}
-
-::::: {.fragment fragment-index=1}
-
-### Engineering model
-
-- Plain text is highly portable.
-- Push button, recreate analysis.
-- JFC Why can't I do this simple thing?
-- `Object of type 'closure' is not subsettable`
-
-:::::
-
-:::
-
-::::
-
----
-
-:::{.huge .center}
-::::{.absolute top="20%"}
-Each approach generates solutions to its own problems
-::::
-:::
-
-
-# The Whole Game
-
-## A tiny research project
-
-- Go here and download this:  
-- <https://github.com/kjhealy/mptc_oecd>
-- We're going to open it in RStudio and turn it into a document.
-
-# The File System
-
-
-## The traditional analog {.smaller}
-
+## What is a file?
 
 :::: {.columns}
 
@@ -311,7 +60,26 @@ Illustration: @peek02:_unix_power_tools [p. 21]
 
 ## The file cabinet!
 
-![](../assets/01-file-system/01_filing_cabinet.png){width=90%}
+:::: {.columns}
+
+::: {.column width="50%"}
+
+
+![](../assets/01-file-system/01_filing_cabinet.png){width=50%}
+
+:::
+
+::: {.column width="50%"}
+
+"Could capitalism, surveillance, and governance have developed in
+the twentieth century without filing cabinets? Of course, but only if
+there had been another way to store and circulate paper efficiently;
+if that had been the case, that technology would be the object of this
+book." --- @robertsonFilingCabinetVertical2021 [p.3]
+
+:::
+
+::::
 
 ::: {.notes}
 "The ubiquity of the filing cabinet in the twentieth-century office space, along with its noticeable absence of style, has obscured its transformative role in the histories of both information technology and work. In the first in-depth history of this neglected artifact, Craig Robertson explores how the filing cabinet profoundly shaped the way that information and data have been sorted, stored, retrieved, and used.
@@ -324,7 +92,25 @@ Robertson’s unconventional history of the origins of the information age posit
 
 ## The file cabinet!
 
-![](../assets/01-file-system/01_filing_cabinet_manual.png){width=90%}
+::::: {.columns}
+
+:::: {.column width="50%"}
+
+
+![](../assets/01-file-system/01_filing_cabinet_manual.png){width=75% .lightbox}
+
+::::
+
+:::: {.column width="50%"}
+
+::: {style="font-size: 60%;"}
+"Cabinet logic involves the creation of interior compartments to organize storage space according to classification and indexing systems ... A historically specific cabinet logic, used in the name of efficiency, determined the interior of the filing cabinet. Partitions made from paper, not wood, divided storage space to create rigorous order; these partitions took the form of tabbed manila folders separated by tabbed guide cards. This iteration of the logic dispensed with a separate index to make paper discoverable by utilizing the “very organization of the material and its location” with the “vertical guides serving as locating medium.” Elimination of an index was signaled in filing literature by the terms “direct alphabet index” and “automatic index” ... Without the need to consult a separate index, a clerk grouped papers together on their edge behind tabs labeled with classifications, so any given paper could be found quickly." --- [@robertsonFilingCabinetVertical2021, p.104-5]
+
+:::
+
+::::
+
+:::::
 
 ::: {.notes}
 "The ubiquity of the filing cabinet in the twentieth-century office space, along with its noticeable absence of style, has obscured its transformative role in the histories of both information technology and work. In the first in-depth history of this neglected artifact, Craig Robertson explores how the filing cabinet profoundly shaped the way that information and data have been sorted, stored, retrieved, and used.
@@ -338,7 +124,18 @@ Robertson’s unconventional history of the origins of the information age posit
 
 ## Index cards
 
+:::: {.columns}
+::: {.column width="80%"}
 ![](../assets/01-file-system/01_library_index-card_shelf.png){width=90%}
+:::
+
+::: {.column width="20%" .right}
+
+Just like a filing cabinet, but smol
+
+:::
+::::
+
 
 
 ## Index cards
@@ -346,21 +143,26 @@ Robertson’s unconventional history of the origins of the information age posit
 ![](../assets/01-file-system/01_library_index_cards.png){width=90%}
 
 
-## Automating information processing
+
+# Automating information 
+
+## A music box
 
 ![](../assets/01-file-system/01_music_box.png){width=100%}
 
-## Automating information processing
+## A Jacquard Loom
 
 ![](../assets/01-file-system/01_jacquard_loom.png){width=100%}
 
 
-## Automating information processing
+## Jacquard Loom Cards
 
 ![](../assets/01-file-system/01_jacquard_loom_card_2.png){width=100%}
 
 
-## Hollerith machines
+# Tabulation Machines
+
+## Hollerith Cards
 
 ![](../assets/01-file-system/01_hollerith_card.png){width=100%}
 
@@ -438,6 +240,7 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 
 ![](../assets/01-file-system/01_hollerith_operator_02.png){width=100%}
 
+# Programmable Computers
 
 ## IBM punch cards
 
@@ -456,39 +259,161 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 
 ## Storage
 
-![](../assets/01-file-system/01_bryant_hard_drive1.png){width=100%}
+:::: {.columns}
+::: {.column width="70%"}
+![](../assets/01-file-system/01_bryant_hard_drive1.png){width=60%}
 
-## Storage
+:::
 
-![](../assets/01-file-system/01_bryant_hard_drive_2.png){width=100%}
+::: {.column width="30%" .right}
+Notice that the "File" here is the machine itself, or a most a single disk platter.
+:::
+::::
 
+
+## Storage {.smaller}
+
+:::: {.columns}
+::: {.column width="55%"}
+  ![](../assets/01-file-system/01_bryant_hard_drive_2.png){width=90%}
+:::
+
+::: {.column width="45%" .right}
+The older way of speaking is still with us, as when we speak of someone's "Application File" or "Tenure File"; that is, a file is a collection of related documents. 
+  
+But the newer way, where "file" means "a single document", is now dominant, especially in computing.
+:::
+::::
+
+
+# What Files Are
+
+## A file is a metaphor
+
+- Your computer does not have "files" in the way that a filing cabinet has files. 
+- A file is an _abstraction_, a way of naming and organizing data on your computer that at a lower-level is "just zeros and ones" (and at a lower level than _that_ is just patterns in some physical substrate that can be _interpreted_ as zeros and ones)
+- The file metaphor in computing dates most prominently to the development of the Unix operating system in the early 1970s
+- Files are organized in filesystems
+
+## There are many kinds of files
+
+- As many as there are kinds of application
+- Files have the name someone gives them. `My Thesis`, `term_paper`, and so on.
+- There's a longstanding (though weak) convention about using file extensions, tagged on to the end of a name, to signal _to users_ what kind of file it is: `term_paper.docx`, `.xlsx`, `.ppt`, `.pdf`, `.sqlite`, `.png`, `.jpg`, `.ps`, `.mp3`, `.mp4`, `.gif`, `.csv`, `.Rmd`, `.qmd`, `.md`, `.txt`.
+- Files don't know what their extension is, a bit like how electrons don't know what color the outside of their copper wire is.
+
+## Binary and Plain Text files
+
+- The notion of encoding information in something is a very rich and complex topic that we sadly are going to skip.
+- If a file is in some binary format then in general you won't be able to read its contents just by looking inside it. You will need an application that understands the file's particular format; i.e. the way that information in it is encoded. 
+- A `.jpg` file uses a set of rules to store numbers that can be interpreted as corresponding to things like the hue and location of a pixel. But _you_ won't see a picture if you look inside a `.jpg` file using a text editor. You'll need an application that knows how to read `.jpg` files.
+- Same goes for, e.g. an `.mp3` file. There's music or sound encoded there, but in a way that requires a fair amount of work to extract.
+
+## What is Plain Text?
+
+- Text files, though, are sort of special. What's in them corresponds much more closely to what they represent. A plain text file seems to represent the letter "A" with a symbol that looks like an "A". So much so that we can say it _is_ an "A".   
+
+- That means that when you look at the file you can see what is in it immediately. And editing the contents of the file is the same as editing its text. There's still an "encoding" of course, and it's still necessary to have an application that can read the text file and display it on a screen, etc. But what's inside is much closer to being immediately interpretable just by looking at it, because most of the encoding is letters and numbers. 
+
+## But wait!
+
+::::: {.fragment fragment-index=1}
+- _I thought you said computers just store ones and zeros?_
+:::::
+
+::::: {.fragment fragment-index=2}
+- Yes this is true. In `ASCII` encoding, for instance, an "A" is really just conventionally the symbol represented by the seven-bit binary number `1000001`, which exists on some sort of storage medium (an SSD, a Hard Disk, a floppy disk, a punch card, a reel of paper, whatever) in such a way that some device can read its contents.
+
+:::::
+
+## ASCII 
+
+The venerable and now outdated [ASCII](https://en.wikipedia.org/wiki/ASCII) character set: 26 uppercase letters; 26 lowercase letters; 10 digits; 32 printable symbols; and 33 control characters ultimately derived from teletype machines.
+
+:::: {.columns}
+::: {.column width="70%"}
+
+```{r}
+#| echo: FALSE
+readxl::read_xlsx(here::here("files", "examples", "ascii_table.xlsx")) |> 
+  mutate(Binary = str_pad(Binary, width = 7, pad = "0")) |> 
+  kableExtra::kbl() |> 
+  kableExtra::kable_styling(fixed_thead = TRUE) |> 
+  kableExtra::scroll_box(height = "400px", 
+                         width = "700px", 
+                         box_css = "border: 0px; padding: 5px;")
+                    
+```
+
+:::
+
+::: {.column width="30%" .right}
+  ![](../assets/01-file-system/01_teletype_model_33.png){width=100%}
+:::
+::::
+
+
+
+
+## Modern Text: Unicode and UTF-8
+
+- ASCII is a seven bit system that only has 128 "code points" — i.e. individual slots that could represent anything. It left out all kinds of things. (Other alphabets, for instance. Also any diacritics or accents. And any number of symbols.)
+- Eight bit computers allowed for 256 code points. The second 128 never had a single standard. The most common extension was [ISO-8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) or "Latin1" encoding.
+
+## Modern Text: Unicode and UTF-8
+
+- Encoding conflicts are why you still sometimes see this sort of thing: "CafÃ©"  or "Caf◻" instead of "Café".
+- It is surprisingly difficult to establish the encoding of a large text file that doesn't explicitly declare how it's encoded in some sort of metadata. (You can guess, but it can be super-annoying.)
+- Nowadays this has _mostly_ been resolved by the adoption of [Unicode](https://home.unicode.org) and its simplest and most widespread encoding, [UTF-8](https://en.wikipedia.org/wiki/UTF-8), which extends ASCII to 1,112,064 code points. It uses between one and four eight-bit elements to represent particular character glyphs.
+- Many older datasets may still be encoded in something other than UTF-8 however.
+
+
+# Organizing Files
 
 ## Input/Output
 
-### A late-model teletype (TTY) machine
+- Computing moves away from print and towards screens. 
+- Storage capacity and processing power increase radically
+- We get to a point where our "Teletype" interface with the machine is purely metaphorical: this is the command line or console.
+- And after that, in the late 1970s and early 1980s, an entirely new set of metaphors gets introduced: files represented by "icons" inside "windows", first on on a metaphorical "desktop" and then later on a more abstract touch-based surface.
+
+## A late-model teletype (TTY) machine
 
 ![](../assets/01-file-system/01_teletype_telex_machine.png)
 
 
-## Input/Output
-
-### The DEC VT-100 Terminal
+## The DEC VT-100 Terminal
 
 ![](../assets/01-file-system/01_dec_vt100.png)
 
 
-## Input/Output
+## The macOS Terminal icon
 
 ![](../assets/01-file-system/01_macos_terminal_icon.png)
 
 
-# The file system
+## This is where we came in
 
-## What is a file?
+- The "Office" and "Engineering" models really start to diverge in the 1980s
+- A lot of computing gets done using the Engineering model and its metaphors, even as the Office model comes to dominate. 
+- But many of these newer systems remain built on top of the world made out of the older metaphors. And in particular, the idea of _named files_ living in a _hierarchical file system_ that are acted on in sequence through _written instructions_ remains extremely important for many computing tasks.
+- Especially the stuff we need to do.
 
-## A file is a metaphor
+# Back to the file system
 
-## What is plain text?
+## Files
+
+- Our data is stored --- or represented as being stored --- in a _file system_
+- This is, again, a way of organizing items for our benefit
+- The UNIX operating system developed at Bell Labs codifies the modern "file" metaphor. 
+- Files are named items that live in a hierarchical file system. "Ordinary" documents like `notes.txt` are thought of as files, which seems natural to us now.
+
+## Files
+
+- But a file is just a stream of bytes, of data, some sort of resource that a program can read or interact with.
+- In the UNIX way of thinking, "Everything is a file"
+- That is, lots of things that are not normally thought of as files (such as printers, or terminal screens, or connections to other computers) can be thought of as living in a named place somewhere in the file system
+- The basic set of UNIX utilities can be thought of as tools that accept "files" (as a stream of data), perform some specific action on them (read, print, move, copy, delete, count lines, find text, whatever) and then return something that can also be sent to a "file" of its own.
 
 ## File system hierarchy {.smaller}
 
@@ -700,7 +625,7 @@ Executable permissions are irrelevant here because it's a text file.
 - The files are stored in a large hierarchy
 - The commands are many and varied but there's a core set of them that are most useful
 - Unix commands and utilities generally try to do a _specific_ thing to files or running processes 
-- The Unix conception of a 'file' is very flexible. Connections to other computers or processes can act like files.
+- The Unix conception of a 'file' is very flexible. Connections to other computers  can act like files.
 - Unix commands are often _composable_ using _pipes_
 
 ## The Unix pipe
@@ -812,18 +737,4 @@ This is the number of Citi Bikes available in New York City at the time these sl
 ::: aside
 CitiBike example courtesy of Jeroen Janssens
 :::
-
-
-# Things to do for next week
-
-## Setup
-
-### On a Mac
-- Install macOS command line tools: From the command line, run `xcode-select –install`
-- Install the Homebrew package manager. See `https://brew.sh`
-
-
-### On Windows
-- Install the Windows Subsystem for Linux: `https://learn.microsoft.com/en-us/windows/wsl/install`
-- _Or_ install Cygwin: `https://www.cygwin.com`
 
