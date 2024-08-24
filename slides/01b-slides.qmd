@@ -839,12 +839,17 @@ CitiBike example courtesy of Jeroen Janssens
 
 ## Why am I doing this? {.smaller}
 
-In an era of Generative AI and Large Language Models and all the rest, why are we covering this stuff?
+
+::: {style="font-size: 80%;"}
+#### In an era of Generative AI and Large Language Models and all the rest, why are we covering this stuff?
+:::
+
+::: {style="font-size: 115%;"}
 
 Two related answers: 
 
-1. Unix is still everywhere and will be for a long time to come.
+1. [Unix is still everywhere]{.fg-lblue} and will be for a long time to come.
 
-2. As soon as you try to do anything of any sort of complexity, depth, or even basic reliability with even the newest tools, [you'll almost certainly find yourself in a world governed by the metaphors and methods Unix originated]{.fg-red}. You will be in some sort of folder-based hierarchy consisting of plain-text files that are used to configure, launch, generate, or capture the output of executable applications by way of instructions written down as a series of commands following some regular syntax. 
+2. As soon as you try to do anything of any sort of technical complexity, depth, or just simple reproducibility with your computer---even using the newest and coolest tools---[I promise you'll eventually find yourself in a world governed by the metaphors and methods Unix originated]{.fg-lblue}, and, very likely, a literal Unix-derived environment. You will be in some sort of folder-based hierarchy; you will edit plain-text files in order to configure, launch, generate, or capture the output of applications; and you will do this by way of instructions written down as a series of commands that follow some sort of regular syntax. The details of those instructions (the particular conventions they use to express what they mean) will vary depending on the task at hand. But in essence you will always be doing the same thing. 
 
-The details of those instructions (the particular conventions they use to express what they mean) will vary depending on the application and the task at hand. But in essence you will always be doing the same thing. 
+:::
