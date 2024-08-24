@@ -231,31 +231,68 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 |               |                              |                                                           |                                     |
 :::
 
-## Hollerith Operators
+## Hollerith Operators {.smaller}
 
-![](../assets/01-file-system/01_hollerith_operator_01.png){width=100%}
+:::: {.columns}
+::: {.column width="70%"}
+  ![](../assets/01-file-system/01_hollerith_operator_01.png){width=80% .lightbox}  
+:::
+
+::: {.column width="30%" .right}
+  Demonstrating a older card-puncher, probably to show how things had improved with census tabulation methods. This is likely the "Before" picture with a roll from the 1890 Census. The card-puncher is a [Pantograph](https://en.wikipedia.org/wiki/Pantograph).
+:::
+::::
 
 
-## Hollerith Operators
 
-![](../assets/01-file-system/01_hollerith_operator_02.png){width=100%}
+
+## Hollerith Operators {.smaller}
+
+:::: {.columns}
+::: {.column width="70%"}
+  ![](../assets/01-file-system/01_hollerith_operator_02.png){width=80% .lightbox}  
+:::
+
+::: {.column width="30%" .right}
+  Same woman as the previous photo; her colleague on the right is demonstrating the newer, faster IBM Type 001 Key Puncher. (Again, probably a re-enactment / demo of earlier techniques.) 
+:::
+::::
+
+
 
 # Programmable Computers
 
 ## IBM punch cards
 
-![](../assets/01-file-system/01_ibm_card.png){width=100%}
+:::: {.columns}
+::: {.column width="70%"}
+  ![](../assets/01-file-system/01_ibm_punch_card_verifiers.png){width=100%}    
+:::
 
-
+::: {.column width="30%" .right}
+  In the longer term, punch card writers got much more efficient.
+:::
+::::
 
 ## IBM punch cards
-![](../assets/01-file-system/01_ibm_operator.png){width=100%}
+
+![](../assets/01-file-system/01_ibm_card.png){width=100%}
+
+An IBM punch card is 80 columns wide. The first CRT terminals displayed 80 columns of text for this reason. You'll see 80 columns of text pop up as a standard in all kinds of places. 
 
 
-## Big Iron
+## Big Iron {.smaller}
 
-![](../assets/01-file-system/01_ibm_system_360.png){width=100%}
+:::: {.columns}
+::: {.column width="70%"}
+![](../assets/01-file-system/01_ibm_system_360.png){width=90%}  
+:::
 
+::: {.column width="30%" .right}
+No screens! Paper in, paper out for the operator; magnetic tapes for storage in the background. This is an IBM/360, the most widespread mainframe of the 1960s and early 1970s.
+
+:::
+::::
 
 ## Storage
 
@@ -266,7 +303,7 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 :::
 
 ::: {.column width="30%" .right}
-Notice that the "File" here is the machine itself, or a most a single disk platter.
+Notice that the "File" here is the machine itself, or at most a single disk platter.
 :::
 ::::
 
@@ -304,14 +341,13 @@ But the newer way, where "file" means "a single document", is now dominant, espe
 
 ## Binary and Plain Text files
 
-- The notion of encoding information in something is a very rich and complex topic that we sadly are going to skip.
+- The notion of "encoding information" is a very rich and complex topic that we sadly are going to skip.
 - If a file is in some binary format then in general you won't be able to read its contents just by looking inside it. You will need an application that understands the file's particular format; i.e. the way that information in it is encoded. 
 - A `.jpg` file uses a set of rules to store numbers that can be interpreted as corresponding to things like the hue and location of a pixel. But _you_ won't see a picture if you look inside a `.jpg` file using a text editor. You'll need an application that knows how to read `.jpg` files.
-- Same goes for, e.g. an `.mp3` file. There's music or sound encoded there, but in a way that requires a fair amount of work to extract.
 
 ## What is Plain Text?
 
-- Text files, though, are sort of special. What's in them corresponds much more closely to what they represent. A plain text file seems to represent the letter "A" with a symbol that looks like an "A". So much so that we can say it _is_ an "A".   
+- Text files, though, are sort of special. What's visibly in them corresponds much more closely to what they represent. A plain text file seems to represent the letter "A" with a symbol that looks like an "A". So much so that we can say it _is_ an "A".   
 
 - That means that when you look at the file you can see what is in it immediately. And editing the contents of the file is the same as editing its text. There's still an "encoding" of course, and it's still necessary to have an application that can read the text file and display it on a screen, etc. But what's inside is much closer to being immediately interpretable just by looking at it, because most of the encoding is letters and numbers. 
 
@@ -357,8 +393,8 @@ readxl::read_xlsx(here::here("files", "examples", "ascii_table.xlsx")) |>
 
 ## Modern Text: Unicode and UTF-8
 
-- ASCII is a seven bit system that only has 128 "code points" — i.e. individual slots that could represent anything. It left out all kinds of things. (Other alphabets, for instance. Also any diacritics or accents. And any number of symbols.)
-- Eight bit computers allowed for 256 code points. The second 128 never had a single standard. The most common extension was [ISO-8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) or "Latin1" encoding.
+- ASCII is a seven bit system that only has $2^7$ or 128 "code points" — i.e. individual slots that could represent anything. It left out all kinds of things. (Other alphabets, for instance. Also any diacritics or accents. And any number of symbols.)
+- Eight bit computers allowed for 256 code points. The second 128 never had a single standard for what they should represent. The most common extension was [ISO-8859-1](https://en.wikipedia.org/wiki/ISO/IEC_8859-1) or "Latin1" encoding, but there were others too. This created conflicts and confusion when a program or application expecting text encoded according to one standard was fed text encoded with a different standard.   
 
 ## Modern Text: Unicode and UTF-8
 
@@ -372,9 +408,9 @@ readxl::read_xlsx(here::here("files", "examples", "ascii_table.xlsx")) |>
 
 ## Input/Output
 
-- Computing moves away from print and towards screens. 
-- Storage capacity and processing power increase radically
-- We get to a point where our "Teletype" interface with the machine is purely metaphorical: this is the command line or console.
+- Beginning in the 1970s, computing rapidly moves away from print I/O and towards screens. 
+- Storage capacity and processing power increase radically (and get much smaller) with the development of hard drives and integrated circuits.
+- We get to a point where our "Teletype" interface with the machine is purely metaphorical: this is the _command line_ or _console_.
 - And after that, in the late 1970s and early 1980s, an entirely new set of metaphors gets introduced: files represented by "icons" inside "windows", first on on a metaphorical "desktop" and then later on a more abstract touch-based surface.
 
 ## A late-model teletype (TTY) machine
@@ -396,7 +432,7 @@ readxl::read_xlsx(here::here("files", "examples", "ascii_table.xlsx")) |>
 
 - The "Office" and "Engineering" models really start to diverge in the 1980s
 - A lot of computing gets done using the Engineering model and its metaphors, even as the Office model comes to dominate. 
-- But many of these newer systems remain built on top of the world made out of the older metaphors. And in particular, the idea of _named files_ living in a _hierarchical file system_ that are acted on in sequence through _written instructions_ remains extremely important for many computing tasks.
+- But many of these **newer systems remain built on top of the world made out of the older metaphors**. And in particular, the idea of _named files_ living in a _hierarchical file system_ that are acted on in sequence through _written instructions_ remains extremely important for many computing tasks.
 - Especially the stuff we need to do.
 
 # Back to the file system
