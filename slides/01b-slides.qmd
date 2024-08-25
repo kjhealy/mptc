@@ -731,7 +731,7 @@ Executable permissions are irrelevant here because it's a text file.
 
 
 # The Unix way of thinking
-
+ 
 ## Stepping back
 
 - Your computer [stores files]{.fg-lblue} and [runs commands]{.fg-orange}.
@@ -880,6 +880,6 @@ And will be for a long time to come, I'm afraid.
 
 ## "Why am I doing this?" 
 
-- As soon as you try to do anything of any sort of technical complexity, depth, or just simple [reproducibility]{.fg-red} with your computer---even using the newest and coolest tools---[I promise you'll eventually find yourself in a world governed by the metaphors and methods Unix originated]{.fg-lblue}, and, very likely, in a literal Unix-derived environment. 
+- As soon as you try to do anything of any sort of technical complexity, or just simple [reproducibility]{.fg-red}, with your computer---even using the newest and coolest tools---I promise [you'll eventually find yourself in a world governed by the metaphors and methods Unix originated]{.fg-lblue}, and, very likely, in a literal Unix-derived environment. 
 
 - That is, you will be in some sort of [folder-based hierarchy]{.fg-lblue}; you will edit [plain-text files]{.fg-orange} in order to configure, launch, generate, or capture the output of applications; and you will do this by way of [instructions written down as a series of commands]{.fg-red} that follow some sort of regular syntax. The details of those instructions (the particular conventions they use to express what they mean) will vary depending on the task at hand. But in essence you will always be doing the same thing. 

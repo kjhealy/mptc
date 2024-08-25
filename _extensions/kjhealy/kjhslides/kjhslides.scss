@@ -248,6 +248,11 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   color: $my-red;
 }
 
+.fg-green {
+  color: $my-green !important;
+}
+
+
 .fg-pink {
   color: $my-pink;
 }
@@ -283,6 +288,11 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   color: $my-red !important;
 }
 
+.fg-green {
+  color: $my-green !important;
+}
+
+
 // p elements
 .fg-white p {
   color: $my-off-white !important;
@@ -312,6 +322,11 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 .fg-red p {
   color: $my-red !important;
 }
+
+.fg-green {
+  color: $my-green !important;
+}
+
 
 
 // h elements
@@ -348,6 +363,11 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 .fg-red h1 h2 h3 {
   color: $my-red !important;
 }
+
+.fg-green h1 h2 h3 {
+  color: $my-green !important;
+}
+
 
 // For section backgrounds
 .bg-blue {
