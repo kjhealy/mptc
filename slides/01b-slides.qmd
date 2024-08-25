@@ -262,6 +262,18 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 
 # Programmable Computers
 
+## Logic from Sand
+
+:::: {.columns}
+::: {.column width="40%"} 
+  ![](../assets/01-file-system/01_petzold_cover.png){width="100%"}
+:::
+
+::: {.column width="60%"}
+  The best book to read about how the guts of a programmable computer works is Charles Petzold's [-@petzold22:_code].
+:::
+::::
+
 ## IBM punch cards
 
 :::: {.columns}
@@ -270,7 +282,7 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 :::
 
 ::: {.column width="30%" .right}
-  In the longer term, punch card writers got much more efficient.
+  In the longer term, punch card writers got much more efficient. And now they could be fed into machines that could use them to run programs instead of just tabulate the punches.
 :::
 ::::
 
@@ -882,4 +894,4 @@ And will be for a long time to come, I'm afraid.
 
 - As soon as you try to do anything of any sort of technical complexity, or just simple [reproducibility]{.fg-red}, with your computer---even using the newest and coolest tools---I promise [you'll eventually find yourself in a world governed by the metaphors and methods Unix originated]{.fg-lblue}, and, very likely, in a literal Unix-derived environment. 
 
-- That is, you will be in some sort of [folder-based hierarchy]{.fg-lblue}; you will edit [plain-text files]{.fg-orange} in order to configure, launch, generate, or capture the output of applications; and you will do this by way of [instructions written down as a series of commands]{.fg-red} that follow some sort of regular syntax. The details of those instructions (the particular conventions they use to express what they mean) will vary depending on the task at hand. But in essence you will always be doing the same thing. 
+- That is, you will be in some sort of [folder-based hierarchy]{.fg-lblue}; you will edit [plain-text files]{.fg-orange} in order to configure, launch, generate, or capture the output of applications; and you will do this by way of [instructions written down as a series of commands]{.fg-red} that follow some sort of regular syntax. The details of those instructions (and the particular conventions they use) will vary depending on the task at hand. But in essence you will always be doing the same thing. 
