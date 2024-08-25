@@ -253,7 +253,35 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 }
 
 
+// li elements
+.fg-white li {
+  color: $my-off-white !important;
+}
 
+
+.fg-yellow li {
+  color: $my-yellow !important;
+}
+
+.fg-green li {
+  color: $my-green !important;
+}
+
+.fg-blue li {
+  color: $my-blue !important;
+}
+
+.fg-orange li {
+  color: $my-orange !important;
+}
+
+.fg-pink li {
+  color: $my-pink !important;
+}
+
+.fg-red li {
+  color: $my-red !important;
+}
 
 // p elements
 .fg-white p {
@@ -286,38 +314,38 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 }
 
 
-// h1 elements
-.fg-white h1 {
+// h elements
+.fg-white h1 h2 h3 {
   color: $my-off-white !important ;
 }
 
 
-.fg-yellow h1 {
+.fg-yellow h1 h2 h3 {
   color: $my-yellow !important;
 }
 
-.fg-green h1 {
+.fg-green h1 h2 h3 {
   color: $my-green !important;
 }
 
-.fg-blue h1 {
+.fg-blue h1 h2 h3 {
   color: $my-green !important;
 }
 
-.fg-lblue h1 {
+.fg-lblue h1 h2 h3 {
   color: $my-lblue !important;
 }
 
-.fg-pink h1 {
+.fg-pink h1 h2 h3 {
   color: $my-pink !important;
 }
 
-.fg-orange h1 {
+.fg-orange h1 h2 h3 {
   color: $my-orange !important;
 }
 
 
-.fg-red h1 {
+.fg-red h1 h2 h3 {
   color: $my-red !important;
 }
 

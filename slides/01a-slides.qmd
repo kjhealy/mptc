@@ -169,21 +169,22 @@ Also it's weirdly satisfying once you get into it.
 - Don't worry at this point if you're not sure what's happening, or what GitHub or RStudio are.
 
 
-## Takeaways
+## Main Ideas
 
-- Our little scholarly article is a *file* in some *format*
-- It's the result of some series of steps we use to *create* or *render* it from various pieces
-- Some of these pieces include: _data_, _text_, _markup_, and _code_
-- These pieces are stored in some sort of _orderly fashion_ somewhere 
-- We have some sort of _engine_ that assembles the pieces into the end result
-- We have some kind of _application_ to help us run that engine
-- We can _reliably produce and reproduce_ the document in various formats
+- Our little scholarly article is a [file]{.fg-lblue} in some [format]{.fg-lblue}.
+- We created or [rendered]{.fg-lblue} it from several other pieces when we pushed that [&#8680;Render]{.fg-red} button. 
+- Some of these pieces include: [data]{.fg-lblue}, [text]{.fg-lblue}, [markup]{.fg-lblue}, and [code]{.fg-lblue}. 
+- Most of these pieces are in [plain text]{.fg-lblue}, in files of their own.
+- They are stored in some sort of [orderly fashion]{.fg-lblue} somewhere.
+- We have some sort of [engine]{.fg-lblue} that assembled the pieces into the article.
+- We have some kind of [application]{.fg-lblue} to help us run the engine and manage the pieces.
+- We can [reliably produce and reproduce]{.fg-lblue} the document in various formats.
 
 ## That's a lot to start with
 
-- We're going to back up and go through these pieces slowly
-- Keep in mind why we're doing it (we want to reliably produce a scholarly paper)
-- Also start thinking about why the tools we're using might look like this
+- We're going to back up and go through these pieces slowly.
+- Keep in mind why we're doing it (we want to reliably produce a scholarly paper).
+- Also start thinking about why the tools we're using might look like this.
 
 
 # Two Revolutions in Computing
@@ -201,10 +202,11 @@ Also it's weirdly satisfying once you get into it.
 
 ::: {.column width="45%"}
 
-- Touch\-based user interface
-- Foregrounds a single application
-- Dislikes multi-tasking\*
-- Hides the file system
+- Touch\-based user interface.
+- Foregrounds a single application.
+- Dislikes multi-tasking.\*
+- Hides the file system.
+- Very far underneath, it's often the 1970s, UNIX, and the command-line. But usually you don't get to see this.
 
 
 :::
@@ -214,7 +216,7 @@ Also it's weirdly satisfying once you get into it.
 
 ---
 
-[[_Multitasking_]{.fg-orange}: I mean, “Making different specialized applications and resources work together in the service of a single but multi-dimensional project”, not “Checking social media while also listening to a talk and waiting for an update from the school nurse.”]{.larger .center .absolute top="30%"}
+[[_Multi-tasking_]{.fg-orange}: I mean, “Making different specialized applications and resources work together in the service of a single but multi-dimensional project”, not “Checking social media while also listening to a talk and waiting for an update from the school nurse.”]{.larger .center .absolute top="30%"}
 
 
 ## Where technical computing lives
@@ -229,11 +231,11 @@ Also it's weirdly satisfying once you get into it.
 
 ::: {.column width="55%"}
 
-- Windows and pointers.
-- Multi-tasking, multiple windows.
+- Most interaction via windows, icons, pointers, clicking.
+- Multi-tasking via multiple windows at once is standard.
 - Exposes and leverages the file system.
-- Many specialized tools in concert.
-- Underneath, it's the 1970s, UNIX, and the command-line. 
+- Using several specialized applications in concert is common.
+- Underneath, it's often the 1970s, UNIX, and the command-line. And you _can_ get to see this.
 
 :::
 
@@ -252,11 +254,10 @@ Also it's weirdly satisfying once you get into it.
 
 ::: {.column width="55%"}
 
-- This toolset is by now really good!
-- Free! Open! Powerful!
-- Friendly communities! Lots of information! Many resources!
-- But: grounded in a UI paradigm that is increasingly far away from the everyday use of computing devices 
-- So why do we use this stuff?
+- For technical computing in the sense of doing "statistics" this toolset is by now really good.
+- It's also very good for technical computing in the sense that all scholarly work is technical.
+- But these tools are grounded in a paradigm that is increasingly far away from the everyday use of our most common computing devices. 
+- So why do we continue to use and develop them?
 :::
 
 ::::
@@ -267,22 +268,25 @@ Also it's weirdly satisfying once you get into it.
 
 ## Control, not Productivity
 
-### Productivity is great and everything, but not why we do all this
+### Productivity is great and everything, but not why we do all this.
 
 ### &nbsp;
 
-### The most important thing is to be able to [_know and show what it was that you did_]{.fg-red} in the service of doing your work properly
+### The most important thing is to be able to [_confidently know and clearly show what it was that you did_]{.fg-red} in the service of doing your work properly.
 
 ## "Office" vs "Engineering" approaches
 
-### What is "real" in your project?
+The challenge of "Knowing and Showing" gives rise to questions like these:
 
-### What is the final output?
+### [What is "real" in your project?]{.fg-lblue}
 
-### How is it produced?
+### [What is the final output?]{.fg-orange}
 
-### How are changes managed?
+### [How is it produced?]{.fg-pink}
 
+### [How are changes managed?]{.fg-blue}
+
+### [Can you do it again?]{.fg-yellow}
 
 ## Different Answers
 
@@ -324,10 +328,10 @@ Also it's weirdly satisfying once you get into it.
 
 ### Office model
 
-- Documents look like documents
-- Everyone knows Word, Excel, or Google Docs
-- "Track changes" is powerful and easy in a single document
-- Hm, I can't remember how I made this figure
+- Documents look like documents.
+- Everyone knows Word, Excel, or Google Docs.
+- "Track changes" is powerful and easy in a single document.
+- Hm, I can't remember how I made this figure.
 - Where did this table of results come from?
 - `Paper_edits_FINAL_kh-1.docx`
 
@@ -339,10 +343,10 @@ Also it's weirdly satisfying once you get into it.
 
 ### Engineering model
 
-- Plain text is highly portable
-- Push button, recreate analysis
-- Project fully version-controlled
-- Tables and figures produced and integrated programatically
+- Plain text is highly portable.
+- Push button, recreate analysis.
+- Project fully version-controlled.
+- Tables and figures produced and integrated programatically.
 - For the love of God, why can't I do this simple thing?
 - `Object of type 'closure' is not subsettable`
 
@@ -356,7 +360,7 @@ Also it's weirdly satisfying once you get into it.
 
 :::{.huge .center}
 ::::{.absolute top="20%"}
-Each approach generates solutions to its own problems
+[Each approach generates solutions to its own problems]{.fg-red}
 ::::
 :::
 
