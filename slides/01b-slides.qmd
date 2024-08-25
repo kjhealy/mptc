@@ -417,7 +417,6 @@ readxl::read_xlsx(here::here("files", "examples", "ascii_table.xlsx")) |>
 
 
 
-
 ## Modern Text: Unicode and UTF-8
 
 - ASCII is a seven bit system that only has $2^7$ or 128 "code points" — i.e. individual slots that could represent anything. It left out all kinds of things. (Other alphabets, for instance. Also any diacritics or accents. And any number of symbols.)
