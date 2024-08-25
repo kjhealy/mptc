@@ -172,17 +172,17 @@ Like a filing cabinet, but smol
 Initially, these electromechanical machines only counted holes, but by the 1920s they had units for carrying out basic arithmetic operations.[18]: 124  Hollerith founded the Tabulating Machine Company (1896) which was one of four companies that were amalgamated via stock acquisition to form a fifth company, Computing-Tabulating-Recording Company (CTR) (1911), later renamed International Business Machines Corporation (IBM) (1924). Other companies entering the punched card business included The Tabulator Limited (Britain, 1902), Deutsche Hollerith-Maschinen Gesellschaft mbH (Dehomag) (Germany, 1911), Powers Accounting Machine Company (US, 1911), Remington Rand (US, 1927), and H.W. Egli Bull (France, 1931).[19] These companies, and others, manufactured and marketed a variety of punched cards and unit record machines for creating, sorting, and tabulating punched cards, even after the development of electronic computers in the 1950s."
 :::
 
-## Hollerith machines
+## Hollerith Machines
 
 ![](../assets/01-file-system/01_hollerith_tabulator.png){width=100%}
 
 
-## Hollerith machines
+## Hollerith Machines
 
 ![](../assets/01-file-system/01_hollerith_card_1890_yellow.png){width=100%}
 
 
-## Hollerith machines
+## Hollerith Machines
 
 ![](../assets/01-file-system/01_hollerith_card_1890_decoder_fields.png){width=100%}
 
@@ -246,7 +246,7 @@ Initially, these electromechanical machines only counted holes, but by the 1920s
 
 
 
-## Hollerith operators {.smaller}
+## Hollerith Operators {.smaller}
 
 :::: {.columns}
 ::: {.column width="70%"}
@@ -330,31 +330,33 @@ But the newer way, where "file" means "a single document", is now dominant, espe
 
 # What Files Are
 
-## A file is a metaphor
+## A file is a [metaphor]{.fg-yellow}
 
 - Your computer does not have "files" in the way that a filing cabinet has files. 
-- A file is an _abstraction_, a way of naming and organizing data on your computer that at a lower-level is "just zeros and ones" (and at a lower level than _that_ is just patterns in some physical substrate that can be _interpreted_ as zeros and ones)
+- A file is an [abstraction]{.fg-lblue}, a way of naming and organizing data on your computer that at a lower-level is "just zeros and ones" (and at a lower level than _that_ is just patterns in some physical substrate that can be _interpreted_ as zeros and ones)
 - The file metaphor in computing dates most prominently to the development of the Unix operating system in the early 1970s
 - Files are organized in filesystems
 
 ## There are many kinds of files
 
-- As many as there are kinds of application
+- As many as there are kinds of application.
 - Files have the name someone gives them. `My Thesis`, `term_paper`, and so on.
 - There's a longstanding (though weak) convention about using file extensions, tagged on to the end of a name, to signal _to users_ what kind of file it is: `term_paper.docx`, `.xlsx`, `.ppt`, `.pdf`, `.sqlite`, `.png`, `.jpg`, `.ps`, `.mp3`, `.mp4`, `.gif`, `.csv`, `.Rmd`, `.qmd`, `.md`, `.txt`.
 - Files don't know what their extension is, a bit like how electrons don't know what color the outside of their copper wire is.
 
 ## Binary and Plain Text files
 
-- The notion of "encoding information" is a very rich and complex topic that we sadly are going to skip.
+- Understanding the general notion of "encoding information" is a very rich and deep topic that, sadly, we are going to skip.
 - If a file is in some binary format then in general you won't be able to read its contents just by looking inside it. You will need an application that understands the file's particular format; i.e. the way that information in it is encoded. 
 - A `.jpg` file uses a set of rules to store numbers that can be interpreted as corresponding to things like the hue and location of a pixel. But _you_ won't see a picture if you look inside a `.jpg` file using a text editor. You'll need an application that knows how to read `.jpg` files.
 
 ## What is Plain Text?
 
-- Text files, though, are sort of special. What's visibly in them corresponds much more closely to what they represent. A plain text file seems to represent the letter "A" with a symbol that looks like an "A". So much so that we can say it _is_ an "A".   
+- Text files, though, are sort of special. What's visibly in them appears to correspond much more closely to what they represent. A plain text file seems to represent the letter "A" with a symbol that looks like an "A". So much so that we can say it _is_ an "A".   
 
-- That means that when you look at the file you can see what is in it immediately. And editing the contents of the file is the same as editing its text. There's still an "encoding" of course, and it's still necessary to have an application that can read the text file and display it on a screen, etc. But what's inside is much closer to being immediately interpretable just by looking at it, because most of the encoding is letters and numbers. 
+- That means that when you look at a text file you can see what is in it immediately. And editing the contents of the file is the same as editing its text. 
+
+- There's still an "encoding" of course! It's still necessary to have an application that can read the text file and display it on a screen, etc. But what's inside seems much closer to being immediately interpretable "just by looking", because most of it is letters and numbers. 
 
 ## But wait!
 
@@ -367,9 +369,17 @@ But the newer way, where "file" means "a single document", is now dominant, espe
 
 :::::
 
+::::: {.fragment fragment-index=3}
+- ASCII is the **A**merican **S**tandard **C**ode for **I**nformation **I**nterchange. It was first specified in 1963.
+:::::
+
 ## ASCII 
 
-The venerable and now outdated [ASCII](https://en.wikipedia.org/wiki/ASCII) character set: 26 uppercase letters; 26 lowercase letters; 10 digits; 32 printable symbols; and 33 control characters ultimately derived from teletype machines.
+::: {style="font-size: 85%;"}
+
+The venerable and now outdated [ASCII](https://en.wikipedia.org/wiki/ASCII) character set: 26 uppercase letters; 26 lowercase letters; 10 digits; 32 printable symbols; and 33 control characters ultimately derived from telegraph code and teletype machines.
+
+:::
 
 :::: {.columns}
 ::: {.column width="70%"}
@@ -589,9 +599,9 @@ pwd
 ```
 
 What is my purpose in life?
-
-```{.zsh}
-Sorry, Unix can't help you with this one
+ 
+```{zsh}
+fortune
 ```
 
 
@@ -645,8 +655,9 @@ bin  certbot.log  logrotate.conf  old  projects  public  staging
 
 ##  Path rules
 
-- If the pathname does not begin with a `/` or `~`
-  - The path name is relative to the current directory. Two relative special cases use entries that are in every Unix directory:
+- If the pathname does not begin with a `/` or `~` then the path name is relative to the current directory. 
+
+- Two relative special cases use entries that are in every Unix directory:
     a. If the path name begins with `./`, the path is relative to the current directory, e.g., `./textfile`, though this can also execute the file if it is given executable file permissions.
     b. If the path name begins with `../`, the path is relative to the parent of the current directory. For example, if your current directory is `/Users/kjhealy/Documents/papers` then `../data` means `/Users/kjhealy/Documents/data`
 
@@ -692,8 +703,15 @@ Three things you can do to a file:
 
 ## File permissions
 
-#### `❯ ls -l README.md`
-#### `-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md`
+::: {style="font-size: 80%;"}
+
+`❯ ls -l README.md`
+
+`-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md`
+
+:::
+
+&nbsp; 
 
 These permissions say `rw-r--r--` or 
 
@@ -716,12 +734,12 @@ Executable permissions are irrelevant here because it's a text file.
 
 ## Stepping back
 
-- Your computer [stores files]{.fg-lblue} and [runs commands]{.fg-orange}
-- The files are stored in a large hierarchy called a [filesystem]{.fg-green}
+- Your computer [stores files]{.fg-lblue} and [runs commands]{.fg-orange}.
+- The files are stored in a large hierarchy called a [filesystem]{.fg-green}.
 - You issue instructions to run particluar commands at a [command line]{.fg-lblue} that is provided by a [shell]{.fg-orange}, which is how you the user talk to the [operating system]{.fg-orange}.
-- Unix commands and utilities generally try to do a _specific_ thing to files or running processes 
+- Unix commands and utilities generally try to do a _specific_ thing to files or running processes. 
 - The Unix conception of a 'file' is very flexible. Connections to other computers  can act like files.
-- Unix commands are often [composable]{.fg-red} using [pipes]{.fg-red}
+- Unix commands are often [composable]{.fg-red} using [pipes]{.fg-red}.
 
 ## The Unix pipe
 
@@ -837,19 +855,31 @@ CitiBike example courtesy of Jeroen Janssens
 
 # Envoi
 
-## Why am I doing this? {.smaller}
+---
 
-
-::: {style="font-size: 80%;"}
-#### In an era of Generative AI and Large Language Models and all the rest, why are we covering this stuff?
+:::{.huge .center}
+::::{.absolute top="1%"}
+In an era of Generative AI and LLMs, why are we covering this stuff?
+::::
 :::
 
-::: {style="font-size: 115%;"}
 
-Two related answers: 
+---
 
-1. [Unix is still everywhere]{.fg-lblue} and will be for a long time to come.
-
-2. As soon as you try to do anything of any sort of technical complexity, depth, or just simple reproducibility with your computer---even using the newest and coolest tools---[I promise you'll eventually find yourself in a world governed by the metaphors and methods Unix originated]{.fg-lblue}, and, very likely, a literal Unix-derived environment. You will be in some sort of folder-based hierarchy; you will edit plain-text files in order to configure, launch, generate, or capture the output of applications; and you will do this by way of instructions written down as a series of commands that follow some sort of regular syntax. The details of those instructions (the particular conventions they use to express what they mean) will vary depending on the task at hand. But in essence you will always be doing the same thing. 
-
+:::{.huge .center} 
+::::{.absolute top="30%"}
+Because [Unix]{.fg-lblue} is still [everywhere]{.fg-pink}
+::::
 :::
+
+::: aside
+And will be for a long time to come, I'm afraid.
+:::
+
+--- 
+
+## "Why am I doing this?" 
+
+- As soon as you try to do anything of any sort of technical complexity, depth, or just simple [reproducibility]{.fg-red} with your computer---even using the newest and coolest tools---[I promise you'll eventually find yourself in a world governed by the metaphors and methods Unix originated]{.fg-lblue}, and, very likely, in a literal Unix-derived environment. 
+
+- That is, you will be in some sort of [folder-based hierarchy]{.fg-lblue}; you will edit [plain-text files]{.fg-orange} in order to configure, launch, generate, or capture the output of applications; and you will do this by way of [instructions written down as a series of commands]{.fg-red} that follow some sort of regular syntax. The details of those instructions (the particular conventions they use to express what they mean) will vary depending on the task at hand. But in essence you will always be doing the same thing. 
