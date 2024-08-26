@@ -227,9 +227,9 @@ Also it's weirdly satisfying once you get into it.
 - We're going to open it in RStudio, take a look at the various parts of the project, and turn it into a document.
 - Don't worry at this point if you're not sure what's happening, or what GitHub or RStudio are.
 
-## (Placeholder Slide)
+## (Sound of Engine Trying to Start)
 
-This is where we install the required software by following the instructions handed out earlier. In other words, this is where we discover the inevitable idiosyncrasies of everyone's individual setup, the vagaries of various operating systems, the intrinsic difficulty of following documented steps in a procedure, the hidden bits of implicit knowledge or not-fully-articulated steps that are nevertheless necessary, the high prevalence of ordinary error and failure in everyday life, and the awful grip of chance on human affairs in general.
+This slide is up because we are installing the required software by following the instructions handed out earlier. In other words, we are discovering the inevitable idiosyncrasies of everyone's individual setup, the vagaries of various operating systems, the intrinsic difficulty of following documented steps in a procedure, the hidden bits of implicit knowledge or not-fully-articulated steps that are nevertheless necessary, the high prevalence of ordinary error and failure in everyday life, and the awful grip of chance on human affairs in general.
 
 ## Main Ideas
 
