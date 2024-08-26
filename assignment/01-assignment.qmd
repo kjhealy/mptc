@@ -40,7 +40,8 @@ Begin by installing R (<http://cloud.r-project.org>). Choose the version appropr
 ```R
 my_packages <- c("tidyverse", "babynames", "broom", "drat", "gapminder",  
                   "here", "janitor", "naniar", "palmerpenguins", "remotes",
-                  "skimr", "slider", "socviz", "usethis", "visdat", "reprex")
+                  "skimr", "slider", "socviz", "usethis", "visdat", "reprex" 
+                  "tinytex")
 
 install.packages(my_packages, repos = "http://cran.rstudio.com")
 

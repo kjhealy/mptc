@@ -1,6 +1,6 @@
 ---
-title: "Your Computer and Why It's Like That"
-subtitle: "Modern Plain Text Computing<br />Week 01a"
+title: "Doing Your Work Properly"
+subtitle: "Modern Plain Text Computing<br />Week 01"
 format: kjhslides-revealjs
 engine: knitr
 filters: 
@@ -31,7 +31,7 @@ library(flipbookr)
 
 ![](../assets/00-site/00-se-30-r.jpg){width=100%, fig-align="center"}
 
-## Technical Computing is frustrating
+## Technical computing is frustrating
 
 ![](../assets/01-file-system/01_stock_sad_mac.png){width=100%}
 
@@ -101,15 +101,60 @@ But we can make it [work]{.fg-lblue}
 Also it's weirdly satisfying once you get into it. 
 :::
 
+# Bigger picture
+
+## Science is hard
+
+:::: {.columns}
+::: {.column width="40%"} 
+  ![](../assets/01-file-system/01_reproducible_cover.png){width="100%"}
+
+:::
+
+::: {.column width="60%"}
+
+- Scientific research is difficult.
+- It depends on norms that entail a lot of trust.
+- Doing it badly or fraudulently is too easy.
+- We have tools to help us do the right thing.
+- (But our tools can't _make_ us do the right thing.)
+
+:::
+::::
+
+## This course
+
+### What it's not
+
+::::: {.fragment fragment-index=1}
+- This is not a statistics or quantitative methods course.
+- Neither is it a course in the logic of social-science research.
+- Other courses in the program teach you that stuff.
+:::::
+
+### What it is
+
+::::: {.fragment fragment-index=2}
+- Our goal is more humble but also [smooths the path]{.fg-green} for the other stuff. 
+- You'll learn a way of thinking and a set of technical tools for managing your own research, whatever that research is. 
+- This toolkit is [powerful]{.fg-red}, [extensible]{.fg-orange}, [versatile]{.fg-pink},  and _extremely_ [widespread]{.fg-lblue}, far beyond the world of social-scientific research.
+:::::
+
 
 # The Whole Game
 
 ## A tiny research project
 
-- [Click here for a PDF of the tiny paper](/files/examples/01_mptc_oecd_nocode.pdf)
+:::: {.columns}
+::: {.column width="45%"}
+![](../assets/01-file-system/01_mptc_nocode_pdf_sshot.png){width="100%"}
+:::
 
+::: {.column width="45%"}
+[Click here for a PDF of the tiny paper](/files/examples/01_mptc_oecd_nocode.pdf)
+:::
+::::
 
-![](../assets/01-file-system/01_mptc_nocode_pdf_sshot.png)
 
 ## Features of our tiny paper
 
@@ -132,11 +177,19 @@ Also it's weirdly satisfying once you get into it.
 
 ::::
 
-## A different version 
 
-- [Click here for a different version of our tiny paper](/files/examples/01_mptc_oecd_withcode.pdf)
+## A slightly different version 
 
-![](../assets/01-file-system/01_mptc_withcode_pdf_sshot.png)
+:::: {.columns}
+::: {.column width="45%"}
+![](../assets/01-file-system/01_mptc_withcode_pdf_sshot.png){width="100%"}
+:::
+
+::: {.column width="45%"}
+[Click here for a PDF of this version of the tiny paper](/files/examples/01_mptc_oecd_withcode.pdf)
+:::
+::::
+
 
 ## Features of this version
 
@@ -160,27 +213,38 @@ Also it's weirdly satisfying once you get into it.
 ::::
 
 
+## Have you done this part yet?
+
+[Week 01 Assignment: Install R and RStudio](/assignment/01-assignment.qmd)
+
+![](../assets/01-file-system/01_mptc_assignment_01.png)
+
 ## The project's GitHub page
 
 ![](../assets/01-file-system/01_mptc_oecd_github_page.png){fig-align="center"}
 
 - Go here and download it:  <https://github.com/kjhealy/mptc_oecd>
-- We're going to open it in RStudio and turn it into a document.
+- We're going to open it in RStudio, take a look at the various parts of the project, and turn it into a document.
 - Don't worry at this point if you're not sure what's happening, or what GitHub or RStudio are.
 
+## (Placeholder Slide)
+
+This is where we install the required software by following the instructions handed out earlier. In other words, this is where we discover the inevitable idiosyncrasies of everyone's individual setup, the vagaries of various operating systems, the intrinsic difficulty of following documented steps in a procedure, the hidden bits of implicit knowledge or not-fully-articulated steps that are nevertheless necessary, the high prevalence of ordinary error and failure, and the awful grip of chance on human affairs in general.
 
 ## Main Ideas
 
-- Our little scholarly article is a [file]{.fg-lblue} in some [format]{.fg-lblue}.
+::: {.incremental}
+- Our little scholarly article is a [file]{.fg-lblue} in some [format]{.fg-lblue}.    
 - We created or [rendered]{.fg-lblue} it from several other pieces when we pushed that [&#8680;Render]{.fg-red} button. 
 - Some of these pieces include: [data]{.fg-lblue}, [text]{.fg-lblue}, [markup]{.fg-lblue}, and [code]{.fg-lblue}. 
-- Most of these pieces are in [plain text]{.fg-lblue}, in files of their own.
-- They are stored in some sort of [orderly fashion]{.fg-lblue} somewhere.
-- We have some sort of [engine]{.fg-lblue} that assembled the pieces into the article.
+- Most of these pieces are in [plain text]{.fg-lblue}, in files of their own.    
+- They are stored in some sort of [orderly fashion]{.fg-lblue} somewhere.    
+- We have some sort of [engine]{.fg-lblue} that assembled the pieces into the article.    
 - We have some kind of [application]{.fg-lblue} to help us run the engine and manage the pieces.
-- We can [reliably produce and reproduce]{.fg-lblue} the document in various formats.
+- We can [reliably produce and reproduce]{.fg-lblue} the document in various formats.    
+:::
 
-## That's a lot to start with
+## That's a lot all at once
 
 - We're going to back up and go through these pieces slowly.
 - Keep in mind why we're doing it (we want to reliably produce a scholarly paper).
