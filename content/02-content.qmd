@@ -30,6 +30,10 @@ _After_ you have completed this week's [assignment](/assignment/02-assignment.qm
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/ES1LTlnpLMk?si=hP_4NHRcqGe3KYUo" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" allowfullscreen></iframe>
 
+- The Unix way of thinking. You can watch the whole video for a really great dose of 1970s/1980s Corporate Video Nostalgia (and a lot of useful information), but in particular watch the seven minutes from about 04:56 in, when [Brian Kernighan](https://en.wikipedia.org/wiki/Brian_Kernighan) (the guy in the blue pullover) explains the idea of the Unix way of thinking, and gives an example.
+
+<iframe width="560" height="315" src="https://www.youtube.com/embed/tc4ROCJYbm0?si=gVXYm4heKI5WoRQ-&amp;start=296" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+
 ## Examples
 
 [This week's examples and demos](/example/02-example.qmd).
