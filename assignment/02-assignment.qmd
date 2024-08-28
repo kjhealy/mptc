@@ -1,0 +1,18 @@
+---
+title: "Tasks for Week 02"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+## Complete parts One to Four of the Carpentries' Shell Tutorial
+
+- [Click here to access the tutorial](https://swcarpentry.github.io/shell-novice/index.html). It has seven parts, which you're welcome to do all of, but for now you should do at least the first four: Introducing the Shell, Navigating Files and Directories, Working with Files and Directories, and Pipes and Filters. 
+
+- Don't skip the Summary and Setup section! Amongst other things it has a zip file of sample material you will need to download in order to complete the tutorial. 
+
+- If you are on Windows, remember to _explicitly_ uncompress or expand the zip file you download before trying to use anything in it. 
+
+- Complete the exercises in the Tutorial (don't just read through them!) and make notes of any questions you want to raise in class about it. 

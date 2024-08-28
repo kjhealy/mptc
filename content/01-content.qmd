@@ -29,6 +29,9 @@ Why is technical computing, in the broadest sense, organized in the way that it 
 
 ## Slides
 
+
+### First batch
+
 ```{=html}
 <script type="application/javascript">
 
@@ -45,8 +48,20 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/01-slides.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/01a-slides.html"></iframe>
+
+
 ```
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_win_button("/slides/01-slides")
+slide_win_button("/slides/01a-slides")
+```
+
+### Second batch
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/01b-slides.html"></iframe>
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+slide_win_button("/slides/01b-slides")
 ```

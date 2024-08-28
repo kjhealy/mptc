@@ -30,6 +30,10 @@ source("R/tar_data.R")
 source("R/tar_calendar.R")
 
 
+# Force the schedule page to always re-render; bah
+system("[ ! -e _freeze/schedule ] || rm -rf _freeze/schedule")
+
+
 ## THE MAIN PIPELINE ----
 list(
   ## Class schedule calendar ----

@@ -40,8 +40,7 @@ Begin by installing R (<http://cloud.r-project.org>). Choose the version appropr
 ```R
 my_packages <- c("tidyverse", "babynames", "broom", "drat", "gapminder",  
                   "here", "janitor", "naniar", "palmerpenguins", "remotes",
-                  "skimr", "slider", "socviz", "usethis", "visdat", "reprex" 
-                  "tinytex")
+                  "skimr", "slider", "socviz", "usethis", "visdat","reprex", "tinytex")
 
 install.packages(my_packages, repos = "http://cran.rstudio.com")
 
@@ -52,6 +51,7 @@ remotes::install_github(data_packages)
 ```
 
 Installing these packages may take a little time. 
+
 
 ## Task 2: Get set up on GitHub
 

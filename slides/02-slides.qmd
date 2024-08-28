@@ -1,0 +1,918 @@
+---
+title: "The File System and the Shell"
+subtitle: "Modern Plain Text Computing<br />Week 02"
+format: kjhslides-revealjs
+engine: knitr
+filters: 
+  - invert-h1
+  - include-code-files
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+---
+
+```{r}
+#| label: setup
+#| include: false
+#| echo: false
+#| warning: false
+#| message: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(tidyverse)
+library(flipbookr)
+
+```
+
+
+# Files
+
+## Files
+
+- A file is just a stream of bytes, of data, some sort of resource that a program can read or interact with.
+- In the UNIX way of thinking, "[Everything is a file]{.fg-lblue}"
+- That is, lots of things that are not normally thought of as files (such as printers, or terminal screens, or connections to other computers) can be thought of as living in a named place somewhere in the filesystem.
+- The basic set of UNIX utilities can be thought of as tools that accept "files" (as a standard stream of input data), perform some specific action on them (read, print, move, copy, delete, count lines, find text, whatever) and then return a standard stream of output data that can be sent to the console, used as input to another command, or become a file of its own.
+
+## File system hierarchy {.smaller}
+
+![](../assets/01-file-system/01_file_system_example.png){width="70%"}
+
+::: aside
+
+Illustration: @peek02:_unix_power_tools [p. 23]
+
+:::
+
+## Path conventions
+
+- `/` represents a division in the file hierarchy. You can think of it as a branch point on a tree, or as a new level of nesting in a series of boxes, or as the action "Go inside" or "Enter".
+
+- On a Unix-like system, a full path to a file looks like this: 
+
+```{r}
+#| echo: false
+fs::fs_path(here::here("slides", "01b-slides.qmd"))
+```
+
+"Go inside the '`Users`' folder, then inside the '`kjhealy`' folder, then inside '`Documents`' then inside '`courses`' then '`mptc`' then '`slides`' and you will find the file `01b-slides.qmd`."
+
+## Standard locations 
+
+- `/` : root. Everything lives inside or under the root.
+- `/bin/`  : For _binaries_. Core user executable programs and tools.
+- `/sbin/` : System binaries. Essential executables for the super user (who is also called `root`)
+- `/lib/` : Support files for executables. 
+- `/usr/` : Conventionally, stuff installed "locally" for users in addition to the core system. Will contain its own `bin/` and `lib/` subdirs.
+- `/usr/local` : Files that the local user has compiled or installed
+- `/opt/` : Like `/usr/`, another place for locally installed software to go.
+
+
+## Standard locations
+
+- These locations get mapped together in the `$PATH`, which is an _environment variable_ that tells the system where executables can be found. 
+
+```{.zsh}
+❯ echo $PATH
+/home/kjhealy/bin:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games:/snap/bin
+```
+
+- Delimited by `:` and searched in order from left to right.
+- To learn where a command is being executed from, use `which`
+
+```{.zsh}
+❯ which R
+/usr/local/bin/R
+```
+
+## Standard locations 
+
+- `/` : root. Everything lives inside or under the root.
+- `/bin/`  : For _binaries_. Core user executable programs and tools.
+- `/sbin/` : System binaries. Essential executables for the super user (who is also called `root`)
+- `/lib/` : Support files for executables. 
+- `/usr/` : Conventionally, stuff installed "locally" for users in addition to the core system. Will contain its own `bin/` and `lib/` subdirs.
+- `/usr/local` : Files that the local user has compiled or installed
+- `/opt/` : Like `/usr/`, another place for locally installed software to go.
+- `/etc/` : Editable text configuration. Config files often go here. 
+
+
+## Standard locations 
+
+-  `/home/` or `/Users/` : Where the accounts of individual system users live, like `/Users/kjhealy/`
+
+
+```{.zsh}
+❯ pwd
+/home/kjhealy
+❯  ls
+bin  certbot.log  logrotate.conf  old  projects  public  staging
+```
+
+## File system hierarchy {.smaller}
+
+- An edited version of the root `/` tree
+
+```{.text include="../files/misc/root-tree.txt"}
+```
+
+## File system hierarchy {.smaller}
+
+- An edited version of the user or home tree
+
+```{.text include="../files/misc/home-tree.txt"}
+```
+
+So, how do we make our way around this file hierarchy tree and how do we take actions and do things?
+
+
+# The Shell
+
+## What is it?
+
+- A shell is a way for you to tell the operating system to do things.
+- On Unix systems it's the first user-facing thing to get off the ground during the startup/boot process.
+- The command line is where you type instructions. Shells come with a collection of standard utilities that let you do things.
+- These utilities can be chained or piped together for more complex tasks.
+- You can also write scripts that will run tasks for you.
+- Shell scripting languages are small programming languages that understand variables, command substitution, branching, and iteration.
+
+## There are many shells
+
+- Strictly speaking, GUI environments like Windows and the macOS Finder are shells too.
+- But "the shell" usually means a text-based interpreter that runs programs in response to typed commands.
+- The "original" Unix shell is `sh`.
+- Its most widely-used descendant is `bash` or the Bourne-Again Shell.
+- On macOS the default shell is the Z shell or `zsh`.
+- Windows has the Command shell and PowerShell, and possibly also e.g. Cygwin. (PowerShell does not follow Unix conventions.)
+
+## A command interpreter
+
+- A shell is an _interpreter_. It waits for commands. When you supply them, it does what you tell it, or tells the relevant bit of the operating system to do what you said.
+
+```{zsh}
+echo "Hello there"
+```
+
+- The general name for this mode of interacting with a computer is a _REPL_ or Read-Eval-Print Loop. 
+- Programming languages like Python and R work this way as well. So does ChatGPT. They are _interpreted_, meaning code is sent to an interpreter (the Python or R program) that runs the code directly. 
+- This is distinct from languages whose programs are (at least originally) designed to be _compiled_ into executable machine code before they are run. Languages like C, Go, and Rust are in this category.
+
+# Getting around the file system
+
+## Who and where
+
+Who am I?
+
+```{zsh}
+whoami
+```
+
+Where am I?
+
+```{zsh}
+# Print working directory
+pwd
+```
+
+## Listing files
+
+What is in here?
+
+```{zsh}
+# List files
+ls
+```
+
+
+## Navigating the tree
+
+Who am I?
+
+```{zsh}
+whoami
+```
+
+
+Where am I?
+
+```{zsh}
+pwd
+```
+
+What is my purpose in life?
+ 
+```{.zsh}
+(Unix can't help you here)
+```
+
+
+## Navigating the tree
+
+```{zsh}
+cd files
+ls  
+cd ..
+```
+
+
+## Navigating the tree
+
+
+```{zsh}
+ls -l                                                                                           
+```
+
+Note the idea of commands having options, or _switches_. 
+
+## Navigating the tree
+
+
+```{zsh}
+ls / 
+```
+
+##  Path rules
+
+- If the path name begins with `/`, it is an _absolute_ path, starting from the filesystem root.
+- If the path name begins with `~`, it will usually be expanded into an absolute path name starting at your home directory (`~`).
+
+##  Path rules
+
+- If the pathname does not begin with a `/` or `~` then the path name is relative to the current directory. 
+
+- Two relative special cases use entries that are in every Unix directory:
+    a. If the path name begins with `./`, the path is relative to the current directory, e.g., `./textfile`, though this can also execute the file if it is given executable file permissions.
+    b. If the path name begins with `../`, the path is relative to the parent of the current directory. For example, if your current directory is `/Users/kjhealy/Documents/papers` then `../data` means `/Users/kjhealy/Documents/data`
+
+
+## File permissions
+
+Who is using this file system anyway?
+
+```{.zsh}
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+```
+
+Unix derives from a world there there are multiple users and groups of users who are all using slices (in terms of processor time and available permanent storage) of a large central computer.
+
+
+## File permissions
+
+```{.zsh}
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+```
+
+In Unix systems there are three kinds of owner: the _user_ (here `kjhealy`), the _group_ (here `staff`), and _others_ or other users on the system.
+
+## File permissions
+
+```{.zsh}
+drwxr-xr-x@  8 kjhealy  staff    256 Aug 15 16:35 R
+-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md
+```
+
+
+Three things you can do to a file: 
+
+### [r]{.fg-lblue}ead
+### [w]{.fg-orange}rite
+### e[x]{.fg-red}ecute
+
+- For files, "read" means _open_; "write" means _edit, save, or delete_; "execute" means _run_ if it's an application or script.
+- For directories, "read" means _list contents_ with ls, "write' means _create, delete, or rename_; "execute" means access or enter using `cd`
+
+
+## File permissions
+
+::: {style="font-size: 80%;"}
+
+`❯ ls -l README.md`
+
+`-rw-r--r--@  1 kjhealy  staff   1210 Aug 15 20:29 README.md`
+
+:::
+
+&nbsp; 
+
+These permissions say `rw-r--r--` or 
+
+- The _user_ can `rw-` read and write this file
+- The _group_ can `r--` read this file
+- The _world_ can `r--` read this file
+
+Executable permissions are irrelevant here because it's a text file.
+
+
+## File permissions
+
+![](../assets/01-file-system/01_unix_permission_bits.png){width="70%"}
+
+
+- We change file permissions with the `chmod` command. So e.g. `chmod 644 README.md` means "change the permissions to `rw-r--r--`".
+
+
+
+## A Tree
+
+```{zsh}
+## The kind of thing you can do in principle ... just use <tree -d -L 2> at the console though
+find . -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
+```
+
+## Changing directories
+
+```{zsh}
+## Change directory and list files
+cd files
+ls  
+cd ../slides
+```
+
+
+# Some shell tools
+
+## `wc`, `cat`, `head`, and `tail`
+
+```{zsh}
+wc files/examples/alice_in_wonderland.txt
+```
+
+We can ask for a count of lines only:
+
+```{zsh}
+wc -l files/examples/alice_in_wonderland.txt
+```
+
+## `wc`, `cat`, `head`, and `tail`
+
+`cat` _concatenates_ and _prints_ the files given to it. 
+
+```{zsh}
+cat files/examples/jabberwocky.txt
+```
+
+## `wc`, `cat`, `head`, and `tail`
+
+The top:
+
+```{zsh}
+head files/examples/alice_in_wonderland.txt 
+```
+
+The bottom:
+
+```{zsh}
+tail files/examples/alice_in_wonderland.txt 
+```
+
+
+## `wc`, `cat`, `head`, and `tail`
+
+There are 29 lines of boilerplate at the start of the book:
+
+```{zsh}
+head -n 29 files/examples/alice_in_wonderland.txt
+```
+
+## `wc`, `cat`, `head`, and `tail`
+
+And 351 at the end:
+
+```{zsh}
+tail -n 351 files/examples/alice_in_wonderland.txt | head -n 20
+```
+
+## `wc`, `cat`, `head`, and `tail`
+
+We can use `tail` to skip the boilerplate at the top:
+
+```{zsh}
+tail -n +29 files/examples/alice_in_wonderland.txt | head
+```
+
+
+## `wc`, `cat`, `head`, and `tail`
+
+The shell can be treated like a programming language. That is, it has variables and also flow control (loops, if-then-else, etc).
+
+We can use some shell variables along with `tail` twice to skip the boilerplate at the top and bottom, and put the result into a file of its own using `>` to redirect the output from `STDOUT`:
+
+```{zsh}
+# This sets HEADSKIP to 29 and ENDSKIP to 351; 
+# We can refer to them with $HEADSKIP and $ENDSKIP
+HEADSKIP=29
+ENDSKIP=351
+
+# The backticks ` ` here mean "Evaluate this command"; then put the result in a variable
+BOOKLINES=`cat files/examples/alice_in_wonderland.txt| wc -l | tr ' ' '\n' | tail -1`
+
+# This line does the arithmetic using expr and makes the result a variable
+GOODLINES=$(expr $BOOKLINES - $HEADSKIP - $ENDSKIP)
+
+# Now we use $HEADKSIP and $GOODLINES and create a new file 
+tail -n +$HEADSKIP files/examples/alice_in_wonderland.txt | 
+  head -n $GOODLINES > files/examples/alice_noboiler.txt
+```
+
+
+## `wc`, `cat`, `head`, and `tail`
+
+Now our `wc` will be different:
+
+```{zsh}
+wc files/examples/alice_in_wonderland.txt 
+
+wc files/examples/alice_noboiler.txt
+```
+
+
+## `uniq`, `sort`, and `cut`
+
+A data file: 
+
+```{zsh}
+head files/examples/countries.csv
+```
+
+How many lines?
+
+```{zsh}
+wc -l files/examples/countries.csv 
+```
+
+How many unique lines?
+
+```{zsh}
+uniq files/examples/countries.csv | wc -l
+```
+
+
+## `uniq`, `sort`, and `cut`
+
+```{zsh}
+# Omit the header line 
+tail -n +2 files/examples/countries.csv | sort -r | head
+```
+
+
+## `uniq`, `sort`, and `cut`
+
+This doesn't _quite_ work because of the way the data is coded:
+
+```{zsh}
+tail -n +2 files/examples/countries.csv | sort -t , -k4 -k1
+```
+
+
+## `uniq`, `sort`, and `cut`
+
+`cut` slices out columns defined by a delimiter (by default `\t` or tab)
+
+
+```{zsh}
+cut -d , -f 2,4 files/examples/countries.csv 
+```
+
+Again in this case it doesn't quite behave as you might think! 
+
+# Finding files and finding text
+
+## `find` and `grep`
+
+`find` is for locating files and directories by name:
+
+```{zsh}
+# Everything in the `files/` subdirectory
+find files
+```
+
+
+## `find` and `grep`
+
+We can use _globbing_ (or _wildcards_) to narrow our search:
+
+```{zsh}
+# Everything underneath the `files/` subdirectory 
+# whose name ends in `.csl`
+find files -name "*.csl"
+```
+
+
+## `find` and `grep`
+
+Here we use the `.` to mean "Search in the current folder"
+
+```{zsh}
+find . -name "*.xlsx"
+```
+
+
+## `find` and `grep`
+
+- The `-exec` option lets us do things with each result.
+- The `{}` expands to each found file in turn.
+- Here we use `echo` to see what the `rm` (remove) command would do. 
+- The quoted semicolon `";"` or `\;` is required to end the line
+
+```{zsh}
+find files -name "*.png" -exec echo rm {} ";"
+```
+
+If we omitted the `echo` here the found files would be deleted one at a time.
+
+
+## `find` and `grep`
+
+We can also use `xargs` to act on search results:
+
+```{zsh}
+# Everything underneath the `files/` subdirectory 
+# whose name ends in `.png`
+find files -name "*.png"
+```
+
+Convert all these `png` files to `jpg`:
+
+```{zsh}
+# Everything underneath the `files/` subdirectory 
+# whose name ends in `.png`
+find files -name '*.png' -print0 | xargs -0 -r magick -format jpg
+```
+
+## `find` and `grep`
+
+Check:
+
+```{zsh}
+find files -name '*.png' -o -name '*.jpg'
+```
+
+Delete them (with another method of deletion):
+
+```{zsh}
+find files  -name '*.jpg' -type f -delete
+```
+
+
+## `find` and `grep`
+
+`find` searches file and folder names only. 
+To search _inside_ files we use `grep`.
+
+```{zsh}
+grep Stately files/examples/ulysses.txt 
+```
+
+Search more than one file:
+
+```{zsh}
+## -i for case-insensitive search
+grep -i jabber files/examples/*.txt
+```
+
+## `find` and `grep`
+
+Grep and its derivatives are very powerful thanks to their ability to use _regular expressions_. We will be learning more about that next week. For now, we'll introduce `rg` or `ripgrep`, which is a modern version of `grep` that has some nice additional features. For more details see the [ripgrep project page](https://github.com/BurntSushi/ripgrep)
+
+```{.zsh}
+# On a Mac
+brew install rg
+```
+
+
+# Getting around in the shell
+
+## Your command history
+
+Eventually you will accumulate a history of shell commands you have typed, many of which you may want to reuse from time to time. 
+
+- Go to the previous command with the up arrow, `↑`
+- _Search_ your command history with control-R, `^R`
+- `^R` will also work for history search at the RStudio console and in many other places.
+
+
+## Aside: Standard Modifier Key Symbols
+
+| Symbol | Key       | Unicode  | Symbol | Key       | Unicode  |
+|:------:|-----------|----------|:------:|-----------|----------|
+| ⎋      | Escape    | `U+238B` | ⌫      | Backspace | `U+232B` |
+| ⇥      | Tab       | `U+21E5` | ⌦      | Delete    | `U+2326` |
+| ⇪      | Caps Lock | `U+21EA` | ⇱      | Home      | `U+21F1` |
+| ⇧      | Shift     | `U+21E7` | ⇲      | End       | `U+21F2` |
+| ⌃      | Control   | `U+2303` | ⇞      | Page Up   | `U+21DE` |
+| ⌥      | Option/Alt| `U+2325` | ⇟      | Page Down | `U+21DF` |
+| ⌘      | Command   | `U+2318` | ⌤      | Enter     | `U+2324` |
+| ⏎      | Return    | `U+23CE` | ␣      | Space     | `U+2423` |
+
+: {.striped}
+
+## Integrate `rg` and `fzf`
+
+`fzf` is a command-line fuzzy-finder. It makes `^R` really powerful and convenient. For details see the [fzf project page](https://github.com/junegunn/fzf).
+
+
+```{.zsh}
+# On a Mac
+brew install fzf
+```
+
+
+![](../assets/02-shell/02_fzf_screenshot.png){width=100%}
+
+# Naming things
+
+## Naming files
+
+- The better your names for things, the easier they will be to find (and programmatically work with)
+- In civilized operating systems, names containing spaces and special characters (such as `? ! , . # $ * <space>` and the like) are not a problem. 
+- However, the more you work programatically, the more you will want to avoid them. 
+- Jenny Bryan's 5 minute Normconf talk is a good overview of good habits
+
+## Naming files
+
+- Names should tell you something about what the file is
+- Names should avoid spaces and punctuation
+- Names should follow some reasonable convention
+- Names with numbers should sort in useful ways
+- Names should not be used to track the versions of files
+
+## Naming files
+
+Find all files in or below the project directory that end in `.qmd`:
+
+```{zsh}
+find . -name "*.qmd"
+```
+
+
+## Naming files
+
+Find all files in or below the current directory that start with two characters followed by `-example` and end with any other number of characters:
+
+```{zsh}
+find . -name "??-example*"
+```
+
+
+## Sort order
+
+```{zsh}
+mkdir tmp
+touch tmp/{1..15}.txt
+```
+
+See how these sort:
+
+```{zsh}
+ls tmp/
+```
+
+Not what we want. 
+
+## Sort order
+
+```{zsh}
+rm -f tmp/*.txt
+touch tmp/{01..15}.txt
+ls tmp/
+```
+
+## Sort order 
+
+```{zsh}
+rm -f tmp/*.txt
+touch tmp/{a..d}{01..03}.txt
+ls -l tmp/
+rm -rf tmp/
+rm -rf ../tmp/
+```
+
+In general keep your names lower-case.
+
+## Dates 
+
+### Use the one true YMD format, **ISO 8601**: 
+
+### [YYYY-MM-DD]{.fg-orange}
+
+## Naming files
+
+- Be consistent in your use of naming conventions
+- No need to get too clever, but ...
+
+```{.zsh}
+data_clean/
+data_raw/
+docs/
+figures/
+R/01_clean-data.R
+R/02_process-data.R
+R/03_descriptive-figs-tables.R
+R/04_brms-model.R
+paper/
+README.md
+```
+
+
+## Unix naming conventions
+
+- Dotfiles and underscores
+
+```{zsh}
+#| class: scrollout
+ls -l 
+```
+
+## Unix naming conventions
+
+```{zsh}
+#| class: scrollout
+ls -la 
+```
+
+## Unix naming conventions
+
+- Files and folders beginning with a period, `.`, are "hidden"
+- They won't show up via `ls`
+- By convention they are often used for configuration information
+- Files or folders beginning with an underscore, `_`, are often "generated" (though this is a weak convention)
+- The structure of plain-text config files will depend on the thing they are configuring. It might just a list of words or options, or it might be a structured file based on a Markup language like YAML or TOML, or it might be written to be parsed in R or Python, etc.
+
+## Unix naming conventions {.smaller}
+
+Here's the `.gitignore` file for this project:
+
+```{.zsh include="../.gitignore"}
+```
+
+## Unix naming conventions {.smaller}
+
+A `.bashrc` file to configure non-login shells for Bash:
+
+```{.bash include="../files/examples/bashrc.txt"}
+#| class: scrollout
+```
+
+
+# The Unix way of thinking
+ 
+## Stepping back
+
+- Your computer [stores files]{.fg-lblue} and [runs commands]{.fg-orange}.
+- The files are stored in a large hierarchy called a [filesystem]{.fg-green}.
+- You issue instructions to run particluar commands at a [command line]{.fg-lblue} that is provided by a [shell]{.fg-orange}, which is how you the user talk to the [operating system]{.fg-orange}.
+- Unix commands and utilities generally try to do a _specific_ thing to files or running processes. 
+- The Unix conception of a 'file' is very flexible. Connections to other computers  can act like files.
+- Unix commands are often [composable]{.fg-red} using [pipes]{.fg-red}.
+
+## The Unix pipe
+
+- Unix commands work with some _input_ and may produce some _output_
+- Unix systems have the concepts of "standard input", "standard output", and "standard error" as streams where things come from, where they go to, and where problems are reported. 
+
+## The Unix pipe
+
+- The output of the `ls` command again: 
+
+
+```{zsh}
+ls 
+```
+
+## The Unix pipe
+
+We can send, or _pipe_, this output to another command, instead of to the terminal:
+
+```{zsh}
+ls | wc -l
+```
+
+- The `wc` command counts the number of words in a file, or in whatever is sent to it via `STDIN`. 
+- The `-l` switch to `wc` means 'just count lines instead of words'
+
+## The Unix pipe
+
+Like with pipelines in R, we can compose sequences of actions at the prompt:
+
+```{.zsh}
+❯ ls -lh access.log
+-rw-r--r-- 1 root root 7.0M Aug 29 16:00 access.log
+```
+
+
+```{.zsh}
+❯ head access.log
+192.195.49.31 - - [27/Aug/2023:00:01:11 +0000] "GET / HTTP/1.1" 200 19219 "https://www.google.com/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /libs/tufte-css-2015.12.29/tufte.css HTTP/1.1" 200 2025 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /libs/tufte-css-2015.12.29/envisioned.css HTTP/1.1" 200 888 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /css/tablesaw-stackonly.css HTTP/1.1" 200 1640 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /css/nudge.css HTTP/1.1" 200 1675 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:12 +0000] "GET /css/sourcesans.css HTTP/1.1" 200 1492 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:13 +0000] "GET /js/jquery.js HTTP/1.1" 200 30464 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:13 +0000] "GET /js/tablesaw-stackonly.js HTTP/1.1" 200 2996 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+192.195.49.31 - - [27/Aug/2023:00:01:13 +0000] "GET /js/nudge.min.js HTTP/1.1" 200 937 "https://socviz.co/" "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/116.0.0.0 Safari/537.36 Edg/116.0.1938.54"
+52.13.187.67 - - [27/Aug/2023:00:01:13 +0000] "GET /dataviz-pdfl_files/figure-html4/ch-03-fig-lexp-gdp-10-1.png HTTP/1.1" 200 308830 "-" "Mozilla/5.0 (X11; Ubuntu; Linux x86_64; rv:72.0) Gecko/20100101 Firefox/72.0"
+```
+
+
+## The Unix pipe
+
+Like with pipelines in R, we can compose sequences of actions at the prompt:
+
+```{.zsh}
+❯ head access.log | awk '// {print $11}'
+
+"https://www.google.com/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"https://socviz.co/"
+"-"
+```
+
+## The Unix pipe
+
+Like with pipelines in R, we can compose sequences of actions at the prompt:
+
+```{.zsh}
+❯ awk '// {print $11}' access.log | sort | uniq -c | sort -nr | head -n 15
+
+   9729 "https://socviz.co/lookatdata.html"
+   4851 "-"
+   4212 "https://socviz.co/"
+   1719 "https://socviz.co/makeplot.html"
+   1477 "https://bookdown.org/"
+   1466 "https://socviz.co/gettingstarted.html"
+   1373 "https://socviz.co/groupfacettx.html"
+    864 "https://socviz.co/workgeoms.html"
+    794 "https://socviz.co/maps.html"
+    733 "https://socviz.co/refineplots.html"
+    671 "https://socviz.co/index.html"
+    349 "https://socviz.co/appendix.html"
+    228 "https://socviz.co/modeling.html"
+    153 "https://www.google.com/"
+     50 "http://vissoc.co/"
+```
+
+## The Unix pipe
+
+We can do a lot with a pipeline:
+
+```{zsh}
+curl -s 'http://api.citybik.es/v2/networks/citi-bike-nyc' |
+   jq '.network.stations[].free_bikes' | 
+  gpaste -sd+ | 
+  bc
+```
+
+This is the number of Citi Bikes available in New York City at the time these slides were made.
+
+We usually won't use the Unix command line or shell to things like this. We'll do it in R. You could also do it in other languages. But basic shell competence remains extremely handy for many more common tasks. 
+
+::: aside
+CitiBike example courtesy of Jeroen Janssens
+:::
+
+---
+
+:::{.huge .center}
+::::{.absolute top="1%"}
+In an era of Generative AI and LLMs, why are we covering this stuff?
+::::
+:::
+
+
+---
+
+:::{.huge .center} 
+::::{.absolute top="30%"}
+Because [Unix]{.fg-lblue} is still [everywhere]{.fg-pink}
+::::
+:::
+
+::: aside
+And will be for a long time to come, I'm afraid.
+:::
+
+--- 
+
+## "Why am I doing this?" 
+
+- As soon as you try to do anything of any sort of technical complexity, or just simple [reproducibility]{.fg-red}, with your computer---even using the newest and coolest tools---I promise [you'll eventually find yourself in a world governed by the metaphors and methods Unix originated]{.fg-lblue}, and, very likely, in a literal Unix-derived environment. 
+
+- That is, you will be in some sort of [folder-based hierarchy]{.fg-lblue}; you will edit [plain-text files]{.fg-orange} in order to configure, launch, generate, or capture the output of applications; and you will do this by way of [instructions written down as a series of commands]{.fg-red} that follow some sort of regular syntax. The details of those instructions (and the particular conventions they use) will vary depending on the task at hand. But in essence you will always be doing the same thing. 
+
+
