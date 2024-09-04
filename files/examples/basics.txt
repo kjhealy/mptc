@@ -1,0 +1,13 @@
+apple, banana, pear
+Apple, Banana, Pear,
+apple pie, apple, apple cake
+apple
+Apple
+pear
+peach, apple, plum
+grey
+gray
+griy
+groy
+A period at the end.
+

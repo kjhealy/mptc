@@ -1,6 +1,6 @@
 ---
-title: "Tasks for Wk 02/03"
-date: "2023-09-04"
+title: "Tasks for Week 03"
+date: last-modified
 ---
 
 ```{r setup, include=FALSE}
@@ -9,6 +9,5 @@ source(here::here("R", "slide-things.R"))
 ```
 
 ## Task 1: Complete the Regular Expression Tutorial
-
 
 - Go to [regexone](https://regexone.com) and complete the interactive regular expression tutorial

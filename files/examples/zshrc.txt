@@ -1,0 +1,28 @@
+# Put the contents of this file in your ~/.zshrc file.
+# Source: https://github.com/belak/zsh-utils?tab=readme-ov-file
+
+[[ ! -d "$HOME/.antigen" ]] && git clone https://github.com/zsh-users/antigen.git "$HOME/.antigen"
+source "$HOME/.antigen/antigen.zsh"
+
+# Set the default plugin repo to be zsh-utils
+antigen use belak/zsh-utils --branch=main
+
+# Specify completions we want before the completion module
+antigen bundle zsh-users/zsh-completions
+
+# Specify plugins we want
+antigen bundle editor@main
+antigen bundle history@main
+antigen bundle prompt@main
+antigen bundle utility@main
+antigen bundle completion@main
+
+# Specify additional external plugins we want
+antigen bundle zsh-users/zsh-syntax-highlighting
+
+# Load everything
+antigen apply
+
+# Set any settings or overrides here
+prompt belak
+bindkey -e

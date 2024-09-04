@@ -1,6 +1,6 @@
 ---
-title: "3. Text Editing"
-date: 2023-09-12
+title: "3. Searching and Editing Text"
+date: last-modified
 date-format: full
 ---
 
@@ -17,21 +17,29 @@ slide_details <- tibble::tribble(
 
 Most of our work is not done interactively. We write things down as "code" in its broadest sense: just sequences of instructions and commentary on them. We need a good set of tools for editing and manipulating all the text we produce. So this week we will cover
 
-- A little more on shell scripting
 - The idea of text search and manipulation via regular expressions
 - Text Editors
 
-## Background and Related Reading
+## Required Reading
+
+- @friedl06:_master_regul_expres, Chapter One
+
+## Background Material
+
+The books on Vim and Emacs are only of interest if you plan on learning one or other of those editors, which I don't necessarily recommend at this point. We'll talk more in class about how you should think pragmatically about your choice of text editor.
 
 - @robbins05:_class_shell_scrip
 - @neil15:_pract_vim
 - @petersen22:_master_emacs
-- @friedl06:_master_regul_expres
 
 ## Examples
 
 [This week's examples and demos](/example/03-example.qmd).
 
+
+## Assignment
+
+[This week's assignment](/assignment/03-assignment.qmd) is an online regular expression tutorial.
 
 ## Slides
 
@@ -51,9 +59,9 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<iframe class="slide-deck" id="quartoframe" src="../slides/03-slides.html"></iframe>
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/03-slides.html"></iframe-->
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/03-slides")
+#slide_win_button("/slides/03-slides")
 ```

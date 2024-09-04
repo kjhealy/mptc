@@ -33,6 +33,9 @@ source("R/tar_calendar.R")
 # Force the schedule page to always re-render; bah
 system("[ ! -e _freeze/schedule ] || rm -rf _freeze/schedule")
 
+# Force the shell example pages to always re-render; bah
+# system("[ ! -e _freeze/example/03-example ] || rm -rf _freeze/example/03-example")
+
 
 ## THE MAIN PIPELINE ----
 list(

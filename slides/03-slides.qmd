@@ -1,0 +1,629 @@
+---
+title: "Search and Edit Text"
+subtitle: "Modern Plain Text Social Science: Week 3"
+format: kjhslides-revealjs
+engine: knitr
+filters: 
+  - invert-h1
+  - include-code-files
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+---
+
+```{r}
+#| label: setup
+#| include: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(flipbookr)
+```
+
+
+```{r}
+#| echo: false
+
+ansi_aware_handler <- function(x, options) {
+  paste0(
+    "<pre class=\"r-output\"><code>",
+    fansi::to_html(x = htmltools::htmlEscape(x), warn = FALSE, term.cap = "256"),
+    #cli::ansi_html(x = x),
+    "</code></pre>"
+  )
+}
+
+knitr::knit_hooks$set(
+  output = ansi_aware_handler, 
+  message = ansi_aware_handler, 
+  warning = ansi_aware_handler,
+  error = ansi_aware_handler
+)
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+# Getting around in the Shell
+
+## Your command history
+
+Eventually you will accumulate a history of shell commands you have typed, many of which you may want to reuse from time to time. 
+
+- Go to the previous command with the up arrow, `↑`
+- _Search_ your command history with control-R, `^R`
+- `^R` will also work for history search at the RStudio console and in many other places.
+
+
+## Aside: Standard Modifier Key Symbols
+
+| Symbol | Key       | Unicode  | Symbol | Key       | Unicode  |
+|:------:|-----------|----------|:------:|-----------|----------|
+| ⎋      | Escape    | `U+238B` | ⌫      | Backspace | `U+232B` |
+| ⇥      | Tab       | `U+21E5` | ⌦      | Delete    | `U+2326` |
+| ⇪      | Caps Lock | `U+21EA` | ⇱      | Home      | `U+21F1` |
+| ⇧      | Shift     | `U+21E7` | ⇲      | End       | `U+21F2` |
+| ⌃      | Control   | `U+2303` | ⇞      | Page Up   | `U+21DE` |
+| ⌥      | Option/Alt| `U+2325` | ⇟      | Page Down | `U+21DF` |
+| ⌘      | Command   | `U+2318` | ⌤      | Enter     | `U+2324` |
+| ⏎      | Return    | `U+23CE` | ␣      | Space     | `U+2423` |
+
+: {.striped}
+
+
+# Searching inside files
+
+## `grep`
+
+`find` searches file and folder names only.  To search _inside_ files we use `grep`. Or rather we will use a flavor of grep called `egrep`. 
+
+```{zsh}
+grep 'Stately' files/examples/ulysses.txt 
+```
+
+Search more than one file:
+
+```{zsh}
+## -i for case-insensitive search
+egrep -i 'jabber' files/examples/*.txt
+```
+
+## The `grep` family
+
+grep and its derivatives are very powerful thanks to their ability to use _regular expressions_. We will be learn more about that very soon. For now, we'll introduce `rg` or `ripgrep`, which is a modern version of `grep` that has some nice additional features. For more details see the [ripgrep project page](https://github.com/BurntSushi/ripgrep)
+
+```{.zsh}
+# On a Mac with Homebrew (https://brew.sh)
+brew install rg
+```
+
+## Integrate `rg` and `fzf`
+
+`fzf` is a command-line fuzzy-finder. It makes `^R` really powerful and convenient. For details see the [fzf project page](https://github.com/junegunn/fzf).
+
+
+```{.zsh}
+# On a Mac
+brew install fzf
+```
+
+
+![](../assets/02-shell/02_fzf_screenshot.png){width=100%}
+
+
+
+# Regular Expressions
+
+## Setup
+
+## Regular Expressions
+
+Or,
+
+:::{.huge}
+  Waiter, there appears to be a language inside my language
+:::
+
+##  Regular Expressions
+
+Regexps are their own world of text processing
+
+:::: {.columns}
+
+::: {.column width="50%"}
+  ![](../assets/03-editors/03_friedl_regex_cover.png){width=70%}
+:::
+
+::: {.column width="50%" .right}
+  ☜ This book is a thing of beauty.
+:::
+
+::::
+
+
+
+
+## Searching for patterns 
+
+::: {.incremental}
+- A regular expression is a way of searching for a piece of text, or _pattern_, inside some larger body of text, called a _string_.
+- The simplest sort of search is like the "Find" functionality in a Word Processor, where the pattern is a literal letter, number, punctuation mark, word or series of words and the text is a document that gets searched one line at a time. The next step up is "Find and Replace"
+
+:::
+
+## Searching for patterns
+
+- Regular expressions are implemented across a very wide range of tools: shells of all kinds; 
+- Every pattern-searching function in `stringr` has the same basic form:
+
+```{.r}
+str_view(<STRING>, <PATTERN>, [...]) # where [...] means "maybe some options"
+```
+
+## Searching for patterns
+
+Here's a file:
+
+```{zsh}
+cat files/examples/basics.txt
+```
+
+Search it for `apple`: 
+
+```{zsh}
+egrep 'apple' files/examples/basics.txt 
+```
+
+
+
+## Searching for patterns
+
+- Regular expressions get their real power from special _wildcards_, i.e. tokens that match more than just literal strings, but also more general and more complex patterns.
+- The most general pattern-matching token is, "Match everything!" This is represented by the period, or **`.`**
+
+```{zsh}
+egrep '.' files/examples/basics.txt
+```
+
+## Searching for patterns {.incremental}
+
+- But ... if “**`.`**” matches any character, how do you specifically match the character “[**`.`**]{.fg-pink}”?
+- You have to "escape" the period to tell the regex you want to match it exactly, rather than interpret it as meaning "match anything".
+- regexs use the backslash, **\\**, to signal "escape the next character".
+- To match a "**.**", you need the regex "**`\.`**"
+
+::: {.notes}
+You need to use an “escape” to tell the regular expression you want to match it exactly, not use its special behaviour. Like strings, regexs use the backslash, \, to escape special behaviour. So to match an ., you need the regex \.. Unfortunately this creates a problem. We use strings to represent regular expressions, and \ is also used as an escape symbol in strings. So to create the regular expression \. we need the string "\\."
+::: 
+
+## Searching for patterns
+
+```{zsh}
+egrep '\.' files/examples/basics.txt
+```
+
+
+## Hang on, I see a further problem
+
+… how do you match a [literal]{.fg-orange} `\`?
+
+```{zsh}
+cat files/examples/specials.txt
+```
+
+::: {.incremental}
+
+```{zsh}
+egrep '\\' files/examples/specials.txt
+```
+
+
+- Well that's ugly
+
+- This is the price we pay for having to express searches for patterns using a language containing these same characters, which we may also want to search for. 
+
+- I [_promise_]{.fg-orange} this will pay off!
+:::
+
+
+## Line delimiters 
+
+::: {.incremental}
+- Use [**`^`**]{.fg-pink} to match the start of a string.
+- Use [**`$`**](.fg-pink) to match the end of a string.
+:::
+
+## Line delimiters 
+
+- Use [**`^`**]{.fg-pink} to match the start of a string.
+- Use [**`$`**](.fg-pink) to match the end of a string.
+
+:::: {.columns}
+::: {.column width="50%"}
+```{zsh}
+egrep '^a' files/examples/basics.txt
+```
+
+:::
+
+::: {.column width="50%" .right}
+
+```{.zsh}
+egrep 'a$' files/examples/basics.txt
+```
+:::
+::::
+
+## Matching start and end
+
+- To force a regular expression to only match a complete string, anchor it with both [**`^ `**]{.fg-pink} and [**`$`**]{.fg-pink}
+
+
+```{zsh}
+egrep 'apple' files/examples/basics.txt
+```
+
+<br />
+
+```{zsh}
+egrep '^apple$' files/examples/basics.txt
+```
+
+
+## Matching character classes
+
+**`\d`** matches any digit.
+**`\s`** matches any whitespace (e.g. space, tab, newline).
+**`[abc]`** matches a, b, or c.
+**`[^abc]`** matches anything _except_ a, b, or c.
+
+::: {.notes}
+Remember, to create a regular expression containing \d or \s, you’ll need to escape the \ for the string, so you’ll type "\\d" or "\\s".
+:::
+
+
+## Alternation
+
+Use parentheses to make the precedence of **`|`** clear:
+
+```{zsh}
+# e or a variant 
+egrep 'gr(e|a)y' files/examples/basics.txt
+```
+
+## Repeated patterns 
+
+::: {.incremental}
+- **`?`** is 0 or 1
+- **`+`** is 1 or more
+- **`*`** is 0 or more
+:::
+
+
+## Repeated patterns 
+
+- **`?`** is 0 or 1
+- **`+`** is 1 or more
+- **`*`** is 0 or more
+
+```{zsh}
+cat files/examples/roman.txt
+```
+
+## Repeated patterns
+
+
+- **`?`** is 0 or 1
+- **`+`** is 1 or more
+- **`*`** is 0 or more
+
+```{zsh}
+egrep 'CC+' files/examples/roman.txt
+```
+
+
+## Repeated patterns
+
+- **`?`** is 0 or 1
+- **`+`** is 1 or more
+- **`*`** is 0 or more
+
+
+```{zsh}
+egrep 'C[LX]+' files/examples/roman.txt
+```
+
+## Exact numbers of repetitions
+
+::: {.incremental}
+- **`{n}`** is exactly n
+- **`{n,}`** is n or more
+- **`{,m}`** is at most m
+- **`{n,m}`** is between n and m
+:::
+
+## Exact numbers of repetitions
+
+- **`{n}`** is exactly n
+- **`{n,}`** is n or more
+- **`{,m}`** is at most m
+- **`{n,m}`** is between n and m
+
+```{zsh}
+egrep 'C{2}' files/examples/roman.txt
+```
+
+
+## Exact numbers of repetitions
+
+- **`{n}`** is exactly n
+- **`{n,}`** is n or more
+- **`{,m}`** is at most m
+- **`{n,m}`** is between n and m
+
+```{zsh}
+egrep 'C{2,}' files/examples/roman.txt
+```
+
+## Exact numbers of repetitions
+
+- **`{n}`** is exactly n
+- **`{n,}`** is n or more
+- **`{,m}`** is at most m
+- **`{n,m}`** is between n and m
+
+```{zsh}
+egrep 'C{2,3}' files/examples/roman.txt
+```
+
+## Exact numbers of repetitions
+
+- **`{n}`** is exactly n
+- **`{n,}`** is n or more
+- **`{,m}`** is at most m
+- **`{n,m}`** is between n and m
+
+
+By default these are _greedy_ matches. You can make them “lazy”, matching the shortest string possible by putting a **`?`** after them. **This is often very useful!**
+
+```{zsh}
+egrep 'C{2,3}?' files/examples/roman.txt 
+```
+
+## Exact numbers of repetitions
+
+- **`{n}`** is exactly n
+- **`{n,}`** is n or more
+- **`{,m}`** is at most m
+- **`{n,m}`** is between n and m
+
+By default these are _greedy_ matches. You can make them “lazy”, matching the shortest string possible by putting a **`?`** after them. **This is often very useful!**
+
+```{zsh}
+egrep 'C[LX]+?' files/examples/roman.txt
+```
+
+## And [finally]{.fg-yellow} ... backreferences
+
+
+```{zsh}
+cat files/examples/fruit.txt
+```
+
+## Grouping and backreferences
+
+Find all fruits that have a repeated pair of letters:
+
+```{zsh}
+# Using basic grep here because `rg` doesn't support backreferences
+grep -E '(..)\1' files/examples/fruit.txt
+```
+
+## Grouping and backreferences
+
+Backreferences and grouping are very useful for string _replacements_.
+
+## OK that was a [lot]{.fg-red}
+
+![](../assets/03-editors/03_grover_bluehead.png){width=100%}
+
+## Learning [and testing]{.fg-yellow} regexps
+
+### Practice with a tester like [https://regexr.com](https://regexr.com)
+
+### Or an app like [Patterns](https://krillapps.com/patterns/)
+
+### The regex engine or "flavor" used by `stringr` is Perl- or PCRE-like. 
+
+## Regexes in the Shell {.smaller}
+
+- Grep searches for text _inside_ files
+
+```{.zsh}
+# Search recursively through all subdirs below the current one
+egrep -r "Grep searches for text" . 
+```
+
+<br />
+
+```{.zsh}
+egrep "format: " *.qmd
+```
+
+<br />
+
+```{.zsh}
+# Count the number of matches
+egrep -c "format: " *.qmd
+```
+
+ 
+## Regexes in the Shell
+
+- Ripgrep, or `rg` is much quicker than `grep` and has some nice features
+
+```{.zsh}
+rg Kieran .
+```
+
+## Regexes in the Shell
+
+- Ripgrep, or `rg` is quicker than `grep` and has some nice features
+
+```{.zsh}
+rg -t yaml "url:" .
+```
+
+## Regexes in the Shell
+
+- Standard shell tools like `sed`, `awk`, and `grep` can all use some version of regular expressions. 
+
+```{.zsh}
+egrep "^The sky|night.$" files/examples/sentences.txt
+```
+
+<br />
+
+```{.zsh}
+egrep "^The sky|night.$" files/examples/sentences.txt
+```
+
+## Regexes in the Shell
+
+- There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings. 
+- One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. 
+
+```{.zsh}
+# Find every Rmarkdown file beneath the current directory
+# Then edit each one in place to replace every instance of 
+# `percent_format` with `label_percent`
+find . -name "*.Rmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
+```
+
+## Regexes in the Shell
+
+- You can protect a bit against the dangers of doing this by making the `-i` option create backup files of everything it touches:
+
+```{.zsh}
+# Find every Rmarkdown file beneath the current directory
+# Then edit each one in place to replace every instance of 
+# `percent_format` with `label_percent`
+find . -name "*.Rmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
+```
+
+- Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. 
+- For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/)
+
+# Text Editors
+
+---
+
+::: {layout-ncol=3}
+![](../assets/03-editors/03_icon_emacs.png){width=5%}
+
+![](../assets/03-editors/03_icon_vim.png){width=5%}
+
+![](../assets/03-editors/03_icon_vscode.png){width=5%}
+
+![](../assets/03-editors/03_icon_sublimetext.png){width=8%}
+
+![](../assets/03-editors/03_icon_notepadpp.png){width=8%}
+
+![](../assets/03-editors/03_icon_bbedit.png){width=8%}
+:::
+
+## Choices, choices
+
+- There are many good text editors.
+- The main point is: pick one, and learn the hell out of it.
+- The RStudio IDE has many of the features of a good editor built in, as well as doing other things.
+- Several of the other editors also have good support for R and many other languages.
+
+## Danger, Will Robinson 
+
+![One view of things](../assets/03-editors/03_learning_curves_editors.png)
+
+## Danger, Will Robinson {.smaller}
+
+![](../assets/03-editors/03_emacs_setup.png){width=90% fig-align="center"}
+
+- Endlessly futzing with your text editor's setup is a displacement activity. 
+- The tools are not magic. They cannot by themselves make you do good work. Or any work.
+
+## Things any good text editor will do
+
+### Specialized text display
+
+- Syntax highlighting
+- Brace and parenthesis matching
+- Outlining / Folding
+
+
+::: {.fragment}
+### Edit text!
+
+- Easy navigation with keyboard shortcuts 
+- Keyboard-based selection and movement of text, lines, and logical sections
+- Search and replace using regular expressions
+
+:::
+
+## Things most good text editors also do
+
+### Cursor and Insertion-Point tricks
+
+- Multiple Cursors
+- Rectangular / Columnar editing
+- A snippet system of some sort
+
+::: {.notes}
+
+VS Code: 
+  cmd-shift-L for example
+
+
+Emacs: 
+
+`C-x r M-w`: Save the text of the region-rectangle as the last killed rectangle `(copy-rectangle-as-kill)`.
+
+`C-x r y`
+Yank [paste] the last killed rectangle with its upper left corner at point `(yank-rectangle)`.
+
+`C-x r o`
+Insert blank space to fill the space of the region-rectangle `(open-rectangle)`. This pushes the previous contents of the region-rectangle to the right.
+
+`C-x r N`
+Insert line numbers along the left edge of the region-rectangle `(rectangle-number-lines)`. This pushes the previous contents of the region-rectangle to the right.
+
+`C-x r c`
+Clear the region-rectangle by replacing all of its contents with spaces `(clear-rectangle)`.
+
+The command C-x SPC (rectangle-mark-mode) toggles whether the region-rectangle or the standard region is highlighted (first activating the region if necessary). When this mode is enabled, commands that resize the region (C-f, C-n etc.) do so in a rectangular fashion, and killing and yanking operate on the rectangle. See Killing and Moving Text. The mode persists only as long as the region is active.
+
+:::
+
+
+## Things most good text editors also do
+
+### IDE-like functionality
+
+- Integration with documentation
+- Static analysis and Linting
+- Integration with a REPL
+- Diffing files
+- Integration with version control systems
+- Remote editing
+
+
+## Other things
+
+### Specifically for academia
+
+- Citation and reference management
+- Integration with Zotero
+- Connection to [Pandoc](https://pandoc.org)

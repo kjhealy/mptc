@@ -1,5 +1,5 @@
 ---
-title: "The File System and the Shell"
+title: "The File System & the Shell"
 subtitle: "Modern Plain Text Computing<br />Week 02"
 format: kjhslides-revealjs
 engine: knitr
@@ -31,14 +31,21 @@ library(flipbookr)
 ```
 
 
+# Housekeeping
+
+## RStudio Container
+
+- <https://cmgr.oit.duke.edu/containers>
+
 # Files
 
 ## Files
 
-- A file is just a stream of bytes, of data, some sort of resource that a program can read or interact with.
+- A file is just a stream of bytes, or data, some sort of resource that a program can read or interact with.
+- Files have a location in the file system.
 - In the UNIX way of thinking, "[Everything is a file]{.fg-lblue}"
 - That is, lots of things that are not normally thought of as files (such as printers, or terminal screens, or connections to other computers) can be thought of as living in a named place somewhere in the filesystem.
-- The basic set of UNIX utilities can be thought of as tools that accept "files" (as a standard stream of input data), perform some specific action on them (read, print, move, copy, delete, count lines, find text, whatever) and then return a standard stream of output data that can be sent to the console, used as input to another command, or become a file of its own.
+- The basic set of UNIX utilities can be thought of as tools that accept "files" (as a standard stream of input data), perform some specific action on them (read, print, move, copy, delete, count lines, find text, whatever) and then return a standard stream of output data that can be sent somewhere, e.g. to a terminal display, or used as input to another command, or become a file of its own.
 
 ## File system hierarchy {.smaller}
 
@@ -63,7 +70,7 @@ fs::fs_path(here::here("slides", "01b-slides.qmd"))
 
 "Go inside the '`Users`' folder, then inside the '`kjhealy`' folder, then inside '`Documents`' then inside '`courses`' then '`mptc`' then '`slides`' and you will find the file `01b-slides.qmd`."
 
-## Standard locations 
+## Standard Unix locations 
 
 - `/` : root. Everything lives inside or under the root.
 - `/bin/`  : For _binaries_. Core user executable programs and tools.
@@ -74,7 +81,7 @@ fs::fs_path(here::here("slides", "01b-slides.qmd"))
 - `/opt/` : Like `/usr/`, another place for locally installed software to go.
 
 
-## Standard locations
+## Standard Unix locations
 
 - These locations get mapped together in the `$PATH`, which is an _environment variable_ that tells the system where executables can be found. 
 
@@ -91,7 +98,7 @@ fs::fs_path(here::here("slides", "01b-slides.qmd"))
 /usr/local/bin/R
 ```
 
-## Standard locations 
+## Standard Unix locations 
 
 - `/` : root. Everything lives inside or under the root.
 - `/bin/`  : For _binaries_. Core user executable programs and tools.
@@ -103,9 +110,9 @@ fs::fs_path(here::here("slides", "01b-slides.qmd"))
 - `/etc/` : Editable text configuration. Config files often go here. 
 
 
-## Standard locations 
+## Standard Unix locations 
 
--  `/home/` or `/Users/` : Where the accounts of individual system users live, like `/Users/kjhealy/`
+-  `/home/` or `/Users/` : Where the accounts of individual system users live, like `/Users/kjhealy` or `/home/kjhealy`
 
 
 ```{.zsh}
@@ -114,6 +121,8 @@ fs::fs_path(here::here("slides", "01b-slides.qmd"))
 ❯  ls
 bin  certbot.log  logrotate.conf  old  projects  public  staging
 ```
+
+- All of this is a matter of more or less established convention that varies by particular operating systems. E.g. on most Linux systems, individual user directories live in `/home`. On macOS they live in `/Users`. Windows is different again (and uses `\` for file paths rather than `/`.)
 
 ## File system hierarchy {.smaller}
 
@@ -134,35 +143,48 @@ So, how do we make our way around this file hierarchy tree and how do we take ac
 
 # The Shell
 
-## What is it?
+## What is it? 
 
-- A shell is a way for you to tell the operating system to do things.
+
+::: {.incremental}
+
+- A [shell]{.fg-lblue} is a way for you to tell the operating system to do things.
 - On Unix systems it's the first user-facing thing to get off the ground during the startup/boot process.
-- The command line is where you type instructions. Shells come with a collection of standard utilities that let you do things.
-- These utilities can be chained or piped together for more complex tasks.
-- You can also write scripts that will run tasks for you.
-- Shell scripting languages are small programming languages that understand variables, command substitution, branching, and iteration.
+- The [command line]{.fg-lblue} or [command prompt]{.fg-lblue} is where you type instructions. Shells come with a collection of standard utilities---i.e., commands---that let you do things.
+- These utilities can be [composed]{.fg-orange}, chained or piped together to accomplish more complex tasks.
+- You can also write scripts, or little programs, that the shell will run you.
+- Shell scripting languages are small interpreted programming languages that understand variables, command substitution, branching, and iteration.
+
+:::
 
 ## There are many shells
 
+::: {.incremental}
+
 - Strictly speaking, GUI environments like Windows and the macOS Finder are shells too.
-- But "the shell" usually means a text-based interpreter that runs programs in response to typed commands.
+- But "[the shell]{.fg-lblue}" usually means a text-based interpreter that runs programs in response to typed commands.
 - The "original" Unix shell is `sh`.
 - Its most widely-used descendant is `bash` or the Bourne-Again Shell.
-- On macOS the default shell is the Z shell or `zsh`.
+- On macOS the default shell is the Z Shell or `zsh`.
 - Windows has the Command shell and PowerShell, and possibly also e.g. Cygwin. (PowerShell does not follow Unix conventions.)
 
-## A command interpreter
+:::
 
-- A shell is an _interpreter_. It waits for commands. When you supply them, it does what you tell it, or tells the relevant bit of the operating system to do what you said.
+
+## A command interpreter 
 
 ```{zsh}
 echo "Hello there"
 ```
 
-- The general name for this mode of interacting with a computer is a _REPL_ or Read-Eval-Print Loop. 
-- Programming languages like Python and R work this way as well. So does ChatGPT. They are _interpreted_, meaning code is sent to an interpreter (the Python or R program) that runs the code directly. 
-- This is distinct from languages whose programs are (at least originally) designed to be _compiled_ into executable machine code before they are run. Languages like C, Go, and Rust are in this category.
+::: {.incremental}
+- A shell is an _interpreter_. It waits for commands. When you supply them, it does what you tell it, or tells the relevant bit of the operating system to do what you said.
+
+- This mode of interacting with a computer is sometimes called a _REPL_ or Read-Eval-Print Loop. 
+- Programming languages like Python and R work this way as well. So does ChatGPT. Shell commands (and R and Python commands, and scripts) They are _interpreted_, meaning code is sent to an interpreter (the Python or R program) that runs the code. 
+- This is distinct from languages (at least originally) designed to be _compiled_ into executable machine code before they are run. Languages like C, Go, and Rust are in this category.
+
+:::
 
 # Getting around the file system
 
@@ -324,6 +346,8 @@ Executable permissions are irrelevant here because it's a text file.
 ## A Tree
 
 ```{zsh}
+#| echo: false
+
 ## The kind of thing you can do in principle ... just use <tree -d -L 2> at the console though
 find . -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
 ```
@@ -337,8 +361,22 @@ ls
 cd ../slides
 ```
 
-
 # Some shell tools
+
+## Example files
+
+- Project at: <https://github.com/kjhealy/mptc_text_examples>
+
+- Download the zip file, for now
+
+## What are we working with
+
+```{zsh}
+ls files/examples/
+```
+
+- Your file path will be different! First order of business is to open a Terminal window (either in RStudio or from the operating system) and navigate to where your example files are using `pwd`, `cd`, and `ls`. 
+
 
 ## `wc`, `cat`, `head`, and `tail`
 
@@ -486,7 +524,7 @@ Again in this case it doesn't quite behave as you might think!
 
 # Finding files and finding text
 
-## `find` and `grep`
+## `find` 
 
 `find` is for locating files and directories by name:
 
@@ -496,7 +534,7 @@ find files
 ```
 
 
-## `find` and `grep`
+## `find` 
 
 We can use _globbing_ (or _wildcards_) to narrow our search:
 
@@ -507,7 +545,7 @@ find files -name "*.csl"
 ```
 
 
-## `find` and `grep`
+## `find` 
 
 Here we use the `.` to mean "Search in the current folder"
 
@@ -516,7 +554,7 @@ find . -name "*.xlsx"
 ```
 
 
-## `find` and `grep`
+## `find` 
 
 - The `-exec` option lets us do things with each result.
 - The `{}` expands to each found file in turn.
@@ -527,10 +565,10 @@ find . -name "*.xlsx"
 find files -name "*.png" -exec echo rm {} ";"
 ```
 
-If we omitted the `echo` here the found files would be deleted one at a time.
+If we omitted the `echo` here the found files really would be deleted one at a time.
 
 
-## `find` and `grep`
+## `find` 
 
 We can also use `xargs` to act on search results:
 
@@ -543,17 +581,18 @@ find files -name "*.png"
 Convert all these `png` files to `jpg`:
 
 ```{zsh}
-# Everything underneath the `files/` subdirectory 
-# whose name ends in `.png`
-find files -name '*.png' -print0 | xargs -0 -r magick -format jpg
+# Convert everything underneath the `files/` subdirectory 
+# whose name ends in `.png` to `.jpg` format, keeping the original files.
+find files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
 ```
 
-## `find` and `grep`
+## `find`
 
 Check:
 
 ```{zsh}
-find files -name '*.png' -o -name '*.jpg'
+find files -name '*.png' 
+find files -name '*.jpg' 
 ```
 
 Delete them (with another method of deletion):
@@ -562,71 +601,9 @@ Delete them (with another method of deletion):
 find files  -name '*.jpg' -type f -delete
 ```
 
+## Perspective
 
-## `find` and `grep`
-
-`find` searches file and folder names only. 
-To search _inside_ files we use `grep`.
-
-```{zsh}
-grep Stately files/examples/ulysses.txt 
-```
-
-Search more than one file:
-
-```{zsh}
-## -i for case-insensitive search
-grep -i jabber files/examples/*.txt
-```
-
-## `find` and `grep`
-
-Grep and its derivatives are very powerful thanks to their ability to use _regular expressions_. We will be learning more about that next week. For now, we'll introduce `rg` or `ripgrep`, which is a modern version of `grep` that has some nice additional features. For more details see the [ripgrep project page](https://github.com/BurntSushi/ripgrep)
-
-```{.zsh}
-# On a Mac
-brew install rg
-```
-
-
-# Getting around in the shell
-
-## Your command history
-
-Eventually you will accumulate a history of shell commands you have typed, many of which you may want to reuse from time to time. 
-
-- Go to the previous command with the up arrow, `↑`
-- _Search_ your command history with control-R, `^R`
-- `^R` will also work for history search at the RStudio console and in many other places.
-
-
-## Aside: Standard Modifier Key Symbols
-
-| Symbol | Key       | Unicode  | Symbol | Key       | Unicode  |
-|:------:|-----------|----------|:------:|-----------|----------|
-| ⎋      | Escape    | `U+238B` | ⌫      | Backspace | `U+232B` |
-| ⇥      | Tab       | `U+21E5` | ⌦      | Delete    | `U+2326` |
-| ⇪      | Caps Lock | `U+21EA` | ⇱      | Home      | `U+21F1` |
-| ⇧      | Shift     | `U+21E7` | ⇲      | End       | `U+21F2` |
-| ⌃      | Control   | `U+2303` | ⇞      | Page Up   | `U+21DE` |
-| ⌥      | Option/Alt| `U+2325` | ⇟      | Page Down | `U+21DF` |
-| ⌘      | Command   | `U+2318` | ⌤      | Enter     | `U+2324` |
-| ⏎      | Return    | `U+23CE` | ␣      | Space     | `U+2423` |
-
-: {.striped}
-
-## Integrate `rg` and `fzf`
-
-`fzf` is a command-line fuzzy-finder. It makes `^R` really powerful and convenient. For details see the [fzf project page](https://github.com/junegunn/fzf).
-
-
-```{.zsh}
-# On a Mac
-brew install fzf
-```
-
-
-![](../assets/02-shell/02_fzf_screenshot.png){width=100%}
+Obviously you will not be doing this sort of thing every day of the week. But you may well want to programmatically rename, move, convert, or otherwise maniplate files in batches from time to time. Especially if there are a lot of them, the shell can help you.
 
 # Naming things
 
@@ -747,20 +724,50 @@ ls -la
 - Files or folders beginning with an underscore, `_`, are often "generated" (though this is a weak convention)
 - The structure of plain-text config files will depend on the thing they are configuring. It might just a list of words or options, or it might be a structured file based on a Markup language like YAML or TOML, or it might be written to be parsed in R or Python, etc.
 
-## Unix naming conventions {.smaller}
+## Unix naming conventions 
 
 Here's the `.gitignore` file for this project:
 
 ```{.zsh include="../.gitignore"}
 ```
 
-## Unix naming conventions {.smaller}
+# Customizing your shell
+
+## Bash (often the Linux default)
 
 A `.bashrc` file to configure non-login shells for Bash:
 
+::: {.scrollable}
+
 ```{.bash include="../files/examples/bashrc.txt"}
-#| class: scrollout
+
 ```
+
+:::
+
+
+## Zsh (the Mac default)
+
+
+::: {.scrollable}
+
+```{.zsh include="../files/examples/zshrc.txt"}
+
+```
+
+:::
+
+
+## Caution
+
+::: {.callout-important}
+
+### Don't blindly install things
+
+Installing things via shell scripts should only be done from trusted sources!
+
+:::
+
 
 
 # The Unix way of thinking
@@ -885,6 +892,49 @@ We usually won't use the Unix command line or shell to things like this. We'll d
 ::: aside
 CitiBike example courtesy of Jeroen Janssens
 :::
+
+# Shell Scripting
+
+## Shell Scripts
+
+- If you find yourself doing the same task repeatedly, think about whether it makes sense to write a script
+- Shell scripts can become mini-programs, but can also be just one or two lines that pull together a few commands
+- They really show their strength when there's some fiddly thing you want to do to a lot of files or directories
+
+## Shell Scripts
+
+```{.bash include="../files/scripts/hello-world.sh"}
+```
+
+- `#!` or "shebang" line saying where the interpreter is
+- `chmod 755 script.sh` or `chmod +x script.sh` to make executable
+- The interpreter doesn't have to be the shell: other languages can be scripted too
+
+## Shell Scripts
+
+```{.bash include="../files/scripts/make-thumbnail.sh"}
+```
+
+## Shell Scripts
+
+- The shell can talk to the clipboard:
+
+```{zsh}
+echo I am sending this sentence to the clipboard | pbcopy
+```
+
+- Back from the clipboard:
+
+```{zsh}
+pbpaste | wc -c
+```
+
+
+::: aside
+On Windows with Cygwin the corresponding commands are `getclip` and `putclip`. 
+:::
+
+
 
 ---
 

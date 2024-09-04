@@ -1,0 +1,12 @@
+
+Two backslashes: \ \ 
+A period or full stop: . 
+A dollar sign: $ hello
+A caret: ^
+[
+The @ symbol
+]
+
+A backslash \ and a forward slash / 
+
+

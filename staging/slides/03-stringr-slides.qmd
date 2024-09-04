@@ -1,5 +1,5 @@
 ---
-title: "Text Editing"
+title: "Search and Edit Text"
 subtitle: "Modern Plain Text Social Science: Week 3"
 format: kjhslides-revealjs
 engine: knitr
@@ -25,52 +25,80 @@ kjh_set_slide_theme()
 library(flipbookr)
 ```
 
-# Shell Scripting
+# Getting around in the Shell
 
-## Shell Scripts
+## Your command history
 
-- If you find yourself doing the same task repeatedly, think about whether it makes sense to write a script
-- Shell scripts can become mini-programs, but can also be just one or two lines that pull together a few commands
-- They really show their strength when there's some fiddly thing you want to do to a lot of files or directories
+Eventually you will accumulate a history of shell commands you have typed, many of which you may want to reuse from time to time. 
 
-## Shell Scripts
+- Go to the previous command with the up arrow, `↑`
+- _Search_ your command history with control-R, `^R`
+- `^R` will also work for history search at the RStudio console and in many other places.
 
-```{.bash include="../files/scripts/hello-world.sh"}
-```
 
-- `#!` or "shebang" line saying where the interpreter is
-- `chmod 755 script.sh` or `chmod +x script.sh` to make executable
-- The interpreter doesn't have to be the shell: other languages can be scripted too
+## Aside: Standard Modifier Key Symbols
 
-## Shell Scripts
+| Symbol | Key       | Unicode  | Symbol | Key       | Unicode  |
+|:------:|-----------|----------|:------:|-----------|----------|
+| ⎋      | Escape    | `U+238B` | ⌫      | Backspace | `U+232B` |
+| ⇥      | Tab       | `U+21E5` | ⌦      | Delete    | `U+2326` |
+| ⇪      | Caps Lock | `U+21EA` | ⇱      | Home      | `U+21F1` |
+| ⇧      | Shift     | `U+21E7` | ⇲      | End       | `U+21F2` |
+| ⌃      | Control   | `U+2303` | ⇞      | Page Up   | `U+21DE` |
+| ⌥      | Option/Alt| `U+2325` | ⇟      | Page Down | `U+21DF` |
+| ⌘      | Command   | `U+2318` | ⌤      | Enter     | `U+2324` |
+| ⏎      | Return    | `U+23CE` | ␣      | Space     | `U+2423` |
 
-```{.bash include="../files/scripts/make-thumbnail.sh"}
-```
+: {.striped}
 
-## Shell Scripts
 
-- The shell can talk to the clipboard:
+# Searching inside files
+
+## `grep`
+
+`find` searches file and folder names only. 
+To search _inside_ files we use `grep`.
 
 ```{zsh}
-echo I am sending this sentence to the clipboard | pbcopy
+grep Stately files/examples/ulysses.txt 
 ```
 
-- Back from the clipboard:
+Search more than one file:
 
 ```{zsh}
-pbpaste | wc -c
+## -i for case-insensitive search
+grep -i jabber files/examples/*.txt
+```
+
+## `grep`
+
+Grep and its derivatives are very powerful thanks to their ability to use _regular expressions_. We will be learn more about that very soon. For now, we'll introduce `rg` or `ripgrep`, which is a modern version of `grep` that has some nice additional features. For more details see the [ripgrep project page](https://github.com/BurntSushi/ripgrep)
+
+```{.zsh}
+# On a Mac with Homebrew (https://brew.sh)
+brew install rg
+```
+
+## Integrate `rg` and `fzf`
+
+`fzf` is a command-line fuzzy-finder. It makes `^R` really powerful and convenient. For details see the [fzf project page](https://github.com/junegunn/fzf).
+
+
+```{.zsh}
+# On a Mac
+brew install fzf
 ```
 
 
-::: aside
-On Windows with Cygwin the corresponding commands are `getclip` and `putclip`. 
-:::
+![](../assets/02-shell/02_fzf_screenshot.png){width=100%}
+
+
 
 # Regular Expressions
 
 ## Setup
 
-- We'll do this in R because that's where most of you will use regexps first. 
+- We'll do this in R because that's where most of you will use regexps. 
 - Most of the ideas we'll cover carry over to the shell and other regexp contexts
 
 ```{r}
