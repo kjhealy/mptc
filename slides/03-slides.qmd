@@ -454,83 +454,31 @@ Backreferences and grouping are very useful for string _replacements_.
 
 ### The regex engine or "flavor" used by `stringr` is Perl- or PCRE-like. 
 
-## Regexes in the Shell {.smaller}
+## Beyond `grep` in the shell
 
-- Grep searches for text _inside_ files
-
-```{.zsh}
-# Search recursively through all subdirs below the current one
-egrep -r "Grep searches for text" . 
-```
-
-<br />
-
-```{.zsh}
-egrep "format: " *.qmd
-```
-
-<br />
-
-```{.zsh}
-# Count the number of matches
-egrep -c "format: " *.qmd
-```
-
- 
-## Regexes in the Shell
-
-- Ripgrep, or `rg` is much quicker than `grep` and has some nice features
-
-```{.zsh}
-rg Kieran .
-```
-
-## Regexes in the Shell
-
-- Ripgrep, or `rg` is quicker than `grep` and has some nice features
-
-```{.zsh}
-rg -t yaml "url:" .
-```
-
-## Regexes in the Shell
-
-- Standard shell tools like `sed`, `awk`, and `grep` can all use some version of regular expressions. 
-
-```{.zsh}
-egrep "^The sky|night.$" files/examples/sentences.txt
-```
-
-<br />
-
-```{.zsh}
-egrep "^The sky|night.$" files/examples/sentences.txt
-```
-
-## Regexes in the Shell
-
-- There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings. 
+- There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings and being a kind of "glue language" for work in the shell. Perl can act as a kind of more consistent and powerful superset of shell stream-of-strings tools like `grep`, `sed`, and `awk`.
 - One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. 
 
 ```{.zsh}
-# Find every Rmarkdown file beneath the current directory
+# Find every Quarto file beneath the current directory
 # Then edit each one in place to replace every instance of 
 # `percent_format` with `label_percent`
-find . -name "*.Rmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
+find . -name "*.qmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
 ```
 
-## Regexes in the Shell
+## Beyond `grep` in the shell
 
 - You can protect a bit against the dangers of doing this by making the `-i` option create backup files of everything it touches:
 
 ```{.zsh}
-# Find every Rmarkdown file beneath the current directory
+# Find every quarto file beneath the current directory
 # Then edit each one in place to replace every instance of 
 # `percent_format` with `label_percent`
-find . -name "*.Rmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
+find . -name "*.qmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
 ```
 
 - Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. 
+- The other protection, of course, is to have your working files under version control, which will get to later in the semester.
 - For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/)
 
 # Text Editors
