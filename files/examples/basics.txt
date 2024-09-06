@@ -3,6 +3,10 @@ Apple, Banana, Pear,
 apple pie, apple, apple cake
 apple
 Apple
+Apple. Banana. Pear.
+Banana
+Guava
+Alabama
 pear
 peach, apple, plum
 grey

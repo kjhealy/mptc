@@ -31,10 +31,10 @@ library(flipbookr)
 
 ansi_aware_handler <- function(x, options) {
   paste0(
-    "<pre class=\"r-output\"><code>",
+    "<div class=\"cell-output cell-output-stdout\"><pre \"data-code-line-numbers\"><code>",
     fansi::to_html(x = htmltools::htmlEscape(x), warn = FALSE, term.cap = "256"),
     #cli::ansi_html(x = x),
-    "</code></pre>"
+    "</code></pre></div>"
   )
 }
 
@@ -95,7 +95,7 @@ egrep -i 'jabber' files/examples/*.txt
 
 ## The `grep` family
 
-grep and its derivatives are very powerful thanks to their ability to use _regular expressions_. We will be learn more about that very soon. For now, we'll introduce `rg` or `ripgrep`, which is a modern version of `grep` that has some nice additional features. For more details see the [ripgrep project page](https://github.com/BurntSushi/ripgrep)
+grep and its derivatives are very powerful thanks to their ability to use _regular expressions_. We will learn about those momentarily. There are also more recent command-line search tools like ripgrep, or `rg`, a modern version of `grep` that is very fast, automatically searches subfolders, and has other nice additional features. For more details see the [ripgrep project page](https://github.com/BurntSushi/ripgrep).
 
 ```{.zsh}
 # On a Mac with Homebrew (https://brew.sh)
@@ -126,20 +126,20 @@ brew install fzf
 Or,
 
 :::{.huge}
-  Waiter, there appears to be a language inside my language
+  [Waiter, there appears to be a language inside my language]{.fg-lblue}
 :::
 
 ##  Regular Expressions
 
-Regexps are their own world of text processing
-
 :::: {.columns}
 
-::: {.column width="50%"}
+::: {.column width="60%"}
   ![](../assets/03-editors/03_friedl_regex_cover.png){width=70%}
 :::
 
-::: {.column width="50%" .right}
+::: {.column width="40%" .right}
+Regexps are their own world of text processing
+
   ☜ This book is a thing of beauty.
 :::
 
@@ -151,55 +151,63 @@ Regexps are their own world of text processing
 ## Searching for patterns 
 
 ::: {.incremental}
-- A regular expression is a way of searching for a piece of text, or _pattern_, inside some larger body of text, called a _string_.
-- The simplest sort of search is like the "Find" functionality in a Word Processor, where the pattern is a literal letter, number, punctuation mark, word or series of words and the text is a document that gets searched one line at a time. The next step up is "Find and Replace"
-
+- A regular expression is a way of searching for a piece of text, or [pattern]{.fg-pink}, inside some larger body of text, called a [string]{.fg-red}.
+- The simplest sort of search is like the "Find" functionality in a Word Processor. The pattern is a literal letter, number, punctuation mark, word or series of words; the strings are all the sentences in a document.
+- When searching a plain-text file, our strings are the _lines_ of some plain text file. We search the file for some pattern and we want to see every line in the file where there is a match.
 :::
 
-## Searching for patterns
-
-- Regular expressions are implemented across a very wide range of tools: shells of all kinds; 
-- Every pattern-searching function in `stringr` has the same basic form:
-
-```{.r}
-str_view(<STRING>, <PATTERN>, [...]) # where [...] means "maybe some options"
-```
 
 ## Searching for patterns
 
 Here's a file:
 
 ```{zsh}
+# cat sends the contents of a file to the console
 cat files/examples/basics.txt
 ```
 
-Search it for `apple`: 
+## Searching for patterns
+
+
+Search `basics.txt` for `apple`: 
 
 ```{zsh}
 egrep 'apple' files/examples/basics.txt 
 ```
 
 
+::: aside
+
+Full disclosure: The code here and on the following slides is written as though it were being run by `egrep` but in reality it was run with `rg`. This is because I wanted to use a generic utility available on all platforms (`egrep`) but also easily highlight match patterns on the slides (something `rg` lends itself to). If you try these examples using `egrep` they will work as shown.
+
+:::
 
 ## Searching for patterns
 
-- Regular expressions get their real power from special _wildcards_, i.e. tokens that match more than just literal strings, but also more general and more complex patterns.
-- The most general pattern-matching token is, "Match everything!" This is represented by the period, or **`.`**
+::: {.incremental}
+- Regular expressions get their real power from their ability to search for patterns that match more than just literal strings.
+- We want to match things like "Any word that follows an `@` symbol", or "Dates formatted as `YYYY/MM/DD`" or "Any word that's repeated",  and so on.
+- To do this we need a way of expressing search terms like "any word" or "a four digit number" and so on. Regexps do this by creating a little mini-language where some tokens stand for classes of things we might search for.
+- The most general matching pattern is, "Match everything!" This is represented by the period, or **`.`**
+:::
+
+## Searching for patterns
 
 ```{zsh}
 egrep '.' files/examples/basics.txt
 ```
 
-## Searching for patterns {.incremental}
+Everything in the file matches the `.` pattern.
 
+## Searching for patterns 
+
+::: {.incremental}
 - But ... if “**`.`**” matches any character, how do you specifically match the character “[**`.`**]{.fg-pink}”?
-- You have to "escape" the period to tell the regex you want to match it exactly, rather than interpret it as meaning "match anything".
-- regexs use the backslash, **\\**, to signal "escape the next character".
+- You have to "escape" the period to tell the regex you want to match it exactly, or literally, rather than interpret it as meaning "match anything".
+- As in the shell, regular expressions use the backslash character, **\\**, to signal "escape the next character", or "treat the next character in a predefined special way". (E.g. `\n` for "New Line").
 - To match a "**.**", you need the regex "**`\.`**"
+:::
 
-::: {.notes}
-You need to use an “escape” to tell the regular expression you want to match it exactly, not use its special behaviour. Like strings, regexs use the backslash, \, to escape special behaviour. So to match an ., you need the regex \.. Unfortunately this creates a problem. We use strings to represent regular expressions, and \ is also used as an escape symbol in strings. So to create the regular expression \. we need the string "\\."
-::: 
 
 ## Searching for patterns
 
@@ -207,14 +215,20 @@ You need to use an “escape” to tell the regular expression you want to match
 egrep '\.' files/examples/basics.txt
 ```
 
+Now the only match is the period (highlighted in red).
 
 ## Hang on, I see a further problem
 
-… how do you match a [literal]{.fg-orange} `\`?
+… how do you match a [literal]{.fg-orange} `\` then?
 
 ```{zsh}
 cat files/examples/specials.txt
 ```
+
+## Hang on, I see a further problem
+
+… how do you match a [literal]{.fg-orange} `\` then?
+
 
 ::: {.incremental}
 
@@ -227,7 +241,7 @@ egrep '\\' files/examples/specials.txt
 
 - This is the price we pay for having to express searches for patterns using a language containing these same characters, which we may also want to search for. 
 
-- I [_promise_]{.fg-orange} this will pay off!
+- I [_promise_]{.fg-orange} this will pay off, though.
 :::
 
 
@@ -253,7 +267,7 @@ egrep '^a' files/examples/basics.txt
 
 ::: {.column width="50%" .right}
 
-```{.zsh}
+```{zsh}
 egrep 'a$' files/examples/basics.txt
 ```
 :::
@@ -544,6 +558,13 @@ find . -name "*.Rmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/
 - The RStudio IDE has many of the features of a good editor built in, as well as doing other things.
 - Several of the other editors also have good support for R and many other languages.
 
+## RStudio's Text Editor
+
+- I'll mostly confine my examples to RStudio's text editor
+
+![](../assets/03-editors/03_rstudio_sample_project_quarto.png)
+
+
 ## Danger, Will Robinson 
 
 ![One view of things](../assets/03-editors/03_learning_curves_editors.png)
@@ -613,7 +634,7 @@ The command C-x SPC (rectangle-mark-mode) toggles whether the region-rectangle o
 ### IDE-like functionality
 
 - Integration with documentation
-- Static analysis and Linting
+- Static Analysis and Linting
 - Integration with a REPL
 - Diffing files
 - Integration with version control systems
