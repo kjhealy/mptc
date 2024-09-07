@@ -275,8 +275,9 @@ egrep 'a$' files/examples/basics.txt
 
 ## Matching start and end
 
-- To force a regular expression to only match a complete string, anchor it with both [**`^ `**]{.fg-pink} and [**`$`**]{.fg-pink}
+To force a regular expression to only match a complete string, anchor it with both [**`^ `**]{.fg-pink} and [**`$`**]{.fg-pink}
 
+<br />
 
 ```{zsh}
 egrep 'apple' files/examples/basics.txt
@@ -325,9 +326,13 @@ egrep 'gr(e|a)y' files/examples/basics.txt
 - **`+`** is 1 or more
 - **`*`** is 0 or more
 
+::: {.bigcode}
+
 ```{zsh}
 cat files/examples/roman.txt
 ```
+
+:::
 
 ## Repeated patterns
 
@@ -335,11 +340,15 @@ cat files/examples/roman.txt
 - **`?`** is 0 or 1
 - **`+`** is 1 or more
 - **`*`** is 0 or more
+
+::: {.bigcode}
+
 
 ```{zsh}
 egrep 'CC+' files/examples/roman.txt
 ```
 
+:::
 
 ## Repeated patterns
 
@@ -348,9 +357,13 @@ egrep 'CC+' files/examples/roman.txt
 - **`*`** is 0 or more
 
 
+::: {.bigcode}
+
 ```{zsh}
 egrep 'C[LX]+' files/examples/roman.txt
 ```
+
+:::
 
 ## Exact numbers of repetitions
 
@@ -368,10 +381,13 @@ egrep 'C[LX]+' files/examples/roman.txt
 - **`{,m}`** is at most m
 - **`{n,m}`** is between n and m
 
+::: {.bigcode}
+
 ```{zsh}
 egrep 'C{2}' files/examples/roman.txt
 ```
 
+:::
 
 ## Exact numbers of repetitions
 
@@ -379,22 +395,31 @@ egrep 'C{2}' files/examples/roman.txt
 - **`{n,}`** is n or more
 - **`{,m}`** is at most m
 - **`{n,m}`** is between n and m
+
+::: {.bigcode}
 
 ```{zsh}
 egrep 'C{2,}' files/examples/roman.txt
 ```
 
+:::
+
 ## Exact numbers of repetitions
 
 - **`{n}`** is exactly n
 - **`{n,}`** is n or more
 - **`{,m}`** is at most m
 - **`{n,m}`** is between n and m
+
+
+::: {.bigcode}
 
 ```{zsh}
 egrep 'C{2,3}' files/examples/roman.txt
 ```
 
+:::
+
 ## Exact numbers of repetitions
 
 - **`{n}`** is exactly n
@@ -404,11 +429,15 @@ egrep 'C{2,3}' files/examples/roman.txt
 
 
 By default these are _greedy_ matches. You can make them “lazy”, matching the shortest string possible by putting a **`?`** after them. **This is often very useful!**
+
+::: {.bigcode}
 
 ```{zsh}
 egrep 'C{2,3}?' files/examples/roman.txt 
 ```
 
+:::
+
 ## Exact numbers of repetitions
 
 - **`{n}`** is exactly n
@@ -418,25 +447,37 @@ egrep 'C{2,3}?' files/examples/roman.txt
 
 By default these are _greedy_ matches. You can make them “lazy”, matching the shortest string possible by putting a **`?`** after them. **This is often very useful!**
 
+::: {.bigcode}
+
 ```{zsh}
 egrep 'C[LX]+?' files/examples/roman.txt
 ```
 
+:::
+
 ## And [finally]{.fg-yellow} ... backreferences
 
+
+::: {.bigcode}
 
 ```{zsh}
 cat files/examples/fruit.txt
 ```
 
+:::
+
 ## Grouping and backreferences
 
 Find all fruits that have a repeated pair of letters:
+
+::: {.bigcode}
 
 ```{zsh}
 # Using basic grep here because `rg` doesn't support backreferences
 grep -E '(..)\1' files/examples/fruit.txt
 ```
+
+:::
 
 ## Grouping and backreferences
 
@@ -477,9 +518,9 @@ find . -name "*.qmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
 find . -name "*.qmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
 ```
 
-- Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. 
+- Here the `-i.orig` flag will back up e.g. `analysis.qmd` to `analysis.qmd.orig` before changing `analysis.qmd`. 
 - The other protection, of course, is to have your working files under version control, which will get to later in the semester.
-- For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/)
+- For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/).
 
 # Text Editors
 
