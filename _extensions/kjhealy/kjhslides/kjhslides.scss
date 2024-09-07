@@ -150,6 +150,9 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   font-size: 0.78rem;
 }
 
+.bigcode pre, .bigcode code {
+  font-size: 1.33rem;
+}
 
 
 // Miscellaneous helper classes
