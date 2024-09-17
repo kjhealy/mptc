@@ -83,6 +83,19 @@
       ],
       "Hash": "f27411eb6d9c3dada5edd444b8416675"
     },
+    "V8": {
+      "Package": "V8",
+      "Version": "5.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "Rcpp",
+        "curl",
+        "jsonlite",
+        "utils"
+      ],
+      "Hash": "9eb7b2df315593e726b029200fc0276c"
+    },
     "askpass": {
       "Package": "askpass",
       "Version": "1.2.0",
@@ -123,11 +136,21 @@
       ],
       "Hash": "0c54cf3a08cc0e550fbd64ad33166143"
     },
+    "bigD": {
+      "Package": "bigD",
+      "Version": "0.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "93637e906f3fe962413912c956eb44db"
+    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R"
       ],
@@ -137,7 +160,7 @@
       "Package": "bit64",
       "Version": "4.0.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R",
         "bit",
@@ -146,6 +169,13 @@
         "utils"
       ],
       "Hash": "9fe98599ca456d6552421db0d6772d8f"
+    },
+    "bitops": {
+      "Package": "bitops",
+      "Version": "1.0-8",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Hash": "da69e6b6f8feebec0827205aad3fdbd8"
     },
     "blob": {
       "Package": "blob",
@@ -238,6 +268,22 @@
       ],
       "Hash": "d7e13f49c19103ece9e58ad2d83a7354"
     },
+    "cards": {
+      "Package": "cards",
+      "Version": "0.2.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "dplyr",
+        "glue",
+        "rlang",
+        "tidyr",
+        "tidyselect"
+      ],
+      "Hash": "b1aff1f353f1f384dfc1fb4dd78d903c"
+    },
     "cellranger": {
       "Package": "cellranger",
       "Version": "1.1.0",
@@ -265,7 +311,7 @@
       "Package": "clipr",
       "Version": "0.8.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "utils"
       ],
@@ -543,7 +589,7 @@
       "Package": "forcats",
       "Version": "1.0.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R",
         "cli",
@@ -565,6 +611,17 @@
         "methods"
       ],
       "Hash": "15aeb8c27f5ea5161f9f6a641fafd93a"
+    },
+    "gapminder": {
+      "Package": "gapminder",
+      "Version": "1.0.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "tibble"
+      ],
+      "Hash": "3a6fab978494586e851b8763996821d6"
     },
     "gargle": {
       "Package": "gargle",
@@ -785,6 +842,36 @@
       ],
       "Hash": "05e4f5fffb1eecfeaac9ea0b7f255fef"
     },
+    "gt": {
+      "Package": "gt",
+      "Version": "0.11.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "base64enc",
+        "bigD",
+        "bitops",
+        "cli",
+        "commonmark",
+        "dplyr",
+        "fs",
+        "glue",
+        "htmltools",
+        "htmlwidgets",
+        "juicyjuice",
+        "magrittr",
+        "markdown",
+        "reactable",
+        "rlang",
+        "sass",
+        "scales",
+        "tidyselect",
+        "vctrs",
+        "xml2"
+      ],
+      "Hash": "3470c2eb1123db6a2c54ec812de38284"
+    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.5",
@@ -800,11 +887,30 @@
       ],
       "Hash": "e18861963cbc65a27736e02b3cd3c4a0"
     },
+    "gtsummary": {
+      "Package": "gtsummary",
+      "Version": "2.0.2",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cards",
+        "cli",
+        "dplyr",
+        "glue",
+        "gt",
+        "lifecycle",
+        "rlang",
+        "tidyr",
+        "vctrs"
+      ],
+      "Hash": "4f9f5a43b87926c5969d50780b282e8f"
+    },
     "haven": {
       "Package": "haven",
       "Version": "2.5.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R",
         "cli",
@@ -825,7 +931,7 @@
       "Package": "here",
       "Version": "1.0.1",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "rprojroot"
       ],
@@ -846,7 +952,7 @@
       "Package": "hms",
       "Version": "1.1.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "lifecycle",
         "methods",
@@ -871,6 +977,21 @@
         "utils"
       ],
       "Hash": "81d371a9cc60640e74e4ab6ac46dcedc"
+    },
+    "htmlwidgets": {
+      "Package": "htmlwidgets",
+      "Version": "1.6.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "grDevices",
+        "htmltools",
+        "jsonlite",
+        "knitr",
+        "rmarkdown",
+        "yaml"
+      ],
+      "Hash": "04291cc45198225444a397606810ac37"
     },
     "httpuv": {
       "Package": "httpuv",
@@ -1004,6 +1125,16 @@
         "methods"
       ],
       "Hash": "e1b9c55281c5adc4dd113652d9e26768"
+    },
+    "juicyjuice": {
+      "Package": "juicyjuice",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "V8"
+      ],
+      "Hash": "3bcd11943da509341838da9399e18bce"
     },
     "kableExtra": {
       "Package": "kableExtra",
@@ -1278,6 +1409,16 @@
       ],
       "Hash": "c62edf62de70cadf40553e10c739049d"
     },
+    "palmerpenguins": {
+      "Package": "palmerpenguins",
+      "Version": "0.1.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "6c6861efbc13c1d543749e9c7be4a592"
+    },
     "pander": {
       "Package": "pander",
       "Version": "0.6.5",
@@ -1337,7 +1478,7 @@
       "Package": "prettyunits",
       "Version": "1.2.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R"
       ],
@@ -1360,7 +1501,7 @@
       "Package": "progress",
       "Version": "1.2.3",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R",
         "R6",
@@ -1433,11 +1574,36 @@
       ],
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
     },
+    "reactR": {
+      "Package": "reactR",
+      "Version": "0.6.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "htmltools"
+      ],
+      "Hash": "10f4d661c235181648a5958c02c0382a"
+    },
+    "reactable": {
+      "Package": "reactable",
+      "Version": "0.4.4",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "digest",
+        "htmltools",
+        "htmlwidgets",
+        "jsonlite",
+        "reactR"
+      ],
+      "Hash": "6069eb2a6597963eae0605c1875ff14c"
+    },
     "readr": {
       "Package": "readr",
       "Version": "2.1.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R",
         "R6",
@@ -1558,7 +1724,7 @@
       "Package": "rprojroot",
       "Version": "2.0.4",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R"
       ],
@@ -1953,12 +2119,27 @@
       "Package": "tzdb",
       "Version": "0.4.0",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R",
         "cpp11"
       ],
       "Hash": "f561504ec2897f4d46f0c7657e488ae1"
+    },
+    "ukelection2019": {
+      "Package": "ukelection2019",
+      "Version": "0.0.1.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "ukelection2019",
+      "RemoteUsername": "kjhealy",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "177cdf403a7be8647d7f5e52ce2fe50ba15d32b9",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "e0cbfc67f4d6efebf78d419a17f32fdf"
     },
     "usethis": {
       "Package": "usethis",
@@ -2039,7 +2220,7 @@
       "Package": "vroom",
       "Version": "1.6.5",
       "Source": "Repository",
-      "Repository": "CRAN",
+      "Repository": "https://cloud.r-project.org",
       "Requirements": [
         "R",
         "bit64",

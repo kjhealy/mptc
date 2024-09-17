@@ -170,6 +170,17 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   text-align: left;
 }
 
+// large text
+
+.large p {
+  font-size: 3em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 1em;
+  margin-bottom: 0.1em;
+}
+
+
 // very large text
 
 .huge p {

@@ -785,6 +785,7 @@ Installing things via shell scripts should only be done from trusted sources!
 
 - Unix commands work with some _input_ and may produce some _output_
 - Unix systems have the concepts of "standard input", "standard output", and "standard error" as streams where things come from, where they go to, and where problems are reported. 
+- The idea of a sequence of commands or, more generally, _functions_ that can be composed or pipelined in a smooth sequence is a very general and very powerful idea that we will soon see in action in R and that you may come across in many other settings as well.
 
 ## The Unix pipe
 

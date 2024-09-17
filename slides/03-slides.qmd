@@ -298,7 +298,7 @@ egrep '^apple$' files/examples/basics.txt
 **`[^abc]`** matches anything _except_ a, b, or c.
 
 ::: {.notes}
-Remember, to create a regular expression containing \d or \s, you’ll need to escape the \ for the string, so you’ll type "\\d" or "\\s".
+
 :::
 
 
@@ -428,7 +428,7 @@ egrep 'C{2,3}' files/examples/roman.txt
 - **`{n,m}`** is between n and m
 
 
-By default these are _greedy_ matches. You can make them “lazy”, matching the shortest string possible by putting a **`?`** after them. **This is often very useful!**
+By default regexps make _greedy_ matches. You can make them match the _shortest_ string possible by adding a [?]{.fg-pink}. **This is often very useful!**
 
 ::: {.bigcode}
 
@@ -445,7 +445,7 @@ egrep 'C{2,3}?' files/examples/roman.txt
 - **`{,m}`** is at most m
 - **`{n,m}`** is between n and m
 
-By default these are _greedy_ matches. You can make them “lazy”, matching the shortest string possible by putting a **`?`** after them. **This is often very useful!**
+By default regexps make _greedy_ matches. You can make them match the _shortest_ string possible by adding a [?]{.fg-pink}. **This is often very useful!**
 
 ::: {.bigcode}
 
@@ -489,7 +489,7 @@ Backreferences and grouping are very useful for string _replacements_.
 
 ## Learning [and testing]{.fg-yellow} regexps
 
-### Practice with a tester like [https://regexr.com](https://regexr.com)
+### Practice with a tester like [https://regexr.com](https://regexr.com) or [https://regex101.com](https://regex101.com)
 
 ### Or an app like [Patterns](https://krillapps.com/patterns/)
 
@@ -497,8 +497,9 @@ Backreferences and grouping are very useful for string _replacements_.
 
 ## Beyond `grep` in the shell
 
-- There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings and being a kind of "glue language" for work in the shell. Perl can act as a kind of more consistent and powerful superset of shell stream-of-strings tools like `grep`, `sed`, and `awk`.
-- One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. 
+There's also [Perl](https://perl.org), a programming language that's been displaced to some extent by Python but which remains very good at compactly manipulating strings and being a kind of "glue language" for work in the shell. Perl can act as a kind of more consistent and powerful superset of shell stream-of-strings tools like `grep`, `sed`, and `awk`.
+
+One useful (but [be-careful-not-to-cut-yourself]{.fg-red} dangerous) thing Perl can do is easily edit a lot of files "in place". 
 
 ```{.zsh}
 # Find every Quarto file beneath the current directory
@@ -521,6 +522,87 @@ find . -name "*.qmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/
 - Here the `-i.orig` flag will back up e.g. `analysis.qmd` to `analysis.qmd.orig` before changing `analysis.qmd`. 
 - The other protection, of course, is to have your working files under version control, which will get to later in the semester.
 - For more on Perl oneliners see, for example, the [Perl one-liners cookbook](https://learnbyexample.github.io/learn_perl_oneliners/).
+
+# Regular Expressions in R
+
+## Why they appear
+
+To _detect_ text, to _extract_ it, to _replace_ or _transform_ it.
+
+`r chunq_reveal("05-regular-expressions-25", smallcode=TRUE, lcolw="60", rcolw="40", title = "Example: Politics and Placenames")`
+
+
+```{r}
+#| label: "05-regular-expressions-25"
+#| include: FALSE
+library(tidyverse)
+library(ukelection2019)
+
+ukvote2019 |> 
+  group_by(constituency) |> 
+  slice_max(votes) |> 
+  ungroup() |> 
+  select(constituency, party_name) |> 
+  mutate(shire = str_detect(constituency, "shire"),
+         field = str_detect(constituency, "field"),
+         dale = str_detect(constituency, "dale"),
+         pool = str_detect(constituency, "pool"),
+         ton = str_detect(constituency, "(ton$)|(ton )"),
+         wood = str_detect(constituency, "(wood$)|(wood )"),
+         saint = str_detect(constituency, "(St )|(Saint)"),
+         port = str_detect(constituency, "(Port)|(port)"),
+         ford = str_detect(constituency, "(ford$)|(ford )"),
+         by = str_detect(constituency, "(by$)|(by )"),
+         boro = str_detect(constituency, "(boro$)|(boro )|(borough$)|(borough )"),
+         ley = str_detect(constituency, "(ley$)|(ley )|(leigh$)|(leigh )")) |> 
+  pivot_longer(shire:ley, names_to = "toponym")
+```
+
+
+## Example: Politics and Placenames
+
+```{r}
+#| label: "05-regular-expressions-26"
+place_tab <- ukvote2019 |> 
+  group_by(constituency) |> 
+  slice_max(votes) |> 
+  ungroup() |> 
+  select(constituency, party_name) |> 
+  # We could write these more efficiently but we don't care about that rn
+  mutate(shire = str_detect(constituency, "shire"),
+         field = str_detect(constituency, "field"),
+         dale = str_detect(constituency, "dale"),
+         pool = str_detect(constituency, "pool"),
+         ton = str_detect(constituency, "(ton$)|(ton )"),
+         wood = str_detect(constituency, "(wood$)|(wood )"),
+         saint = str_detect(constituency, "(St )|(Saint)"),
+         port = str_detect(constituency, "(Port)|(port)"),
+         ford = str_detect(constituency, "(ford$)|(ford )"),
+         by = str_detect(constituency, "(by$)|(by )"),
+         boro = str_detect(constituency, "(boro$)|(boro )|(borough$)|(borough )"),
+         ley = str_detect(constituency, "(ley$)|(ley )|(leigh$)|(leigh )")) |> 
+  pivot_longer(shire:ley, names_to = "toponym")
+```
+
+---
+
+```{r}
+#| label: "05-regular-expressions-27"
+#| include: FALSE
+place_tab |> 
+  group_by(party_name, toponym) |> 
+  filter(party_name %in% c("Conservative", "Labour")) |> 
+  group_by(toponym, party_name) |> 
+  summarize(freq = sum(value)) |> 
+  mutate(pct = freq/sum(freq)) |> 
+  filter(party_name == "Conservative") |> 
+  arrange(desc(pct))
+  
+```
+
+`r chunq_reveal("05-regular-expressions-27", smallcode=TRUE,  lcolw="50", rcolw="50", title = "Example: Politics and Placenames")`
+
+
 
 # Text Editors
 
@@ -549,10 +631,9 @@ find . -name "*.qmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/
 
 ## RStudio's Text Editor
 
-- I'll mostly confine my examples to RStudio's text editor
+![](../assets/03-editors/03_rstudio_sample_project_quarto.png){width=120% fig-align="center"}
 
-![](../assets/03-editors/03_rstudio_sample_project_quarto.png)
-
+I'll mostly confine my examples to RStudio's text editor
 
 ## Danger, Will Robinson 
 
@@ -577,7 +658,7 @@ find . -name "*.qmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/
 ::: {.fragment}
 ### Edit text!
 
-- Easy navigation with keyboard shortcuts 
+- Navigation and action via keyboard shortcuts
 - Keyboard-based selection and movement of text, lines, and logical sections
 - Search and replace using regular expressions
 
@@ -590,6 +671,7 @@ find . -name "*.qmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/
 - Multiple Cursors
 - Rectangular / Columnar editing
 - A snippet system of some sort
+
 
 ::: {.notes}
 
@@ -622,10 +704,11 @@ The command C-x SPC (rectangle-mark-mode) toggles whether the region-rectangle o
 
 ### IDE-like functionality
 
+- Diffing files
 - Integration with documentation
 - Static Analysis and Linting
 - Integration with a REPL
-- Diffing files
+- A Command Palette (Windows: Ctrl+Shift+P Mac: Command+Shift+P)
 - Integration with version control systems
 - Remote editing
 
@@ -637,3 +720,5 @@ The command C-x SPC (rectangle-mark-mode) toggles whether the region-rectangle o
 - Citation and reference management
 - Integration with Zotero
 - Connection to [Pandoc](https://pandoc.org)
+
+

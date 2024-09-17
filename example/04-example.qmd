@@ -1,0 +1,15 @@
+---
+title: "Example 04: R and RStudio"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+
+# R Practice
+

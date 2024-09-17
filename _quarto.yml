@@ -54,8 +54,8 @@ website:
               file: content/02-content.qmd
             - text: "03: Searching and Editing Text"
               file: content/03-content.qmd
-            # - text: "04: Version Control"
-            #   file: content/04-content.qmd
+            - text: "04: R and RStudio"
+              file: content/04-content.qmd
             # - text: "05: Build Systems"
             #   file: content/05-content.qmd
     - title: "Assignments"
@@ -71,6 +71,8 @@ website:
               file: assignment/02-assignment.qmd
             - text: "03: Searching and Editing Text"
               file: assignment/03-assignment.qmd
+            - text: "04: R and RStudio"
+              file: assignment/04-assignment.qmd
 
 
     - title: "Examples"
@@ -86,8 +88,8 @@ website:
               file: example/02-example.qmd
             - text: "03: Searching and Diffing Text"
               file: example/03-example.qmd
-            # - text: "04: Git"
-            #   file: example/04-example.qmd
+            - text: "04: R and RStudio"
+              file: example/04-example.qmd
             # - text: "05: Make"
             #   file: example/05-example.qmd
 

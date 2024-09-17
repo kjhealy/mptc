@@ -1,0 +1,15 @@
+---
+title: "Tasks for Week 04"
+date: last-modified
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+## Work through the "Whole Game" section of R4DS
+
+- @wickham23:_r_data_scien. 
+
+[Read the text online.](https://r4ds.hadley.nz/) Complete as much of the "[Whole Game](https://r4ds.hadley.nz/whole-game)" section as you can, i.e. Chapters 1-8. (They are short.) If you can, see if you can create a new R project and try redoing some of the examples and code in the Whole Game section using data of your own, or a dataset downloaded from one of the [practice data sources](https://mptc.io/content/). Don't worry if things don't go as expected, but do make a note of what you found difficult or confusing so we can discuss it in seminar.

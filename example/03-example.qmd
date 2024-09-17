@@ -82,19 +82,19 @@ There's also [Perl](https://perl.org), a programming language that's been displa
 One useful (but be-careful-not-to-cut-yourself dangerous) thing Perl can do is easily edit a lot of files in place. For example, imagine you have a project with a bunch of `.Rmd` files that have code in them for graphs. And imagine further that many of these files have bits of code that uses the `percent_format` function from the `{scales}` package. Then one day the `{scales}` maintainer announces that `percent_format` is now deprecated and you should use `label_percent` instead. How can you change _all_ instances of one to the other across _all_ `.Rmd` files in your project folder (or a series of project folders)?
 
 ```{.zsh}
-# Find every Rmarkdown file beneath the current directory
+# Find every quarto file beneath the current directory
 # Then edit each one in place to replace every instance of 
 # `percent_format` with `label_percent`
-find . -name "*.Rmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
+find . -name "*.qmd" | xargs perl -p -i -e "s/percent_format/label_percent/g"
 ```
 
 You can protect a bit against the dangers of doing this by making the `-i` option create backup files of everything it touches:
 
 ```{.zsh}
-# Find every Rmarkdown file beneath the current directory
+# Find every quarto file beneath the current directory
 # Then edit each one in place to replace every instance of 
 # `percent_format` with `label_percent`
-find . -name "*.Rmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
+find . -name "*.qmd" | xargs perl -p -i.orig -e "s/percent_format/label_percent/g"
 ```
 
 Here the `-i.orig` flag will back up e.g. `analysis.Rmd` to `analysis.Rmd.orig`. Note that you don't put a space between the `-i` part and the `.orig` backup extension. (You can choose any extension you like.)
