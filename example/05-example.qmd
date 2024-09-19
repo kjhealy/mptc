@@ -1,0 +1,137 @@
+---
+title: "Example 05: Tables and dplyr"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+
+# Crosstabs
+
+```{r}
+library(tidyverse)
+library(socviz)
+
+gss_sm
+```
+
+
+Count up one variable:
+
+```{r}
+gss_sm |> 
+  group_by(bigregion) |> 
+  tally()
+```
+
+
+Cross-tabulate:
+
+```{r}
+gss_sm |> 
+  group_by(bigregion, religion) |> 
+  tally()
+```
+
+Notice the difference:
+
+```{r}
+gss_sm |> 
+  group_by(religion, bigregion) |> 
+  tally()
+```
+
+Seems similar, but now try:
+
+```{r}
+# Religion within bigregion;
+gss_sm |> 
+  group_by(bigregion, religion) |> 
+  tally() |> 
+  summarize(group_total = sum(n)) |> 
+  mutate(prop = group_total/sum(group_total))
+```
+
+
+```{r}
+# Bigregion within religion
+gss_sm |> 
+  group_by(religion, bigregion) |> 
+  tally() |> 
+  summarize(group_total = sum(n)) |> 
+  mutate(prop = group_total/sum(group_total))
+```
+
+
+To get our table to look like a conventional nxm crosstab, pivot it:
+
+```{r}
+gss_sm |> 
+  group_by(bigregion, religion) |> 
+  tally() |> 
+  pivot_wider(names_from = religion, values_from = n)
+```
+
+
+```{r}
+# Bigregion within religion
+gss_sm |> 
+  group_by(religion, bigregion) |> 
+  tally() |> 
+  summarize(group_total = sum(n)) |> 
+  mutate(prop = group_total/sum(group_total))
+```
+
+
+Grouped and counted by region within religion:
+
+```{r}
+gss_sm |> 
+  group_by(religion, bigregion) |> 
+  tally() |> 
+  pivot_wider(names_from = bigregion, values_from = n)
+```
+
+
+As many dimensions as we wish:
+
+```{r}
+gss_sm |> 
+  group_by(bigregion, race, sex) |> 
+  tally()
+```
+
+
+Equivalently, but the result is not grouped:
+
+```{r}
+gss_sm |> 
+  count(bigregion, race, sex)
+```
+
+
+Add a frequency column:
+
+```{r}
+gss_sm |> 
+  group_by(bigregion, race, sex) |> 
+  tally() |> 
+  mutate(prop = n/sum(n))
+```
+
+
+When the result is not grouped, what do you get as the proportions?
+
+```{r}
+gss_sm |> 
+  count(bigregion, race, sex) |> 
+  mutate(prop = n/sum(n))
+```
+
+Check your work by summing the rows.
+

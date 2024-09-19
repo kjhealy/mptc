@@ -1,0 +1,175 @@
+---
+title: "Tasks for Week 05"
+date: last-modified
+---
+
+## UK Election Data
+
+```{r}
+library(tidyverse)
+```
+
+
+### 1. Install the UK Election Data package
+
+It's not on CRAN, it's on my GitHub.
+
+```{r}
+#| eval: false
+
+# You only need to do this once
+remotes::install_github("kjhealy/ukelection2019")
+```
+
+### 2. Load the package
+
+```{r }
+#| label: "03b-dplyr-basics-16"
+library(ukelection2019)
+
+ukvote2019
+```
+
+Each row is a candidate standing in a particular constituency (in US speak, a district) for a particular party or as an independent candidate.
+
+### 3. Get familiar with the data
+
+Use [**`sample_n()`**]{.fg-green} to sample `n` rows of your tibble.
+
+```{r }
+#| label: "03b-dplyr-basics-17"
+ukvote2019 |> 
+  sample_n(10)
+```
+
+A vector of unique constituency names:
+
+```{r}
+#| label: "03b-dplyr-basics-18"
+ukvote2019 |> 
+  distinct(constituency)
+```
+
+
+Tally them up:
+
+```{r}
+#| label: "03b-dplyr-basics-19"
+ukvote2019 |> 
+  distinct(constituency) |> 
+  tally()
+```
+
+That is, there are 650 electoral constituencies in Great Britain and Northern Ireland.
+
+
+A quicker way of establishing how many constituencies there are:
+
+```{r}
+#| label: "03b-dplyr-basics-24"
+ukvote2019 |> 
+  count(constituency) 
+```
+
+
+Which parties fielded the most candidates?
+
+```{r}
+#| label: "03b-dplyr-basics-21"
+ukvote2019 |> 
+  count(party_name) |> 
+  arrange(desc(n))
+```
+
+What are the Top 5 parties by n candidates?
+
+```{r}
+#| label: "03b-dplyr-basics-22"
+ukvote2019 |> 
+  count(party_name) |> 
+  slice_max(order_by = n, n = 5)
+
+```
+
+Bottom 5? Does this make sense?
+
+```{r}
+#| label: "03b-dplyr-basics-23"
+ukvote2019 |> 
+  count(party_name) |> 
+  slice_min(order_by = n, n = 5)
+
+```
+
+### 4. Filtering 
+
+Filtering is subsetting the rows according to a condition in one or more of the columns
+
+Show me all and only the Green party candidates.
+
+```{r}
+ukvote2019 |> 
+  filter(party_name == "Green")
+```
+
+Show me all candidates named "Michael". 
+
+```{r}
+ukvote2019 |> 
+  filter(fname == "Michael")
+```
+
+Show me all Green party candidates named "Michael". 
+
+```{r}
+ukvote2019 |> 
+  filter(party_name == "Green" & fname == "Michael")
+```
+
+### 5. Grouping
+
+Who won in each constituency?
+
+```{r}
+ukvote2019 |> 
+  group_by(constituency) |> 
+  slice_max(votes)
+```
+
+What happens if you leave out `group_by()` in the chunk of code above? 
+
+
+How do I count the number of seats each party won?
+
+```{r}
+ukvote2019 |> 
+  group_by(constituency) |> 
+  slice_max(votes) |> 
+  group_by(party_name) |> 
+  tally() |> 
+  arrange(desc(n))
+```
+
+
+### Group and Summarize
+
+```{r}
+ukvote2019 |> 
+  group_by(constituency) |> 
+  slice_max(votes) |> 
+  ungroup() |> 
+  summarize(mean_winner_share = mean(vote_share_percent))
+```
+
+What happens if you leave out `ungroup()` in the chunk above?
+
+### 4. Have a go
+
+Can you find ...
+
+- The candidate who won the most votes in the country?
+- The candidate with the largest vote share in the country?
+- The median vote share of winning candidates?
+- The largest vote share swing from previous election?
+- Overall turnout for the whole country?
+- Median turnout across constituencies?

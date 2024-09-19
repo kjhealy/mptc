@@ -127,6 +127,28 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 
 }
 
+// Tables
+
+.reveal table {
+  border: none;
+  border-collapse: collapse;
+}
+
+.reveal table th {
+  border-bottom: 1px solid;
+}
+
+.reveal table tr {
+  border-bottom: none;
+  border-top: none;
+}
+
+.reveal table td {
+  border-bottom: none;
+  border-top: none;
+}
+
+
 // Console/text/cell output
 
 
@@ -170,29 +192,50 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   text-align: left;
 }
 
-// large text
+// Text size changes
 
-.large p {
-  font-size: 3em;
+.huge p {
+  font-size: 4em;
   font-weight: bold;
   text-align: center;
   line-height: 1em;
   margin-bottom: 0.1em;
 }
 
-
-// very large text
-
-.huge p {
-  font-size: 4em;
+.larger p {
+  font-size: 3em;
   font-weight: bold;
   text-align: center;
   line-height: 0.85em;
   margin-bottom: 0.1em;
 }
 
+.large p {
+  font-size: 2em;
+  font-weight: bold;
+  text-align: center;
+  line-height: 0.85em;
+  margin-bottom: 0.1em;
+}
+
+.small p {
+  font-size: 1.2em;
+}
+
+.smallerkh p {
+  font-size: 1em;
+}
+
+.tiny p {
+  font-size: 0.65em;
+}
+
 .code-annotation-anchor {
   color: $my-orange !important;
+}
+
+.reveal ul {
+  list-style-type: none;
 }
 
 .reveal a {
@@ -216,6 +259,13 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   font-size: 0.6em;
 }
 
+
+// Add a little padding below code blocks
+.cell-output-stdout {
+  margin-bottom: 1em;
+}
+
+
 // Color classes for divider-slide backgrounds,
 // paragraphs and header foregrounds. The !important
 // flag turns out to be, uh, important for this
@@ -237,7 +287,7 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 }
 
 .inv-title code {
-  color: $my-green !important;
+  // color: $my-green !important;
   background-color: $my-blue;
 }
 
@@ -262,19 +312,12 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   color: $my-red;
 }
 
-.fg-green {
-  color: $my-green !important;
-}
-
-
 .fg-pink {
   color: $my-pink;
 }
 
-
-// li elements
-.fg-white li {
-  color: $my-off-white !important;
+.fg-offwhite {
+  color: $my-off-white;
 }
 
 
@@ -336,11 +379,6 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 .fg-red p {
   color: $my-red !important;
 }
-
-.fg-green {
-  color: $my-green !important;
-}
-
 
 
 // h elements
@@ -468,4 +506,3 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
     font-weight: bold;
     font-style: italic;
 }
-

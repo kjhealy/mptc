@@ -2105,6 +2105,17 @@
       ],
       "Hash": "c5f3c201b931cd6474d17d8700ccb1c8"
     },
+    "tinytable": {
+      "Package": "tinytable",
+      "Version": "0.4.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "methods"
+      ],
+      "Hash": "fb44b5c5e35e171b0129b22e7cb35949"
+    },
     "tinytex": {
       "Package": "tinytex",
       "Version": "0.52",

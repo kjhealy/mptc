@@ -245,11 +245,28 @@ TYPE OUT<br />YOUR CODE<br />[BY HAND]{.fg-orange}
 
 # Getting O[r]{.fg-green}iented
 
-## Before we start {.incremental}
+## Before we start 
+
+::: {.incremental .large}
 
 - Keep in mind the kinds of things we want to do. 
-- In particular, we are constantly working with _rectangular tables of data_ consisting of _columns_ with information about _variables_
+- In particular, we are constantly working with [_rectangular tables of data_]{.fg-lblue} consisting of _columns_ with information about _variables_
 - We want to do things like group, summarize, count, tally, calculate, model or otherwise work on these columns, singly or all at once.
+- Once we learn how to do things like count up the number of rows within a group, or take the average of the values in a column, we will find that we are just a step or two away from doing much more complex operations in essentially the same fashion.
+
+:::
+
+---
+
+::: {.huge .center}
+
+[**Split**]{.fg-lblue}
+
+[**Apply**]{.fg-red}
+
+[**Combine**]{.fg-green}
+
+:::
 
 ## Before we start
 
