@@ -361,15 +361,33 @@
       ],
       "Hash": "bb097fccb22d156624fd07cd2894ddb6"
     },
+    "covdata": {
+      "Package": "covdata",
+      "Version": "1.01",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "covdata",
+      "RemoteUsername": "kjhealy",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "0626c6522c38f1ac0c74453267dd5779a88ca2c6",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "magrittr",
+        "tidyr"
+      ],
+      "Hash": "e43668fb2b753e5f52922669f2ed4bcc"
+    },
     "cpp11": {
       "Package": "cpp11",
-      "Version": "0.4.7",
+      "Version": "0.5.0",
       "Source": "Repository",
       "Repository": "CRAN",
       "Requirements": [
         "R"
       ],
-      "Hash": "5a295d7d963cc5035284dcdbaf334f4e"
+      "Hash": "91570bba75d0c9d3f1040c835cee8fba"
     },
     "crayon": {
       "Package": "crayon",
@@ -1096,6 +1114,28 @@
       ],
       "Hash": "0080607b4a1a7b28979aecef976d8bc2"
     },
+    "janitor": {
+      "Package": "janitor",
+      "Version": "2.2.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "hms",
+        "lifecycle",
+        "lubridate",
+        "magrittr",
+        "purrr",
+        "rlang",
+        "snakecase",
+        "stringi",
+        "stringr",
+        "tidyr",
+        "tidyselect"
+      ],
+      "Hash": "5baae149f1082f466df9d1442ba7aa65"
+    },
     "jpeg": {
       "Package": "jpeg",
       "Version": "0.1-10",
@@ -1686,6 +1726,18 @@
       ],
       "Hash": "97b1d5361a24d9fb588db7afe3e5bcbf"
     },
+    "repurrrsive": {
+      "Package": "repurrrsive",
+      "Version": "1.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "tibble",
+        "utils"
+      ],
+      "Hash": "83cf8bf4ada1dca8cfe94111c2a691d7"
+    },
     "rlang": {
       "Package": "rlang",
       "Version": "1.1.4",
@@ -1849,6 +1901,32 @@
         "utils"
       ],
       "Hash": "c12e756cf947e58b0f2c2a520521a5a8"
+    },
+    "slider": {
+      "Package": "slider",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "cli",
+        "rlang",
+        "vctrs",
+        "warp"
+      ],
+      "Hash": "a584625e2b9e4fad4be135c8ea5c99aa"
+    },
+    "snakecase": {
+      "Package": "snakecase",
+      "Version": "0.11.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "stringi",
+        "stringr"
+      ],
+      "Hash": "58767e44739b76965332e8a4fe3f91f1"
     },
     "socviz": {
       "Package": "socviz",
@@ -2252,6 +2330,16 @@
         "withr"
       ],
       "Hash": "390f9315bc0025be03012054103d227c"
+    },
+    "warp": {
+      "Package": "warp",
+      "Version": "0.2.1",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R"
+      ],
+      "Hash": "fea474d578b1cbcb696ae6ac8bdcc439"
     },
     "whisker": {
       "Package": "whisker",
