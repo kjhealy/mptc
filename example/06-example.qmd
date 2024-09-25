@@ -1,0 +1,13 @@
+---
+title: "Example 06: Version Control and `git`"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+

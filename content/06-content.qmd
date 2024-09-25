@@ -1,0 +1,64 @@
+---
+title: "6. Version Control and Git"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+We'll learn about backing up your work and keeping the most important parts in a version control sytem.
+
+## Required Reading
+
+-   @bryanHappyGit Read *and work through* as much of this book as you can, but at least Chapters 1, 4 through 9, 11, and 12.
+
+## Optional but Recommended
+
+-   @evansLearningGit2024
+
+-   @sylor-miller21:_oh_shit_git.
+
+## Optional
+
+-   @chacon14:_pro_git
+
+## Examples
+
+[This week's examples and demos](/example/06-example.qmd).
+
+## Assignment
+
+[This week's assignment](/assignment/06-assignment.qmd) is to follow the tasks outlined in *Happy Git With R*, to the point where you have a sample repo you have committed to and pushed.
+
+## Slides
+
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/06-slides.html"></iframe-->
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+#slide_win_button("/slides/06-slides")
+```

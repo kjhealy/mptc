@@ -122,11 +122,17 @@ Not all of these are attached when we do `library(tidyverse)`
 ::::: {.fragment fragment-index=1}
 - Remember, tibbles are tables of data where the columns can be of different types, such as numeric, logical, character, factor, etc.
 - We'll use dplyr to _transform_ and _summarize_ our data.
-
 :::::
 
-
 ::::: {.fragment fragment-index=2}
+- The core logic is: split, apply, combine:
+- [Split]{.fg-lblue} or group the data into pieces
+- [Apply]{.fg-orange} a function, i.e. act on the data in some way
+- [Combine]{.fg-green} the results back into a table
+
+::::: 
+
+::::: {.fragment fragment-index=3}
 - We'll use the pipe operator, [**`|>`**]{.fg-pink}, to chain together sequences of actions on our tables.
 :::::
 
@@ -145,9 +151,9 @@ Not all of these are attached when we do `library(tidyverse)`
 ## Some [actions]{.fg-orange} to take on a single table 
 
 ::: {.incremental}
-- [**Group**]{.fg-orange} the data at the level we want, such as “_Religion by Region_” or “_Children by School_”.
-
 - [**Subset**]{.fg-orange} either the rows or columns of or table—i.e. remove them before doing anything.
+
+- [**Group**]{.fg-orange} the data at the level we want, such as "By Race", or "By Country", or “_By Religion within Regions_” or “_By Grade within Schools_”.
 
 - [**Mutate**]{.fg-orange} the data. That is, change something at the _current_ level of grouping.  Mutating adds new columns to the table, or changes the content of an existing column. It never changes the number of rows.
 
@@ -158,8 +164,8 @@ Not all of these are attached when we do `library(tidyverse)`
 ## For each [action]{.fg-orange} there's a [function]{.fg-green} 
 
 ::: {.incremental}
+- [**Subset**]{.fg-orange} has one function for rows and one for columns. We **`filter()`** rows and **`select()`** columns.
 - [**Group**]{.fg-orange} using  **`group_by()`**.
-- [**Subset**]{.fg-orange} has one action for rows and one for columns. We **`filter()`** rows and **`select()`** columns.
 - [**Mutate**]{.fg-orange} tables (i.e. add new columns, or re-make existing ones) using **`mutate()`**.
 - [**Summarize**]{.fg-orange} tables (i.e. perform aggregating calculations) using **`summarize()`**.
 :::
@@ -366,7 +372,7 @@ gss_sm |>
 gss_sm |> 
   count(bigregion, religion) |> 
   pivot_wider(names_from = bigregion, values_from = n) |>  #<<
-  knitr::kable()  
+  tinytable::tt()  
 ```
 
 ```{r}
@@ -375,11 +381,11 @@ gss_sm |>
 gss_sm |> 
   count(bigregion, religion) |> 
   pivot_wider(names_from = bigregion, values_from = n) |> 
-  knitr::kable()  
+  tinytable::tt()  
 ```
 
 
-- More on [**`pivot_wider()`**]{.fg-green} and [**`kable()`**]{.fg-green} soon ...
+- More on [**`pivot_wider()`**]{.fg-green} soon ...
 
 
 
@@ -871,12 +877,31 @@ organdata |>
 
 `r chunq_reveal("03a-dplyr-basics-43", smallcode = TRUE, widths = c(40,60), title = "Let's look at that again")`
 
+
+## Let's look at that again
+
+```{r}
+#| eval: false
+
+my_vars <- c("gdp", "donors", "roads")
+
+organdata |> 
+  group_by(consent_law, country) |>
+  summarize(across(all_of(my_vars),           
+                   list(avg = \(x) mean(x, na.rm = TRUE))
+                  )
+           )     
+```
+
 ::: {.incremental}
+
 - `my_vars` are selected by [**`across()`**]{.fg-green}
 - We use `all_of()` or `any_of()` to be explicit
-- [**`list()`**]{.fg-green} of the form `result = function` gives the new columns that will be calculated. 
-- The thing inside the list is an _anonymous function_ with the "waving person"
+- [**`list()`**]{.fg-green} of the form `result = function` gives the new columns that will be calculated.
+- The thing inside the list with the "waving person", `\(x)`, is an _anonymous function_ 
+
 :::
+
 
 
 ## We can calculate more than one thing
@@ -890,7 +915,7 @@ organdata |>
   group_by(consent_law, country) |>
   summarize(across(all_of(my_vars),           
                    list(avg = \(x) mean(x, na.rm = TRUE), #<<
-                        sd = \(x) var(x, na.rm = TRUE), #<<
+                        sdev = \(x) sd(x, na.rm = TRUE), #<<
                         md = \(x) median(x, na.rm = TRUE)) #<<
                   )
            )
@@ -907,7 +932,7 @@ organdata |>
   group_by(consent_law, country) |>
   summarize(across(all_of(my_vars),           
                    list(mean = \(x) mean(x, na.rm = TRUE), #<<
-                        var = \(x) var(x, na.rm = TRUE), #<<
+                        sd = \(x) sd(x, na.rm = TRUE), #<<
                         median = \(x) median(x, na.rm = TRUE)) #<<
                   )
            )
@@ -922,7 +947,7 @@ organdata |>
   group_by(consent_law, country) |>
   summarize(across(where(is.numeric),           
                    list(mean = \(x) mean(x, na.rm = TRUE), #<<
-                        var = \(x) var(x, na.rm = TRUE), #<<
+                        sd = \(x) sd(x, na.rm = TRUE), #<<
                         median = \(x) median(x, na.rm = TRUE)) #<<
                   )
            ) |> 
@@ -938,7 +963,7 @@ organdata |>
   group_by(consent_law, country) |>
   summarize(across(where(is.numeric),           
                    list(mean = \(x) mean(x, na.rm = TRUE), #<<
-                        var = \(x) var(x, na.rm = TRUE), #<<
+                        sd = \(x) sd(x, na.rm = TRUE), #<<
                         median = \(x) median(x, na.rm = TRUE)) #<<
                   ),
             .names = "{fn}_{col}") |> #<<

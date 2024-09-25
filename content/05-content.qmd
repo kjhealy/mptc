@@ -51,9 +51,18 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides.html"></iframe>
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_win_button("/slides/05-slides")
+slide_win_button("/slides/05-slides")
+```
+
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/05b-slides.html"></iframe>
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+slide_win_button("/slides/05b-slides")
 ```
