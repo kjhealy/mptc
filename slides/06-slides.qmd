@@ -1,6 +1,6 @@
 ---
 title: "Version Control with Git"
-subtitle: "Modern Plain Text Social Science: Week 4"
+subtitle: "Modern Plain Text Social Science: Week 06"
 format: kjhslides-revealjs
 engine: knitr
 filters: 
@@ -35,18 +35,79 @@ library(flipbookr)
 
 ![](../assets/04-git/04_four_rules.png){width=100%}
 
+# Keep Backups
+
+## You Need Backups That Are
+
+:::: {.huge}
+::: {.incremental}
+- **[Secure]{.fg-blue}**
+- **[Automated]{.fg-green}**
+- **[Redundant]{.fg-pink}**
+- **[Remote]{.fg-orange}**
+:::
+::::
+
+## These are Not Backups
+
+::: {.large}
+
+- [Your computer]{.fg-lblue}
+- [Your old computer]{.fg-green}
+- [An attachment you emailed to yourself]{.fg-orange}
+- [A USB Drive you updated twice and forget where it is maybe it is in the drawer in the kitchen oh god i hope so please please]{.fg-red}
+
+:::
+
+## Not Nearly Good Enough
+
+These services are good for a lot of things, and some of them are like backups in some ways, but they are also [not backups]{.fg-red}.
+
+::: {.large}
+
+- Google Drive
+- Dropbox
+- Box
+- Git/GitHub
+
+:::
+
+## Pay for a Reputable Service
+
+- E.g., [Backblaze](https://www.backblaze.com/cloud-backup/pricing).
+
+- If ensuring that you have [access to your work]{.fg-lblue} in the event your laptop is stolen, dropped, lost, breaks, fails, or has coffee spilled on it is *not* worth nine bucks a month to you, perhaps reconsider the value of your time, your personal risk tolerance, and your career choices.
+
+::: {.large}
+- ["When it comes to losing your data, the universe tends toward maximum irony. Don’t push it."]{.fg-pink} --- Jamie Zawinski
+:::
+
+## Remember
+
+:::{.huge}
+ - **[Secure]{.fg-blue}**
+ - **[Automated]{.fg-green}**
+ - **[Redundant]{.fg-pink}**
+ - **[Remote]{.fg-orange}**
+:::
+
 # Knowing what you did
 
-##
+---
 
-### ... O that I were as great
-### As is my grief, or lesser than my name!
-### Or that I could forget what I have been,
-### Or not remember what I must be now!
 
-::: aside 
-Richard II, Act 3, Scene iii 
+:::{.huge}
+["To remember everything is a form of madness."]{.fg-lblue}
 :::
+
+
+::: aside
+
+Brian Friel, _Translations_, Act III.
+
+:::
+
+
 
 ## We need to keep track 
 

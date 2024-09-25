@@ -1,6 +1,6 @@
 ---
 title: "Tables with `dplyr`"
-subtitle: "Modern Plain Text Social Science: Week 4"
+subtitle: "Modern Plain Text Social Science: Week 5"
 format: kjhslides-revealjs
 engine: knitr
 filters: 

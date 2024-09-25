@@ -202,31 +202,46 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   margin-bottom: 0.1em;
 }
 
-.larger p {
+.huge li {
+  font-size: 4em;
+  line-height: 0.65em;
+  margin-top: 0;
+  padding-top: 0;
+
+}
+
+.larger p, .larger li {
   font-size: 3em;
-  font-weight: bold;
-  text-align: center;
   line-height: 0.85em;
+  margin-bottom: 0.1em;
+}
+
+.larger p {
+  text-align: center;
+  font-weight: bold;
+}
+
+
+.large p, .large li {
+  font-size: 1.85em;
+  line-height: 0.9em;
   margin-bottom: 0.1em;
 }
 
 .large p {
-  font-size: 2em;
-  font-weight: bold;
   text-align: center;
-  line-height: 0.85em;
-  margin-bottom: 0.1em;
+  font-weight: bold;
 }
 
-.small p ul {
+.small p, .small ul {
   font-size: 1.2em;
 }
 
-.smallerkh p ul {
+.smallerkh p, .smallerkh ul {
   font-size: 0.85em;
 }
 
-.tiny p ul {
+.tiny p, .tiny ul {
   font-size: 0.65em;
 }
 
