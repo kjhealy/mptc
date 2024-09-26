@@ -247,7 +247,7 @@ TYPE OUT<br />YOUR CODE<br />[BY HAND]{.fg-orange}
 
 ## Before we start 
 
-::: {.incremental .large}
+::: {.incremental}
 
 - Keep in mind the kinds of things we want to do. 
 - In particular, we are constantly working with [_rectangular tables of data_]{.fg-lblue} consisting of _columns_ with information about _variables_

@@ -281,11 +281,7 @@ gss_sm |>
            pct = round((freq*100), 1))
 ```
 
-:::{.tiny}
-Groups are carried forward till summarized or explicitly ungrouped
-
-Summary calculations are done on the innermost group, which then "disappears". (It becomes the rows in the summary table.)
-:::
+Groups are carried forward till summarized or explicitly ungrouped. Summary calculations are done on the innermost group, which "disappears". (It becomes the rows in the summary table.)
 
 
 ## Pipelines carry assumptions forward
