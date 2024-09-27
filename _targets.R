@@ -9,8 +9,10 @@ class_number <- yaml_vars$course$number
 page_suffix <- ".html"
 base_url <- yaml_vars$course$url
 
-options(tidyverse.quiet = TRUE,
-        dplyr.summarise.inform = FALSE)
+options(
+  tidyverse.quiet = TRUE,
+  dplyr.summarise.inform = FALSE
+)
 
 tar_option_set(
   packages = c("tibble"),
@@ -21,7 +23,9 @@ tar_option_set(
 # There's no way to get a relative path directly out of here::here(), but
 # fs::path_rel() works fine with it (see
 # https://github.com/r-lib/here/issues/36#issuecomment-530894167)
-here_rel <- function(...) {fs::path_rel(here::here(...))}
+here_rel <- function(...) {
+  fs::path_rel(here::here(...))
+}
 
 ## Load functions for the pipeline
 source("R/tar_slides.R")
@@ -44,9 +48,12 @@ list(
   tar_target(schedule_page_data, build_schedule_for_page(schedule_file)),
   tar_target(schedule_ical_data, build_ical(schedule_file, base_url, page_suffix, class_number)),
   tar_target(schedule_ical_file,
-             save_ical(schedule_ical_data,
-                       here_rel("files", "schedule.ics")),
-             format = "file"),
+    save_ical(
+      schedule_ical_data,
+      here_rel("files", "schedule.ics")
+    ),
+    format = "file"
+  ),
 
   ## Data resource list
   tar_target(data_source_file, here_rel("data", "data_sources.xlsx"), format = "file"),
@@ -69,8 +76,8 @@ list(
     site
     # Run the deploy script if both conditions are met
     # deploy_username and deploy_site are set in _variables.yml
-    if (Sys.info()["user"] != yaml_vars$deploy$user | yaml_vars$deploy$site != TRUE) message("Deployment vars not set. Will not deploy site.")
-    if (Sys.info()["user"] == yaml_vars$deploy$user & yaml_vars$deploy$site == TRUE) message("Running deployment script ...")
-    if (Sys.info()["user"] == yaml_vars$deploy$user & yaml_vars$deploy$site == TRUE) processx::run(paste0("./", deploy_script), echo = TRUE)
+    if (Sys.info()["user"] != yaml_vars$deploy$user | yaml_vars$deploy$site != TRUE) message("Deployment vars not set. Will not deploy site.") # nolint
+    if (Sys.info()["user"] == yaml_vars$deploy$user & yaml_vars$deploy$site == TRUE) message("Running deployment script ...") # nolint
+    if (Sys.info()["user"] == yaml_vars$deploy$user & yaml_vars$deploy$site == TRUE) processx::run(paste0("./", deploy_script), echo = TRUE) # nolint
   })
 )
