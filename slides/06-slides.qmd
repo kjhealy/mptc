@@ -239,7 +239,7 @@ ggdag::ggdag(dag, layout = "circle") +
 
 
 ::::: {.fragment fragment-index=3}
-- Git is also the standard for basically _everything_ that gets done in the world of technical computing. All software development is done in this way.    
+- Again, Git is the standard for basically _everything_ that gets done in the world of technical computing. All software development is done in this way, or something functionally the same as it.    
 :::::
 
 # Git as a Logbook
