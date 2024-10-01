@@ -151,7 +151,8 @@ dag <- dagify(z ~ y, y ~ x, y ~ u, outcome = "z",
 
 ggdag::ggdag(dag, layout = "circle") + ggdag::theme_dag_blank(plot.caption = ggplot2::element_text(hjust = 1)) + ggdag::geom_dag_node(color="#1C222F") + ggdag::geom_dag_text(color="white") +
   ggplot2::ggtitle("A Directed Acyclic Graph where the arrows mean 'Causes'") +
-  ggplot2::labs(caption = "")
+  ggplot2::labs(caption = "") + 
+  ggplot2::theme(plot.background = ggplot2::element_rect(fill = "#F4F4F4"))
 ```
 
 You are going to see a _lot_ of diagrams like this in papers, talks, and seminars you're required to take.
@@ -177,7 +178,8 @@ ggdag::ggdag(dag, layout = "circle") +
   ggdag::geom_dag_node(color="#1C222F", size = ggplot2::rel(20)) +
   ggdag::geom_dag_text(color="white", size = ggplot2::rel(3.1)) +
   ggplot2::ggtitle("A Paper as a Directed Acyclic Graph where the Arrows mean 'Leads to'") +
-  ggplot2::labs(caption = "")
+  ggplot2::labs(caption = "") + 
+  ggplot2::theme(plot.background = ggplot2::element_rect(fill = "#F4F4F4"))
 ```
 
 
@@ -208,7 +210,8 @@ ggdag::ggdag(dag, layout = "circle") +
   ggdag::geom_dag_node(color="#1C222F", size = ggplot2::rel(20)) +
   ggdag::geom_dag_text(color="white", size = ggplot2::rel(3.1)) +
   ggplot2::ggtitle("A Paper as a Directed Acyclic Graph where the Arrows mean 'Depends on'") +
-  ggplot2::labs(caption = "")
+  ggplot2::labs(caption = "") + 
+  ggplot2::theme(plot.background = ggplot2::element_rect(fill = "#F4F4F4"))
 ```
 
 
