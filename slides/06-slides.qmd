@@ -118,16 +118,106 @@ Brian Friel, _Translations_, Act III.
 
 ::::: {.fragment fragment-index=2}
 - There's a long history of software that can keep track of how files in projects have changed, and who did things to which files.
-- A tool like this is called a [_Version Control System_]{.fg-lblue} or a [_Revision Control System_]{.fg-lblue}.
+- A tool like this is called a [_Version Control System_]{.fg-lblue} or a [_Revision Control System_]{.fg-lblue}. 
 :::::
+
+
+::::: {.fragment fragment-index=3}
+- Modern solutions are sometimes called [_Distributed Version Control Systems_]{.fg-lblue} because of some additional capabilities they have. 
+:::::
+
+
+## Problems a (D)VCS Solves
+
+- [Track changes you make to project files.]{.fg-lblue}
+- [Do this in terms of or at the level of the project as a whole.]{.fg-pink}
+- [Keep track of who made which changes to a file and when.]{.fg-green}
+- [Manage new content or revisions by breaking them into branches or offshoots that can also be tracked.]{.fg-orange}
+- [Merge these offshoots and branches back into the main line of the project as needed.]{.fg-red}
+
+## Sidenote: a VCS is a DAG
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+
+library(dagitty)
+library(ggdag)
+
+dag <- dagify(z ~ y, y ~ x, y ~ u, outcome = "z",
+              exposure = "y",
+              coords = list(x=c(x=1, u=1, y=5, z=7),
+                            y=c(x=1.5, u=0.5, y=1, z=1))) 
+
+ggdag::ggdag(dag, layout = "circle") + ggdag::theme_dag_blank(plot.caption = ggplot2::element_text(hjust = 1)) + ggdag::geom_dag_node(color="#1C222F") + ggdag::geom_dag_text(color="white") +
+  ggplot2::ggtitle("A Directed Acyclic Graph where the arrows mean 'Causes'") +
+  ggplot2::labs(caption = "")
+```
+
+You are going to see a _lot_ of diagrams like this in papers, talks, and seminars you're required to take.
+
+## Sidenote: a VCS is a DAG
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+
+dag <- dagify(Final ~ Draft, Draft ~ LitRev, LitRev ~ Theory, 
+              Theory ~ Outline, Draft ~ Analysis, Analysis ~ Data,
+              Data ~ Outline,
+              outcome = "Final",
+              exposure = "Outline",
+              coords = list(
+  x=c(Outline=1, Theory=3, LitRev=4, Data=3, Analysis=4, Draft=5, Final=6),
+  y=c(Outline=1, Theory=1.5, LitRev=1.5, Data=0.5, Analysis=0.5, Draft=1,Final=1))) 
+
+
+ggdag::ggdag(dag, layout = "circle") + 
+  ggdag::theme_dag_blank(plot.caption = ggplot2::element_text(hjust = 1)) + 
+  ggdag::geom_dag_node(color="#1C222F", size = ggplot2::rel(20)) +
+  ggdag::geom_dag_text(color="white", size = ggplot2::rel(3.1)) +
+  ggplot2::ggtitle("A Paper as a Directed Acyclic Graph where the Arrows mean 'Leads to'") +
+  ggplot2::labs(caption = "")
+```
+
+
+## Sidenote: a VCS is a DAG
+
+```{r}
+#| echo: false
+#| out-width: "100%"
+
+dag <- dagitty("dag {
+  Outline <- Theory
+  Outline <- Data
+  Data <- Analysis
+  Theory <- LitRev
+  LitRev <- Draft
+  Analysis <- Draft
+  Draft <- Final
+               }")
+
+coordinates( dag ) <-  list(
+  x=c(Outline=1, Theory=3, LitRev=4, Data=3, Analysis=4, Draft=5, Final=6),
+  y=c(Outline=1, Theory=1.5, LitRev=1.5, Data=0.5, Analysis=0.5, Draft=1,Final=1) )
+
+dag <- ggdag::tidy_dagitty(dag)
+
+ggdag::ggdag(dag, layout = "circle") + 
+  ggdag::theme_dag_blank(plot.caption = ggplot2::element_text(hjust = 1)) + 
+  ggdag::geom_dag_node(color="#1C222F", size = ggplot2::rel(20)) +
+  ggdag::geom_dag_text(color="white", size = ggplot2::rel(3.1)) +
+  ggplot2::ggtitle("A Paper as a Directed Acyclic Graph where the Arrows mean 'Depends on'") +
+  ggplot2::labs(caption = "")
+```
 
 
 ## Git
 
-- **Git** is the industry-standard VCS. There are others, but it's the main one.
+- **Git** is the industry-standard DVCS. There are others, but it's the main one.
 - It's very powerful.
 - It's used to run the software development projects of gigantic corporations that must coordinate huge projects with contributions by hundreds or thousands of developers.
-- It makes professionals and amateurs alike cry on the regular.
+- It makes professionals and amateurs alike cry on the regular. But there are a bunch of cry-minimizing ways of using and interacting with it.
 
 
 
