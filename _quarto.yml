@@ -99,7 +99,7 @@ website:
               file: example/04-example.qmd
             - text: "05: Tables and dplyr"
               file: example/05-example.qmd
-            - text: "06: Version Control and `git`"
+            - text: "06: Version Control and git"
               file: example/06-example.qmd
 
 
