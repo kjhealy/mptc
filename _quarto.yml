@@ -58,7 +58,7 @@ website:
               file: content/04-content.qmd
             - text: "05: Tables and dplyr"
               file: content/05-content.qmd
-            - text: "06: Version Control and `git`"
+            - text: "06: Version Control and git"
               file: content/06-content.qmd
 
     - title: "Assignments"
@@ -78,7 +78,7 @@ website:
               file: assignment/04-assignment.qmd
             - text: "05: Working with Tables"
               file: assignment/05-assignment.qmd
-            - text: "06: Version Control and `git`"
+            - text: "06: Version Control and git"
               file: assignment/06-assignment.qmd
 
 
