@@ -132,8 +132,10 @@ Brian Friel, _Translations_, Act III.
 - [Track changes you make to project files.]{.fg-lblue}
 - [Do this in terms of or at the level of the project as a whole.]{.fg-pink}
 - [Keep track of who made which changes to a file and when.]{.fg-green}
+- Jump back to any previous point to see the state of the project then.
 - [Manage new content or revisions by breaking them into branches or offshoots that can also be tracked.]{.fg-orange}
 - [Merge these offshoots and branches back into the main line of the project as needed.]{.fg-red}
+- Figure out when a change that breaks something later got introduced earlier.
 
 ## Sidenote: a VCS is a DAG
 
