@@ -50,14 +50,14 @@ library(flipbookr)
 
 ## These are Not Backups
 
-::: {.large}
-
+:::: {.large}
+::: {.incremental}
 - [Your computer]{.fg-lblue}
 - [Your old computer]{.fg-green}
 - [An attachment you emailed to yourself]{.fg-orange}
 - [A USB Drive you updated twice and forget where it is maybe it is in the drawer in the kitchen oh god i hope so please please]{.fg-red}
-
 :::
+::::
 
 ## Not Nearly Good Enough
 

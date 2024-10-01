@@ -255,6 +255,9 @@ penguins |>
 
 ![Tidied version.](../assets/05-dplyr/05_broman_woo_tidied_2.png)
 
+
+# Pivoting
+
 ## The most common [`tidyr`]{.fg-orange} operation
 
 ```{r }
