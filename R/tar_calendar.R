@@ -61,7 +61,7 @@ build_schedule_for_page <- function(schedule_file) {
   schedule_nested <- schedule |>
     dplyr::select(group, subgroup,
                   ` ` = col_date, Topic = col_title, Content = col_content,
-                  Example = col_example, Assignment = col_assignment) |>
+                  Examples = col_example, Assignment = col_assignment) |>
     dplyr::group_by(group) |>
     tidyr::nest() |>
     dplyr::mutate(subgroup_count = purrr::map(data, ~dplyr::count(.x, subgroup)),
