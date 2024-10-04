@@ -1,0 +1,13 @@
+---
+title: "Example 07: Reading and wrangling data"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+

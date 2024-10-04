@@ -1,0 +1,22 @@
+---
+title: "Tasks for Week 07"
+date: last-modified
+---
+
+## Set up a project
+
+Some of the [example material from last week](/example/06-example.html) might be usefule for the GitHub part of this assignment.
+
+Either with your own data or with one of the [sample data sources](https://mptc.io/content/), do the following: 
+
+1. Create a project in RStudio and initialize a git repository in it. 
+
+2. Add your chosen data to the project.
+
+3. Add a Quarto file or R script that will be where you start reading in and cleaning the data. 
+
+4. Push the project to a repository on GitHub (either public or private). 
+
+5. Once you've done the reading for this week, see if you can read in the data to R and start exploring it.
+
+
