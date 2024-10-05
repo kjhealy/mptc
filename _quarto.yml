@@ -60,6 +60,9 @@ website:
               file: content/05-content.qmd
             - text: "06: Version Control and git"
               file: content/06-content.qmd
+            - text: "07: Data in and out"
+              file: content/07-content.qmd
+
 
     - title: "Assignments"
       contents:
@@ -80,6 +83,8 @@ website:
               file: assignment/05-assignment.qmd
             - text: "06: Version Control and git"
               file: assignment/06-assignment.qmd
+            - text: "07: Data in and out"
+              file: assignment/07-assignment.qmd
 
 
     - title: "Examples"
@@ -101,6 +106,8 @@ website:
               file: example/05-example.qmd
             - text: "06: Version Control and git"
               file: example/06-example.qmd
+            - text: "07: Data in and out"
+              file: example/07-example.qmd
 
 
   page-footer:
