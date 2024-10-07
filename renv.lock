@@ -163,16 +163,6 @@
       ],
       "Hash": "0c54cf3a08cc0e550fbd64ad33166143"
     },
-    "bigD": {
-      "Package": "bigD",
-      "Version": "0.2.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R"
-      ],
-      "Hash": "93637e906f3fe962413912c956eb44db"
-    },
     "bit": {
       "Package": "bit",
       "Version": "4.0.5",
@@ -196,13 +186,6 @@
         "utils"
       ],
       "Hash": "9fe98599ca456d6552421db0d6772d8f"
-    },
-    "bitops": {
-      "Package": "bitops",
-      "Version": "1.0-8",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Hash": "da69e6b6f8feebec0827205aad3fdbd8"
     },
     "blob": {
       "Package": "blob",
@@ -306,22 +289,6 @@
         "utils"
       ],
       "Hash": "d7e13f49c19103ece9e58ad2d83a7354"
-    },
-    "cards": {
-      "Package": "cards",
-      "Version": "0.2.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "cli",
-        "dplyr",
-        "glue",
-        "rlang",
-        "tidyr",
-        "tidyselect"
-      ],
-      "Hash": "b1aff1f353f1f384dfc1fb4dd78d903c"
     },
     "cellranger": {
       "Package": "cellranger",
@@ -1044,36 +1011,6 @@
       ],
       "Hash": "05e4f5fffb1eecfeaac9ea0b7f255fef"
     },
-    "gt": {
-      "Package": "gt",
-      "Version": "0.11.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "base64enc",
-        "bigD",
-        "bitops",
-        "cli",
-        "commonmark",
-        "dplyr",
-        "fs",
-        "glue",
-        "htmltools",
-        "htmlwidgets",
-        "juicyjuice",
-        "magrittr",
-        "markdown",
-        "reactable",
-        "rlang",
-        "sass",
-        "scales",
-        "tidyselect",
-        "vctrs",
-        "xml2"
-      ],
-      "Hash": "3470c2eb1123db6a2c54ec812de38284"
-    },
     "gtable": {
       "Package": "gtable",
       "Version": "0.3.5",
@@ -1088,25 +1025,6 @@
         "rlang"
       ],
       "Hash": "e18861963cbc65a27736e02b3cd3c4a0"
-    },
-    "gtsummary": {
-      "Package": "gtsummary",
-      "Version": "2.0.2",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "cards",
-        "cli",
-        "dplyr",
-        "glue",
-        "gt",
-        "lifecycle",
-        "rlang",
-        "tidyr",
-        "vctrs"
-      ],
-      "Hash": "4f9f5a43b87926c5969d50780b282e8f"
     },
     "haven": {
       "Package": "haven",
@@ -1179,21 +1097,6 @@
         "utils"
       ],
       "Hash": "81d371a9cc60640e74e4ab6ac46dcedc"
-    },
-    "htmlwidgets": {
-      "Package": "htmlwidgets",
-      "Version": "1.6.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "grDevices",
-        "htmltools",
-        "jsonlite",
-        "knitr",
-        "rmarkdown",
-        "yaml"
-      ],
-      "Hash": "04291cc45198225444a397606810ac37"
     },
     "httpuv": {
       "Package": "httpuv",
@@ -1349,16 +1252,6 @@
         "methods"
       ],
       "Hash": "e1b9c55281c5adc4dd113652d9e26768"
-    },
-    "juicyjuice": {
-      "Package": "juicyjuice",
-      "Version": "0.1.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "V8"
-      ],
-      "Hash": "3bcd11943da509341838da9399e18bce"
     },
     "kableExtra": {
       "Package": "kableExtra",
@@ -1807,31 +1700,6 @@
         "R"
       ],
       "Hash": "5e3c5dc0b071b21fa128676560dbe94d"
-    },
-    "reactR": {
-      "Package": "reactR",
-      "Version": "0.6.0",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "htmltools"
-      ],
-      "Hash": "10f4d661c235181648a5958c02c0382a"
-    },
-    "reactable": {
-      "Package": "reactable",
-      "Version": "0.4.4",
-      "Source": "Repository",
-      "Repository": "CRAN",
-      "Requirements": [
-        "R",
-        "digest",
-        "htmltools",
-        "htmlwidgets",
-        "jsonlite",
-        "reactR"
-      ],
-      "Hash": "6069eb2a6597963eae0605c1875ff14c"
     },
     "readr": {
       "Package": "readr",

@@ -6,6 +6,7 @@ engine: knitr
 filters: 
   - invert-h1
   - include-code-files
+  - line-highlight
 author:
   - name: Kieran Healy
     email: kieran.healy@duke.edu
