@@ -1241,21 +1241,24 @@ convert_agegrp <- function(x){
 #| label: "06-getting-data-in-61"
 #| include: FALSE
 gss_sub |>
-    mutate(agequint = cut(x = age, 
-                          breaks = unique(age_quintiles), 
-                          include.lowest = TRUE)) |> 
-    mutate(agequint = fct_relabel(agequint, convert_agegrp)) |> 
-    mutate(year_f = droplevels(factor(year))) |> 
-    mutate(young = ifelse(age < 26, "Yes", "No")) |> 
-    mutate(fefam_d = fct_recode(fefam,
-                                Agree = "Strongly Agree",
-                                Disagree = "Strongly Disagree")) |> 
-    mutate(degree = factor(degree, 
-                           levels = levels(gss_sub$degree), #<<
-                           ordered = TRUE))#<<
+  # `select` is here just so you can see 
+  #  what's happening to the columns
+  select(age, year, degree, fefam) |> 
+  mutate(agequint = cut(x = age, 
+                        breaks = unique(age_quintiles), 
+                        include.lowest = TRUE)) |> 
+  mutate(agequint = fct_relabel(agequint, convert_agegrp)) |> 
+  mutate(year_f = droplevels(factor(year))) |> 
+  mutate(young = ifelse(age < 26, "Yes", "No")) |> 
+  mutate(fefam_d = fct_recode(fefam,
+                              Agree = "Strongly Agree",
+                              Disagree = "Strongly Disagree")) |> 
+  mutate(degree = factor(degree, 
+                         levels = levels(gss_sub$degree), #<<
+                         ordered = TRUE)) #<<
 ```
 
-`r chunq_reveal("06-getting-data-in-61", smallcode=TRUE, lcolw="40", rcolw="60", title = "The GSS panel: more recoding")`
+`r chunq_reveal("06-getting-data-in-61", smallcode=TRUE, lcolw="45", rcolw="55", title = "The GSS panel: more recoding")`
 
 ## How we'd actually write this
 
@@ -1268,7 +1271,7 @@ gss_sub <- gss_sub |>
                             breaks = unique(age_quintiles), 
                             include.lowest = TRUE), 
               agequint = fct_relabel(agequint, convert_agegrp), 
-              year_f = droplevels(factor(year)),#<< 
+              year_f = droplevels(factor(year)), #<<
               young = ifelse(age < 26, "Yes", "No"), 
               fefam_d = fct_recode(fefam,
                                   Agree = "Strongly Agree",
@@ -1276,6 +1279,8 @@ gss_sub <- gss_sub |>
               degree = factor(degree, 
                              levels = levels(gss_sub$degree), 
                              ordered = TRUE))
+
+gss_sub
 ```
 
 :::
@@ -1345,8 +1350,6 @@ gss_sub |>
   tally() |> 
   pivot_wider(names_from = sex, values_from = n)
 ```
-
----
 
 # More about factors
 
