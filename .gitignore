@@ -16,7 +16,7 @@ assignment/*.html
 example/*.html
 schedule/*.html
 syllabus/*.html
-
+data/dfstrat.csv
 slides/*.pdf
 slides/*.html
 slides/**/*_cache/*
