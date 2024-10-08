@@ -87,7 +87,7 @@ fars_daily_means
 
 ```
 
-For those purposes of what we're going to draw, it will make more sense to treat years and months as categorical variables, i.e. as factors, rather than true dates. 
+For those purposes of what we're going to draw, it will make more sense to treat years and months as categorical variables, i.e. as factors, rather than true dates. (This is because we have already summarized by month and day, so we no longer have year-level information in the data.)
 
 ```{r}
 fars_daily_means <- fars_daily_means |> 
