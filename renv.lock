@@ -1480,6 +1480,24 @@
       ],
       "Hash": "4fd8900853b746af55b81fda99da7695"
     },
+    "myriad": {
+      "Package": "myriad",
+      "Version": "0.2.4.9000",
+      "Source": "GitHub",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteRepo": "myriad",
+      "RemoteUsername": "kjhealy",
+      "RemoteRef": "HEAD",
+      "RemoteSha": "c039dae3267f2dbfa21351394a068ad60771714f",
+      "Requirements": [
+        "R",
+        "dplyr",
+        "ggplot2",
+        "systemfonts"
+      ],
+      "Hash": "ff72cfb2a824ea8cf927b3784d4cb53d"
+    },
     "namer": {
       "Package": "namer",
       "Version": "0.1.8",
