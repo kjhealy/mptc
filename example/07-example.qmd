@@ -37,29 +37,48 @@ theme_set(theme_myriad_semi())
 
 # FARS Example
 
-We start with data from the [Fatality Analysis Reporting System](https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars), which is how the NTSA tracks information about road accidents. Our data file shows counts of pedestrians killed in road accidents on each day of the month in the United States from 2009 to 2018.
+We start with data from the [Fatality Analysis Reporting System](https://www.nhtsa.gov/research-data/fatality-analysis-reporting-system-fars), which is how the NTSA tracks information about road accidents. Our data file shows counts of pedestrians aged <16 killed in road accidents on each day of the month in the United States from 2009 to 2018.
+
+It arrives, as is very often the case, in a spreadsheet that is not tidy. It looks like this:
+
+![FARS Query Report Results](../files/fars_spreadsheet_raw.png)
+
+
+Let's try to read it in as cleanly as we can, by skipping the metadata at the top.  
 
 ```{r}
-fars_raw <- read_csv(here("files", "examples", "fars0-17daily.csv"))
+fars_raw <- readxl::read_xlsx(here("files", "examples", "fars_crash_report.xlsx"), 
+                              skip = 7)
 
 fars_raw |> 
   print(n=35)
-
 ```
 
-It's not tidy. It's in wide format and the months aren't filled in down the columns. We also have a `Total` value in the day column.
+We need to tidy this up. The first two columns don't have proper names. It's in wide format and the months aren't filled in down the columns. We also have a `Total` value in the day column. We know the column names, so we can supply those manually.
 
 
 ```{r}
+# We haven't seen this kind of "function on either side" way of writing things before; it's handy for this sort of thing.
+colnames(fars_raw) <- c("year", "month", 1:31, "unknown", "total")
+
+
 fars <- fars_raw |> 
-  # Remove 'Total' rows
-  filter(day %nin% "Total") |> 
+  # Drop 'Unknown' and 'Total' rows
+  select(!all_of(c("unknown", "total"))) |> 
+  # Make sure there's no leading or trailing whitespace
+  mutate(year = str_squish(year), 
+         month = str_squish(month)) |> 
+  # Remove 'Unknown' and 'Total' rows 
+  filter(month %nin% c("Unknown", "Total")) |> 
+  # Remove 'Redacted', 'Unknown' and 'Total' rows from `year` 
+  # (This partially overlaps with the 'Unknown' and 'Total' in `month`
+  filter(year %nin% c("Redacted", "Unknown", "Total")) |> 
   # Remove any lines that are all NAs
   filter(!if_all(everything(), \(x) is.na(x))) |> 
-  # Fill in the month values downwards
-  fill(month) |> 
+  # Fill in the year values downwards
+  fill(year) |> 
   # Lengthen 
-  pivot_longer(cols = `2009`:`2018`, names_to = "year",
+  pivot_longer(cols = `1`:`31`, names_to = "day",
                values_to = "n")  
   
 
@@ -70,10 +89,6 @@ fars
 We're going to make a graph of average patterns by month and day over all available years. So first we aggregate the data by month and day and take the average across years. 
 
 ```{r}
-dates <- unique(paste(fars$month, fars$day))
-
-dates[1:10]
-
 # Shortcut use of `.by` here replaces group_by() and returns ungrouped tibble
 fars_daily_means <- fars |> 
     summarize(mean_n = mean(n, na.rm = TRUE), 
@@ -87,9 +102,15 @@ fars_daily_means
 
 ```
 
-For those purposes of what we're going to draw, it will make more sense to treat years and months as categorical variables, i.e. as factors, rather than true dates. (This is because we have already summarized by month and day, so we no longer have year-level information in the data.)
+For the purposes of what we're going to draw, it will make more sense to treat years and months as categorical variables, i.e. as factors, rather than true dates.
 
 ```{r}
+dates <- unique(paste(fars$month, fars$day))
+
+dates[1:10]
+
+
+
 fars_daily_means <- fars_daily_means |> 
   mutate(
     # Ordered categorical var of months
@@ -119,18 +140,30 @@ Now we can draw a plot. This one is generated from the code here but there's a t
 #| fig-height: 18
 #| fig-width: 6
 
+
+# Make a mini dataset of facet labels
+month_labs <- fars_daily_means |> 
+  distinct(month) |> 
+  mutate(x = 1L, y = 3.5, 
+         month_fac = factor(month, ordered = TRUE)) 
+
 fars_daily_means |> 
-  ggplot( mapping = aes(x = day, y = mean_n, fill = flag)) +
+  ggplot(mapping = aes(x = day, y = mean_n, fill = flag)) +
     geom_col() +
     scale_fill_manual(values = c("gray30", "darkorange2")) +
     scale_x_continuous(breaks = c(1, 10, 20, 30)) + 
+    geom_label(data = month_labs, 
+                              mapping = aes(x = x, y = y, label = month),
+                              inherit.aes = FALSE, hjust = 0, 
+               family = "Myriad Pro Condensed") + 
     guides(fill = "none") + 
     facet_wrap(~ month_fac, ncol = 1) +
     labs(x = "Day of the Month",
          y = "Mean Number of Child Pedestrians Killed",
-         title = "Pedestrians aged 0-17 years involved\nin Fatal Motor Vehicle Crashes",
-         subtitle = "Daily Average, 2009-2018",
-         caption = "Kieran Healy @kjhealy / Source: NHTSA Fatality Analysis Reporting System")
+         title = "Pedestrians aged <16 years killed\nin Fatal Motor Vehicle Crashes",
+         subtitle = "Daily Average, 2008-22",
+         caption = "Kieran Healy @kjhealy / Source: NHTSA Fatality Analysis Reporting System") + 
+  theme(strip.text = element_blank())
 
 ```
 
