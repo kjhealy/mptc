@@ -1,6 +1,6 @@
 ---
 title: "Databases"
-subtitle: "Modern Plain Text Social Science: Week 8a"
+subtitle: "Modern Plain Text Social Science: Week 8"
 format: kjhslides-revealjs
 engine: knitr
 filters:
