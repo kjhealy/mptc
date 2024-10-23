@@ -1,0 +1,38 @@
+---
+title: "Example 08: Databases"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+
+library(tidyverse)
+library(here)
+library(socviz)
+
+## These packages aren't necessary to reproduce the analysis here
+library(showtext)
+showtext_auto()
+
+# Custom fonts and stuff; just don't eval it.
+library(systemfonts)
+clear_registry()
+
+register_variant(
+  name = "Myriad Pro SemiCondensed",
+  family = "Myriad Pro",
+  width = "semicondensed",
+  weight = c("normal", "semibold"),
+)
+
+library(myriad)
+import_myriad_semi()
+import_myriad_condensed()
+theme_set(theme_myriad_semi())
+
+```
+
+
+(To follow)
