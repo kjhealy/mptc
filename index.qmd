@@ -26,7 +26,7 @@ To help address these challenges, modern computing platforms provide us with a s
 
 ## What we'll cover
 
-We have twelve class weeks for this seminar, excluding Fall Break and Thanksgiving. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are: 
+We have twelve class weeks for this seminar, excluding Fall Break and Thanksgiving. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are:
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)

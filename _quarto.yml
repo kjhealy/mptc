@@ -87,6 +87,8 @@ website:
               file: assignment/06-assignment.qmd
             - text: "07: Data in and out"
               file: assignment/07-assignment.qmd
+            - text: "08: Databases"
+              file: assignment/08-assignment.qmd
 
 
     - title: "Examples"
