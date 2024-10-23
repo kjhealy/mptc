@@ -58,7 +58,7 @@ $font-family-sans-serif: "Tenso Slab", "Solitas Slab", "Iosevka Slab", "Input Sa
 $font-family-monospace: "BerkeleyMono", "Berkeley Mono", "IBM Plex Mono", "Input Mono Narrow", "JetBrains Mono", "Fabrikat Mono" "SF Mono" monospace  !default;
 $web-font-path: "";
 
-$presentation-font-size-root: 2rem !default;
+$presentation-font-size-root: 1.85rem !default;
 $presentation-heading-font-weight: 700 !default;
 
 $body-bg: $my-off-white !default;
@@ -270,6 +270,10 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   text-align: center;
 }
 
+.reveal .slide h1 h2 h3 code {
+    font-size: inherit;
+}
+
 // Table output from code cells
 
 .cell-output-display table {
@@ -306,6 +310,11 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 .inv-title code {
   // color: $my-green !important;
   background-color: $my-blue;
+  font-size: inherit;
+}
+
+.title code {
+  font-size: inherit;
 }
 
 // direct adjustment classes
@@ -445,6 +454,7 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 
 .bg-blue code {
   color: $my-green !important;
+  font-size: inherit;
 }
 
 
