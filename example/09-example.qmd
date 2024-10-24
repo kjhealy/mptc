@@ -1,0 +1,89 @@
+---
+title: "Example 09: Functions and Iteration"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+library(tidyverse)
+library(here)
+library(socviz)
+
+## These packages aren't necessary to reproduce the analysis here
+library(showtext)
+showtext_auto()
+
+# Custom fonts and stuff; just don't eval it.
+library(systemfonts)
+clear_registry()
+
+register_variant(
+  name = "Myriad Pro SemiCondensed",
+  family = "Myriad Pro",
+  width = "semicondensed",
+  weight = c("normal", "semibold"),
+)
+
+library(myriad)
+import_myriad_semi()
+import_myriad_condensed()
+theme_set(theme_myriad_semi())
+
+```
+
+
+## Functions
+
+```{r}
+my_adder <- function(x, add = 1) {
+  x + add
+}
+
+my_adder(10)
+
+my_adder(1:10)
+
+# This won't work
+# my_adder("a")
+```
+
+Guard clauses and error handling:
+
+```{r}
+my_adder <- function(x, add = 1) {
+  if(!is.numeric(x)) {
+    return("Argument `x` must be numeric.")
+  }
+    
+  x + add  
+}
+
+my_adder("a")
+
+
+my_adder <- function(x, add = 1) {
+  if(!is.numeric(x)) {
+    return("Argument `x` must be numeric.")
+  }
+  
+  if(!is.numeric(add)) {
+    return("Argument `add` must be numeric.")
+  }
+    
+  x + add  
+}
+
+
+```
+
+Here I use `return()` in the guard clauses in order to make this example work as part of the pipeline that creates the site. But really I should use `stop()`. 
+
+```{r}
+my_adder(1:10, 5)
+
+
+my_adder(1:10, "c")
+```
+

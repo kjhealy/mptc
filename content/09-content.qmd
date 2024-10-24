@@ -1,5 +1,5 @@
 ---
-title: "8. Databases"
+title: "9. Functions and Iteration"
 date: last-modified
 date-format: full
 ---
@@ -15,21 +15,23 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-Working with data that's nominally larger than the amount of RAM you have.
+Learning to program in R, and learning to think in terms of the repeated or sequential application of functions to data. 
 
 ## Required Reading
 
 - @wickham23:_r_data_scien. 
 
-[Read the text online.](https://r4ds.hadley.nz/). Take a look at [Chapter 21](https://r4ds.hadley.nz/databases) on databases. data. It uses a different database back-end from the one we'll use in class, but the ideas are the same.
+[Read the text online.](https://r4ds.hadley.nz/). Read [Chapter 25](https://r4ds.hadley.nz/functions) on functions and [Chapter 26](https://r4ds.hadley.nz/iteration) on iteration. 
+
+
 
 ## Examples
 
-[This week's examples and demos](/example/08-example.qmd).
+[This week's examples and demos](/example/09-example.qmd).
 
 ## Assignment
 
-No assignment this week.
+[This week's assignment](/assignment/09-assignment.qmd)
 
 ## Slides
 
@@ -49,8 +51,8 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 </script>
 
-<iframe class="slide-deck" id="quartoframe" src="../slides/08-slides.html"></iframe>
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/09-slides.html"></iframe-->
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/08-slides")
+#slide_win_button("/slides/09-slides")
 ```

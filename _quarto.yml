@@ -64,6 +64,8 @@ website:
               file: content/07-content.qmd
             - text: "08: Databases"
               file: content/08-content.qmd
+            - text: "09: Functions and Iteration"
+              file: content/09-content.qmd
 
 
     - title: "Assignments"
@@ -89,6 +91,8 @@ website:
               file: assignment/07-assignment.qmd
             - text: "08: Databases"
               file: assignment/08-assignment.qmd
+            - text: "09: Functions and Iteration"
+              file: assignment/09-assignment.qmd
 
 
     - title: "Examples"
@@ -114,6 +118,8 @@ website:
               file: example/07-example.qmd
             - text: "08: Databases"
               file: example/08-example.qmd
+            - text: "09: Functions and Iteration"
+              file: example/09-example.qmd
 
 
   page-footer:
