@@ -13,7 +13,7 @@ slide_details <- tibble::tribble(
 
 ```
 
-## This week ...
+## This week ... 
 
 We'll learn about importing and cleaning your data.
 
