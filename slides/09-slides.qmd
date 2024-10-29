@@ -1,6 +1,6 @@
 ---
 title: "Iterating on Data"
-subtitle: "Modern Plain Text Social Science: Week 8"
+subtitle: "Modern Plain Text Social Science: Week 9"
 format: kjhslides-revealjs
 engine: knitr
 filters:
@@ -49,12 +49,31 @@ library(socviz)    # data and some useful functions
 library(tidyverse) # your friend and mine
 ```
 
+---
+
+::: {.huge .center}
+
+[**Split**]{.fg-lblue}
+
+[**Apply**]{.fg-red}
+
+[**Combine**]{.fg-green}
+
+:::
+
 
 ---
 
-:::{.huge}
-[Moar Data]{.fg-orange}
-:::
+## The Core Idea
+
+- [Split]{.fg-lblue} or group the data into pieces
+- [Apply]{.fg-red} a function, i.e. act on the data in some way
+- [Combine]{.fg-green} the results back into a table
+
+::::: {.fragment fragment-index=2}
+Sometimes we start out in a "split" state, as when we have multiple data files, and we need to read them in and then combine them.
+:::::
+
 
 ## More than one data file
 
@@ -1335,208 +1354,138 @@ ggplot(data = out, aes(x = .fittedPC1,
 
 ```
 
+# And there's more ... 
 
-# Elvis PCA Example
+## Nesting other things
 
-## An iconic image
+Let's go back to this stage:
 
-![](../assets/08-iterate/elvis-nixon.jpeg)
+```{r }
+#| label: "06-work-with-models-54"
+# New model
+fit_ols2 <- function(df) {
+    lm(lifeExp ~ log(gdpPercap) + log(pop), data = df)
+}
 
+out_tidy <- gapminder |>
+    group_by(continent, year) |>
+    nest() |> 
+    mutate(model = map(data, fit_ols2),
+           tidied = map(model, tidy)) 
 
-## Long Tall Sally
-
-```{r}
-# install.packages("imager")
-
-img <- imager::load.image(here("assets", "08-iterate", "elvis-nixon.jpeg"))
-str(img)
-dim(img)
-
-## Long
-img_df_long <- as.data.frame(img)
-
-head(img_df_long)
+out_tidy
 ```
 
-## Return to Sender
+## A function to draw a coef plot
 
-
-```{r}
-img_df <- pivot_wider(img_df_long, 
-                             names_from = y, 
-                             values_from = value)
-
-dim(img_df)
-
-img_df[1:5, 1:5]
-
-```
-
-
-## Don't be Cruel
-
-```{r}
-tmp <- img_df |> select(-x)
-dim(tmp)
-tmp[1:5, 1:5]
-
-# Scaled and centered
-tmp_norm <- scale(tmp, center = TRUE, scale = TRUE)
-tmp_norm[1:5, 1:5]
-
-
-# Covariance matrix
-cov_mat <- cov(tmp_norm)
-dim(cov_mat)
-cov_mat[1:5, 1:5]
-```
-
-## Don't be Cruel
-
-Doing the PCA manually
-
-```{r}
-# Decomposition/Factorization into eigenvalues and eigenvectors
-cov_eig <- eigen(cov_mat)
-names(cov_eig)
-
-# Eigenvalues (variances)
-cov_evals <- cov_eig$values
-cov_evals[1:5]
-
-# Eigenvectors (principal components)
-cov_evecs <- cov_eig$vectors 
-cov_evecs[1:5, 1:5]
-
-# Rotation matrix -- ie the coordinates of the 
-# original data points translated into the 
-# transformed coordinate space prcomp$rotation
-tmp_rot <- tmp_norm %*% cov_evecs
-dim(tmp_rot)
-tmp_rot[1:5, 1:5]
-
-# Should be zero
-round(cov(cov_evecs), 2)[1:5,1:5]
-```
-
-## Clean up your own Backyard
-
-```{r}
-img_pca <- img_df |>
-  select(-x) |>
-  prcomp(scale = TRUE, center = TRUE)
-
-pca_tidy <- tidy(img_pca, matrix = "pcs")
-
-pca_tidy
-```
-
-## Return to Sender
-
-```{r}
-names(img_pca)
-
-```
-
-::: {.notes}
-What are these? `sdev` contains the standard deviations of the principal components. `rotation` is a matrix where the rows correspond to the columns of the original data, and the columns are the principal components. `x` is a matrix containing the value of the rotated data multiplied by the `rotation` matrix. Finally, `center` and `scale` are vectors showing the centering and scaling for each observation. 
-
-Now, to get from this information back to the original data matrix, we need to multiply `x` by the transpose of the `rotation` matrix, and then revert the centering and scaling steps. If we multiply by the transpose of the _full_ rotation matrix (and then un-center and un-scale), we'll recover the original data matrix exactly. But we can also choose to use just the first few principal components, instead. There are 633 components in all (corresponding to the number of rows in the original data matrix), but the scree plot suggests that most of the data is "explained" by a much smaller number of components than that. 
-
-Here's a function that takes a PCA object created by `prcomp()` and returns an approximation of the original data, calculated by some number (`n_comp`) of principal components. It returns its results in long format, in a way that mirrors what the Imager library wants. This will make plotting easier in a minute.
-
-:::
-
-## I Gotta Know
-
-::: {.smallcode}
-
-```{r}
-reverse_pca <- function(n_comp = 20, pca_object = img_pca){
-  ## The pca_object is an object created by base R's prcomp() function.
-  
-  ## Multiply the matrix of rotated data by the transpose of the matrix 
-  ## of eigenvalues (i.e. the component loadings) to get back to a 
-  ## matrix of original data values
-  recon <- pca_object$x[, 1:n_comp] %*% t(pca_object$rotation[, 1:n_comp])
-  
-  ## Reverse any scaling and centering that was done by prcomp()
-  
-  if(all(pca_object$scale != FALSE)){
-    ## Rescale by the reciprocal of the scaling factor, i.e. back to
-    ## original range.
-    recon <- scale(recon, center = FALSE, scale = 1/pca_object$scale)
-  }
-  if(all(pca_object$center != FALSE)){
-    ## Remove any mean centering by adding the subtracted mean back in
-    recon <- scale(recon, scale = FALSE, center = -1 * pca_object$center)
-  }
-  
-  ## Make it a data frame that we can easily pivot to long format
-  ## (because that's the format that the excellent imager library wants
-  ## when drawing image plots with ggplot)
-  recon_df <- data.frame(cbind(1:nrow(recon), recon))
-  colnames(recon_df) <- c("x", 1:(ncol(recon_df)-1))
-
-  ## Return the data to long form 
-  recon_df_long <- recon_df |>
-    tidyr::pivot_longer(cols = -x, 
-                        names_to = "y", 
-                        values_to = "value") |>
-    mutate(y = as.numeric(y)) |>
-    arrange(y) |>
-    as.data.frame()
-  
-  tibble::as_tibble(recon_df_long)
+```{r }
+#| label: "06-work-with-models-55"
+# Plot the output from our model
+mod_plot <- function(data, 
+                     title){
+  data |> 
+    filter(term %nin% "(Intercept)") |> 
+    ggplot(mapping = aes(x = estimate,
+                         xmin = estimate - std.error,
+                         xmax = estimate + std.error,
+                         y = reorder(term, estimate))) + 
+    geom_pointrange() + 
+    labs(title = title, 
+         y = NULL)
 }
 ```
 
+## Add it using [`map2()`]{.fg-green} or [`pmap()`]{.fg-green}
+
+- When we have two arguments to feed a function we can use [`map2()`]{.fg-green}. The general case is [`pmap()`]{.fg-green}, for passing any number of arguments in a list.
+
+```{r }
+#| label: "06-work-with-models-56"
+out_tidy <- gapminder |> group_by(continent, year) |> nest() |> 
+    mutate(title = paste(continent, year),
+           model = map(data, fit_ols2),#<<
+           tidied = map(model, tidy), 
+           ggout = pmap(list(tidied, title), #<<
+                        mod_plot)) #<<
+
+out_tidy
+```
+Now, every element of [`ggout`]{.fg-orange} is ...
+
+## A plot!
+
+:::: {.columns}
+::: {.column width="50%"}
+```{r}
+#| label: "06-work-with-models-57"
+#| fig.height: 3
+#| fig.width: 6
+out_tidy$ggout[[8]]
+```
 :::
 
-
-## It's Now or Never
-
+::: {.column width="50%" .right}
 ```{r}
-## The sequence of PCA components we want
-n_pcs <- c(2:5, 10, 20, 50, 100)
-names(n_pcs) <- paste("First", n_pcs, "Components", sep = "_")
-
-## Map reverse_pca() 
-recovered_imgs <- map(n_pcs, reverse_pca) |> 
-  list_rbind(names_to = "pcs") |> 
-  mutate(pcs = str_replace_all(pcs, "_", " "), 
-         pcs = factor(pcs, levels = unique(pcs), ordered = TRUE))
-
-recovered_imgs
+#| label: "06-work-with-models-58"
+#| fig.height: 3
+#| fig.width: 6
+out_tidy$ggout[[18]]
 ```
 
-## Jailhouse Rock
+:::
+::::
+
+## We don't just put them in there for fun
+
+- We can e.g. [`walk`]{.fg-green} the plots out to disk
+
+## We don't just put them in there for fun
+
+- We can e.g. [`walk`]{.fg-green} the plots out to disk
 
 ```{r}
-p <- ggplot(data = recovered_imgs, 
-            mapping = aes(x = x, y = y, fill = value))
-p_out <- p + geom_raster() + 
-  scale_y_reverse() + 
-  scale_fill_gradient(low = "black", high = "white") +
-  facet_wrap(~ pcs, ncol = 4) + 
-  guides(fill = FALSE) + 
-  labs(title = "Recovering the content of an 800x600 pixel image\nfrom a Principal Components Analysis of its pixels") + 
-  theme(strip.text = element_text(face = "bold", size = rel(1.2)),
-        plot.title = element_text(size = rel(1.5)))
+# If a root-level figures directory doesn't exist, create one
+ifelse(!dir.exists(here("figures")), dir.create(here("figures")), message("`figures` already exists"))
+
+fs::dir_ls(here("figures"))
 ```
 
----
+## We don't just put them in there for fun
+
+- We can e.g. [`walk`]{.fg-green} the plots out to disk
+
+- [`walk()`]{.fg-green} is [`map()`]{.fg-green} for when you just want a "side-effect" such as printed output. There is also [`walk2()`]{.fg-green} and [`pwalk()`]{.fg-green}
+
+```{r }
+#| label: "06-work-with-models-59"
+
+pwalk(
+  list(
+    filename = paste0(out_tidy$title, ".png"),
+    plot = out_tidy$ggout,
+    path = here("figures"),
+    height = 3, width = 4,
+    dpi = 300
+  ),
+  ggsave
+)
+
+
+                       
+```
+
+## Peek again in the [`figures/`]{.fg-orange} folder
+
+```{r }
+#| label: "06-work-with-models-60"
+fs::dir_ls(here("figures")) |> 
+  basename()
+```
+
+## Clean up
 
 ```{r}
-#| echo: false
-#| message: false
-
-print(p_out)
+fs::dir_delete(here("figures"))
 ```
 
-```{r}
-#| label: "r 07-[Iterating]{.fg-green}-27"
-#| echo: FALSE
-options(digits = old_digits)
-```
 
