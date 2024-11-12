@@ -33,6 +33,46 @@ source("R/tar_projects.R")
 source("R/tar_data.R")
 source("R/tar_calendar.R")
 
+# Ensure deletion_candidates has at least one dummy dir, to keep target branching happy
+if(!fs::dir_exists(here::here("00_dummy_files"))) { fs::dir_create(here::here("00_dummy_files")) }
+if(!fs::dir_exists(here::here("00_dummy_files/figure-revealjs"))) { fs::dir_create(here::here("00_dummy_files/figure-revealjs")) }
+fs::file_create(here::here("00_dummy_files/figure-revealjs/00_dummy.png"))
+
+
+get_flipbookr_orphans <- function() {
+  all_candidates <- fs::dir_ls(glob = "*_files/figure-revealjs/*.png", recurse = TRUE)
+  all_candidates <- all_candidates[stringr::str_detect(all_candidates, "_site", negate = TRUE)]
+  if(length(all_candidates) == 0) { return(character(0))} else return(all_candidates)
+}
+
+# Put the orphans in _site/ *and* in _freeze
+relocate_orphans <- function(file) {
+  if(length(file) == 0) { return(character(0))}
+  if(is.null(file)) {return(character(0))}
+  destdir_site <- paste0("_site/slides/", fs::path_dir(file))
+  destdir_freeze <- stringr::str_remove(fs::path_dir(file), "_files")
+  destdir_freeze <- paste0("_freeze/slides/", destdir_freeze)
+  if(!fs::dir_exists(here::here(destdir_site))) {fs::dir_create(here::here(destdir_site))}
+  fs::file_copy(file, paste0("_site/slides/", file), overwrite = TRUE)
+  if(!fs::dir_exists(here::here(destdir_freeze))) {fs::dir_create(here::here(destdir_freeze))}
+  file_freeze <- stringr::str_remove(file, "_files")
+  fs::file_copy(file, paste0("_freeze/slides/", file_freeze), overwrite = TRUE)
+}
+
+
+get_leftover_dirs <- function(excludes = "_site|_targets|example|assignment|content") {
+  # the figure-revealjs subdirs will all have been moved
+  deletion_candidates <- fs::dir_ls(glob = "*_files", recurse = TRUE)
+  deletion_candidates <- deletion_candidates[stringr::str_detect(deletion_candidates, excludes, negate = TRUE)]
+  if(length(deletion_candidates) == 0) { return(character(0))} else return(deletion_candidates)
+}
+
+remove_leftover_dirs <- function (dirs) {
+  if(length(dirs) == 0) { return(character(0))}
+  if(is.null(dirs)) { return(character(0))} else fs::dir_delete(dirs)
+}
+
+
 
 # Force the schedule page to always re-render; bah
 system("[ ! -e _freeze/schedule ] || rm -rf _freeze/schedule")
@@ -68,6 +108,43 @@ list(
   ## Build site ----
   tar_quarto(site, path = ".", quiet = FALSE),
 
+  tar_files(rendered_slides, {
+    # Force dependencies
+    site
+    fl <- list.files(here_rel("slides"),
+                     pattern = "\\.qmd", full.names = TRUE)
+    paste0("_site/", stringr::str_replace(fl, "qmd", "html"))
+  }),
+
+  ## Fix any flipbookr leftover files
+  tar_files(flipbookr_orphans, {
+    # Force dependencies
+    rendered_slides
+    # Flipbooks created in the top level
+    get_flipbookr_orphans()
+  }
+  ),
+
+  tar_target(move_orphans, {
+    relocate_orphans(flipbookr_orphans)
+  },
+  pattern = map(flipbookr_orphans),
+  format = "file"),
+
+  ## Remove any flipbookr leftover dirs
+  tar_files(flipbookr_dirs, {
+    # Top-level flipbookr dirs now empty
+    get_leftover_dirs()
+  }
+  ),
+
+  tar_invalidate(empty_dirs),
+
+  tar_target(empty_dirs, {
+    remove_leftover_dirs(flipbookr_dirs)
+  },
+  pattern = map(flipbookr_dirs)
+  ),
 
   ## Upload site ----
   tar_target(deploy_script, here_rel("deploy.sh"), format = "file"),

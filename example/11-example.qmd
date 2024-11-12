@@ -1,0 +1,134 @@
+---
+title: "Example 11: Visualizing Data"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+library(tidyverse)
+library(here)
+library(socviz)
+
+## These packages aren't necessary to reproduce the analysis here
+library(showtext)
+showtext_auto()
+
+# Custom fonts and stuff; just don't eval it.
+library(systemfonts)
+clear_registry()
+
+register_variant(
+  name = "Myriad Pro SemiCondensed",
+  family = "Myriad Pro",
+  width = "semicondensed",
+  weight = c("normal", "semibold"),
+)
+
+library(myriad)
+import_myriad_semi()
+import_myriad_condensed()
+theme_set(theme_myriad_semi())
+
+```
+
+```{r}
+library(tidyverse)
+library(scales)
+library(here)
+library(socviz)
+
+my_colors <- ggokabeito::palette_okabe_ito()
+```
+
+
+# Census Data Example
+
+A faceted view of some multi-way data. 
+
+```{r}
+
+attainment_levs <- c("Less than High School",
+                     "High School",
+                     "Some College",
+                     "College Degree")
+
+edage_df <- read_csv(here("files", "examples", "census_edage.csv")) |> 
+  # Need to order the Education categories
+  mutate(attainment = factor(attainment, 
+                             levels = attainment_levs,
+                             ordered = TRUE))
+  
+
+edage_df
+```
+
+This data is not tidy.
+
+```{r}
+unique(edage_df$group)
+```
+
+We're going to filter to what we need and graph it. 
+
+```{r}
+edage_coarse_df <- edage_df |>
+  group_by(group, year, attainment) |>
+  summarize(total = mean(total),
+            count = sum(count)) |>
+  mutate(prop = count/total) |>
+  separate_wider_delim(group, delim = ",", names = c("age", "sex")) |>
+  mutate(sex = str_squish(sex))
+
+edage_coarse_df
+```
+
+
+Still not tidy!
+
+```{r}
+unique(edage_coarse_df$age)
+```
+
+Final pre-plot data:
+
+```{r}
+plot_df <- edage_coarse_df |>
+  filter(sex != "Both Sexes", age != "25 Years and Over") |>
+  mutate(gender = case_match(sex,
+                             "Male" ~ "Men",
+                             "Female" ~ "Women")) |>
+  mutate(age = str_to_lower(age))
+
+plot_df
+```
+
+And off we go:
+
+```{r}
+#| fig-width: 15
+#| fig-height: 12.5
+plot_df |>
+  ggplot(aes(x = year, y = prop, color = gender)) +
+  geom_line(linewidth = 1.5) +
+  facet_grid(age ~ attainment) +
+  scale_y_continuous(labels = label_percent()) +
+  scale_color_manual(values = my_colors) + 
+  labs(x = "Year",
+       y = "Percent of Cohort",
+       color = "",
+       title = "Educational Attainment in the United States, 1940-2022",
+       subtitle = "By Age Group and Gender",
+       caption = "Data: US Census Bureau. Graph: Kieran Healy / @kjhealy") +
+  theme(panel.spacing.x = unit(1.2, "lines"),
+        panel.spacing.y = unit(1.1, "lines"), 
+        strip.text = element_text(size = rel(1.8)), 
+        plot.title = element_text(size = rel(2)), 
+        plot.subtitle = element_text(size = rel(1.8)), 
+        legend.text = element_text(size = rel(1.8)))
+```
+
+
+
+

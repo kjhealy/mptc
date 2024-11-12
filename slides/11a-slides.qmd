@@ -1,0 +1,580 @@
+---
+title: "Make Some Graphs"
+subtitle: "Modern Plain Text Social Science: Week 11"
+format: kjhslides-revealjs
+engine: knitr
+filters:
+  - invert-h1
+  - line-highlight
+  - include-code-files
+author:
+  - name: Kieran Healy
+    affiliation: "Duke University"
+date: last-modified
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+#| label: "note"
+#| include: FALSE
+## NB: By default the  template will create a new subdirectory with its files inside.
+```
+
+
+```{r}
+#| label: "packages"
+#| include: FALSE
+library(flipbookr)
+library(kjhslides)
+library(here)
+```
+
+
+```{r}
+#| label: "setup"
+#| include: FALSE
+## Configure the slides
+
+kjh_register_tenso()    # Default fonts. Comment out if you don't have Tenso and Berkeley fonts.
+kjh_set_knitr_opts()    
+# kjh_set_slide_theme()   # ggplot theme to go with slides. Set tenso = FALSE if necessary.
+kjh_set_classic_theme()
+
+
+
+
+
+
+# Safe
+```
+
+
+
+
+# Make Some [Graphs]{.fg-yellow} 
+
+
+
+## Load our libraries
+
+
+```{r}
+#| label: "05-work-with-dplyr-and-geoms-1"
+#| message: TRUE
+library(here)      # manage file paths
+library(socviz)    # data and some useful functions
+library(tidyverse) # your friend and mine
+library(gapminder) # some data
+```
+
+
+
+# A Plot's [Components]{.fg-lblue}
+
+## What we need our code to make
+
+:::: {.columns}
+::: {.column width="60%"}
+  ![](../assets/11-graph/03_ggplot_flow_final_plot_only.png)
+:::
+
+::: {.column width="40%" .right}
+- Data [**represented**]{.fg-pink} by visual elements;
+- like [_position_]{.fg-orange}, [_length_]{.fg-orange}, [_color_]{.fg-orange}, and [_size_]{.fg-orange};
+- Each measured on some [**scale**]{.fg-pink};
+- Each scale with a labeled [**guide**]{.fg-pink};
+- With the plot itself also [**titled**]{.fg-pink} and labeled.
+:::
+::::
+
+---
+
+:::{.huge}
+How does <br /> [`ggplot`]{.fg-yellow} <br /> [do this?]{.fg-lblue}
+:::
+
+# [`ggplot`]{.fg-lblue}'s flow of action
+
+## Here's the whole thing, start to finish
+
+![Flow of action](../assets/11-graph/03_ggplot_flow_wide_all.png)
+
+## We'll go through it step by step
+
+![Flow of action](../assets/11-graph/03_ggplot_flow_wide_all.png)
+
+## [`ggplot`]{.fg-lblue}'s flow of action
+
+![What we start with](../assets/11-graph/03_ggplot_flow_tidy_data_only.png)
+
+
+## [`ggplot`]{.fg-lblue}'s flow of action
+
+![Where we're going](../assets/11-graph/03_ggplot_flow_final_plot_only.png)
+
+## [`ggplot`]{.fg-lblue}'s flow of action
+
+![Core steps](../assets/11-graph/03_ggplot_flow_wide_1to3.png)
+
+## [`ggplot`]{.fg-lblue}'s flow of action
+
+![Optional steps](../assets/11-graph/03_ggplot_flow_wide_4to6.png)
+
+
+## [`ggplot`]{.fg-lblue}'s flow of action: [required]{.fg-red}
+
+![Tidy data](../assets/11-graph/03_ggplot_flow_wide_1.png)
+
+
+## [`ggplot`]{.fg-lblue}'s flow of action: [required]{.fg-red}
+
+![Aesthetic mappings](../assets/11-graph/03_ggplot_flow_wide_2.png)
+
+
+## [`ggplot`]{.fg-lblue}'s flow of action: [required]{.fg-red}
+
+![Geom](../assets/11-graph/03_ggplot_flow_wide_3.png)
+---
+
+:::{.huge}
+[Let's go piece by piece]{.fg-blue}  
+:::
+
+
+
+## Start with the data
+
+```{r }
+#| label: "03-make-a-graph-12"
+gapminder
+```
+
+```{r }
+#| label: "03-make-a-graph-13"
+dim(gapminder)
+```
+
+## Create a plot object
+
+Data is the [`gapminder`]{.fg-orange} tibble.
+
+```{r }
+#| label: "03-make-a-graph-14"
+p <- ggplot(data = gapminder)
+```
+
+## Map variables to aesthetics
+
+Tell [`ggplot`]{.fg-lblue} the variables you want represented by visual elements on the plot
+
+```{r }
+#| label: "03-make-a-graph-15"
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+```
+
+## Map variables to aesthetics
+
+The [`mapping`]{.fg-orange} `=` [`aes(...)`]{.fg-green} call links variables to things you will see on the plot.
+
+`x` and `y` represent the quantities determining position on the x and y axes.
+
+Other aesthetic mappings can include, e.g., `color`, `shape`, `size`, and `fill`. 
+
+---
+
+:::{.large}
+  [Mappings]{.fg-orange} do not _directly_ specify the particular, e.g., colors, shapes, or line styles that will appear on the plot. Rather, they establish [_which variables_]{.fg-orange} in the data will be represented by [_which visible elements_]{.fg-orange} on the plot.
+  
+:::
+
+## [`p`]{.fg-orange} has data and mappings but no geom
+
+```{r}
+#| label: "03-make-a-graph-16"
+#| fig.cap: "This empty plot has no geoms."
+#| fig.width: 8
+#| fig.height: 5
+p
+```
+
+## Add a geom
+
+```{r}
+#| label: "03-make-a-graph-17"
+#| fig.cap: "A scatterplot of Life Expectancy vs GDP"
+#| fig.width: 8
+#| fig.height: 5
+p + geom_point() 
+```
+
+## Try a different geom
+
+```{r}
+#| label: "03-make-a-graph-18"
+#| fig.cap: "A scatterplot of Life Expectancy vs GDP"
+#| fig.width: 8
+#| fig.height: 5
+p + geom_smooth() 
+```
+
+## Build your plots layer by layer
+
+```{r}
+#| label: "03-make-a-graph-19"
+#| fig.cap: "Life Expectancy vs GDP, using a smoother."
+#| fig.width: 8
+#| fig.height: 5
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y=lifeExp))
+p + geom_smooth()
+
+```
+
+---
+
+`r chunq_reveal("reveal-additive1",  lcolw="55", rcolw="45", title = "This process is additive")`
+
+```{r}
+#| label: "reveal-additive1"
+#| include: FALSE
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y=lifeExp))
+p + geom_smooth() + 
+  geom_point() 
+```
+---
+
+## Every [`geom`]{.fg-green} is a [function]{.fg-green} 
+
+Functions take [arguments]{.fg-orange}
+
+```{r}
+#| label: "codefig-functionargs"
+#| fig.caption: "An ill-advised linear fit"
+#| echo: TRUE
+#| output-location: column
+
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+p + geom_point() + 
+  geom_smooth(method = "lm") 
+```
+
+---
+
+`r chunq_reveal("reveal-logtrans",  lcolw="55", rcolw="45", title = "Keep Layering")`
+
+```{r}
+#| label: "reveal-logtrans"
+#| include: FALSE
+p <- ggplot(data = gapminder, 
+             mapping = aes(x = gdpPercap, 
+                           y=lifeExp))
+p + geom_point() +
+    geom_smooth(method = "lm") +
+    scale_x_log10()
+```
+
+---
+
+`r chunq_reveal("reveal-logtrans2",  lcolw="50", rcolw="50", title = "Fix the labels")`
+
+```{r}
+#| label: "reveal-logtrans2"
+#| include: FALSE
+p <- ggplot(data = gapminder, 
+            mapping = aes(x = gdpPercap, 
+                          y=lifeExp))
+p + geom_point() +
+    geom_smooth(method = "lm") +
+    scale_x_log10(labels = scales::label_dollar())
+```
+
+## Add labels, title, and caption
+
+::: {.smallcode}
+
+```{r}
+#| label: "codefig-logtranslab"
+#| message: FALSE
+#| fig.width: 5
+#| fig.height: 4.5
+#| output-location: column
+
+p <- ggplot(data = gapminder, 
+            mapping = aes(x = gdpPercap, 
+                          y = lifeExp))
+p + geom_point() + 
+  geom_smooth(method = "lm") +
+    scale_x_log10(labels = scales::label_dollar()) +
+    labs(x = "GDP Per Capita", 
+         y = "Life Expectancy in Years",
+         title = "Economic Growth and Life Expectancy",
+         subtitle = "Data points are country-years",
+         caption = "Source: Gapminder.")
+```
+
+:::
+
+---
+
+:::{.huge}
+[Mapping]{.fg-yellow} vs [Setting]{.fg-lblue}<br />your plot's aesthetics  
+:::
+
+
+## "Can I change the color of the points?"
+
+```{r }
+#| label: "03-make-a-graph-23"
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = "purple"))
+
+## Put in an object for convenience
+p_out <- p + geom_point() +
+    geom_smooth(method = "loess") +
+    scale_x_log10()
+```
+
+## What has gone wrong here?
+
+```{r}
+#| label: "03-make-a-graph-24"
+#| fig.width: 8
+#| fig.height: 5
+p_out
+```
+
+
+## Try again
+
+```{r }
+#| label: "03-make-a-graph-25"
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+
+## Put in an object for convenience
+p_out <- p + geom_point(color = "purple") +
+    geom_smooth(method = "loess") +
+    scale_x_log10()
+```
+
+
+## Try again
+
+```{r}
+#| label: "03-make-a-graph-26"
+#| fig.width: 8
+#| fig.height: 5
+p_out
+```
+
+## Geoms can take many arguments
+
+- Here we [set]{.fg-orange} `color`, `size`, and `alpha`. Meanwhile `x` and `y` are [mapped]{.fg-lblue}.
+- We also give non-default values to some other arguments
+
+```{r }
+#| label: "03-make-a-graph-27"
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp)) 
+p_out <- p + geom_point(alpha = 0.3) +
+    geom_smooth(color = "orange", 
+                se = FALSE, 
+                size = 8, 
+                method = "lm") +
+    scale_x_log10()
+```
+
+## Geoms can take many arguments
+
+```{r}
+#| label: "03-make-a-graph-28"
+#| fig.width: 8.5
+#| fig.height: 5
+p_out
+```
+
+## [`alpha`]{.fg-orange} for overplotting 
+
+::: {.smallcode}
+
+```{r}
+#| label: "codefig-alphapoints"
+#| message: FALSE
+#| fig.width: 5
+#| fig.height: 4.5
+#| output-location: column
+
+p <- ggplot(data = gapminder, 
+            mapping = aes(x = gdpPercap, 
+                          y = lifeExp))
+p + geom_point(alpha = 0.3) + #<<
+  geom_smooth(method = "lm") +
+    scale_x_log10(labels = scales::label_dollar()) +
+    labs(x = "GDP Per Capita", 
+         y = "Life Expectancy in Years",
+         title = "Economic Growth and Life Expectancy",
+         subtitle = "Data points are country-years",
+         caption = "Source: Gapminder.")
+```
+
+:::
+
+---
+
+:::{.huge}
+Map or Set values<br /> [per geom]{.fg-pink}  
+:::
+
+---
+
+`r chunq_reveal("reveal-pergeom1",  lcolw="60", rcolw="40", title = "Geoms can take their own mappings")`
+
+```{r}
+#| label: "reveal-pergeom1"
+#| include: FALSE
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp,
+                          color = continent,
+                          fill = continent))
+p + geom_point() +
+    geom_smooth(method = "loess") +
+    scale_x_log10(labels = scales::label_dollar())
+```
+
+---
+
+`r chunq_reveal("reveal-pergeom2",  lcolw="60", rcolw="40", title = "Geoms can take their own mappings")`
+
+```{r}
+#| label: "reveal-pergeom2"
+#| include: FALSE
+p <- ggplot(data = gapminder,
+            mapping = aes(x = gdpPercap,
+                          y = lifeExp))
+p + geom_point(mapping = aes(color = continent)) +
+    geom_smooth(method = "loess") +
+    scale_x_log10(labels = scales::label_dollar())
+ 
+```
+
+---
+
+:::{.huge}
+[Pay attention to which scales and guides are drawn, and why]{.fg-orange}  
+:::
+
+## Guides and scales reflect [`aes()`]{.fg-green} mappings
+
+:::: {.columns}
+::: {.column width="50%"}
+- `mapping = aes(color = continent, fill = continent)`
+
+![](../assets/11-graph/03_guides_1_classic.png){width=50%}
+
+:::
+
+::: {.column width="50%" .right}
+
+:::
+::::
+
+
+## Guides and scales reflect [`aes()`]{.fg-green} mappings
+
+:::: {.columns}
+::: {.column width="50%"}
+- `mapping = aes(color = continent, fill = continent)`
+
+![](../assets/11-graph/03_guides_1_classic.png){width=50%}
+
+:::
+
+::: {.column width="50%" .right}
+- `mapping = aes(color = continent)`
+
+![](../assets/11-graph/03_guides_2_classic.png){width=50%}
+
+:::
+::::
+
+---
+
+:::{.huge}
+[Remember:]{.fg-blue} [Every mapped variable has a scale]{.fg-blue}
+:::
+
+
+# Saving your work
+
+## Use [`ggsave()`]{.fg-green}
+
+```{r}
+#| label: "03-make-a-graph-29"
+#| echo: TRUE
+#| eval: FALSE
+
+## Save the most recent plot
+ggsave(filename = "figures/my_figure.png")
+
+## Use here() for more robust file paths
+ggsave(filename = here("figures", "my_figure.png"))
+
+## A plot object
+p_out <- p + geom_point(mapping = aes(color = log(pop))) +
+    scale_x_log10()
+
+ggsave(filename = here("figures", "lifexp_vs_gdp_gradient.pdf"), 
+       plot = p_out)
+
+ggsave(here("figures", "lifexp_vs_gdp_gradient.png"), 
+       plot = p_out, 
+       width = 8, 
+       height = 5)
+```
+
+## In code chunks
+
+Set options in any chunk:
+
+### RMarkdown Style
+
+`{r, fig.height=8, fig.width=5, fig.show = "hold", fig.cap="A caption"}`  
+
+### Quarto Style
+
+```{.r}
+#| fig.height=8 
+#| fig.width=5
+#| fig.show: "hold" 
+#| fig.cap="A caption"
+```
+
+
+## Or for the whole document:
+
+```{r}
+#| label: "03-make-a-graph-30"
+#| eval: FALSE
+#| echo: TRUE
+knitr::opts_chunk$set(warning = TRUE,
+                        message = TRUE,
+                        fig.retina = 3,
+                        fig.align = "center",
+                        fig.asp = 0.7,
+                        dev = c("png", "pdf"))
+```
+

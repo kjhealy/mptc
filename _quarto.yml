@@ -67,6 +67,9 @@ website:
               file: content/09-content.qmd
             - text: "10: Parallel Processing"
               file: content/10-content.qmd
+            - text: "11: Visualizing Data"
+              file: content/11-content.qmd
+
 
     - title: "Assignments"
       contents:
@@ -119,8 +122,9 @@ website:
               file: example/08-example.qmd
             - text: "09: Functions and Iteration"
               file: example/09-example.qmd
-            - text: "10: Parallel Processing"
-              file: example/10-example.qmd
+            - text: "11: Data Visualization"
+              file: example/11-example.qmd
+
 
   page-footer:
     left: |
