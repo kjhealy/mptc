@@ -22,6 +22,8 @@ slides/*.html
 slides/**/*_cache/*
 slides/libs/*
 projects/*.zip
+seas
+avhrr 
 
 # knitr and caching
 **/*_files/*

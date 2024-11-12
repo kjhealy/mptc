@@ -12,10 +12,9 @@ filters:
   - line-highlight
   - include-code-files
 
-
 ## Freeze seems to interact badly with the schedule.qmd / schedule.csv relation
 execute:
-   freeze: auto  # Re-render only when source changes
+  freeze: auto # Re-render only when source changes
 
 bibliography: files/bib/mptc_references.bib
 link-citations: false
@@ -66,7 +65,8 @@ website:
               file: content/08-content.qmd
             - text: "09: Functions and Iteration"
               file: content/09-content.qmd
-
+            - text: "10: Parallel Processing"
+              file: content/10-content.qmd
 
     - title: "Assignments"
       contents:
@@ -94,7 +94,6 @@ website:
             - text: "09: Functions and Iteration"
               file: assignment/09-assignment.qmd
 
-
     - title: "Examples"
       contents:
         - section: "Overview"
@@ -120,7 +119,8 @@ website:
               file: example/08-example.qmd
             - text: "09: Functions and Iteration"
               file: example/09-example.qmd
-
+            - text: "10: Parallel Processing"
+              file: example/10-example.qmd
 
   page-footer:
     left: |
@@ -139,4 +139,3 @@ format:
     highlight-style: html/catppuccin-macchiato.theme
     toc: true
     css: html/tenso-berkeley.css
-
