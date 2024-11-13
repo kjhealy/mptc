@@ -928,6 +928,18 @@
       ],
       "Hash": "384b388bd9155468d2c851846ee69f9f"
     },
+    "ggokabeito": {
+      "Package": "ggokabeito",
+      "Version": "0.1.0",
+      "Source": "Repository",
+      "Repository": "CRAN",
+      "Requirements": [
+        "R",
+        "ggplot2",
+        "grDevices"
+      ],
+      "Hash": "3ebb1aa87a9e095e5693c7fa782a6b1b"
+    },
     "ggplot2": {
       "Package": "ggplot2",
       "Version": "3.5.1",

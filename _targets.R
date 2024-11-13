@@ -38,7 +38,6 @@ if(!fs::dir_exists(here::here("00_dummy_files"))) { fs::dir_create(here::here("0
 if(!fs::dir_exists(here::here("00_dummy_files/figure-revealjs"))) { fs::dir_create(here::here("00_dummy_files/figure-revealjs")) }
 fs::file_create(here::here("00_dummy_files/figure-revealjs/00_dummy.png"))
 
-
 get_flipbookr_orphans <- function() {
   all_candidates <- fs::dir_ls(glob = "*_files/figure-revealjs/*.png", recurse = TRUE)
   all_candidates <- all_candidates[stringr::str_detect(all_candidates, "_site", negate = TRUE)]
@@ -61,6 +60,7 @@ relocate_orphans <- function(file) {
 
 
 get_leftover_dirs <- function(excludes = "_site|_targets|example|assignment|content") {
+
   # the figure-revealjs subdirs will all have been moved
   deletion_candidates <- fs::dir_ls(glob = "*_files", recurse = TRUE)
   deletion_candidates <- deletion_candidates[stringr::str_detect(deletion_candidates, excludes, negate = TRUE)]
@@ -71,8 +71,6 @@ remove_leftover_dirs <- function (dirs) {
   if(length(dirs) == 0) { return(character(0))}
   if(is.null(dirs)) { return(character(0))} else fs::dir_delete(dirs)
 }
-
-
 
 # Force the schedule page to always re-render; bah
 system("[ ! -e _freeze/schedule ] || rm -rf _freeze/schedule")
@@ -118,8 +116,6 @@ list(
 
   ## Fix any flipbookr leftover files
   tar_files(flipbookr_orphans, {
-    # Force dependencies
-    rendered_slides
     # Flipbooks created in the top level
     get_flipbookr_orphans()
   }
@@ -133,6 +129,8 @@ list(
 
   ## Remove any flipbookr leftover dirs
   tar_files(flipbookr_dirs, {
+    # Force dependencies
+    rendered_slides
     # Top-level flipbookr dirs now empty
     get_leftover_dirs()
   }
