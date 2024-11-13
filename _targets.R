@@ -129,7 +129,7 @@ list(
 
   ## Remove any flipbookr leftover dirs
   tar_files(flipbookr_dirs, {
-    # Force dependencies
+    # Force dependencies (no PDFs of slides so we use rendered_slides)
     rendered_slides
     # Top-level flipbookr dirs now empty
     get_leftover_dirs()
