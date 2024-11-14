@@ -46,22 +46,22 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 </script>
 
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/11a-slides.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/11a-slides.html"></iframe>
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_win_button("/slides/11a-slides")
+slide_win_button("/slides/11a-slides")
 ```
 
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/11b-slides.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/11b-slides.html"></iframe>
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-#slide_win_button("/slides/11b-slides")
+slide_win_button("/slides/11b-slides")
 ```
 
 
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/11c-slides.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/11c-slides.html"></iframe>
 
 ```{r show-slide-tabs3, echo=FALSE, results="asis"}
-#slide_win_button("/slides/11c-slides")
+slide_win_button("/slides/11c-slides")
 ```
 
