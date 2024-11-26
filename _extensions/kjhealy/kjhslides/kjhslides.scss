@@ -258,18 +258,27 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 }
 
 .small p,
+.small th,
+.small tr,
+.small td,
 .small ul {
   font-size: 1.2em;
 }
 
 .smallerkh p,
+.smallerkh th,
+.smallerkh tr,
+.smallerkh td,
 .smallerkh ul {
   font-size: 0.85em;
 }
 
 .tiny p,
+.tiny th,
+.tiny tr,
+.tiny td,
 .tiny ul {
-  font-size: 0.65em;
+  font-size: 0.7em;
 }
 
 .code-annotation-anchor {
