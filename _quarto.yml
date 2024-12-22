@@ -69,6 +69,8 @@ website:
               file: content/10-content.qmd
             - text: "11: Visualizing Data"
               file: content/11-content.qmd
+            - text: "12: Helpers and Packages"
+              file: content/12-content.qmd
 
 
     - title: "Assignments"

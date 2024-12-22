@@ -10,7 +10,7 @@ filters:
 author:
   - name: Kieran Healy
     affiliation: "Duke University"
-date: last-modified
+date: "October 23rd, 2024"
 editor_options: 
   chunk_output_type: console
 ---
@@ -419,4 +419,4 @@ dbDisconnect(con)
 
 ## This one is messier
 
-I'm not going to do it on the slides. We'll try to process a pretty big data file on a machine of modest proportions. 
+I'm not going to do it on the slides. We'll try to process a pretty big data file on a machine of modest proportions. [This week's example](https://mptc.io/example/08-example.html) shows some of the output. 
