@@ -57,7 +57,7 @@ show_table <- function(group_id) {
     kable_styling(bootstrap_options = c("striped", "hover")) %>% 
     column_spec(1, width = "20%", extra_css = "padding-right: 20px;") %>% 
     column_spec(2, width = "15%", extra_css = "padding-right: 20px;") %>% 
-    column_spec(3, width = "65%")  
+    column_spec(3, width = "65%", extra_css = "font-style: normal;")  
   cat(tbl)
 }
 ```

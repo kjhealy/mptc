@@ -10,7 +10,7 @@ filters:
 author:
   - name: Kieran Healy
     affiliation: "Duke University"
-date: "October 23rd, 2024"
+date: 2024-10-23
 editor_options: 
   chunk_output_type: console
 ---
