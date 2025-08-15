@@ -89,7 +89,7 @@ misplaced impatience to creeping despair.
 # Reading
 
 Required reading from books and articles will be provided on [the course
-website](https://mptc.io) Canvas or (in most cases) will be freely
+website](https://mptc.io), Canvas, or (in most cases) will be freely
 available online. Useful texts to acquire in hardcopy or to bookmark
 include:
 
@@ -138,17 +138,17 @@ readxl::read_xlsx(here::here("data", "schedule.xlsx")) |>
 
 # Expectations
 
-This is a graduate seminar. I take it for granted that you have a basic interest in the material, an enthusiastic attitude toward participation, and a respectful attitude to everyone in the room. I expect you to attend each meeting, do the required reading and assignments thoroughly and on time, and participate actively. Participating actively means contributing to class discussion and problem-solving, something that involves both speaking and listening. Do not silently wander off during class, as if the person speaking in front of you was a video playing. Each class meeting will have a short break in the middle.
+This is a graduate seminar. I take it for granted that you have a basic interest in the material, an enthusiastic attitude toward participation, and a respectful attitude to everyone in the room. I expect you to attend each meeting, do the required reading and assignments thoroughly and on time, and participate actively. Participating actively means contributing to class discussion and problem-solving, something that involves both speaking and listening. Do not silently wander off during class, as if the person speaking in front of you was on a screen. Each class meeting will have a short break in the middle.
 
 The main purpose of the first year graduate sequence is to teach you some core things about the field that are either required for you to do good work, or extremely useful toward that end, but which you do not already know. This has some implications that might not be immediately obvious. First, I am not making you read or do things in order to waste your time or haze you in some weird fashion. Second, your role in the class is to try to learn things you don't already know and not, for example, to try to impress me, your peers, or yourself with how clever you are. Third, this point also applies to my role as the instructor. Fourth, the people in the room---including me---are not your competitors or enemies; they are your interlocutors. Academic disciplines are just highly-structured, long-running conversations involving specialized show-and-tell and question-and-answer formats. This is where you start learning what the conversation topics are, what you need to know in order to make something useful, and how to begin making your own contributions. So please, trust the process. Everything will go better if you do.
 
 # Required work and assessment
 
-Weekly **Class Participation** (30% of final grade) and **Problem Sets**
+Weekly **Class Participation** (30% of final grade) and **Assignments**
 (50% of final grade) will let you reflect on the reading and practice
-your skills. Problem sets are due by end of day the *Friday after* they
+your skills. Assignments due by end of day the *Friday after* the class they
 are assigned. A **Final Project** (20% of final grade) will allow you to
-put what you've learned to use.
+put what you've learned to use. Submit assignments via Canvas.
 
 # Course policies
 

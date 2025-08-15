@@ -26,7 +26,7 @@ To help address these challenges, modern computing platforms provide us with a s
 
 ## What we'll cover
 
-We have twelve class weeks for this seminar, excluding Fall Break and Thanksgiving. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are:
+We have thirteen class weeks for this seminar, excluding Fall Break. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are:
 
 ```{r packages-data, include=FALSE}
 library(tidyverse)
@@ -48,26 +48,26 @@ ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
 show_table <- function(group_id) {
   # Add a heading
   # cat(as.character(paste("\n\n###", schedule_nested$group[[group_id]], "\n\n")))
-  
+
   # Make the table
-  tbl <- schedule_nested$data[[group_id]] %>% 
-    rename(`   ` = subgroup) %>% 
+  tbl <- schedule_nested$data[[group_id]] %>%
+    rename(`   ` = subgroup) %>%
     select(1:3) |> # Never mind about the lecture links and stuff on this page
-    kbl(escape = FALSE, align = "rrl", table.attr = 'class="schedule-table"') %>% 
-    kable_styling(bootstrap_options = c("striped", "hover")) %>% 
-    column_spec(1, width = "20%", extra_css = "padding-right: 20px;") %>% 
-    column_spec(2, width = "15%", extra_css = "padding-right: 20px;") %>% 
-    column_spec(3, width = "65%", extra_css = "font-style: normal;")  
+    kbl(escape = FALSE, align = "rrl", table.attr = 'class="schedule-table"') %>%
+    kable_styling(bootstrap_options = c("striped", "hover")) %>%
+    column_spec(1, width = "20%", extra_css = "padding-right: 20px;") %>%
+    column_spec(2, width = "15%", extra_css = "padding-right: 20px;") %>%
+    column_spec(3, width = "65%", extra_css = "font-style: normal;")
   cat(tbl)
 }
 ```
 
 ```{r show-table, echo=FALSE, results="asis"}
-walk(seq(1, nrow(schedule_nested)), ~show_table(.x)) 
+walk(seq(1, nrow(schedule_nested)), ~show_table(.x))
 ```
 
 :::
- 
-Throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. That's the stuff mentioned in the tag lines. At this level we will focus on examples that come up in our everyday work. As we shall see, each particular thing we learn about is a means of doing something useful. But second, and more generally, we will try to develop a *way of thinking*. That's the idea in the header. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. We want to cultivate an attitude of determined curiosity that will help us solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating.  
 
-Consult the [course schedule page](/schedule/) for more detail on weekly topics, readings, and assignments.
+Throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. That's the stuff mentioned in the tag lines. At this level we will focus on examples that come up in our everyday work. As we shall see, each particular thing we learn about is a means of doing something useful. But second, and more generally, we will try to develop a *way of thinking*. That's the idea in the header. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. We want to cultivate an attitude of determined curiosity that will help us solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating.
+
+Consult the [course schedule page](/schedule/) for more detail on weekly topics, readings, and assignments. The [syllabus](/syllabus/) has more information on expectations, requirements, course polices, and assessment for the seminar.
