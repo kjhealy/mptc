@@ -1,4 +1,4 @@
-version: 2.0
+version: 3.0
 author: Kieran Healy
 
 instructor:
@@ -8,19 +8,19 @@ instructor:
   url: "https://www.kieranhealy.org"
   mastodon: kjhealy
   github: kjhealy
-  office: "268 Reuben-Cooke"
+  office: "710 Erwin Square Plaza"
 
 course:
   number: "SOCIOL 703"
   title: "Modern Plain Text Computing"
-  semester: "Fall 2024"
-  days: "Tuesdays"
-  time: "11:45am--2:15pm"
-  location: "Reuben-Cooke 329"
-  dates: "08/27/2024 -- 12/01/2024"
+  semester: "Fall 2025"
+  days: "Mondays"
+  time: "10:05am--12:35pm"
+  location: "Erwin Square Plaza 746"
+  dates: "08/25/2025 -- 11/25/2025"
   github: "https://www.github.com/kjhealy/mptc"
   url: "https://mptc.io"
-  copyright_year: "2024"
+  copyright_year: "2025"
 
 university:
   name: Duke University
@@ -35,17 +35,17 @@ deploy:
   site: true
 
 schedule:
-  wk01: 2024-08-27
-  wk02: 2024-09-03
-  wk03: 2024-09-10
-  wk04: 2024-09-17
-  wk05: 2024-09-24
-  wk06: 2024-10-01
-  wk07: 2024-10-08
-  wk08: 2024-10-15
-  wk09: 2024-10-22
-  wk10: 2024-10-29
-  wk11: 2024-11-05
-  wk12: 2024-11-12
-  wk13: 2024-11-19
-  wk14: 2024-11-26
+  wk01: 2025-08-25
+  wk02: 2025-09-01
+  wk03: 2025-09-08
+  wk04: 2025-09-15
+  wk05: 2025-09-22
+  wk06: 2025-09-29
+  wk07: 2025-10-06
+  wk08: 2025-10-13
+  wk09: 2025-10-20
+  wk10: 2025-10-27
+  wk11: 2025-11-03
+  wk12: 2025-11-10
+  wk13: 2025-11-17
+  wk14: 2025-11-24

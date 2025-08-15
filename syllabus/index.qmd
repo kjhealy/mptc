@@ -1,16 +1,16 @@
 ---
-title: "Sociol 703: Modern Plain Text Computing" 
+title: "Sociol 703: Modern Plain Text Computing"
 author:
   - name: Kieran Healy
     email: kieran.healy@duke.edu
-    affiliations: 
+    affiliations:
       - id: duke
         name: Duke University
 format:
   html: default
   minion-pdf: default
-editor: 
-  markdown: 
+editor:
+  markdown:
     wrap: 72
 ---
 
@@ -123,16 +123,32 @@ examples and the problem set due the following week.
 
 # Weekly Schedule
 
+- The schedule is subject to change.
+
 ```{r,echo=FALSE}
-readxl::read_xlsx(here::here("data", "schedule.xlsx")) |> 
-  dplyr::mutate(date = lubridate::ymd(date), 
+readxl::read_xlsx(here::here("data", "schedule.xlsx")) |>
+  dplyr::mutate(date = lubridate::ymd(date),
                 day2 = lubridate::ymd(day2),
-                date = glue::glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'), 
-                date = stringr::str_replace_all(date, "NA", "-")) |> 
-  dplyr::select(subgroup, title) |> 
-  dplyr::rename(Week = subgroup, Topic = title) |> 
+                date = glue::glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'),
+                date = stringr::str_replace_all(date, "NA", "-")) |>
+  dplyr::select(subgroup, title) |>
+  dplyr::rename(Week = subgroup, Topic = title) |>
   kableExtra::kbl(booktabs = TRUE)
 ```
+
+# Expectations
+
+This is a graduate seminar. I take it for granted that you have a basic interest in the material, an enthusiastic attitude toward participation, and a respectful attitude to everyone in the room. I expect you to attend each meeting, do the required reading and assignments thoroughly and on time, and participate actively. Participating actively means contributing to class discussion and problem-solving, something that involves both speaking and listening. Do not silently wander off during class, as if the person speaking in front of you was a video playing. Each class meeting will have a short break in the middle.
+
+The main purpose of the first year graduate sequence is to teach you some core things about the field that are either required for you to do good work, or extremely useful toward that end, but which you do not already know. This has some implications that might not be immediately obvious. First, I am not making you read or do things in order to waste your time or haze you in some weird fashion. Second, your role in the class is to try to learn things you don't already know and not, for example, to try to impress me, your peers, or yourself with how clever you are. Third, this point also applies to my role as the instructor. Fourth, the people in the room---including me---are not your competitors or enemies; they are your interlocutors. Academic disciplines are just highly-structured, long-running conversations involving specialized show-and-tell and question-and-answer formats. This is where you start learning what the conversation topics are, what you need to know in order to make something useful, and how to begin making your own contributions. So please, trust the process. Everything will go better if you do.
+
+# Required work and assessment
+
+Weekly **Class Participation** (30% of final grade) and **Problem Sets**
+(50% of final grade) will let you reflect on the reading and practice
+your skills. Problem sets are due by end of day the *Friday after* they
+are assigned. A **Final Project** (20% of final grade) will allow you to
+put what you've learned to use.
 
 # Course policies
 
@@ -141,14 +157,8 @@ readxl::read_xlsx(here::here("data", "schedule.xlsx")) |>
     that is possible.
 -   Do the assigned readings in advance of class.
 -   Submit problem sets, or other assignments, on time.
+-   Do not use AI tools to complete assignments unless I explicitly say that you may do so. We'll discuss them, their uses, and their limitations by the end of the course. But if you use them before then for an assigment, you will get an F for the course. I am not joking. The point of this seminar---the whole reason it is required---is for you to learn how to do things for yourself, and to understand what it is you are doing. When it comes to writing scripts or navigating documentation or debugging bits of code, AI can be very handy at times. But first you have to know what you are doing.
 
-# Required work and grading
-
-Weekly **Class Participation** (30% of final grade) and **Problem Sets**
-(50% of final grade) will let you reflect on the reading and practice
-your skills. Problem sets are due by end of day the *Monday* after they
-are assigned. A **Final Project** (20% of final grade) will allow you to
-put what you've learned to use.
 
 # Duke community standard
 

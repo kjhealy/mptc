@@ -48,56 +48,17 @@ website:
         - section: "Topics"
           contents:
             - text: "01: Doing Your Work Properly"
-              file: content/01-content.qmd
-            - text: "02: Files and the Shell"
-              file: content/02-content.qmd
-            - text: "03: Searching and Editing Text"
-              file: content/03-content.qmd
-            - text: "04: R and RStudio"
-              file: content/04-content.qmd
-            - text: "05: Tables and dplyr"
-              file: content/05-content.qmd
-            - text: "06: Version Control and git"
-              file: content/06-content.qmd
-            - text: "07: Data in and out"
-              file: content/07-content.qmd
-            - text: "08: Databases"
-              file: content/08-content.qmd
-            - text: "09: Functions and Iteration"
-              file: content/09-content.qmd
-            - text: "10: Parallel Processing"
-              file: content/10-content.qmd
-            - text: "11: Visualizing Data"
-              file: content/11-content.qmd
-            - text: "12: Helpers and Packages"
-              file: content/12-content.qmd
-
+              file: content/01-content-doing-your-work.qmd
 
     - title: "Assignments"
       contents:
         - section: "Overview"
           contents:
             - assignment/index.qmd
-        - section: "Things to do"
+        - section: "Weekly Work"
           contents:
             - text: "01: Software Setup"
-              file: assignment/01-assignment.qmd
-            - text: "02: Files and the Shell"
-              file: assignment/02-assignment.qmd
-            - text: "03: Searching and Editing Text"
-              file: assignment/03-assignment.qmd
-            - text: "04: R and RStudio"
-              file: assignment/04-assignment.qmd
-            - text: "05: Working with Tables"
-              file: assignment/05-assignment.qmd
-            - text: "06: Version Control and git"
-              file: assignment/06-assignment.qmd
-            - text: "07: Data in and out"
-              file: assignment/07-assignment.qmd
-            - text: "08: Databases"
-              file: assignment/08-assignment.qmd
-            - text: "09: Functions and Iteration"
-              file: assignment/09-assignment.qmd
+              file: assignment/01-assignment-install-r-github.qmd
 
     - title: "Examples"
       contents:
@@ -107,26 +68,7 @@ website:
         - section: "How-To"
           contents:
             - text: "01: A Tiny Project"
-              file: example/01-example.qmd
-            - text: "02: Files and the Shell"
-              file: example/02-example.qmd
-            - text: "03: Searching and Diffing Text"
-              file: example/03-example.qmd
-            - text: "04: R and RStudio"
-              file: example/04-example.qmd
-            - text: "05: Tables and dplyr"
-              file: example/05-example.qmd
-            - text: "06: Version Control and git"
-              file: example/06-example.qmd
-            - text: "07: Data in and out"
-              file: example/07-example.qmd
-            - text: "08: Databases"
-              file: example/08-example.qmd
-            - text: "09: Functions and Iteration"
-              file: example/09-example.qmd
-            - text: "11: Data Visualization"
-              file: example/11-example.qmd
-
+              file: example/01-example-oecd.qmd
 
   page-footer:
     left: |

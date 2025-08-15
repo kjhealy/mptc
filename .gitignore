@@ -19,6 +19,7 @@ syllabus/*.html
 data/dfstrat.csv
 slides/*.pdf
 slides/*.html
+slides/fonts/*
 slides/**/*_cache/*
 slides/libs/*
 projects/*.zip

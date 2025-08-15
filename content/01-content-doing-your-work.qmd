@@ -1,0 +1,66 @@
+---
+title: "01. Doing Your Work Properly"
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+Why is technical computing, in the broadest sense, organized in the way that it is? The specifics are, inevitably, the path-dependent product of particular historical developments. But we can also motivate the topic more positively in terms of ideas about organization and control through composable actions on files. We need to repeatedly do things with the computer; we want to be able to say and have some record of what we did; and we want to be able to open up and inspect the actions we took in order to change them if needed.
+
+## Reading
+
+- @christensen19:_trans_reprod_social_scien_resear "Introduction" and Chapter 11, "Reproducible Workflow".
+- @healy20:_plain_person_guide_plain_text_social_scien "1. Introduction"
+
+
+## Also ...
+
+-   Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
+
+
+## Slides
+
+(Will appear here after the seminar.)
+
+
+```{=html}
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/01-slides-bigpicture.html"></iframe-->
+
+
+```
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+#slide_win_button("/slides/01a-slides")
+```
+
+
+```{=html}
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/01b-slides.html"></iframe-->
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+#slide_win_button("/slides/01b-slides")
+```

@@ -1,9 +1,0 @@
----
-title: "Tasks for Week 09"
-date: last-modified
----
-
-Have a go at the following exercises in [Chapter 25](https://r4ds.hadley.nz/functions) of _R for Data Science_:
-
-- [25.2.5, Vector functions](https://r4ds.hadley.nz/functions#exercises)
-- [25.3.5, Data Frame functions](https://r4ds.hadley.nz/functions#exercises-1)
