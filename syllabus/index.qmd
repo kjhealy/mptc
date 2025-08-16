@@ -6,6 +6,8 @@ author:
     affiliations:
       - id: duke
         name: Duke University
+date: "2025-08-16"
+date-format: long
 format:
   html: default
   minion-pdf: default
@@ -24,67 +26,12 @@ library(pander)
 
 This course is an introduction to modern plain-text methods of data
 analysis, data management, and coding. It is required for first-year
-graduate students in the Sociology department. It introduces a suite or
-"stack" of computing tools and techniques that are widely used in the
-department, the discipline, across the social sciences, and beyond. We
+graduate students in the Sociology department. It introduces a collection of computing tools and techniques that are widely used in the department, the discipline, across the social sciences, and beyond. We
 will learn to use these tools and also learn why they exist and why they
 are important for producing work that is reliable, reproducible, and
 open to inspection.
 
-# Motivation
-
-Researchers depend on computer software to get their work done. But
-often, they do not know enough about how their computers work. This
-makes their lives more difficult. I don't mean it's a shame not everyone
-is a software engineer ready and able to write applications from the
-ground up. Rather, as researchers working with data of various kinds, we
-just don't make the best use of our computers. Nor are we encouraged to
-reflect on why they work the way they do. Instead we end up fending for
-ourselves and picking things up informally. Or, instead of getting on
-with the task at hand, course instructors are forced to spend time
-bringing people up to speed about where that document went, or what a
-file is, or why the stupid thing stopped working just now. In the worst
-case, we never get a feel for this stuff at all and end up marinating in
-an admixture of magical thinking and sour resentment towards the
-machines we sit in front of for hours each day.
-
-All of that is bad. This course is meant to help. While the coding and
-data analysis tools we have are powerful, they are also kind of a pain
-in the neck. For the most part they are made to allow us to know what we
-did. They can be opened up to have their history and inner workings
-examined if needed. This runs against the grain of the devices we use
-most often---our phones---which do not work in that way at all. As a
-rule, apps on your phone hide their implementation details from you and
-do not want you to worry too much about where things are stored or how
-things are accomplished or what happens if you need to do the same thing
-again later. They do that for very good reasons. But it does mean that
-even if you use a powerful computer constantly, as we almost all do now,
-it does not give you much of a grip on how more technical computing
-works. To the contrary, it makes it look strange and annoying and
-deliberately confusing.
-
-The fragmented, messy, and multifacted tasks associated with scholarly
-research make heavy demands on software. Most of them have to do with
-the need for *control* over what you are doing, and especially the
-importance of having a *record* of what you did that you can revisit and
-*reproduce* if needed. They also need to allow us to track down and
-diagnose errors. Because our research work is fragmented and messy, this
-can often be a tricky process to think clearly about and work through in
-a systematic way.
-
-To help address these challenges, modern computing platforms provide us
-with a suite of powerful, modular, specialized tools and methods. The
-bad news is that they are not magic; they cannot do our thinking for us.
-The good news is that they are by now very old and very stable. Most of
-them are developed in the open. Many are supported by helpful
-communities. Almost all are available for free. Nearly without
-exception, they tend to work through the medium of explicit instructions
-written out in plain text. In other words they work by having you write
-some code, in the broadest sense. People who do research involving
-structured data of any kind should become familiar with these tools.
-Lack of familiarly with the basics encourages bad habits and unhealthy
-attitudes among the informed and uninformed alike, ranging from
-misplaced impatience to creeping despair.
+{{< include ../_motivation.qmd >}}
 
 # Reading
 
@@ -123,18 +70,9 @@ examples and the problem set due the following week.
 
 # Weekly Schedule
 
-- The schedule is subject to change.
+The schedule is shown in @tbl-schedule. It is subject to change.
 
-```{r,echo=FALSE}
-readxl::read_xlsx(here::here("data", "schedule.xlsx")) |>
-  dplyr::mutate(date = lubridate::ymd(date),
-                day2 = lubridate::ymd(day2),
-                date = glue::glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'),
-                date = stringr::str_replace_all(date, "NA", "-")) |>
-  dplyr::select(subgroup, title) |>
-  dplyr::rename(Week = subgroup, Topic = title) |>
-  kableExtra::kbl(booktabs = TRUE)
-```
+{{< include ../_weekly-schedule.qmd >}}
 
 # Expectations
 

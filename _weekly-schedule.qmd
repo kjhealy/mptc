@@ -1,0 +1,30 @@
+```{r}
+#| include: false
+#| label: schedule-data
+
+withr::with_dir(here::here(), {
+  schedule_nested <- targets::tar_read(schedule_page_data)
+  targets::tar_load(schedule_ical_file)
+})
+
+base_url <- yaml::read_yaml(here::here("_quarto.yml"))$website$`site-url`
+ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
+```
+
+```{r}
+#| label: tbl-schedule
+#| tbl-cap: "Overview of the course schedule."
+#| echo: false
+
+readxl::read_xlsx(here::here("data", "schedule.xlsx")) |>
+    dplyr::mutate(
+      date = lubridate::ymd(date),
+      day2 = lubridate::ymd(day2),
+      date = glue::glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'),
+      date = stringr::str_replace_all(date, "NA", "-"),
+      date = stringr::str_remove(date, " / -")) |>
+    dplyr::select(subgroup, date, title) |>
+    dplyr::rename(Week = subgroup, Date = date, Topic = title) |>
+    tinytable::tt()
+
+```

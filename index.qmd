@@ -11,62 +11,15 @@ title: "Modern Plain Text Computing"
 
 This is the course website for the {{< var course.semester >}} seminar {{< var course.number >}}, {{< var course.title >}}, taught at [{{< var university.name >}}]({{< var university.url >}}) by [{{< var instructor.name >}}]({{< var instructor.url >}}). It is required for first-year students in the department and open to others who are interested in the material.
 
-## Motivation
-
-Researchers depend on computer software to get their work done. But often, they do not know enough about how their computers work. This makes their lives more difficult. I don't mean it's a shame not everyone is a software engineer ready and able to write applications from the ground up. Rather, as researchers working with data of various kinds, we just don't make the best use of our computers. Nor are we encouraged to reflect on why they work the way they do. Instead we end up fending for ourselves and picking things up informally. Or, instead of getting on with the task at hand, course instructors are forced to spend time bringing people up to speed about where that document went, or what a file is, or why the stupid thing stopped working just now. In the worst case, we never get a feel for this stuff at all and end up marinating in an admixture of magical thinking and sour resentment towards the machines we sit in front of for hours each day, and will likely sit in front of for the rest of our careers.
-
 ![A working [scale replica of a Digital Equipment Corporation PDP-11/70](https://kieranhealy.org/blog/archives/2021/10/09/building-a-pdp-11/70-kit/), one of the mainstays of computing in the 1970s. As annoying as your laptop undoubtedly is, be grateful that you do not have to program this machine using the bank of switches at the front by reading the [blinkenlights](https://en.wikipedia.org/wiki/Blinkenlights).](assets/00-site/00-pdp11-800.gif "A working scale model of a DEC PDP 11/70."){#fig-pdp11}
 
+{{< include _motivation.qmd >}}
 
-All of that is bad. This course is meant to help. While the coding and data analysis tools we have are  powerful, they are also kind of a pain in the neck. For the most part they are made to allow us to know what we did. They can be opened up to have their history and inner workings examined if needed. This  runs against the grain of the devices we use most often---our phones---which do not work in that way at all. As a rule, apps on your phone hide their implementation details from you and do not want you to worry too much about where things are stored or how things are accomplished or what happens if you need to do the same thing again later. They do that for very good reasons. But it does mean that even if you use a powerful computer constantly, as we almost all do now, it does not give you much of a grip on how more technical computing works. To the contrary, it makes it look strange and annoying and deliberately confusing.
+# What we'll cover
 
-The fragmented, messy, and multifacted tasks associated with scholarly research (whatever your preferred methodological approach) make heavy demands on software. Most of them have to do with the need for *control* over what you are doing, and especially the importance of having a *record* of what you did that you can revisit and *reproduce* if needed. They also need to allow us to track down and diagnose errors. Because our research work is fragmented and messy, this can often be a tricky process to think clearly about and work through in a systematic way.
+We have thirteen class weeks for this seminar, excluding Fall Break. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are shown in @tbl-schedule.
 
-To help address these challenges, modern computing platforms provide us with a suite of powerful, modular, specialized tools and techniques. The bad news is that they are not magic; they cannot do our thinking for us. The good news is that they are by now very old and very stable. Most of them are developed in the open. Many are supported by helpful communities. Almost all are available for free. Nearly without exception, they tend to work through the medium of explicit instructions written out in plain text. In other words they work by having you write some "code", in the broadest sense. People who do research involving structured data of any kind should become familiar with these tools. Lack of familiarly with the basics encourages bad habits and unhealthy attitudes among the informed and uninformed alike, ranging from misplaced impatience to creeping despair.
-
-## What we'll cover
-
-We have thirteen class weeks for this seminar, excluding Fall Break. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are:
-
-```{r packages-data, include=FALSE}
-library(tidyverse)
-library(knitr)
-library(kableExtra)
-
-withr::with_dir(here::here(), {
-  schedule_nested <- targets::tar_read(schedule_page_data)
-  targets::tar_load(schedule_ical_file)
-})
-
-base_url <- yaml::read_yaml(here::here("_quarto.yml"))$website$`site-url`
-ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
-```
-
-::: {.schedule-page}
-
-```{r build-table, include=FALSE}
-show_table <- function(group_id) {
-  # Add a heading
-  # cat(as.character(paste("\n\n###", schedule_nested$group[[group_id]], "\n\n")))
-
-  # Make the table
-  tbl <- schedule_nested$data[[group_id]] %>%
-    rename(`   ` = subgroup) %>%
-    select(1:3) |> # Never mind about the lecture links and stuff on this page
-    kbl(escape = FALSE, align = "rrl", table.attr = 'class="schedule-table"') %>%
-    kable_styling(bootstrap_options = c("striped", "hover")) %>%
-    column_spec(1, width = "20%", extra_css = "padding-right: 20px;") %>%
-    column_spec(2, width = "15%", extra_css = "padding-right: 20px;") %>%
-    column_spec(3, width = "65%", extra_css = "font-style: normal;")
-  cat(tbl)
-}
-```
-
-```{r show-table, echo=FALSE, results="asis"}
-walk(seq(1, nrow(schedule_nested)), ~show_table(.x))
-```
-
-:::
+{{< include _weekly-schedule.qmd >}}
 
 Throughout the seminar we will move back and forth between two perspectives. First, and most concretely, we will learn about *specific tools* and various tricks associated with using them. That's the stuff mentioned in the tag lines. At this level we will focus on examples that come up in our everyday work. As we shall see, each particular thing we learn about is a means of doing something useful. But second, and more generally, we will try to develop a *way of thinking*. That's the idea in the header. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to develop the ability---and fortitude---to learn how to learn more. We want to cultivate an attitude of determined curiosity that will help us solve problems as they (inevitably) arise, even when those problems are (undeniably) frustrating.
 
