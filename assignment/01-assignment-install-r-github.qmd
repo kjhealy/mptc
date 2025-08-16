@@ -9,7 +9,7 @@ source(here::here("R", "slide-things.R"))
 
 ## Getting Started
 
-This is the first assignment for the course. It has two parts. The first part is to install R and RStudio, and the second part is to set up your GitHub account and connect it to RStudio. You should complete this assignment before the first class meeting. I _strongly_ encourage you to talk to your fellow classmates about the assignment and to help each other out.
+This is the first assignment for the course. It has several parts. The first part is to install R and RStudio. The second is to set up your GitHub account and connect it to RStudio.  The third part is checking to see if you successfully did the first two parts. Finally, I suggest some other, related software you should also install. You should complete this assignment before the first class meeting. I _strongly_ encourage you to talk to your fellow classmates about the assignment and to help each other out.
 
 ## Task 1: Install R and RStudio
 
@@ -71,3 +71,32 @@ If you do not have one already, create a GitHub account and obtain a GitHub Pers
 ## Task 3: See if everything works
 
 - Go to [this week's Example](../example/01-example-oecd.qmd) and see if you can run the code in the example to the point where you can reproduce the OECD project.
+
+## Task 4: Install some other software
+
+Here are some things we will not use immediately, but which you should install now anyway.
+
+### Both macOS and Windows
+- Manage your references with [Zotero](https://www.zotero.org/). Zotero is a free, open-source reference manager that works well with R and RStudio. It is available for all major operating systems. The sooner you start using it to manage your references, the better.
+- In addition to Zotero, you should also install the [Zotero Better BibTeX plugin](https://retorque.re/zotero-better-bibtex/). This plugin allows you to export your Zotero libraries in a format that works well with R and RStudio. It also means you can use Zotero to automatically manage and update your bibliographical files in Quarto documents rather than having to edit a .bib file by hand.
+
+## macOS
+- If you are on a Mac, install the Developer Command Line Tools if this did not happen already when you installed `git`. To install the command line tools, open a terminal window and type
+
+```{bash}
+#| eval: false
+#| echo: true
+
+xcode-select --install
+```
+
+then hit return. You will see a dialog box asking you to install the command line tools. Go ahead and do so.
+
+- Install [Homebrew](https://brew.sh/), a package manager for macOS. Homebrew is useful for installing and managing command-line tools.
+
+
+## Windows
+- Install the [Windows Terminal](https://aka.ms/terminal) if you don't already have it.
+- Then install the [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) package manager if you don't already have it.
+- Use WinGet to install [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5). Windows comes installed with an older version of PowerShell (version 5). You can't remove it, but can install the newer version (version 7) and choose it as your default shell.
+- Consider installing [Oh My Posh](https://ohmyposh.dev/docs/installation/windows) to make your terminal look a little nicer and get a more useful command prompt.
