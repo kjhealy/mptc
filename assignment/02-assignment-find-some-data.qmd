@@ -17,7 +17,7 @@ Look at the [list of practice data sources](https://mptc.io/content/) on the cou
 
 ## Task 2: Set up a Project
 
-Set up a new R project in RStudio, and save the data file in the `data/` subdirectory of that project. Create a new Quarto document in that project, and write a short paragraph about the data you downloaded, saying what format you think it is in and what it contains.
+Set up a new R project in RStudio, and save the data file in a subdirectory of that project named `data`. Create a new Quarto document in the project, and write a short paragraph about the data you downloaded, saying what format you think it is in, what it contains, and what you think you could learn from it.
 
 ## Task 3: Submit Your Work
 
