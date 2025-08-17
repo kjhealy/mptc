@@ -69,8 +69,8 @@ website:
             - example/index.qmd
         - section: "How-To"
           contents:
-            - text: "01: A Tiny Project"
-              file: example/01-example-oecd.qmd
+            - text: "00: A Tiny Project"
+              file: example/00-example-oecd.qmd
 
   page-footer:
     left: |
