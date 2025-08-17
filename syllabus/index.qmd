@@ -62,11 +62,11 @@ well as in the world of "data science" generally.
 environment, or IDE, for R, a kind of control center from which you can
 manage the engine-room of R itself. It is also freely available.
 
-# Course website
+# Website, Canvas, and Slack
 
 The course website is at <https://mptc.io>. Each week, slides, readings,
 and other class material will be posted there along with additional
-examples and the problem set due the following week.
+examples and the problem set due the following week. We will use Duke's Learning CMS, Canvas, for submission of assignments and to host some readings. There is also a Slack workspace for the course. Details about joining it will be provided via email.
 
 # Weekly Schedule
 
