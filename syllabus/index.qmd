@@ -82,11 +82,10 @@ The main purpose of the first year graduate sequence is to teach you some core t
 
 # Required work and assessment
 
-Weekly **Class Participation** (30% of final grade) and **Assignments**
+Weekly **Class Participation** (50% of final grade) and **Assignments**
 (50% of final grade) will let you reflect on the reading and practice
 your skills. Assignments due by end of day the *Friday after* the class they
-are assigned. A **Final Project** (20% of final grade) will allow you to
-put what you've learned to use. Submit assignments via Canvas.
+are assigned. Submit assignments via Canvas.
 
 # Course policies
 
@@ -95,7 +94,7 @@ put what you've learned to use. Submit assignments via Canvas.
     that is possible.
 -   Do the assigned readings in advance of class.
 -   Submit problem sets, or other assignments, on time.
--   Do not use AI tools to complete assignments unless I explicitly say that you may do so. We'll discuss them, their uses, and their limitations by the end of the course. But if you use them before then for an assigment, you will get an F for the course. I am not joking. The point of this seminar---the whole reason it is required---is for you to learn how to do things for yourself, and to understand what it is you are doing. When it comes to writing scripts or navigating documentation or debugging bits of code, AI can be very handy at times. But first you have to know what you are doing.
+-   Do not use AI tools to complete assignments unless I explicitly say that you may do so. We'll discuss them, their uses, and their limitations by the end of the course. But if you use them before then for an assigment, you will get an F for the course. I am not joking. The point of this seminar---the whole reason it is required---is for you to learn how to do things for yourself, and to understand what it is you are doing. When it comes to writing scripts or navigating documentation or debugging bits of code, AI can be very handy once you know what you are doing. But first you have to know what you are doing.
 
 
 # Duke community standard
