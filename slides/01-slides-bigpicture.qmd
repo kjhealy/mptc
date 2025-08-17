@@ -214,9 +214,9 @@ Also it's weirdly satisfying once you get into it.
 ::::
 
 
-## Have you done this part yet?
+## How did this go?
 
-[Week 01 Assignment: Install R and RStudio](/assignment/01-assignment-install-r-github.qmd)
+[Week 00 Assignment: Install R and RStudio](/assignment/00-assignment-install-r-github.qmd)
 
 ![](../assets/01-file-system/01_mptc_assignment_01.png)
 

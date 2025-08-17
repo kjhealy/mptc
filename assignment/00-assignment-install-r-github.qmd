@@ -1,5 +1,6 @@
 ---
-title: "Assignment 01: Installation"
+title: "Assignment 00: Installation"
+date: "2025-08-25"
 ---
 
 ```{r setup, include=FALSE}
@@ -9,7 +10,7 @@ source(here::here("R", "slide-things.R"))
 
 ## Getting Started
 
-This is the first assignment for the course. It has several parts. The first part is to install R and RStudio. The second is to set up your GitHub account and connect it to RStudio.  The third part is checking to see if you successfully did the first two parts. Finally, I suggest some other, related software you should also install. You should complete this assignment before the first class meeting. I _strongly_ encourage you to talk to your fellow classmates about the assignment and to help each other out.
+This is as it were the zeroth assignment for the course. It has several parts. The first part is to install R and RStudio. The second is to set up your GitHub account and connect it to RStudio.  The third part is checking to see if you successfully did the first two parts. Finally, I suggest some other, related software you should also install. You should complete this assignment before the first class meeting. I _strongly_ encourage you to talk to your fellow classmates about the assignment and to help each other out.
 
 ## Task 1: Install R and RStudio
 

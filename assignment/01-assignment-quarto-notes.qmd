@@ -1,0 +1,22 @@
+---
+title: "Assignment 01: Quarto Notes"
+date: "2025-08-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+
+This is the first regular assignment for the course.
+
+## Task 1: Write up your notes for the first class meeting
+
+You should have taken notes during the first class meeting. If you didn't, you should take notes now, as soon as possible afterwards. Make notes in a Quarto file within the `mptc` project folder you made. Choose a file name for your notes and, in the first paragraph of the notes, explain your choice of file name and what you think a sensible organization strategy for the `mptc` project folder would be. In addition, tell me where exactly on your computer the `mptc` project is, and why it is there.
+
+For the remainder of the notes, write up or include whatever you want to recall or have questionsn about from the first class meeting. You can include screenshots, code snippets, or whatever else you think would be useful for to you.
+
+## Task 2: Render your notes to PDF and submit it to Canvas
+
+Create a PDF version of your notes. There will be a Canvas assignment where you can upload the PDF file.

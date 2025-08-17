@@ -17,7 +17,7 @@ This is the course website for the {{< var course.semester >}} seminar {{< var c
 
 # What we'll cover
 
-We have thirteen class weeks for this seminar, excluding Fall Break. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are shown in @tbl-schedule.
+We have twelve class weeks for this seminar, excluding Labor Day and Fall Break. During that time we will learn some elements of plain-text computing that every graduate student in the social sciences (and beyond!) should know something about. They are shown in @tbl-schedule.
 
 {{< include _weekly-schedule.qmd >}}
 

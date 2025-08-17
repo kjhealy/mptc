@@ -17,14 +17,17 @@ ical_url_absolute <- paste0(base_url, "/", schedule_ical_file)
 #| echo: false
 
 readxl::read_xlsx(here::here("data", "schedule.xlsx")) |>
-    dplyr::mutate(
-      date = lubridate::ymd(date),
-      day2 = lubridate::ymd(day2),
-      date = glue::glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'),
-      date = stringr::str_replace_all(date, "NA", "-"),
-      date = stringr::str_remove(date, " / -")) |>
-    dplyr::select(subgroup, date, title) |>
-    dplyr::rename(Week = subgroup, Date = date, Topic = title) |>
-    tinytable::tt()
+  dplyr::mutate(
+    date = lubridate::ymd(date),
+    day2 = lubridate::ymd(day2),
+    date = glue::glue('{format(date, "%b %e")} / {format(day2, "%b %e")}'),
+    date = stringr::str_replace_all(date, "NA", "-"),
+    date = stringr::str_remove(date, " / -")
+  ) |>
+  dplyr::select(subgroup, date, title) |>
+  dplyr::rename(Week = subgroup, Date = date, Topic = title) |>
+  dplyr::mutate(Week = stringr::str_remove(Week, "Week ")) |>
+  tinytable::tt() |>
+  tinytable::style_tt(align = "cll")
 
 ```

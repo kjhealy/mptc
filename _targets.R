@@ -33,12 +33,14 @@ source("R/tar_projects.R")
 source("R/tar_data.R")
 source("R/tar_calendar.R")
 
-# Force the index and schedule page to always re-render; bah
+# Force the index, syllabus, and schedule pages to always re-render; bah
 # This works around targets not knowing about includes
+system("[ ! -e _freeze/index ] || rm -rf _freeze/index/")
 system("[ ! -e _freeze/schedule ] || rm -rf _freeze/schedule/")
-system("[ ! -e _freeze/content/index ] || rm -rf _freeze/content/index/")
+system("[ ! -e _freeze/syllabus ] || rm -rf _freeze/syllabus/")
+system("[ ! -e _site/index.html ] || rm -f _site/index.html")
 system("[ ! -e _site/schedule ] || rm -rf _site/schedule/")
-system("[ ! -e _freeze/index.html ] || rm -f _site/index.html")
+system("[ ! -e _site/syllabus ] || rm -rf _site/syllabus/")
 
 
 # Ensure deletion_candidates has at least one dummy dir, to keep target branching happy

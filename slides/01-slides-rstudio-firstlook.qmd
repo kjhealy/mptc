@@ -1,0 +1,297 @@
+---
+title: "A First Look at RStudio"
+subtitle: "Modern Plain Text Computing<br />Week 01"
+format: kjhslides-revealjs
+engine: knitr
+filters:
+  - invert-h1
+  - include-code-files
+  - line-highlight
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+editor_options:
+  chunk_output_type: console
+---
+
+```{r}
+#| label: "packages"
+#| include: FALSE
+library(flipbookr)
+library(tidyverse)
+library(here)
+library(kjhslides)
+```
+
+
+```{r}
+#| label: "setup"
+#| include: FALSE
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+
+
+
+
+
+
+
+# Safe
+```
+
+
+
+
+# [Getting to know]{.fg-yellow} [R and RStudio]{.fg-lblue}
+
+
+---
+
+:::{.huge}
+ We want to [do our work]{.fg-orange} [reproducibly]{.fg-green}
+:::
+
+---
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../assets/04-r/04_r_logo.png)
+:::
+
+::: {.column width="50%" .right}
+![](../assets/04-r/04_rstudio_logo.png)
+:::
+::::
+
+
+# The [RStudio]{.fg-lblue} IDE
+
+## An IDE for R {background-image="../assets/04-r/04_ide_control_room.png" background-size="cover"}
+
+## An IDE for Meals {background-image="../assets/04-r/04_ide_kitchen.png" background-size="cover"}
+
+---
+
+![RStudio at startup](../assets/04-r/04_ide_rstudio_startup.png)
+
+---
+
+![RStudio schematic overview](../assets/04-r/04_ide_rstudio_schematic.png)
+
+---
+
+![RStudio schematic overview](../assets/04-r/04_ide_rstudio_schematic_overlay.png)
+
+---
+
+
+![RStudio at startup](../assets/04-r/04_ide_rstudio_startup.png)
+
+---
+
+
+![RStudio at startup](../assets/04-r/04_ide_rstudio_sshot_1.png)
+
+---
+
+
+![RStudio at startup](../assets/04-r/04_ide_rstudio_sshot_2.png)
+
+---
+
+
+![RStudio at startup](../assets/04-r/04_ide_rstudio_sshot_3.png)
+
+---
+
+
+![RStudio at startup](../assets/04-r/04_ide_rstudio_sshot_4.png)
+
+
+## Your code is what's real in your project
+
+![](../assets/04-r/04_rstudio_dont_restore.png)
+
+
+## Consider not showing output inline
+
+![](../assets/04-r/04_rstudio_uncheck_inline.png)
+
+# Writing documents
+
+---
+
+:::{.huge}
+ Use Quarto to [produce]{.fg-orange} and [reproduce]{.fg-green} your work
+:::
+
+## Where we want to end up
+
+## Where we want to end up
+
+![PDF out](../assets/04-r/04_lorem_covid_quarto_pdf.png){fig-align="center" width=90%}
+
+## Where we want to end up
+
+![HTML out](../assets/04-r/04_lorem_covid_quarto_html.png){fig-align="center" width=45%}
+
+## Where we want to end up
+
+![Word out](../assets/04-r/04_lorem_covid_quarto_word.png){fig-align="center" width=100%}
+
+## How to get there?
+
+:::: {.columns}
+::: {.column width="30%"}
+  ![](../assets/04-r/04_covid_r_script.png)
+:::
+
+::: {.column width="70%" .right}
+- We could write an **R script** with some notes inside, using it to create some figures and tables, paste them into our document.
+- This will work well. The more complex our projects get the more likely it is we will write code like this. It will also look less and less like a single all-in-one-breath script and more like a structured collection R files that combine to do many things.
+- But to begin we can also do things a little differently, by taking a more _notebook-based_ approach. For many simpler and routine uses, this will be better.
+
+:::
+::::
+
+
+## We can [make]{.fg-yellow} this ...
+
+![](../assets/04-r/04_lorem_ipsum_goal.png){fig-align="center" width=100%}
+
+## ... by [writing]{.fg-green} this
+
+![](../assets/04-r/04_lorem_ipsum_raw.png){fig-align="center" width=100%}
+
+## The [code]{.fg-pink} gets replaced by its [output]{.fg-green}
+
+This way of doing things is called a _Literate Programming_ or _Notebook_ approach.
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../assets/04-r/04_lorem_ipsum_raw.png)
+:::
+
+::: {.column width="50%" .right}
+![](../assets/04-r/04_lorem_ipsum_goal.png)
+:::
+::::
+
+
+
+
+
+---
+
+![Quarto document](../assets/04-r/04_lorem_covid_quarto_qmd.png){fig-align="center" width=90%}
+
+---
+
+![Quarto document annotated](../assets/04-r/04_lorem_covid_quarto_qmd_annotated.png){fig-align="center" width=90%}
+
+---
+
+![](../assets/04-r/04_lorem_covid_quarto_triple.png){fig-align="center" width=140%}
+
+- This approach has its limitations, but it's _very_ useful and has many benefits.
+
+---
+
+## Strengths and weaknesses
+
+:::: {.columns}
+
+::: {.column width="50%"}
+
+### Notebooks work smoothly when
+
+- Your document or report is small and self-contained.
+- Your analysis is quick or lightweight.
+- You are making slides.
+- You are making a lot of similar reports from a template.
+- You regularly refer to calculated items in the text of your analysis.
+
+:::
+
+::: {.column width="50%" .right}
+
+::::: {.fragment fragment-index=1}
+
+### Notebooks can get awkward when
+
+- Your analysis has many pieces.
+- Your project has many authors.
+- Your analysis needs a lot of scaffolding in code.
+- You have a lot of different outputs.
+
+:::::
+
+:::
+
+::::
+
+
+## In Practice
+
+Notebook-style documents like Quarto files are great as part of larger projects. The more complex your project, the less likely it will straightforwardly fit into a _single_ notebook. More likely you will find yourself, first, splitting parts of a complex project up into different notebooks; and then, second, writing R scripts that programatically clean and pre-process data, run analyses, and produce some outputs---such as key tables and figures---that you then incorporate into a Quarto document indirectly. Not by copying and pasting, but by pointing to those outputs.
+
+
+---
+
+## Basic markdown summary
+
+:::{.custom-small-table}
+
+| Desired style  | Use the following Markdown annotation |
+| -------------- | ------------------------------------- |
+| **Heading 1**  | `# Heading 1`                                    |
+| **Heading 2**  | `## Heading 2`                                   |
+| Heading 3      | `### Heading 3` (Actual heading styles will vary.) |
+| Paragraph      | Just start typing                            |
+| **Bold**       | `**Bold**`                                   |
+| *Italic*       | `*Italic*`                                   |
+| Images         | `[Alternate text for image](path/image.jpg)` |
+| [Hyperlinks](https://www.visualizingsociety.com) | `[Link text](https://www.visualizingsociety.com/)` |
+| Unordered Lists      |   |
+| - First    | `- First` |
+| - Second.  |  `- Second` |
+| - Third    |`- Third`   |
+| Ordered Lists      |   |
+| 1. First    | `1. First` |
+| 2. Second.  |  `2. Second` |
+| 3. Third    |`3. Third`   |
+| Footnote.¹ |  `Footnote[^notelabel]`  |
+|  ¹The note's content. | `[^notelabel] The note's content.`  |
+
+:::
+
+
+## The right frame of mind
+
+- This is like learning how to drive a car, or how to cook in a kitchen ... or learning to speak a language.
+- After some orientation to what's where, you will learn best by _doing_.
+- Software is a pain, but you won't crash the car or burn your house down.
+
+## Create a new Quarto Project
+
+- File > New Project > New Directory > Quarto Project
+- Choose a location for a folder named `mptc`
+- Initialize a git repository
+- Check the "Open in new session" box
+- Click "Create Project"
+
+## Create a new Quarto Document
+
+- Once the project opens, create a new file (File > New File > Quarto Document)
+- Choose "Document" and "HTML" as the output format
+- Save the file as `scratch.qmd` in the `mptc` folder
+
+## For now
+
+- Get used to editing text files in RStudio and rendering them to HTML or PDF.
+- Don't worry about writing any code at this point. Treat it as a way to take notes for the class.
+- In the same way that you should be reading around and beyond the assigned readings for other classes, you should also be exploring R and RStudio on your own. Try to do things; see what happens.

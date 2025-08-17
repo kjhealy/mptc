@@ -57,8 +57,10 @@ website:
             - assignment/index.qmd
         - section: "Weekly Work"
           contents:
-            - text: "01: Software Setup"
-              file: assignment/01-assignment-install-r-github.qmd
+            - text: "00: Software Setup"
+              file: assignment/00-assignment-install-r-github.qmd
+            - text: "01: Quarto Notes"
+              file: assignment/01-assignment-quarto-notes.qmd
 
     - title: "Examples"
       contents:
