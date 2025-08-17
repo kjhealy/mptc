@@ -49,6 +49,8 @@ website:
           contents:
             - text: "01: Doing Your Work Properly"
               file: content/01-content-doing-your-work.qmd
+            - text: "02: Labor Day"
+              file: "content/02-content-labor-day.qmd"
 
     - title: "Assignments"
       contents:
@@ -61,6 +63,9 @@ website:
               file: assignment/00-assignment-install-r-github.qmd
             - text: "01: Quarto Notes"
               file: assignment/01-assignment-quarto-notes.qmd
+            - text: "02: Find Some Data"
+              file: assignment/02-assignment-find-some-data.qmd
+
 
     - title: "Examples"
       contents:
@@ -69,8 +74,8 @@ website:
             - example/index.qmd
         - section: "How-To"
           contents:
-            - text: "00: A Tiny Project"
-              file: example/00-example-oecd.qmd
+            - text: "01: A Tiny Project"
+              file: example/01-example-oecd.qmd
 
   page-footer:
     left: |

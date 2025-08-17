@@ -1,0 +1,36 @@
+---
+title: "Assignment 02: Find Some Data"
+date: "2025-09-05"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+
+There is no class this week, because of the Labor Day holiday. However, there is an assignment due on Friday, September 5.
+
+## Task 1: Data Sources
+
+Look at the [list of practice data sources](https://mptc.io/content/) on the course website. Pick one of the data sources. From there, choose one table from that source and download the data to your computer.
+
+## Task 2: Set up a Project
+
+Set up a new R project in RStudio, and save the data file in the `data/` subdirectory of that project. Create a new Quarto document in that project, and write a short paragraph about the data you downloaded, saying what format you think it is in and what it contains.
+
+## Task 3: Submit Your Work
+
+Compress or zip-up the entire project directory and submit it to the Assignment drop box on Canvas.
+
+To do this on Mac OS, in the Finder, select the folder, right click (that is, hold down the Control key and click), and choose "Compress".
+
+```{r zip-mac, echo=FALSE, out.width="50%"}
+knitr::include_graphics(here::here("assets", "00-site", "compress-mac-1.png"), error = FALSE)
+```
+
+On Windows, Locate the file or folder that you want to zip. Press and hold (or right-click) the file or folder, select (or point to) Send to, and then select Compressed (zipped) folder. A new zipped folder with the same name is created in the same location.
+
+```{r zip-windows, echo=FALSE, out.width="90%"}
+knitr::include_graphics(here::here("assets", "00-site", "compress-windows.png"), error = FALSE)
+```

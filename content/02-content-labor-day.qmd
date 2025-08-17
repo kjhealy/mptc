@@ -1,0 +1,56 @@
+---
+title: "02. Labor Day"
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+Becaus of the Labor Day holiday, there is no class this week. However, there is an assignment due on Friday, September 5.
+
+## Assignments
+
+- [Assignment 02: Find Some Data](/assignment/02-assignment-find-some-data.qmd)
+
+
+
+```{=html}
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/01-slides-bigpicture.html"></iframe-->
+
+
+```
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+#slide_win_button("/slides/01a-slides")
+```
+
+
+```{=html}
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/01b-slides.html"></iframe-->
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+#slide_win_button("/slides/01b-slides")
+```

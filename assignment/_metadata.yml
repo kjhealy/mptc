@@ -1,0 +1,10 @@
+date-heading:
+  content: "Due by <TBD>"
+  class: "bg-assignment"
+date-format: "full"
+
+format:
+  html:
+    code-tools: false
+    template-partials:
+      - ../html/title-block.html

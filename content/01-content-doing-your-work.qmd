@@ -22,10 +22,14 @@ Why is technical computing, in the broadest sense, organized in the way that it 
 - @healy20:_plain_person_guide_plain_text_social_scien "1. Introduction"
 
 
-## Also ...
+## Other work
 
--   Read the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
+-   Familiarize yourself with the [content](/content/index.qmd), [examples](/example/index.qmd), and [assignments](/assignment/index.qmd) pages for this class.
 
+
+## Assignments
+
+- This week (and only this week) there are _two_ assignments. [Assignment 00](/assignment/00-assignment-install-r-github.qmd) is due on the first day of class. [Assignment 01]()(/assignment/01-assignment-quarto-notes.qmd) is due the Friday after the first day.
 
 ## Slides
 
