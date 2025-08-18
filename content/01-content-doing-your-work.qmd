@@ -33,11 +33,11 @@ PDFs of all these readings are available on Canvas.
 
 ## Assignments
 
-- This week (and only this week) there are _two_ assignments. [Assignment 00](/assignment/00-assignment-install-r-github.qmd) is due on the first day of class. [Assignment 01]()(/assignment/01-assignment-quarto-notes.qmd) is due the Friday after the first day.
+- This week (and only this week) there are _two_ assignments. [Assignment 00](/assignment/00-assignment-install-r-github.qmd) is, as it were, the zeroth assignment and is due on the first day of class. [Assignment 01](/assignment/01-assignment-quarto-notes.qmd) is the first regular assignment and is due Friday, August 29th.
 
 ## Slides
 
-(Will appear here after the seminar.)
+(Will appear here after class.)
 
 
 ```{=html}
@@ -56,7 +56,7 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/01-slides-bigpicture.html"></iframe-->
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/"></iframe-->
 
 
 ```
@@ -66,7 +66,7 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 
 ```{=html}
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/01b-slides.html"></iframe-->
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/"></iframe-->
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
