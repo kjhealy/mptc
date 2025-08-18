@@ -18,9 +18,13 @@ Why is technical computing, in the broadest sense, organized in the way that it 
 
 ## Reading
 
+PDFs of all these readings are available on Canvas.
+
 - @christensen19:_trans_reprod_social_scien_resear "Introduction" and Chapter 11, "Reproducible Workflow".
 - @healy20:_plain_person_guide_plain_text_social_scien "1. Introduction"
-
+- @lewis-kraus2023dishonesty
+- @lewis-kraus2024defamation
+- @crimson2025gino
 
 ## Other work
 
