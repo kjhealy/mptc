@@ -14,7 +14,7 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-Becaus of the Labor Day holiday, there is no class this week. However, there is an assignment due on Friday, September 5.
+Because of the Labor Day holiday, there is no class this week. However, there is an assignment due on Friday, September 5.
 
 ## Assignments
 

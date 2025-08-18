@@ -9,7 +9,8 @@ author:
 date: "2025-08-16"
 date-format: long
 format:
-  html: default
+  html:
+    code-tools: false
   minion-pdf: default
 editor:
   markdown:

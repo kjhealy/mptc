@@ -5,6 +5,5 @@ date-format: "full"
 
 format:
   html:
-    code-tools: false
     template-partials:
       - ../html/title-block.html
