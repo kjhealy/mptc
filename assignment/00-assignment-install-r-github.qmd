@@ -25,17 +25,17 @@ Begin by installing R (<http://cloud.r-project.org>). Choose the version appropr
 
 - If you use macOS with an Intel processor, then install [R for macOS's Intel build](https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.5.1-x86_64.pkg).
 
-- If you use Microsoft Windows, then install [R for Windows](https://cloud.r-project.org/bin/windows/base/R-4.5.1-win.exe)
+- If you use Microsoft Windows, then install [R for Windows](https://cloud.r-project.org/bin/windows/base/R-4.5.1-win.exe).
 
 - If you use Linux, [choose your distribution](https://cloud.r-project.org/bin/linux/) and install the R package for it.
 
 ### Install RStudio on your computer
 
-- If you use macOS (whether Apple Silicon or Intel), [install this version of RStudio](https://download1.rstudio.org/electron/macos/RStudio-2025.05.1-513.dmg)
+- If you use macOS (whether Apple Silicon or Intel), [install this version of RStudio](https://download1.rstudio.org/electron/macos/RStudio-2025.05.1-513.dmg).
 
-- If you use Windows, [install this version of RStudio](https://download1.rstudio.org/electron/windows/RStudio-2025.05.1-513.exe)
+- If you use Windows, [install this version of RStudio](https://download1.rstudio.org/electron/windows/RStudio-2025.05.1-513.exe).
 
-- If you use Linux, [choose your distribution from the download page](https://posit.co/download/rstudio-desktop/)
+- If you use Linux, [choose your distribution from the download page](https://posit.co/download/rstudio-desktop/).
 
 ### Installing some additional packages
 
