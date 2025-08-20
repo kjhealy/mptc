@@ -240,21 +240,11 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   margin-bottom: 0.1em;
 }
 
-.larger p {
-  text-align: center;
-  font-weight: bold;
-}
-
 .large p,
 .large li {
   font-size: 1.65em;
   line-height: 1em;
   margin-bottom: 0.1em;
-}
-
-.large p {
-  text-align: center;
-  font-weight: bold;
 }
 
 .small p,
@@ -279,6 +269,15 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
 .tiny td,
 .tiny ul {
   font-size: 0.7em;
+}
+
+
+.center p {
+  text-align: center;
+}
+
+.bold p {
+  font-weight: bold;
 }
 
 .code-annotation-anchor {
@@ -476,4 +475,3 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   color: $my-green !important;
   font-size: inherit;
 }
-

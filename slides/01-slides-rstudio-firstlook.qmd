@@ -51,12 +51,15 @@ kjh_set_slide_theme()
 
 ---
 
+:::::{.absolute top="20%"}
 :::{.huge}
  We want to [do our work]{.fg-orange} [reproducibly]{.fg-green}
 :::
+:::::
 
 ---
 
+:::::{.absolute top="10%"}
 :::: {.columns}
 ::: {.column width="50%"}
 ![](../assets/04-r/04_r_logo.png)
@@ -66,17 +69,17 @@ kjh_set_slide_theme()
 ![](../assets/04-r/04_rstudio_logo.png)
 :::
 ::::
-
+:::::
 
 # The [RStudio]{.fg-lblue} IDE
 
-## An IDE for R {background-image="../assets/04-r/04_ide_control_room.png" background-size="cover"}
+## An Integrated Development Environment {background-image="../assets/04-r/04_ide_control_room.png" background-size="cover"}
 
 ## An IDE for Meals {background-image="../assets/04-r/04_ide_kitchen.png" background-size="cover"}
 
 ---
 
-![RStudio at startup](../assets/04-r/04_ide_rstudio_startup.png)
+![RStudio at with an empty sample project](../assets/04-r/04_ide_rstudio_startup.png)
 
 ---
 
@@ -125,9 +128,11 @@ kjh_set_slide_theme()
 
 ---
 
+:::::{.absolute top="10%"}
 :::{.huge}
  Use Quarto to [produce]{.fg-orange} and [reproduce]{.fg-green} your work
 :::
+:::::
 
 ## Where we want to end up
 
@@ -151,9 +156,9 @@ kjh_set_slide_theme()
 :::
 
 ::: {.column width="70%" .right}
-- We could write an **R script** with some notes inside, using it to create some figures and tables, paste them into our document.
-- This will work well. The more complex our projects get the more likely it is we will write code like this. It will also look less and less like a single all-in-one-breath script and more like a structured collection R files that combine to do many things.
-- But to begin we can also do things a little differently, by taking a more _notebook-based_ approach. For many simpler and routine uses, this will be better.
+- We could write an **R script** with some notes inside, using it to create some figures and tables, paste them into our paper, which we write separately.
+- This will work fine. In fact, the more complex our projects get, the more likely it is we will write more standalone code like this. It will also look less and less like a single all-in-one-breath script and more like a structured collection R files that combine to do many things.
+- But to begin---and in fact for quite a long time after---we can also do things a little differently, by taking a more _notebook-based_ approach. For many use-cases this will be better.
 
 :::
 ::::
@@ -225,7 +230,7 @@ This way of doing things is called a _Literate Programming_ or _Notebook_ approa
 
 - Your analysis has many pieces.
 - Your project has many authors.
-- Your analysis needs a lot of scaffolding in code.
+- Your analysis needs a lot of cleaning, scaffolding, and other prep-work before you can produce the tables and figures in your output document.
 - You have a lot of different outputs.
 
 :::::
@@ -235,9 +240,11 @@ This way of doing things is called a _Literate Programming_ or _Notebook_ approa
 ::::
 
 
-## In Practice
+## Sidenote: In Practice
 
-Notebook-style documents like Quarto files are great as part of larger projects. The more complex your project, the less likely it will straightforwardly fit into a _single_ notebook. More likely you will find yourself, first, splitting parts of a complex project up into different notebooks; and then, second, writing R scripts that programatically clean and pre-process data, run analyses, and produce some outputs---such as key tables and figures---that you then incorporate into a Quarto document indirectly. Not by copying and pasting, but by pointing to those outputs.
+Even when things get complicated, notebook-style documents like Quarto files are great as component parts of larger projects. The more complex your project, the less likely it will straightforwardly fit into a _single_ notebook. The same is true of script-based approaches. The more complex a project, the more you will break it up into smaller, more tractable pieces. You will _re-factor_ it, as programmers say, and make it more _modular_.
+
+You may find yourself, for example, splitting parts of a complex document up into different pieces. The pieces will contain code that cleans and pre-processes data, runs analyses, and produces some outputs. You can then  incorporate those into a Quarto document indirectly. Not by copying and pasting them, but by pointing to those outputs and making use of them to make your tables and figures, and so on.
 
 
 ---

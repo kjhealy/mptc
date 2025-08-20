@@ -172,7 +172,8 @@ Also it's weirdly satisfying once you get into it.
 - It's a file!
 - Of a particular type (a PDF)
 - You can't easily edit it
-- It has a title, author, sections, a figure, tables, references, a footnote, and a bibliography. That is, it has many of the elements of a scholarly paper.
+- It has a title, author, sections, a figure, tables, references, a footnote, and a bibliography.
+- That is, it has many of the elements of a scholarly paper, in miniature.
 
 :::
 
@@ -218,7 +219,7 @@ Also it's weirdly satisfying once you get into it.
 
 [Week 00 Assignment: Install R and RStudio](/assignment/00-assignment-install-r-github.qmd)
 
-![](../assets/01-file-system/01_mptc_assignment_01.png)
+![](../assets/01-file-system/01_mptc_assignment_00.png)
 
 ## The project's GitHub page
 
@@ -236,21 +237,25 @@ This slide is up because we are installing the required software by following th
 
 ::: {.incremental}
 - Our little scholarly article is a [file]{.fg-lblue} in some [format]{.fg-lblue}.
-- We created or [rendered]{.fg-lblue} it from several other pieces when we pushed that [&#8680;Render]{.fg-red} button.
+- We created or [rendered]{.fg-lblue} it from several other pieces when we pushed that [&#x25B7;Render]{.fg-red} button.
 - Some of these pieces include: [data]{.fg-lblue}, [text]{.fg-lblue}, [markup]{.fg-lblue}, and [code]{.fg-lblue}.
 - Most of these pieces are in [plain text]{.fg-lblue}, in files of their own.
-- They are stored in some sort of [orderly fashion]{.fg-lblue} somewhere.
-- We have some sort of [engine]{.fg-lblue} that assembled the pieces into the article.
-- We have some kind of [application]{.fg-lblue} to help us run the engine and manage the pieces.
+- They are organized in some sort of [orderly fashion]{.fg-lblue} in a project folder. This folder lives somewhere.
+- The [data]{.fg-lblue} originally came from somewhere else.
+- We have some sort of [engine]{.fg-lblue} that assembled the pieces of the project into the PDF of the article.
+- We have some kind of [application]{.fg-lblue} that helps us run the engine and manage the project.
 - We can [reliably produce and reproduce]{.fg-lblue} the document in various formats.
 :::
 
 ## That's a lot all at once
 
+::: {.large}
+
 - We're going to back up and go through these pieces slowly.
-- Keep in mind why we're doing it (we want to reliably produce a scholarly paper).
+- Keep in mind why we're doing it. (We want to reliably produce a scholarly paper).
 - Also start thinking about why the tools we're using might look like this.
 
+:::
 
 # Two Revolutions in Computing
 
@@ -271,7 +276,7 @@ This slide is up because we are installing the required software by following th
 - Foregrounds a single application.
 - Dislikes multi-tasking.\*
 - Hides the file system.
-- Very far underneath, it's often the 1970s, UNIX, and the command-line. But usually you don't get to see this.
+- Very far underneath, it's often the 1970s, Unix, and the command-line. But usually you don't get to see this.
 
 
 :::
@@ -281,8 +286,11 @@ This slide is up because we are installing the required software by following th
 
 ---
 
+::: {.large}
+
 [[_Multi-tasking_]{.fg-orange}: I mean, “Making different specialized applications and resources work together in the service of a single but multi-dimensional project”, not “Checking social media while also listening to a talk and waiting for an update from the school nurse.”]{.larger .center .absolute top="30%"}
 
+:::
 
 ## Where technical computing lives
 
@@ -296,11 +304,11 @@ This slide is up because we are installing the required software by following th
 
 ::: {.column width="55%"}
 
-- Most interaction via windows, icons, pointers, clicking.
+- Most interaction via windows, icons, a pointer, and the keyboard.
 - Multi-tasking via multiple windows at once is standard.
 - Exposes and leverages the file system.
 - Using several specialized applications in concert is common.
-- Underneath, it's often the 1970s, UNIX, and the command-line. And you _can_ get to see this.
+- Underneath, it's often the 1970s, Unix, and the command-line. You get to see and often need to interact with this directly.
 
 :::
 
@@ -320,7 +328,7 @@ This slide is up because we are installing the required software by following th
 ::: {.column width="55%"}
 
 - For technical computing in the sense of doing "statistics" this toolset is by now really good.
-- It's also very good for technical computing in the sense that all scholarly work is technical.
+- It's also very good for computing in the sense that _all_ scholarly work is technical, i.e. it must meet specific procedural demands.
 - But these tools are grounded in a paradigm that is increasingly far away from the everyday use of our most common computing devices.
 - So why do we continue to use and develop them?
 :::
@@ -333,11 +341,19 @@ This slide is up because we are installing the required software by following th
 
 ## Control, not Productivity
 
-### Productivity is great and everything, but not why we do all this.
+::: {.large .left}
+
+ Productivity is great and everything, but not why we do all this.
+
+:::
 
 ### &nbsp;
 
-### The most important thing is to be able to [_confidently know and clearly show what it was that you did_]{.fg-red} in the service of doing your work properly.
+::: {.large .left}
+
+ The most important thing is to be able to [_confidently know and clearly show what it was that you did_]{.fg-red} in the service of doing your work properly.
+
+:::
 
 ## "Office" vs "Engineering" approaches
 
@@ -351,7 +367,7 @@ The challenge of "Knowing and Showing" gives rise to questions like these:
 
 ### [How are changes managed?]{.fg-blue}
 
-### [Can you do it again?]{.fg-yellow}
+### [Can you do it again?]{.fg-green}
 
 ## Different Answers
 
@@ -364,7 +380,7 @@ The challenge of "Knowing and Showing" gives rise to questions like these:
 - Formatted documents are real.
 - Intermediate outputs are cut and pasted into documents.
 - Changes are tracked inside files.
-- Final output is often in the same format you've been working in, e.g. a Word file, or a PDF.
+- Final output is often in the same format you've been working in, e.g. a Word file, or that file converted to a PDF.
 
 :::
 
@@ -424,7 +440,7 @@ The challenge of "Knowing and Showing" gives rise to questions like these:
 ---
 
 :::{.huge .center}
-::::{.absolute top="20%"}
+::::{.absolute top="10%"}
 [Each approach generates solutions to its own problems]{.fg-red}
 ::::
 :::
