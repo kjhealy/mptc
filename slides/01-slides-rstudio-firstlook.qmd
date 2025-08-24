@@ -79,7 +79,7 @@ kjh_set_slide_theme()
 
 ---
 
-![RStudio at with an empty sample project](../assets/04-r/04_ide_rstudio_startup.png)
+![RStudio at startup with an empty sample project](../assets/04-r/04_ide_rstudio_startup.png)
 
 ---
 
@@ -117,12 +117,69 @@ kjh_set_slide_theme()
 
 ## Your code is what's real in your project
 
+:::: {.columns}
+::: {.column width="50%"}
+
 ![](../assets/04-r/04_rstudio_dont_restore.png)
+:::
+::: {.column width="50%" .right}
+
+**Tools > Global Options > General**
+
+Uncheck "Restore .RData into workspace at startup"
+
+:::
+
+::::
 
 
 ## Consider not showing output inline
 
+:::: {.columns}
+::: {.column width="50%"}
+
 ![](../assets/04-r/04_rstudio_uncheck_inline.png)
+
+:::
+::: {.column width="50%" .right}
+
+**Tools > Global Options > RMarkdown**
+
+Uncheck "Show output inline for all R Markdown documents"
+:::
+::::
+
+
+## Things an IDE brings together
+
+- A *text editor* for writing code and documents
+- A *console* or REPL (Read-Eval-Print Loop) for running code interactively
+- A *terminal* to talk to the operating system
+- A *debugger* to help find problems in your code
+- A *file manager* to navigate your project
+- A *version control interface* to manage changes to your code
+- A *viewer* for plots, tables, and other outputs
+- An *inspector* to see what's in your environment
+
+## RStudio is just one IDE
+
+- **Positron** (a newer IDE for R and Python)
+- **VS Code** (a general-purpose IDE that supports many languages)
+- **JupyterLab** (an IDE for Python notebooks)
+- Text editors like **Vim**, **Emacs**, and **Sublime Text** can be configured to work like IDEs, too.
+
+## An IDE is not required
+
+- You can write R code in any text editor and run it from the command line.
+- You can do the other things an IDE does with separate tools, via the command line or other applications.
+- However, IDEs make your life easier.
+- They also don't impose much structure on your projects. If you want to switch to another, or to no IDE at all, you can do so without much trouble.
+
+## Fundamentally ...
+
+- A core set of interdependent tasks that require doing things with the computer.
+- A modular set of tools that do specific things, built around a text editor, a console, and plain-text configuration or code files.
+- Some method of organizing and orchestrating these tools.
 
 # Writing documents
 
