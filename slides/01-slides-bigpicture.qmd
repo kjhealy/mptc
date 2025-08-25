@@ -152,6 +152,7 @@ Also it's weirdly satisfying once you get into it.
 :::
 
 ::: {.column width="45%"}
+
 [Click here for a PDF of the tiny paper](/files/examples/01_mptc_oecd_nocode.pdf)
 :::
 ::::
@@ -214,6 +215,17 @@ Also it's weirdly satisfying once you get into it.
 
 ::::
 
+## The source for both versions
+
+![](../assets/01-file-system/01_mptc_oecd_github_page.png)
+
+[https://github.com/kjhealy/mptc_oecd](https://github.com/kjhealy/mptc_oecd)
+
+## Once you've downloaded it
+
+![](../assets/01-file-system/01_mptc_oecd_finder.png)
+
+It's a folder on your computer with a bunch of files in it.
 
 ## How did this go?
 
