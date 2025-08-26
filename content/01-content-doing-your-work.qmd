@@ -37,8 +37,6 @@ PDFs of all these readings are available on Canvas.
 
 ## Slides
 
-(Will appear here after class.)
-
 
 ```{=html}
 <script type="application/javascript">
@@ -56,19 +54,19 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/01-slides-bigpicture.html"></iframe
 
 
 ```
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_win_button("/slides/01a-slides")
+slide_win_button("/slides/01-slides-bigpicture")
 ```
 
 
 ```{=html}
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/01-slides-rstudio-firstlook.html"></iframe
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-#slide_win_button("/slides/01b-slides")
+slide_win_button("/slides/01-slides-rstudio-firstlook")
 ```

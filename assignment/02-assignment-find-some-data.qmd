@@ -13,7 +13,7 @@ There is no class this week, because of the Labor Day holiday. However, there is
 
 ## Task 1: Data Sources
 
-Look at the [list of practice data sources](https://mptc.io/content/) on the course website. Pick one of the data sources. From there, choose one table from that source and download the data to your computer.
+Look at the [list of practice data sources](https://mptc.io/content/) on the course website. Pick one of the data sources. Alternatively, find a similar source for yourself that you are interested in. From there, choose one table from that source and download the data to your computer.
 
 ## Task 2: Set up a Project
 
