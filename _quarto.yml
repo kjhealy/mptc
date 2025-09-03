@@ -51,6 +51,9 @@ website:
               file: content/01-content-doing-your-work.qmd
             - text: "02: Labor Day"
               file: "content/02-content-labor-day.qmd"
+            - text: "03: The File System and the Shell"
+              file: "content/03-content-shell.qmd"
+
 
     - title: "Assignments"
       contents:
@@ -65,6 +68,8 @@ website:
               file: assignment/01-assignment-quarto-notes.qmd
             - text: "02: Find Some Data"
               file: assignment/02-assignment-find-some-data.qmd
+            - text: "03: The Shell"
+              file: assignment/03-assignment-shell.qmd
 
 
     - title: "Examples"
@@ -76,6 +81,9 @@ website:
           contents:
             - text: "01: A Tiny Project"
               file: example/01-example-oecd.qmd
+            - text: "03: The Shell"
+              file: example/03-example-shell.qmd
+
 
   page-footer:
     left: |
