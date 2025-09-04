@@ -127,6 +127,23 @@ ls -lt assets/01-file-system/ | cut -w -f6-7 | uniq -c
 ```
 
 
+## A URL is just a path to a file on someone else's computer
+
+```{zsh}
+#| class: scrollout
+
+curl https://kjhealy.co/mptc/mortality.txt -o tmp/mortality.txt
+```
+
+Take a look at the first few lines of the file:
+
+```{zsh}
+#| class: scrollout
+
+head tmp/mortality.txt
+```
+
+
 ## Clean up
 
 ::: {.callout-important}
