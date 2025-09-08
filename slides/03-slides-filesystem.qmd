@@ -122,6 +122,28 @@ Robertson’s unconventional history of the origins of the information age posit
 
 :::
 
+## Daybooks and Ledgers
+
+:::: {.columns}
+::: {.column width="30%"}
+![](../assets/01-file-system/01_marx_peal.png){width=85%}
+
+:::
+
+::: {.column width="60%" .right}
+Peal and Company (Bootmakers), London. "The collection consists of 660 items, 40 of which are administrative records such as account books and ledgers. The remaining 620 volumes are 'Feet Books' recording each order and usually containing an outline drawing of the customer's feet. Every book includes 150 orders and was given a running number. The earliest surviving book is no. 23 from the 1870s and the last is no. 1002 from shortly before the firm closed in 1965."
+
+"Mr Marx of Berlin c/o Dr W Smith, West Lodge, West End Lane, Hampstead." 02/003 (Book 023, c.1870) page 142.
+
+::: {.tiny}
+([London Archives Collections Catalogue](https://search.lma.gov.uk/scripts/mwimain.dll/144/LMA_OPAC/web_detail?SESSIONSEARCH&exp=refd%20LMA/4454).)
+:::
+
+
+:::
+::::
+
+
 
 ## Index cards
 
@@ -138,10 +160,37 @@ Like a filing cabinet, but smol
 ::::
 
 
-
 ## Index cards
 
 ![](../assets/01-file-system/01_library_index_cards.png){width=90%}
+
+
+## Edge-Notched Cards
+
+![](../assets/01-file-system/01_mcbee_1.jpg){width=90%}
+
+## Edge-Notched Cards
+
+![](../assets/01-file-system/01_mcbee_2.jpg){width=80%}
+
+::: aside
+Ann Sneesby-Koch, [Me and Mr McBee](https://essentials.neh.gov/divisions/odh/featured-project/me-and-mr-mcbee), National Endowment for the Humanities, 2013.
+:::
+
+## Edge-Notched Cards
+
+:::: {.columns}
+::: {.column width="50%"}
+![](../assets/01-file-system/01_mcbee_stasi.jpg){width=90%}
+:::
+
+::: {.column width="30%" .right}
+
+Stasi record card for Werner Teske, a former Stasi employee sentenced for espionage, from 1981. ([Source](https://en.wikipedia.org/wiki/Edge-notched_card#/media/File:Kerblochkartei_Teske.jpg).)
+
+:::
+::::
+
 
 
 
