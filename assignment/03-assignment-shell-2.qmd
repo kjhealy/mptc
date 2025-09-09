@@ -100,6 +100,6 @@ cat basics.txt | tr '[:space:]' '\n'
 
 - A. Now, using `cat`, and `tr` and the pipe, put together a sequence of actions that displays the contents of `basics.txt` with each word on its own line. Make sure that the output contains no punctuation, and no uppercase letters.
 
-- B. To remove any blank lines, add `| grep -v '^$'` to the end of your sequece of piped commands. (The `-v` option tells `grep` to return all lines *except* those that match the pattern, and `^$` is a regular expression that matches blank lines. We will learn more about regular expressions later in the course.)
+- B. To remove any blank lines, add `| grep -v '^$'` to the end of your sequence of piped commands. (The `-v` option tells `grep` to return all lines *except* those that match the pattern, and `^$` is a regular expression that matches blank lines. We will learn more about regular expressions later in the course.)
 
 - C. Finally, count the number of unique words in `basics.txt`.
