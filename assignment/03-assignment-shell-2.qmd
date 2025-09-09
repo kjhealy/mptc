@@ -1,0 +1,105 @@
+---
+title: "Assignment 03b: The Shell, part 2"
+date: "2025-09-12"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+::: {.callout-note}
+
+There's no need to submit this assignment. But do it, and be prepared to show your work in class next Monday.
+
+:::
+
+We're going to run through some exercises to practice using the shell. If you're on Windows, I recommend using Git Bash, most easily accessed as the Terminal tab from RStudio.
+
+## Part 1: Get the example files
+
+You can do this in one of two ways:
+
+1. Use a browser to download the zip file from [this link](https://kjhealy.co/mptc/mptc_text_examples.zip) and unzip it into a folder on your computer.
+
+2. Use `curl` from the command line to download the zip file directly into a folder on your computer, then use `unzip` to unzip it. For example:
+
+```{.zsh}
+## First
+curl -o mptc_text_examples.zip https://kjhealy.co/mptc/mptc_text_examples.zip
+
+## Then
+unzip mptc_text_examples.zip
+```
+
+Next, make sure you are in the mptc_text_examples directory. In a Terminal window, you can use `cd` to change directories and `ls` to list the files in the current directory. The output of `ls` should look something like this:
+
+```{.zsh}
+alice_in_wonderland.txt             countries.csv                       pride_and_prejudice.txt
+alice_noboiler.txt                  country_iso3.tsv                    README.md
+apple_mobility_daily_2021-04-12.csv country_tab.csv                     roman.txt
+ascii_table.xlsx                    country_tab.tsv                     sentences.txt
+bashrc.txt                          country-intermediate.tsv            shalott_1832.txt
+basics.txt                          country-working.tsv                 shalott_1842.txt
+basicsduped.txt                     fruit.txt                           specials.txt
+continent_sizes.csv                 jabberwocky.txt                     ulysses.txt
+continent_tab.csv                   make_example                        words.txt
+continent_tab.tsv                   mortality.txt                       zshrc.txt
+countries_iso3.csv                  mptc_text_examples.Rproj
+```
+
+Now, you can either stay in the terminal window or launch RStudio and use the Terminal tab there. Either way, you should be in the `mptc_text_examples` directory. To launch RStudio, do `open mptc_text_examples.Rproj` from inside the examples folder.
+
+## Part 2: Shell exercise
+
+### Q1.
+
+Using `cat`, display the contents of `basics.txt` to the terminal.
+
+- A. How many lines are in the file? (Hint: use `wc -l`.)
+- B. How many words are in the file? (Hint: use `wc -w`.)
+- C. How many characters are in the file? (Hint: use `wc -c`.)
+
+### Q2.
+
+Using `cat`, display the contents of `basicsduped.txt` to the terminal.
+
+- A. How many lines are in `basicsduped.txt`?
+- B. I want to know how many *unique* lines are in `basicsduped.txt`. There is a command that seems like it should do this: `uniq`. Try it out. What happens? Did it work?
+- C. Read the help file for `uniq` (try `man uniq`). What does it say about how `uniq` works? Why didn't it work the way you might have expected?
+- D. Having read the help file, how can you use `uniq` to get the number of unique lines in `basicsduped.txt`?
+
+### Q3.
+
+- A. The `tr` command translates or transforms characters according to some substitution or deletion rule. For example, you can use it to convert all uppercase letters to lowercase letters. Try it out by running `cat basics.txt | tr '[:upper:]' '[:lower:]'`.
+
+- B. `tr` can also be used to replace characters with other characters. For example, you can convert all commas to underscores with `cat basics.txt | tr ',' '_'`. Try it out.
+
+- C. `tr` can be used to delete characters. For example, you can delete all commas with
+
+
+```{.zsh}
+cat basics.txt | tr -d ','`
+```
+
+Try it out.
+
+- D. Some characters are special and need to be "escaped" with a backslash. For example, the newline character is represented by `\n`. Try using `tr` to convert all commas in `basics.txt` to newlines with
+
+```{.zsh}
+cat basics.txt | tr ',' '\n'
+```
+
+Besides `[:upper:]` and `[:lower:]`, `tr` also has some additional classes of characters that can be used. For example, `[:space:]` represents all whitespace characters (spaces, tabs, newlines). Try using `tr` to convert all whitespace characters in `basics.txt` to newlines with
+
+```{.zsh}
+cat basics.txt | tr '[:space:]' '\n'
+```
+
+### Q4.
+
+- A. Now, using `cat`, and `tr` and the pipe, put together a sequence of actions that displays the contents of `basics.txt` with each word on its own line. Make sure that the output contains no punctuation, and no uppercase letters.
+
+- B. To remove any blank lines, add `| grep -v '^$'` to the end of your sequece of piped commands. (The `-v` option tells `grep` to return all lines *except* those that match the pattern, and `^$` is a regular expression that matches blank lines. We will learn more about regular expressions later in the course.)
+
+- C. Finally, count the number of unique words in `basics.txt`.

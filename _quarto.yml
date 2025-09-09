@@ -53,6 +53,8 @@ website:
               file: "content/02-content-labor-day.qmd"
             - text: "03: The File System and the Shell"
               file: "content/03-content-shell.qmd"
+            - text: "04: Using R to look at data"
+              file: "content/04-content-r.qmd"
 
 
     - title: "Assignments"
@@ -70,6 +72,8 @@ website:
               file: assignment/02-assignment-find-some-data.qmd
             - text: "03: The Shell"
               file: assignment/03-assignment-shell.qmd
+            - text: "03b: Shell Exercise"
+              file: assignment/03-assignment-shell-2.qmd
 
 
     - title: "Examples"
