@@ -1,0 +1,87 @@
+---
+title: "06. More on dplyr and reshaping data"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+More on dplyr: using  `across()` to apply functions to multiple columns at once; using `case_when()` to create new variables based on conditions; more on reshaping data with `pivot_longer()`; more on filtering and selecting data.
+
+## Required Reading
+
+- @bromanDataOrganizationSpreadsheets2018
+
+- Next, read the vignettes that come with `dplyr`. (In R packages, a vignette is like and extended example or tutorial.) These are available on your computer because you've installed the package. But you can also read them online. Note that tidyverse vignettes do not use the base pipe, `|>`, they use the magrittr pipe, `%>%` instead. But for our purposes they are equivalent.
+
+Read the following vignettes, in the order listed:
+
+### `dplyr`
+
+- [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html)
+- [Grouped data](https://dplyr.tidyverse.org/articles/grouping.html)
+- [Column-wise Operations](https://dplyr.tidyverse.org/articles/colwise.html)
+
+### `tidyr`
+
+- [Tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html)
+- [Pivoting](https://tidyr.tidyverse.org/articles/pivot.html)
+- (Optional.) [Rectangling](https://tidyr.tidyverse.org/articles/rectangle.html)
+
+### `stringr`
+
+- [Regular expressions](https://stringr.tidyverse.org/articles/regular-expressions.html)
+- Read the help page for `str_detect()`: `?stringr::str_detect`, which can also be found [here](https://stringr.tidyverse.org/reference/str_replace.html). Work through the examples one at a time and make a note of any that seem confusing.
+
+
+## Examples
+
+(To follow.)
+
+
+## Assignment
+
+(To follow.)
+
+## Slides
+
+```{=html}
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-dplyr.html"></iframe-->
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+#slide_buttons("/slides/05-slides-r-dplyr")
+```
+
+
+```{=html}
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe-->
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+#slide_buttons("/slides/05-slides-r-reshaping-data")
+```

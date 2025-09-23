@@ -61,6 +61,8 @@ website:
               file: "content/04-content-r.qmd"
             - text: "05: Tidy Data and dplyr"
               file: "content/05-content-dplyr.qmd"
+            - text: "06: More on dplyr"
+              file: "content/06-content-dplyr-and-more.qmd"
 
 
     - title: "Assignments"
