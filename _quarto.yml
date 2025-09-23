@@ -55,6 +55,8 @@ website:
               file: "content/03-content-shell.qmd"
             - text: "04: Using R to look at data"
               file: "content/04-content-r.qmd"
+            - text: "05: Tidy Data and dplyr"
+              file: "content/05-content-dplyr.qmd"
 
 
     - title: "Assignments"

@@ -1,0 +1,809 @@
+---
+title: "Tidy Data and Pivoting"
+subtitle: "Modern Plain Text Social Science:<br />Week 05"
+format: kjhslides-revealjs
+engine: knitr
+filters:
+  - invert-h1
+  - include-code-files
+  - line-highlight
+author:
+  - name: Kieran Healy
+    email: kieran.healy@duke.edu
+date: last-modified
+---
+
+
+```{r}
+#| label: "packages"
+#| include: FALSE
+library(flipbookr)
+library(here)
+library(tidyverse)
+library(kjhslides)
+```
+
+
+```{r}
+#| label: "setup"
+#| include: FALSE
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+```
+
+
+# Tidy data with [tidyr]{.fg-yellow}
+
+## Load the packages, as always
+
+```{r}
+#| label: "04-tidy-data-2"
+#| message: FALSE
+library(here)      # manage file paths
+library(socviz)    # data and some useful functions
+```
+
+```{r}
+#| label: "04-tidy-data-3"
+#| message: TRUE
+library(tidyverse) # your friend and mine
+library(gapminder) # gapminder data
+
+## A package of data on Covid
+# remotes::install_github("kjhealy/covdata")
+library(covdata)
+
+
+## Quieten dplyr summarise chatter (with an 's')!
+options(dplyr.summarise.inform = FALSE)
+
+```
+
+
+---
+
+:::{.huge}
+ [Tidy data]{.fg-red}<br />is data in<br />[long]{.fg-red} format
+:::
+
+## The Tidyverse wants to be fed [tidy data]{.fg-yellow}
+
+![](../assets/05-dplyr/05_feed-me-seymour.gif)
+
+## Get your data into long format
+
+Very, very often, the solution to some data-wrangling problem in Tidyverse-focused workflow is:
+
+::: {.fragment}
+### [Get the data in long format]{.fg-lblue}
+:::
+
+
+::: {.fragment}
+Then do the recoding thing that you want.
+:::
+
+::: {.fragment}
+Then transform it back to something wider if needed.
+:::
+
+## This isn't an [_iron_]{.fg-lblue} rule
+
+As we'll see later, [`dplyr`]{.fg-orange} _is_ able to do "rowwise" operations if you need them.
+
+---
+
+:::{.huge}
+ It is a<br />[pretty good]{.fg-orange}<br />rule though
+:::
+
+## Tidy data
+
+```{r }
+#| label: "04-tidy-data-6"
+gapminder
+```
+
+## Tidy data
+
+![](../assets/05-dplyr/05_tidy-gapminder.png)
+
+## Tidy data
+
+![](../assets/05-dplyr/05_tidy-1.png)
+
+::: aside
+ Grolemund & Wickham (2017)
+:::
+
+## Tidy data
+
+::: {.fragment}
+### Each variable has its own column.
+:::
+
+::: {.fragment}
+### Each observation has its own row.
+:::
+
+::: {.fragment}
+### Each value has its own cell.
+:::
+
+::: {.fragment}
+### When data is tidy in this way, the vectorized character of R's way of doing things works best.
+:::
+
+
+## Untidy data: common for good reasons
+
+![](../assets/05-dplyr/05_census-untidy-small.png)
+
+## Untidy data: common for good reasons
+
+Storing data in long form is often _inefficient_
+
+```{r }
+#| label: "04-tidy-data-7"
+library(covdata)
+covus |>
+  filter(state == "NY") |>
+  select(date:fips, measure:count)
+```
+
+## Untidy data: common for good reasons
+
+Storing data in wide form is _easier to display_ in a printed table
+
+```{r }
+#| label: "04-tidy-data-8"
+library(palmerpenguins)
+penguins |>
+  group_by(species, island, year) |>
+  summarize(bill = round(mean(bill_length_mm, na.rm = TRUE),2)) |>
+  knitr::kable()
+```
+
+## Untidy data: common for good reasons
+
+Storing data in wide form is _easier to display_ in a printed table
+
+
+```{r }
+#| label: "04-tidy-data-9"
+penguins |>
+  group_by(species, island, year) |>
+  summarize(bill = round(mean(bill_length_mm, na.rm = TRUE), 2)) |>
+  pivot_wider(names_from = year, values_from = bill) |>
+  knitr::kable()
+```
+
+::: aside
+ Again, these tables are made directly in R with the code you see here.
+:::
+
+
+## It's also common for [_less_]{.fg-orange} good reasons
+
+![](../assets/05-dplyr/05_election-spreadsheet.png)
+
+## It's also common for [_less_]{.fg-orange} good reasons
+
+:::: {.columns}
+::: {.column width="60%"}
+  ![](../assets/05-dplyr/05_election-spreadsheet.png)
+:::
+
+::: {.column width="40%" .right}
+  - More than one header row
+  - Mixed data types in some columns
+  - Color and typography used to encode variables and their values
+
+:::
+::::
+
+
+## Fix it [before]{.fg-yellow} you import it
+
+- Prevention is better than cure!
+- Broman KW, Woo KH (2018) "[Data organization in spreadsheets](doi:10.1080/00031305.2017.1375989)." _The American Statistician_ 78:2–10
+
+![](../assets/05-dplyr/05_broman-and-woo.png){width=60%}
+
+## Key points from Broman & Woo
+
+![Use a consistent date format](../assets/05-dplyr/05_broman_woo_inconsistent_dates.png)
+
+
+---
+
+:::{.huge}
+  [ISO 8601]{.fg-green} <br />
+  [YYYY-MM-DD]{.fg-pink} <br />
+:::
+
+- The one true year-month-day format
+
+## Key points from Broman & Woo
+
+![](../assets/05-dplyr/05_broman_woo_implicit_repeats_and_headers.png)
+
+- No empty cells.
+- Use one row of headers only.
+
+## Key points from Broman & Woo
+
+![Tidied version](../assets/05-dplyr/05_broman_woo_tidied_1.png)
+
+## Key points from Broman & Woo
+
+![Rectangle your data](../assets/05-dplyr/05_broman_woo_non_rectangular.png)
+
+
+## Key points from Broman & Woo
+
+![Use more than one table if needed. We can join them later.](../assets/05-dplyr/05_broman_woo_5D_pair_tables.png)
+
+
+## Key points from Broman & Woo
+
+![Needs a single header row and a consistent naming scheme.](../assets/05-dplyr/05_broman_woo_multi_header_rows.png)
+
+
+## Key points from Broman & Woo
+
+![Tidied version.](../assets/05-dplyr/05_broman_woo_tidied_2.png)
+
+
+# Pivoting
+
+## The most common [`tidyr`]{.fg-orange} operation
+
+```{r }
+#| label: "04-tidy-data-10"
+edu
+```
+
+- The "Level of Schooling Attained" measure is spread across the columns, from `elem4` to `coll4`.
+- This is fine for a compact table, but for us it should be a single measure, say, "education".
+
+## Wide to long with [`pivot_longer()`]{.fg-green}
+
+- We're going to _pivot_ the table. That is, we'll put the columns `elem4:coll4` into a new column, creating a new categorical measure named `education`. The numbers currently under each column will become a  new [value]{.fg-green} column corresponding to that level of education.
+
+```{r }
+#| label: "04-tidy-data-11"
+edu |>
+  pivot_longer(elem4:coll4, names_to = "education")
+```
+
+## Wide to long with [`pivot_longer()`]{.fg-green}
+
+- We can name the "value" column to whatever we like. Here it's a number of people, so let's call it "`n`".
+
+```{r }
+#| label: "04-tidy-data-12"
+edu |>
+  pivot_longer(elem4:coll4, names_to = "education", values_to = "n")
+```
+
+## Let's [recode()]{.fg-green} it while we're here
+
+```{r }
+#| label: "04-tidy-data-13"
+edu |>
+  pivot_longer(elem4:coll4, names_to = "education", values_to = "n") |>
+  mutate(education = recode(education,
+                            elem4 = "Elementary 4", elem8 = "Elementary 8",
+                            hs3 = "High School 3", hs4 = "High School 4",
+                            coll3 = "College 3", coll4 = "College 4"))
+
+```
+
+- The argument order of [**`recode()`**]{.fg-green} is inconsistent with other tidyverse functions and it may be superceded in the future.
+
+## [pivot_longer()]{.fg-green} implies [pivot_wider()]{.fg-green}
+
+```{r }
+#| label: "04-tidy-data-14"
+gapminder
+```
+
+But they're not symmetric operations!
+
+## [pivot_longer()]{.fg-green} implies [pivot_wider()]{.fg-green}
+
+```{r }
+#| label: "04-tidy-data-15"
+gapminder |>
+  select(country, continent, year, lifeExp) |>
+  pivot_wider(names_from = year, values_from = lifeExp) #<<
+```
+
+## What about [_multiple_]{.fg-yellow} columns?
+
+- This is a pretty common problem. A first thought ("Just don't mention the other columns") isn't it:
+
+```{r }
+#| label: "04-tidy-data-16"
+gapminder |>
+  pivot_wider(names_from = year, values_from = lifeExp)
+```
+
+- `pop` and `gdpPercap` are still long, and now our table is really sparse.
+
+## What about [_multiple_]{.fg-yellow} columns?
+
+::: {.smallcode}
+
+We need to specify that we want values from more than one column.
+
+```{r }
+#| label: "04-tidy-data-17"
+gapminder |>
+  select(country, continent, year, lifeExp, gdpPercap) |>
+  pivot_wider(names_from = year, values_from = c(lifeExp, gdpPercap)) #<<
+```
+
+:::
+
+- This will give us a very wide table, but it's what we wanted.
+
+```{r}
+#| label: "04-tidy-data-18"
+#| echo: FALSE
+gen_cats <- function(x, N = 1000) {
+    sample(x, N, replace = TRUE)
+}
+
+set.seed(101)
+N <- 1000
+
+income <- rnorm(N, 100, 50)
+
+vars <- list(stratum = c(1:8),
+          sex = c("M", "F"),
+          race =  c("B", "W"),
+          educ = c("HS", "BA"))
+
+dfstrat <- as_tibble(map_dfc(vars, gen_cats))
+dfstrat <- add_column(dfstrat, income)
+write_csv(dfstrat, here::here("data", "dfstrat.csv"))
+```
+
+---
+
+## Pivot wider while summarizing
+
+```{r }
+#| label: "04-tidy-data-19"
+
+# Some made-up data
+dfstrat <- read_csv(here::here("data", "dfstrat.csv"))
+dfstrat
+```
+
+
+::: {.notes}
+Let’s say we want to transform this to a wider format, specifically by widening the educ column, so we end up with columns for both the HS and BA categories, and as we do so we want to calculate both the mean of income and the total n within each group.
+
+:::
+
+---
+
+```{r}
+#| label: "04-tidy-data-20"
+#| include: FALSE
+dfstrat <- read_csv(here::here("data", "dfstrat.csv"))
+dfstrat |>
+    group_by(sex, race, stratum, educ) |>
+    summarize(mean_inc = mean(income),
+              n = n()) |>
+    pivot_wider(names_from = (educ),
+                values_from = c(mean_inc, n)) |>
+    ungroup()
+```
+
+`r chunq_reveal("04-tidy-data-20",  lcolw="50", rcolw="50", smallcode = TRUE, title = "Pivot wider while summarizing")`
+
+Here we end up with sex-by-race-by-stratum in the rows, and the income-by-education means, and income-by-education Ns, in their own columns.
+
+
+# Separate and Unite
+
+## [separate()]{.fg-green} and [unite()]{.fg-green} columns
+
+```{r }
+#| label: "04-tidy-data-21"
+## tribble() lets you make tibbles by hand
+df <- tribble(
+  ~name, ~occupation,
+  "Nero.Wolfe", "Private Detective",
+  "Archie.Goodwin", "Personal Assistant",
+  "Fritz.Brenner", "Cook and Butler",
+  "Theodore.Horstmann", "Orchid Expert"
+)
+
+df
+
+```
+
+## [separate()]{.fg-green} and [unite()]{.fg-green} columns
+
+```{r }
+#| label: "04-tidy-data-21a"
+## tribble() lets you make tibbles by hand
+df <- tribble(
+  ~name, ~occupation,
+  "Nero.Wolfe", "Private Detective",
+  "Archie.Goodwin", "Personal Assistant",
+  "Fritz.Brenner", "Cook and Butler",
+  "Theodore.Horstmann", "Orchid Expert"
+)
+
+df
+
+```
+
+---
+
+```{r}
+#| label: "04-tidy-data-22"
+#| include: FALSE
+df |>
+  separate(name, into = c("first", "last")) |>
+  unite("full_name", first:last, sep = " ") |>
+  unite("both_together", full_name:occupation,
+        sep = ", ", remove = FALSE)
+
+```
+
+`r chunq_reveal("04-tidy-data-22",  lcolw="40", rcolw="60", smallcode = TRUE, title = "Separate and unite")`
+
+```{r}
+#| label: "04-tidy-data-23"
+#| include: FALSE
+df |>
+  separate(name, into = c("first", "last")) |>
+  unite("full_name", first:last) |>
+  separate(full_name, into = c("first", "last"))
+
+```
+
+`r chunq_reveal("04-tidy-data-23",  lcolw="40", rcolw="60", smallcode = TRUE, title = "Separate and unite")`
+
+The underscore, `_`, is the default uniting character.
+---
+
+```{r}
+#| label: "04-tidy-data-24"
+#| include: FALSE
+gss_sm |>
+    select(race, degree) |>
+    mutate(racedeg = interaction(race, degree)) |>
+    group_by(racedeg) |>
+    tally() |>
+    separate(racedeg, sep = "\\.", into = c("race", "degree"))
+```
+
+`r chunq_reveal("04-tidy-data-24",  lcolw="50", rcolw="50", smallcode = TRUE, title = "Separate and unite")`
+
+This one is a bit trickier, and our first glimpse of a _regular expression_.
+
+We have to tell [**`separate()`**]{.fg-green} to split on the period, not the space.
+
+# More advanced pivots
+
+## Example: tidy selectors
+
+
+```{r}
+billboard
+```
+
+## Example: tidy selectors
+
+```{r}
+billboard |>
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week",
+    values_to = "rank",
+    values_drop_na = TRUE
+  )
+```
+
+## Example: parse fns
+
+```{r}
+billboard  |>
+  pivot_longer(
+    cols = starts_with("wk"),
+    names_to = "week",
+    names_transform = readr::parse_number,
+    values_to = "rank",
+    values_drop_na = TRUE,
+  )
+```
+
+## Example: many vars in cols
+
+```{r}
+who
+```
+
+## Example: many vars in cols
+
+```{r}
+who  |>
+  pivot_longer(
+    cols = new_sp_m014:newrel_f65,
+    names_to = c("diagnosis", "gender", "age"),
+    names_pattern = "new_?(.*)_(.)(.*)",
+    values_to = "count"
+  )
+```
+
+
+## Example: many vars in cols
+
+::: {.smallcode}
+```{r}
+who |>
+  pivot_longer(
+    cols = new_sp_m014:newrel_f65,
+    names_to = c("diagnosis", "gender", "age"),
+    names_pattern = "new_?(.*)_(.)(.*)",
+    names_transform = list(
+      gender = ~ readr::parse_factor(.x, levels = c("f", "m")),
+      age = ~ readr::parse_factor(
+        .x,
+        levels = c("014", "1524", "2534", "3544", "4554", "5564", "65"),
+        ordered = TRUE
+      )
+    ),
+    values_to = "count"
+)
+```
+
+:::
+
+## Example: long to wide
+
+```{r}
+## Get the data and normalize the column names
+df <- read_csv("http://kjhealy.co/MVOtestdata.csv") |>
+  janitor::clean_names()
+
+## Starting point
+df
+
+```
+
+
+## Example: long to wide
+
+```{r}
+colnames(df)
+```
+
+## Example: there & back
+
+More fully lengthen by making side, item, color, and size into variables (ie columns)
+
+```{r}
+df_lon <- df |>
+  pivot_longer(right_shoe_color:left_glove_size,
+               names_to = c("side", "item", ".value"),
+               names_pattern = "(.*)_(.*)_(.*)")
+
+df_lon
+```
+
+## Example: there & back
+
+```{r}
+df_superwide <- df_lon |>
+  group_by(id, date) |>
+  mutate(id = as.character(id),
+         date = lubridate::mdy(date),
+         seq_id = cur_group_rows()) |>
+  relocate(seq_id, .after = id) |>
+  ungroup() |>
+  pivot_wider(names_from = seq_id, values_from =  date:size)
+```
+
+
+## Example: there & back
+
+```{r}
+df_superwide
+
+# Sheer madness
+colnames(df_superwide)
+```
+
+
+# Nested Data
+
+## Example 1: from the `tidyr` Vignette
+
+```{r}
+## Examples of recursive lists and nested/split data frames
+# install.packages("repurrsive")
+library(repurrrsive)
+
+chars <- tibble(char = got_chars)
+chars
+```
+
+
+## Example 1: from the `tidyr` Vignette
+
+```{r}
+chars2 <- chars |>
+  unnest_wider(char)
+
+chars2
+```
+
+## Example 1: from the `tidyr` Vignette
+
+```{r}
+chars2 |>
+  select(where(is.list))
+```
+
+## Example 1: from the `tidyr` Vignette
+
+A row for every book and TV series that the character appears in:
+
+```{r}
+chars2
+```
+
+```{r}
+#| label: "04-tidy-data-got"
+#| include: FALSE
+
+chars2  |>
+  select(name, books, tvSeries) |>
+  pivot_longer(c(books, tvSeries),
+               names_to = "media",
+               values_to = "value") |>
+  unnest_longer(value)
+```
+
+`r chunq_reveal("04-tidy-data-got",  lcolw="40", rcolw="60", smallcode = TRUE, title = "Example 1: Vignette")`
+
+
+
+
+## Example 2: GitHub
+
+The `fromJSON()` function in `{jsonlite}` does its best to simplify what the API returns into a table, which you can convert to a tibble.
+
+```{r}
+# install.packages("jsonlite")
+jsonlite::fromJSON("https://api.github.com/users/kjhealy/repos") |>
+  as_tibble()
+```
+
+
+## Example 2: GitHub
+
+The `read_json()` function in `{jsonlite}` gives you a list of the JSON the API returns, which you won't be able to immediately convert.
+
+```{r}
+gh_raw <- jsonlite::read_json("https://api.github.com/users/kjhealy/repos")
+
+gh_tb <- tibble(gh = gh_raw)
+
+gh_tb
+
+```
+
+## Example 2: GitHub
+
+This is what the `unnest_wider()` function is for:
+
+```{r}
+gh_tb |>
+  unnest_wider(gh)
+```
+
+## Example 2: GitHub
+
+By default we only get the first 30 items back. (The API is paginated.)
+
+```{r}
+gh_tb |>
+  unnest_wider(gh) |>
+  pull(name)
+```
+
+## Example 2: GitHub
+
+```{r}
+gh_tb |>
+  unnest_wider(gh) |>
+  select(id, name, ends_with("count")) |>
+  arrange(desc(watchers_count))
+```
+
+## Example 3: Citibike NYC
+
+```{r}
+bikes <- jsonlite::read_json("https://gbfs.citibikenyc.com/gbfs/2.3/gbfs.json")
+
+bikes
+```
+
+
+## Example 3: Citibike NYC
+
+A slightly messier case:
+
+```{r}
+bikes_tib <- tibble(bikes = bikes$data$en$feeds) |>
+  unnest_wider(bikes)
+
+bikevec <- bikes_tib$url |>
+  set_names(bikes_tib$name)
+
+## Available feeds
+bikevec
+```
+
+## Example 3: Citibike NYC
+
+```{r}
+## Q: Why do we write it like this?
+nyc_stations <- tibble(stations = jsonlite::read_json(bikevec["station_status"])$data)
+
+nyc_stations
+```
+
+## Example 3: Citibike NYC
+
+```{r}
+## Live! (At the time of rendering)
+nyc_stations |>
+  unnest_wider(stations, names_sep = "_")
+```
+
+## Example 3: Citibike NYC
+
+```{r}
+
+nyc_stations |>
+  unnest_wider(stations, names_sep = "_") |>
+  pivot_longer(starts_with("stations"))
+```
+
+## Example 3: Citibike NYC
+
+```{r}
+
+nyc_stations |>
+  unnest_wider(stations, names_sep = "_") |>
+  pivot_longer(starts_with("stations")) |>
+  unnest_wider(value)
+```
+
+
+## Example 3: Citibike NYC
+
+Extra info on the stations:
+
+```{r}
+## Q: Why do we write it like this?
+nyc_stations_info <- tibble(stations = jsonlite::read_json(bikevec["station_information"])$data[[1]])
+
+nyc_stations_info |>
+  unnest_wider(stations)
+```
+
+From here we could join these two tables.

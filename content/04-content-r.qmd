@@ -37,6 +37,8 @@ We'll spend most of the rest of the semester working in R and RStudio. Time to l
 
 ## Slides
 
+The "R and Quarto" slides repeat some of the material from the first week, just for convenience, and then move on to the introduction to R. There is more material in both slide decks than we can covered in class.
+
 ```{=html}
 <script type="application/javascript">
 
@@ -53,9 +55,18 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/04-slides.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/04-slides-r-and-quarto.html"></iframe>
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_win_button("/slides/04-slides")
+slide_win_button("/slides/04-slides-r-and-quarto")
+```
+
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/04-slides-ggplot-1.html"></iframe>
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+slide_win_button("/slides/04-slides-ggplot-1")
 ```
