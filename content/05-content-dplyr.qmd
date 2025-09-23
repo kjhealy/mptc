@@ -55,7 +55,7 @@ window.addEventListener('DOMContentLoaded', function(e) {
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/05-slides-r-dplyr")
+slide_buttons("/slides/05-slides-r-dplyr")
 ```
 
 
@@ -64,5 +64,5 @@ slide_win_button("/slides/05-slides-r-dplyr")
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-slide_win_button("/slides/05b-slides-r-reshaping-data")
+slide_buttons("/slides/05-slides-r-reshaping-data")
 ```

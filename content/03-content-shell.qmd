@@ -67,7 +67,7 @@ window.addEventListener('DOMContentLoaded', function(e) {
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/03-slides-filesystem")
+slide_buttons("/slides/03-slides-filesystem")
 ```
 
 
@@ -76,5 +76,5 @@ slide_win_button("/slides/03-slides-filesystem")
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-slide_win_button("/slides/03-slides-shell")
+slide_buttons("/slides/03-slides-shell")
 ```

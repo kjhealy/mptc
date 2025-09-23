@@ -3,13 +3,14 @@ project:
   resources:
     - "files/"
     - "projects/"
+    - "pdf_slides/"
   preview:
     port: 27514
   render:
     - "*.qmd"
     - "!staging/"
     - "!projects/"
-
+    - "!pdf_slides/"
 
 filters:
   - line-highlight

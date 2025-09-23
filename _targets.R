@@ -2,6 +2,14 @@ library(targets)
 library(tarchetypes)
 suppressPackageStartupMessages(library(tidyverse))
 
+## Parallelize things --- when we build the PDFs
+## it'll take forever otherwise
+library(crew)
+tar_option_set(
+  controller = crew_controller_local(workers = 15)
+)
+
+
 ## Variables and options
 yaml_vars <- yaml::read_yaml(here::here("_variables.yml"))
 
@@ -183,7 +191,7 @@ list(
 
   tar_files(rendered_slides, {
     # Force dependencies
-    site
+    site_ready <- site
     fl <- list.files(here_rel("slides"), pattern = "\\.qmd", full.names = TRUE)
     paste0("_site/", stringr::str_replace(fl, "qmd", "html"))
   }),
@@ -194,6 +202,17 @@ list(
     get_flipbookr_orphans()
   }),
 
+  ## Create PDFs of slides
+  tar_target(
+    quarto_pdfs,
+    {
+      html_to_pdf(rendered_slides)
+    },
+    pattern = map(rendered_slides),
+    format = "file"
+  ),
+
+  ## Clean up after flipbookr
   tar_target(
     move_orphans,
     {
@@ -206,7 +225,7 @@ list(
   ## Remove any flipbookr leftover dirs
   tar_files(flipbookr_dirs, {
     # Force dependencies (no PDFs of slides so we use rendered_slides)
-    rendered_slides
+    rendered_slides_ready <- rendered_slides
     # Top-level flipbookr dirs now empty
     get_leftover_dirs()
   }),
@@ -225,8 +244,10 @@ list(
   tar_target(deploy_script, here_rel("deploy.sh"), format = "file"),
   tar_target(deploy_site, {
     # Force dependencies
-    site
-    # Run the deploy script if both conditions are met
+    site_ready <- site
+    pdfs_ready <- quarto_pdfs
+
+    # Run the deploy script if both deploy conditions are met
     # deploy_username and deploy_site are set in _variables.yml
     if (
       Sys.info()["user"] != yaml_vars$deploy$user |

@@ -58,7 +58,7 @@ window.addEventListener('DOMContentLoaded', function(e) {
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/04-slides-r-and-quarto")
+slide_buttons("/slides/04-slides-r-and-quarto")
 ```
 
 
@@ -67,5 +67,5 @@ slide_win_button("/slides/04-slides-r-and-quarto")
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-slide_win_button("/slides/04-slides-ggplot-1")
+slide_buttons("/slides/04-slides-ggplot-1")
 ```

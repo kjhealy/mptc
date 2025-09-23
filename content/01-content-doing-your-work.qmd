@@ -59,7 +59,7 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 ```
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_win_button("/slides/01-slides-bigpicture")
+slide_buttons("/slides/01-slides-bigpicture")
 ```
 
 
@@ -68,5 +68,5 @@ slide_win_button("/slides/01-slides-bigpicture")
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-slide_win_button("/slides/01-slides-rstudio-firstlook")
+slide_buttons("/slides/01-slides-rstudio-firstlook")
 ```
