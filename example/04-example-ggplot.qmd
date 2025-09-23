@@ -1,0 +1,321 @@
+---
+title: "Example 04: R and ggplot basics"
+engine: knitr
+---
+
+
+We begin as usual by loading the `tidyverse` package and a few others.
+
+
+```{r load-packages, warning=FALSE, message=FALSE}
+library(tidyverse)
+library(socviz)
+library(gapminder)
+library(here)
+```
+
+# How R thinks
+
+To start, we can say: in R, everything has a _name_ and everything is an _object_. You do things to named objects with _functions_ (which are themselves objects!). And you create an object by _assigning_ a thing to a name.
+
+_Assignment_ is the act of attaching a thing to a name. It is represented by `<-` or `=` and you can read it as "gets" or "is". Type it by with the `<` and then the `-` key. Better, there is a shortcut: on Mac OS it is `Option -` or Option and the `-` (minus or hyphen) key together. On Windows it's `Alt -`.
+
+## Objects
+
+We're going to use the `c()` function (c for _concatenate_) to stick some numbers together into a vector. And we will assign that the name `my_numbers`.
+
+```{r}
+## Inside code chunks, lines beginning with a # character are comments
+## Comments are ignored by R
+
+my_numbers <- c(1, 1, 2, 4, 1, 3, 1, 5) # Anything after a # character is ignored as well
+
+## Now we have an object by this name
+my_numbers
+```
+
+Again, in that previous chunk we created an _object_ by _assigning_ something (the result of a function) to a _name_. Now that thing exists in our project environment.
+
+
+```{r}
+my_numbers
+```
+
+
+R has a few built-in objects.
+
+```{r}
+letters
+```
+
+```{r}
+LETTERS
+```
+
+```{r}
+pi
+```
+
+But mostly we will be creating objects.
+
+## R is a calculator
+
+You don't have to make objects. You can just treat R like a calculator that spits out answers at the console.
+
+```{r}
+(31 * 12) / 2^4
+```
+
+```{r}
+sqrt(25)
+```
+
+
+
+```{r}
+log(100)
+```
+
+```{r}
+log10(100)
+```
+
+
+The commands that look like `this()` are called _functions_.
+
+But everything you do along these lines  can, if you want, be assigned to a name. Like `my_five <- sqrt(25)`.
+
+## You can do logic
+
+```{r}
+
+4 < 10
+4 > 2 & 1 > 0.5 # The "&" means "and"
+4 < 2 | 1 > 0.5 # The "|" means "or"
+4 < 2 | 1 < 0.5
+```
+
+A logical test:
+
+```{r}
+2 == 2 # Write `=` twice
+```
+
+Not this:
+
+```{r 02-about-r-11, eval = FALSE, echo = TRUE}
+## This will cause an error, because R will think you are trying to assign a value
+2 = 2
+
+## Error in 2 = 2 : invalid (do_set) left-hand side to assignment
+```
+
+Testing for "not equal to" or "is not":
+
+```{r}
+3 != 7 # Write `!` and then `=` to make `!=`
+```
+
+## More about objects
+
+```{r}
+my_numbers # We created this a few minutes ago
+
+letters  # This one is built-in
+
+pi  # Also built-in
+
+```
+
+Creating objects: assign a thing (usually the result of a function) to a name.
+
+```{r}
+## this object... gets ... the output of this function
+my_numbers <- c(1, 2, 3, 1, 3, 5, 25, 10)
+
+your_numbers <- c(5, 31, 71, 1, 3, 21, 6, 52)
+
+```
+
+## You do things with functions
+
+Functions usually _take input_, _perform actions_, and then _return output_.
+
+```{r}
+# Calculate the mean of my_numbers with the mean() function
+mean(x = my_numbers)
+```
+
+The instructions you can give a function are its _arguments_. Here, `x` is saying "this is the thing I want you to take the mean of".
+
+If you provide arguments in the "right" order (the order the function expects), you don't have to name them.
+
+```{r}
+mean(my_numbers)
+```
+
+Look at the help for `mean()` with `?mean` to learn what `trim` is doing.
+
+```{r}
+## The sample() function
+x <- sample(x = 1:100, size = 100, replace = TRUE) # What does each piece do here?
+mean(x)
+
+mean(x, trim = 0.1)
+```
+
+For functions with more than one or two arguments, explicitly naming arguments is good practice, especially when learning the language.
+
+# Data
+
+## Built-in datasets
+
+A few datasets come built-in, for convenience. Here is one:
+
+```{r}
+mtcars
+```
+
+Some packages also come with datasets. The `socviz` package has a few. The `mpg` dataset is a kind of updated version of the `mtcars` dataset.
+
+```{r}
+mpg
+```
+
+Like functions that are come in packages, you don't see built-in or packaged datasets in your object inspector (because you did not create them yourself in your session), but they are accessible to you. If you want to make a copy of one of these datasets to inspect, you can assign it to a name:
+
+```{r}
+my_mpg <- mpg
+```
+
+Now you'll see it in your object inspector.
+
+## Reading in data
+
+The most common way to get data into R is to read it from a file. The `readr` package (part of the `tidyverse`) has functions for reading in data files. The most common kind of data file is a comma-separated values (CSV) file. We read it in with `read_csv()`. We describe a file path relative to the project root, with the help of the `here()` function from the `here` package.
+
+```{r}
+organs <- read_csv(here("data", "organdonation.csv"))
+
+organs
+
+```
+
+# ggplot basics
+
+To draw a graph in ggplot requires two kinds of statements: one saying what the data is and what relationship we want to plot, and the second saying what kind of plot we want. The first one is done by the `ggplot()` function.
+
+```{r}
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy))
+```
+
+You can see that by itself it doesn't do anything.
+
+But if we add a function saying what kind of plot, we get a result:
+
+```{r}
+ggplot(data = mpg,
+       mapping = aes(x = displ, y = hwy)) +
+  geom_point()
+```
+
+The `data` argument says which table of data to use. The `mapping` argument, which is done using the "aesthetic" function `aes()` tells ggplot which visual elements on the plot will represent which columns or variables in the data.
+
+
+```{r}
+# The gapminder data
+library(gapminder)
+gapminder
+
+```
+
+A histogram is a summary of the distribution of a single variable:
+
+```{r}
+ggplot(data = gapminder,
+       mapping = aes(x = lifeExp)) +
+  geom_histogram()
+```
+
+A scatterplot shows how two variables co-vary:
+
+```{r}
+ggplot(data = gapminder,
+       mapping = aes(x = gdpPercap, y = lifeExp)) +
+  geom_point()
+```
+
+A boxplot is another way of showing the distribution of a single variable:
+
+```{r}
+ggplot(data = gapminder,
+       mapping = aes(y = lifeExp)) +
+  geom_boxplot()
+```
+
+Boxplots are much more useful if we compare several of them:
+
+
+```{r}
+ggplot(data = gapminder,
+       mapping = aes(x = continent, y = lifeExp)) +
+  geom_boxplot()
+```
+
+## Faceting
+
+Faceting is a powerful way to make "small multiples", where we make the same plot for different subsets of the data.
+
+```{r}
+gapminder |>
+  ggplot(mapping = aes(x = year,
+                       y = gdpPercap)) +
+  geom_line()
+```
+
+That looks weird. What has gone wrong? Remember, ggplot only knows about the relationships you tell it about. Our data are country-years and we have asked it to draw a line graph using Year and GDP per capita. And that is what it's done. But it doesn't know anything about the country-level structure of the data. So the `geom_line()` function is trying to connect all the points in the dataset in a single line, which is not what we want. We want to connect the points for each country separately. We do that by telling `geom_line()` to group the data by country:
+
+```{r}
+
+gapminder |>
+  ggplot(mapping = aes(x = year,
+                       y = gdpPercap)) +
+  geom_line(mapping = aes(group = country))
+```
+
+Think of the `group` aesthetic as telling ggplot which points belong together, or when to "lift the pen" when drawing lines.
+
+
+Facet to make small multiples:
+
+```{r}
+gapminder |>
+  ggplot(mapping =
+           aes(x = year,
+           y = gdpPercap)) +
+  geom_line(mapping = aes(group = country)) +
+  facet_wrap(~ continent)
+```
+
+```{r, fig.width=15, fig.height=5}
+p <- ggplot(data = gapminder,
+            mapping = aes(x = year,
+                          y = gdpPercap))
+
+p_out <- p + geom_line(color="gray70",
+              mapping=aes(group = country)) +
+    geom_smooth(linewidth = 1.1,
+                method = "loess",
+                se = FALSE) +
+    scale_y_log10(labels=scales::label_dollar()) +
+    facet_wrap(~ continent, ncol = 5) +#<<
+    labs(x = "Year",
+         y = "log GDP per capita",
+         title = "GDP per capita on Five Continents",
+         subtitle = "1950-2007",
+         caption = "Data: Gapminder")
+
+p_out
+
+```

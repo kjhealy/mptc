@@ -27,12 +27,11 @@ We'll spend most of the rest of the semester working in R and RStudio. Time to l
 
 ## Examples
 
-(To follow)
-
+[R basics and ggplot examples](/example/04-example-ggplot.qmd)
 
 ## Assignment
 
-(To follow)
+No assignment this week.
 
 
 ## Slides

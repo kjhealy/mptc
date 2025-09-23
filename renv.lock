@@ -3348,6 +3348,31 @@
       "RemoteRef": "main",
       "RemoteSha": "789d363118de89dd04454aea5f333c8fdc5f6052"
     },
+    "nycdogs": {
+      "Package": "nycdogs",
+      "Version": "0.1.4",
+      "Source": "GitHub",
+      "Title": "New York City dog licenses and bite incidents by zip code",
+      "Authors@R": "person(given = \"Kieran\", family = \"Healy\", role = c(\"aut\", \"cre\"), email = \"kjhealy@gmail.com\")",
+      "Description": "A data package containing three data sets covering dog ownership in New York City.",
+      "License": "MIT + file LICENSE",
+      "Depends": [
+        "R (>= 3.5)"
+      ],
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "RoxygenNote": "6.1.1",
+      "URL": "https://github.com/kjhealy/nycdogs",
+      "BugReports": "https://github.com/kjhealy/nycdogs/issues",
+      "Author": "Kieran Healy [aut, cre]",
+      "Maintainer": "Kieran Healy <kjhealy@gmail.com>",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "kjhealy",
+      "RemoteRepo": "nycdogs",
+      "RemoteRef": "main",
+      "RemoteSha": "8faab592d9a8b36f7ef4fca2030c470117be856c"
+    },
     "openssl": {
       "Package": "openssl",
       "Version": "2.3.3",

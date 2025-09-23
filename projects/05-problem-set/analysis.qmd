@@ -1,0 +1,90 @@
+---
+title: "Week 05 Problem Set: Dogs of New York"
+author: "<PUT YOUR NAME HERE>"
+date: "`r Sys.Date()`"
+format: html
+---
+
+```{r}
+#| label = "load-libraries-data",
+#| warning = FALSE,
+#| message = FALSE
+library(tidyverse)
+```
+
+# Dogs of New York
+
+This data comes from New York City's Open Data initiative.
+
+We load the data as a package. If you get a message saying there's no such package, then run this line of code at the console _once_:  `remotes::install_github("kjhealy/nycdogs")`. Then it should be available.
+
+```{r}
+library(nycdogs)
+
+nyc_license
+```
+
+The data are structured like this: each _row_ contains the license record for a dog in a particular year. The columns are as follows:
+
+`animal_name` --- Name of dog.
+`animal_gender` --- Sex of dog.
+`animal_birth_year` --- Birth year
+`breed_rc` --- Breed of dog (simplier categories).
+`borough` --- Borough of owner. (Some boroughs are approximate due to zip codes.)
+`zip_code` --- Zip code of owner.
+`license_issued_date` --- Date license issued
+`license_expired_date` --- Date license expired
+`extract_year` --- Year record was extracted
+
+
+# Tasks
+
+## 1. A first look at the data.
+
+You'll use `group_by()` and `summarize()`, or `tally()` to answer these questions.
+
+- a. Write some code to count the number of records there are for each extract year, and now many records are missing a value for the extract year.
+
+```{r}
+
+```
+
+- b. How many distinct dog breeds are there in the data?
+
+
+- c. Are there any notable differences in the ratio of male to female dogs in the city as a whole? What about by borough?
+
+
+- d. Here are the first ten rows of the data again:
+
+```{r}
+nyc_license
+```
+
+Row 8 shows a Labrador named Chewbacca. Are there any other dogs in the data that have the names of major Star Wars characters?
+
+- e. In class we saw some problems with the `animal_name` column, where there seemed to be typos and misspellings and so on. Are there any similar sorts of problems with the `borough` column or the `zip_code` column? (Hint: remember we subset rows with `filter()`)
+
+## 2. Some Crosstabs
+
+- a. What were the Top 5 dog names in each borough in 2016?
+
+```{r}
+
+```
+
+- b. What were the Top 5 dog breeds in the whole city in 2018, in terms of the total number of dogs?
+
+- c. What were the Top 5 dog breeds in the whole city in 2018, as a percentage of all dogs?
+
+- d. What were the Top 5 dog breeds in each borough in 2018, in terms of the total number of dogs in each borough?
+
+- c. Redo this table to show the top 5 dog breeds in each borough in 2018, this time as a percentage of all dogs in the borough.
+
+## 3. A Graph
+
+- a. Make a table of the top 10 dog *names* in each borough in 2018
+
+- b. Make a graph with this table. First think about how best to graph it. Consider either `geom_col()` and `geom_point()`. Add a title and label the axes. Facet the graph by borough.
+
+- c. Can you make it so that only the dog names in each borough are shown for that borough's facet?
