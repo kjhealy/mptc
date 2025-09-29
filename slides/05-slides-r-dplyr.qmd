@@ -175,7 +175,7 @@ Not all of these are attached when we do `library(tidyverse)`
 
 ## General Social Survey data: [`gss_sm`]{.fg-pink}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-3"
 ## library(socviz) # if not loaded
 gss_sm
@@ -193,7 +193,7 @@ Notice how the tibble already tells us a lot.
 
 ## Summarizing a Table
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-4"
 gss_sm |>
   select(id, bigregion, religion)
@@ -203,7 +203,7 @@ We're just taking a look at the relevant columns here.
 
 ## Group by [_one_]{.fg-orange} column or variable
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-5"
 
 gss_sm |>
@@ -273,7 +273,7 @@ gss_sm |>
 
 ## Pipelines carry assumptions forward
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-9"
 gss_sm |>
   group_by(bigregion, religion) |> #<<
@@ -287,7 +287,7 @@ Groups are carried forward till summarized or explicitly ungrouped. Summary calc
 
 ## Pipelines carry assumptions forward
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-10"
 gss_sm |>
   group_by(bigregion, religion) |>
@@ -302,7 +302,7 @@ gss_sm |>
 
 ## Convenience functions
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-11"
 gss_sm |>
   group_by(bigregion, religion) |> #<<
@@ -320,7 +320,7 @@ We're going to be doing this [**`group_by()`**]{.fg-green} ... [**`n()`**]{.fg-g
   -  Use [**`n()`**]{.fg-green}
 
 ::::: {.smallcode}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-12"
 gss_sm |>
   group_by(bigregion, religion) |> #<<
@@ -335,7 +335,7 @@ gss_sm |>
 - Use [**`tally()`**]{.fg-green}
 
 ::::: {.smallcode}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-13"
 gss_sm |>
   group_by(bigregion, religion) |>
@@ -350,7 +350,7 @@ gss_sm |>
  - Use [**`count()`**]{.fg-green}
 
 ::::: {.smallcode}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-14"
 gss_sm |>
   count(bigregion, religion) #<<
@@ -409,7 +409,7 @@ gss_sm |>
 :::: {.columns}
 ::: {.column width="50%"}
   - You can do it like this ...
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-18"
 rel_by_region <- gss_sm |> #<<
   count(bigregion, religion) |>
@@ -430,7 +430,7 @@ rel_by_region
 :::: {.columns}
 ::: {.column width="50%"}
   - You can do it like this ...
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-18b"
 rel_by_region <- gss_sm |> #<<
   count(bigregion, religion) |>
@@ -443,7 +443,7 @@ rel_by_region
 
 ::: {.column width="50%" .right}
 -  Or like this!
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-19"
 gss_sm |>
   count(bigregion, religion) |>
@@ -463,7 +463,7 @@ rel_by_region
 ::: {.column width="50%"}
 - [Left]{.fg-red} assignment is standard
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-20"
 gss_tab <- gss_sm |>
   count(bigregion, religion)
@@ -476,7 +476,7 @@ gss_tab <- gss_sm |>
 ::: {.column width="50%" .right}
 - [Right]{.fg-lblue} assignment also works!
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-21"
 gss_sm |>
   count(bigregion, religion) -> gss_tab
@@ -494,7 +494,7 @@ gss_sm |>
 :::: {.columns}
 ::: {.column width="50%"}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-22"
 rel_by_region <- gss_sm |>
   count(bigregion, religion) |>
@@ -518,7 +518,7 @@ Hm, did I sum over right group?
 :::: {.columns}
 ::: {.column width="50%"}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-22b"
 rel_by_region <- gss_sm |>
   count(bigregion, religion) |>
@@ -532,7 +532,7 @@ Hm, did I sum over right group?
 :::
 
 ::: {.column width="50%" .right}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-23"
 ## Each region should sum to ~100
 rel_by_region |>
@@ -553,7 +553,7 @@ No! What has gone wrong here?
 :::: {.columns}
 ::: {.column width="50%"}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-24b"
 rel_by_region <- gss_sm |>
   count(bigregion, religion) |> #<<
@@ -564,7 +564,7 @@ rel_by_region <- gss_sm |>
 [**`count()`**]{.fg-green} returns ungrouped results, so there are no groups carry forward to the [**`mutate()`**]{.fg-green} step.
 :::::
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-25"
 rel_by_region |>
   summarize(total = sum(pct))
@@ -587,7 +587,7 @@ With [**`count()`**]{.fg-green}, the `pct` values here are the marginals for the
 :::: {.columns}
 ::: {.column width="50%"}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-24"
 rel_by_region <- gss_sm |>
   count(bigregion, religion) |> #<<
@@ -599,7 +599,7 @@ rel_by_region <- gss_sm |>
 :::::
 
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-25b"
 rel_by_region |>
   summarize(total = sum(pct))
@@ -611,7 +611,7 @@ With [**`count()`**]{.fg-green}, the `pct` values here are the marginals for the
 :::
 
 ::: {.column width="50%" .right}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-26"
 rel_by_region <- gss_sm |>
   group_by(bigregion, religion) |> #<<
@@ -619,7 +619,7 @@ rel_by_region <- gss_sm |>
   mutate(pct = round((n/sum(n))*100, 1))
 ```
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-27"
 # Check
 rel_by_region |>
@@ -669,7 +669,7 @@ We get some rounding error because we used `round()` after summing originally.
 ```
 
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-29"
 #| fig.height: 4
 #| fig.width: 10
@@ -689,7 +689,7 @@ gss_sm |>
 `r chunq_reveal("03a-dplyr-basics-30", smallcode = TRUE,  lcolw = "38", rcolw = "62", title = "Following a pipeline")`
 
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-30"
 #| include: FALSE
 gss_sm |>
@@ -710,7 +710,7 @@ gss_sm |>
 
 - Some new data, this time on national rates of cadaveric organ donation:
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-31"
 # library(socviz)
 organdata
@@ -719,7 +719,7 @@ organdata
 
 ## Conditionals in [`select()`]{.fg-green} & [`filter()`]{.fg-green}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-32"
 organdata |>
   filter(consent_law == "Informed" & donors > 15)
@@ -727,7 +727,7 @@ organdata |>
 
 ## Conditionals in [`select()`]{.fg-green} & [`filter()`]{.fg-green}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-33"
 organdata |>
   select(country, year, where(is.integer)) #<<
@@ -750,7 +750,7 @@ This is true in similar situations elsewhere as well.
 
 ## Conditionals in [`select()`]{.fg-green} & [`filter()`]{.fg-green}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-34"
 organdata |>
   select(country, year, where(is.character))
@@ -762,7 +762,7 @@ We have functions like e.g. [**`is.character()`**]{.fg-green}, [**`is.numeric()`
 
 Sometimes we don't pass a function, but do want to use the result of one:
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-35"
 organdata |>
   select(country, year, starts_with("gdp")) #<<
@@ -774,7 +774,7 @@ We have [**`starts_with()`**]{.fg-green}, [**`ends_with()`**]{.fg-green}, [**`co
 
 ## Conditionals in [`select()`]{.fg-green} & [`filter()`]{.fg-green}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-36"
 organdata |>
   filter(country == "Australia" | country == "Canada")
@@ -784,7 +784,7 @@ This could get cumbersome fast.
 
 ## Use [`%in%`]{.fg-pink} for multiple selections
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-37"
 my_countries <- c("Australia", "Canada", "United States", "Ireland")
 
@@ -794,7 +794,7 @@ organdata |>
 
 ## Negating [`%in%`]{.fg-pink}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-38"
 my_countries <- c("Australia", "Canada", "United States", "Ireland")
 
@@ -806,7 +806,7 @@ Also a bit awkward. There's no built-in "Not in" operator.
 
 ## A custom operator
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-39"
 `%nin%` <- Negate(`%in%`) # this operator is included in the socviz package
 ```
@@ -815,7 +815,7 @@ Also a bit awkward. There's no built-in "Not in" operator.
 The backticks are special here because we need to name an operator.
 :::
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-40"
 organdata |>
   filter(country %nin% my_countries) #<<
@@ -827,7 +827,7 @@ organdata |>
 
 Earlier we saw this:
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-41"
 gss_sm |>
   group_by(race, sex, degree) |>
@@ -840,7 +840,7 @@ gss_sm |>
 
 Similarly for `organdata` we might want to do:
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-42"
 organdata |>
   group_by(consent_law, country) |>
@@ -858,7 +858,7 @@ This works, but it's really tedious. Also error-prone.
 
 Instead, use [`across()`]{.fg-green} to apply a function to more than one column.
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-43"
 
 my_vars <- c("gdp", "donors", "roads")
@@ -895,7 +895,7 @@ organdata |>
 - `my_vars` are selected by [**`across()`**]{.fg-green}
 - We use `all_of()` or `any_of()` to be explicit
 - [**`list()`**]{.fg-green} of the form `result = function` gives the new columns that will be calculated.
-- The thing inside the list with the "waving person", `\(x)`, is an _anonymous function_
+- The thing inside the list with the "waving person", `\(x)`, is an _anonymous function_ or _lambda function_. It means "take whatever is passed to me, call it `x`, then immediately do whatever is written next".
 
 :::
 
@@ -903,7 +903,7 @@ organdata |>
 
 ## We can calculate more than one thing
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-44"
 
 my_vars <- c("gdp", "donors", "roads")
@@ -920,7 +920,7 @@ organdata |>
 
 ## It's OK to use the function names
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-45"
 
 my_vars <- c("gdp", "donors", "roads")
@@ -937,7 +937,7 @@ organdata |>
 
 ## Selection with [**`across(where())`**]{.fg-green}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-46"
 
 organdata |>
@@ -954,35 +954,48 @@ organdata |>
 
 ## Name new columns with [**`.names`**]{.fg-green}
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-47"
 organdata |>
   group_by(consent_law, country) |>
   summarize(across(where(is.numeric),
-                   list(mean = \(x) mean(x, na.rm = TRUE), #<<
-                        sd = \(x) sd(x, na.rm = TRUE), #<<
-                        median = \(x) median(x, na.rm = TRUE)) #<<
-                  ),
-            .names = "{fn}_{col}") |> #<<
+                   list(mean = \(x) mean(x, na.rm = TRUE),
+                        sd = \(x) sd(x, na.rm = TRUE),
+                        median = \(x) median(x, na.rm = TRUE)
+                        ),
+                  .names = "{fn}_{col}" #<<
+                  )
+            ) |>
   print(n = 3)
 ```
 
 
 ## Name new columns with [**`.names`**]{.fg-green}
 
-In tidyverse functions, arguments that begin with a "`.`" generally have it in order to avoid confusion with existing items, or are "pronouns" referring to e.g. "the name of the thing we're currently talking about as we evaluate this function".
+In tidyverse functions, arguments that begin with a "`.`" generally have it in order to avoid confusion with existing items, or sometimes are "pronouns" referring to e.g. "the name of the thing we're currently talking about as we evaluate this function". The `.` doesn't have any special meaning beyond that.
 
 
 
 ## This all works with [**`mutate()`**]{.fg-green}, too
 
-
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-48"
 organdata |>
   mutate(across(where(is.character), toupper)) |>
   select(where(is.character))
 ```
+
+## This all works with [**`mutate()`**]{.fg-green}, too
+
+```{r}
+#| label: "03a-dplyr-basics-48a"
+organdata |>
+  group_by(consent_law) |>
+  mutate(consent_mean = mean(donors, na.rm = TRUE)) |>
+  select(country, year, donors, consent_law, consent_mean)
+```
+
+You might do this because you want to see how each country compares to the average for its consent law, or calculate a yearly difference from the consent law average, etc.
 
 ## Arrange rows and columns
 
@@ -990,7 +1003,7 @@ Sort rows with [**`arrange()`**]{.fg-green}
 
 :::: {.columns}
 ::: {.column width="50%"}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-49"
 organdata |>
   group_by(consent_law, country) |>
@@ -1012,7 +1025,7 @@ Sort rows with [**`arrange()`**]{.fg-green}
 
 :::: {.columns}
 ::: {.column width="50%"}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-49b"
 organdata |>
   group_by(consent_law, country) |>
@@ -1024,7 +1037,7 @@ organdata |>
 :::
 
 ::: {.column width="50%" .right}
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-50"
 organdata |>
   group_by(consent_law, country) |>
@@ -1041,7 +1054,7 @@ Using [**`arrange()`**]{.fg-green} to order rows in this way won't respect group
 
 ## More generally ...
 
-```{r }
+```{r}
 #| label: "03a-dplyr-basics-51"
 organdata |>
   group_by(consent_law, country) |>
@@ -1059,7 +1072,7 @@ organdata |>
 Ranking and cumulation within groups.
 
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-3"
 ## Data on COVID-19
 library(covdata)
@@ -1071,7 +1084,7 @@ covnat_weekly
 
 [**`cumsum()`**]{.fg-green} gives cumulative sums
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-4"
 covnat_weekly |>
   filter(iso3 == "FRA") |>
@@ -1085,7 +1098,7 @@ covnat_weekly |>
 
 [**`cume_dist()`**]{.fg-green} gives the proportion of values <= to the current value.
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-5"
 covnat_weekly |>
   select(date, cname, iso3, deaths) |>
@@ -1100,7 +1113,7 @@ The `dplyr` vignette on Window functions is good.
 
 ## An application
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-6"
 covus |>
   filter(measure == "death") |>
@@ -1115,7 +1128,7 @@ Here the `count` measure is _cumulative_ deaths. What if we want to recover the 
 
 `dplyr` has [**`lead()`**]{.fg-green} and [**`lag()`**]{.fg-green} functions. These allow you to access the previous and next values in a vector. You can calculate offsets this way.
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-7"
 my_vec <- c(1:20)
 my_vec
@@ -1129,7 +1142,7 @@ my_vec - lag(my_vec)
 
 We can write the expression directly:
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-8"
 covus |>
   select(-data_quality_grade) |>
@@ -1148,7 +1161,7 @@ covus |>
 We write functions using the special [**`function()`**]{.fg-green} function.\*
 
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-9"
 my_fun <- function(x) {
   x + 1
@@ -1170,7 +1183,7 @@ my_fun(10)
 
 We write our function. It's just the expression we originally wrote, wrapped up.
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-10"
 get_daily_count <- function(count, date){
   count - lag(count, order_by = date)
@@ -1183,7 +1196,7 @@ This function has no generality, error-handling, or anything else. It's a once-o
 
 Now we can use it like any other:
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-11"
 covus |>
   filter(measure == "death") |>
@@ -1209,7 +1222,7 @@ There are several options, notably [`RcppRoll`](https://cran.r-project.org/web/p
 
 We'll use the [`slider`](https://cran.r-project.org/web/packages/slider/vignettes/slider.html) package.
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-12"
 # install.packages("slider")
 library(slider)
@@ -1217,7 +1230,7 @@ library(slider)
 
 ## Tidy moving averages with [`slider`]{.fg-orange}
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-13"
 covus |>
   filter(measure == "death") |>
@@ -1249,7 +1262,7 @@ The package provides a lot of different functions, from general-purpose [**`slid
 
 ## Move columns with [**`relocate()`**]{.fg-green}
 
-```{r }
+```{r}
 #| label: "03b-dplyr-basics-14"
 gss_sm
 ```
