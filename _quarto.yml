@@ -63,7 +63,8 @@ website:
               file: "content/05-content-dplyr.qmd"
             - text: "06: More on dplyr"
               file: "content/06-content-dplyr-and-more.qmd"
-
+            - text: "07: Getting Data in and out of R"
+              file: "content/07-content-ingesting-data.qmd"
 
     - title: "Assignments"
       contents:
@@ -84,7 +85,8 @@ website:
               file: assignment/03-assignment-shell-2.qmd
             - text: "05: dplyr"
               file: assignment/05-assignment-dplyr.qmd
-
+            - text: "07: FARS data exercise"
+              file: assignment/07-assignment-fars.qmd
 
 
     - title: "Examples"

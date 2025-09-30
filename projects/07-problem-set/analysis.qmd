@@ -1,0 +1,90 @@
+---
+title: "Week 06 Problem Set: Traffic Fatalities"
+author: "<PUT YOUR NAME HERE>"
+date: "`r Sys.Date()`"
+format: html
+---
+
+```{r}
+#| label = "load-libraries-data",
+#| warning = FALSE,
+#| message = FALSE
+library(tidyverse)
+library(here)
+library(socviz)
+```
+
+
+The data are from the Federal Accident Reporting System run by the National Highway Traffic Safety Administration. We have two datasets. 
+
+# First Table
+
+The first table was downloaded from this URL: <https://www-fars.nhtsa.dot.gov/States/StatesCrashesAndAllVictims.aspx>. At the time of writing, it's the table labeled "Person Killed, by STATE and Age Group - State : USA, Year : 2023". I downloaded the Excel file and very slightly cleaned it up. It is in the `data/` folder of this project as `fars-persons-killed-by-state-and-age-2023.csv`. 
+
+First we read in the data:
+
+```{r}
+df_state <- read_csv(here("data", "fars-persons-killed-by-state-and-age-2023.csv"))
+
+df_state
+```
+
+
+## Task 1: Cleaning
+
+A. The Age categories are spread across the columns, from `< 5` to `Unknown`. Get them into long format so that your dataset consists of four columns named `state`, `age` and `count`, and `total`. Make sure the capitalization is correct (i.e. all lower case).
+
+```{r}
+
+```
+
+B. Clean the `age` column to remove white space in the age categories and replace the `--` with `-`. Also make sure `<` and `>` do not have any whitespace before or after them. 
+
+
+
+## Task 2: Counting
+
+
+A. Filter the data to show the count by state for ages five to nine
+
+B. Make a table showing the count for each state of victims aged nine and under as single total. That is, we want the sum of ages nine and under as a single number, shown for each state. Do we lose any observations? Should we expect to? Why or why not?
+
+
+# Second Table
+
+The second dataset also comes from FARS. It has daily counts of road accident fatalities for people aged seventeen and under, for the years 2009 to 2018. 
+
+```{r}
+df_daily <- read_csv(here("data", "fars0-17daily.csv"))
+
+df_daily
+```
+
+
+## Task 3. Examine, clean, and reshape `df_daily`
+
+A. Take a look at the data. Some of the rows need to be removed. Which ones? Remove them as you see fit.
+
+B. Make it so that the `month` column has the correct month in every row. Hint: look at the documentation for the `tidyr::fill()` function to help you here. 
+
+C. Get the counts into long format with a column named `year` containing the year and a column named `count` containing the fatality counts. 
+
+## Task 4. Dates
+
+D. Can you use the day, month, and year columns to make a new column called `date` that is actually of type `date`?
+
+- Hint: the `ymd()` function in `lubridate` can intelligently parse date strings. Use `paste` to construct one of the form year-month-day. 
+
+E. Do any dates fail to parse? Can you identify why?
+
+## Task 5.  Trends
+
+Now that you've gotten the data in shape, explore it. Can you find any interesting patterns or trends?
+
+
+
+
+
+
+
+

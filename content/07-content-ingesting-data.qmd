@@ -1,0 +1,65 @@
+---
+title: "07. Getting data in and out of R"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+We'll learn about importing and cleaning your data.
+
+## Required Reading
+
+- @wickham23:_r_data_scien.
+
+[Read the text online.](https://r4ds.hadley.nz/). Read or review [Chapter 7](https://r4ds.hadley.nz/data-import) on importing data. Read [Chapter 20](https://r4ds.hadley.nz/spreadsheets) on Spreadsheets. Read or review [Chapter 17](https://r4ds.hadley.nz/datetimes.html) on dates and times, which will help with the assignment.
+
+
+
+
+## Assignment
+
+[This week's assignment](/assignment/07-assignment-fars.qmd).
+
+## Slides
+
+```{=html}
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-dplyr.html"></iframe-->
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+#slide_buttons("/slides/05-slides-r-dplyr")
+```
+
+
+```{=html}
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe-->
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+#slide_buttons("/slides/05-slides-r-reshaping-data")
+```

@@ -1,0 +1,35 @@
+---
+title: "Problem Set for Week 06"
+date: "2025-10-05"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+## Task 1: Download and launch this week's problem set.
+
+```{r project-download, echo=FALSE, results="asis"}
+project_buttons("/projects/07-problem-set")
+```
+
+1. Launch the project by double-clicking on the `06-problem-set.Rproj` file. It will launch a new instance of R. Remember you can have more than one project open and running at a time. Each one is a self-contained RStudio instance. They don't know anything about each other.
+
+2. Once RStudio is running, take a look at the `analysis.qmd` file. Do the tasks it asks.
+
+3. Save your work.
+
+4. Render the `analysis.qmd` document as an HTML file. Try rendering it to a PDF file, too, if you like.
+
+5. Zip up the problem set folder.
+
+- 5a. On Mac OS, in the Finder, select the folder, right click (that is, hold down the Control key and click), and choose "Compress"
+
+```{r project-structure, echo=FALSE, out.width="30%"}
+knitr::include_graphics(here::here("assets", "00-site", "compress-mac-1.png"), error = FALSE)
+```
+
+- 5b. On Windows, Locate the file or folder that you want to zip. Press and hold (or right-click) the file or folder, select (or point to) Send to, and then select Compressed (zipped) folder. A new zipped folder with the same name is created in the same location.
+
+6. Upload the zipped file to Canvas.
