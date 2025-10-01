@@ -23,6 +23,14 @@ We'll learn about the core of working with data: doing things to tables.
 
 [Read the text online.](https://r4ds.hadley.nz/) Review or redo [Chapter 3](https://r4ds.hadley.nz/data-transform) and [Chapter 5](https://r4ds.hadley.nz/data-tidy); read and work through as much of [Chapters 12-14](https://r4ds.hadley.nz/transform) as you can.
 
+- Next, read the vignettes that come with `dplyr`. (In R packages, a vignette is like and extended example or tutorial.) These are available on your computer because you've installed the package. But you can also read them online. Note that tidyverse vignettes do not use the base pipe, `|>`, they use the magrittr pipe, `%>%` instead. But for our purposes they are equivalent.
+
+Read the following vignettes that come with `dplyr`, in the order listed:
+
+- [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html)
+- [Grouped data](https://dplyr.tidyverse.org/articles/grouping.html)
+- [Column-wise Operations](https://dplyr.tidyverse.org/articles/colwise.html)
+
 
 ## Examples
 
@@ -56,13 +64,4 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
 slide_buttons("/slides/05-slides-r-dplyr")
-```
-
-
-```{=html}
-<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe>
-```
-
-```{r show-slide-tabs2, echo=FALSE, results="asis"}
-slide_buttons("/slides/05-slides-r-reshaping-data")
 ```

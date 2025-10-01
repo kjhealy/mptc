@@ -21,16 +21,6 @@ More on dplyr: using  `across()` to apply functions to multiple columns at once;
 
 - @bromanDataOrganizationSpreadsheets2018
 
-- Next, read the vignettes that come with `dplyr`. (In R packages, a vignette is like and extended example or tutorial.) These are available on your computer because you've installed the package. But you can also read them online. Note that tidyverse vignettes do not use the base pipe, `|>`, they use the magrittr pipe, `%>%` instead. But for our purposes they are equivalent.
-
-Read the following vignettes, in the order listed:
-
-### `dplyr`
-
-- [Introduction to dplyr](https://dplyr.tidyverse.org/articles/dplyr.html)
-- [Grouped data](https://dplyr.tidyverse.org/articles/grouping.html)
-- [Column-wise Operations](https://dplyr.tidyverse.org/articles/colwise.html)
-
 ### `tidyr`
 
 - [Tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html)
@@ -45,12 +35,10 @@ Read the following vignettes, in the order listed:
 
 ## Examples
 
-(To follow.)
+[This week's examples.](/example/06-example-dplyr-and-more.qmd)
 
 
 ## Assignment
-
-(To follow.)
 
 ## Slides
 
@@ -70,18 +58,12 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-dplyr.html"></iframe-->
 ```
-
-```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_buttons("/slides/05-slides-r-dplyr")
-```
-
 
 ```{=html}
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe>
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-#slide_buttons("/slides/05-slides-r-reshaping-data")
+slide_buttons("/slides/05-slides-r-reshaping-data")
 ```

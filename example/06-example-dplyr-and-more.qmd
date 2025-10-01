@@ -1,0 +1,143 @@
+---
+title: "Example 06: More dplyr"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+```{r}
+library(tidyverse)
+library(nycdogs)
+library(socviz)
+```
+
+## Using `across()` to apply functions to multiple columns
+
+```{r}
+gss_sm
+```
+
+Let's summarize the age, childs, and sibs columns.
+
+```{r}
+gss_sm |>
+  summarize(
+    age_mean = mean(age, na.rm = TRUE),
+    age_sd = sd(age, na.rm = TRUE),
+    childs_mean = mean(childs, na.rm = TRUE),
+    childs_sd = sd(childs, na.rm = TRUE),
+    sibs_mean = mean(sibs, na.rm = TRUE),
+    sibs_sd = sd(sibs, na.rm = TRUE)
+  )
+```
+
+This is tedious and we have to name all the columns we create, which is error-prone. We can use `across()` to apply the same functions to multiple columns at once.
+
+```{r}
+gss_sm |>
+  summarize(
+    across(c(age, childs, sibs),
+           list(mean = \(x) mean(x, na.rm = TRUE),
+                sd = \(x) sd(x, na.rm = TRUE)))
+  )
+```
+
+We can also use `where()` to select columns based on their type. Here we summarize all numeric columns. First we drop `id` because it's just a row-identifier and it doesn't make sense to summarize it. We drop `year`, `ballot`, and the weight variables for similar reasons. We use a tidy selector to find the weight variables, and negate with `-` before the `c()` to drop the slected columns. Then in the summarize statement we use `where(is.numeric)` to select all remaining columns that are numeric.
+
+```{r}
+gss_sm |>
+  select(-c(id, ballot, year, starts_with("wts"))) |>
+  summarize(
+    across(where(is.numeric),
+           list(mean = \(x) mean(x, na.rm = TRUE),
+                sd = \(x) sd(x, na.rm = TRUE)))
+  )
+```
+
+This will of course work with grouping variables as well. Here we also add a count of the number of rows in each group.
+
+```{r}
+gss_sm |>
+  select(-c(id, ballot, year, starts_with("wts"))) |>
+  group_by(bigregion, degree) |>
+  summarize(
+    n = n(),
+    across(
+      where(is.numeric),
+      list(mean = \(x) mean(x, na.rm = TRUE),
+           sd = \(x) sd(x, na.rm = TRUE))
+    )
+  ) |>
+  ungroup()
+```
+
+See how, when we do this, we don't put the `n()` call in the `across()`? That's because `n()` is not a function that we are applying across all the numeric variables. We're just counting the number of rows within the group, which will not change no matter how many summary statistics we calculate for variables within each group.
+
+
+## Aggregating NYC dog breeds by Zip Code
+
+Zip codes are more complicated than they look. We'll see more about them in a future class. For now, we'll just use them as an example of how to do some data manipulation with `dplyr`. Here is a table of New York City zip codes (actually ZIP Code Tabulation Areas, or ZCTAs):
+
+```{r}
+nyc_ztca <- readxl::read_xlsx(here::here(
+  "files",
+  "examples",
+  "nyc-ztca-crosswalk.xlsx"))
+
+nyc_ztca
+```
+
+The `nycdogs` package also has some information on zip codes. There's a zip code column in `nyc_license`. How many zip codes are there in there?
+
+```{r}
+nyc_license |>
+    filter(extract_year == 2018) |>
+    distinct(zip_code)
+```
+
+That's too many. People enter invalid zip codes for all kinds of reasons. You can look more carefully at what's going on if you like. For now we'll just filter them out based on our vector of valid zip codes. Then we group and summarize by breed within zip code.
+
+```{r}
+zip_vec <- as.integer(nyc_ztca$zcta)
+
+nyc_license |>
+    filter(extract_year == 2018,
+           zip_code %in% zip_vec) |>
+    count(zip_code, breed_rc)
+```
+
+This is a lot of categories: 18,373. But many are still dropped. We know this because we can calculate how many slots there are in principle. In principle we have 214 zip codes. But, not every one of these is in the dog license data. Let's see how many unique zip codes we have in the filtered data.
+
+```{r}
+nyc_license |>
+  filter(extract_year == 2018, zip_code %in% zip_vec) |>
+  distinct(zip_code)
+```
+
+So we get 190 zip codes. And how many unique breeds?
+
+```{r}
+nyc_license |>
+  filter(extract_year == 2018, zip_code %in% zip_vec) |>
+  distinct(breed_rc)
+```
+
+That's 311 breeds. So in principle we have 190 * 311 = 59,090 combinations of zip code and breed. That's a lot more than the 18,372 number of rows we have. So, many breed/zip code combinations are empty. We can recover these and fill them with zeros using `complete()`. This will add rows for all combinations of zip code and breed, filling in zeros for any that are missing.
+
+
+```{r}
+nyc_license |>
+    filter(extract_year == 2018,
+           zip_code %in% zip_vec) |>
+    count(zip_code, breed_rc) |>
+    complete(zip_code, breed_rc, fill = list(n = 0))
+```
+
+This sort of thing is useful when you want to make sure that you have all combinations of two categorical variables. It's also relevant when we're doing things like making maps, where we want to make sure that every geographic unit is represented, even if there are no cases of whatever we're counting in that unit.
+
+If you look a little more closely at what's inside the `zip_code` column in `nyc_license` compared to what's in the `zip_vec` you'll see that there are mismatches in both directions. That is, some codes appear in each that don't appear in the other. This situation is very common. We'll return to it later when we discuss joining tables and relational data more generally. In addition, one problem with the way that zip codes are read in here is that they are numeric. Really they should be read as character strings. If we had a zip code of 06511, for instance it would be read as 6511, which is not valid. Next week we'll learn how to exercise more control over the data types as we read in our columns, and how to validate our data a bit more rigorously.

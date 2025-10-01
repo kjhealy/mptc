@@ -14,7 +14,7 @@ source(here::here("R", "slide-things.R"))
 project_buttons("/projects/07-problem-set")
 ```
 
-1. Launch the project by double-clicking on the `06-problem-set.Rproj` file. It will launch a new instance of R. Remember you can have more than one project open and running at a time. Each one is a self-contained RStudio instance. They don't know anything about each other.
+1. Launch the project by double-clicking on the `07-problem-set.Rproj` file. It will launch a new instance of R. Remember you can have more than one project open and running at a time. Each one is a self-contained RStudio instance. They don't know anything about each other.
 
 2. Once RStudio is running, take a look at the `analysis.qmd` file. Do the tasks it asks.
 
