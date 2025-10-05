@@ -710,7 +710,7 @@ df |>
 
 ## Do more than one thing
 
-A few weeks ago we saw this:
+The other week we saw this:
 
 ```{r }
 #| label: "03a-dplyr-basics-41"
@@ -741,7 +741,7 @@ This works, but it's really tedious. Also error-prone.
 
 ## Use [**`across()`**]{.fg-green}
 
-Instead, use [`across()`]{.fg-green} to apply a function to more than one column.
+And we also saw this we could use [`across()`]{.fg-green} to apply a function to more than one column.
 
 ```{r }
 #| label: "03a-dplyr-basics-43"
@@ -1350,6 +1350,203 @@ gss_sub |>
   tally() |>
   pivot_wider(names_from = sex, values_from = n)
 ```
+
+
+# An extension: partial applications of functions
+
+## Can we get more concise?
+
+- We have this code:
+
+```{r}
+#| label: "partial-1"
+#| eval: false
+#| echo: true
+organdata |>
+  group_by(consent_law, country) |>
+  summarize(across(where(is.numeric),
+                   list(mean = \(x) mean(x, na.rm = TRUE), #<<
+                        sd = \(x) sd(x, na.rm = TRUE), #<<
+                        median = \(x) median(x, na.rm = TRUE)) #<<
+                  )
+           ) |>
+    print(n = 3)
+```
+
+Let's say we want to do this a lot and we *always* want to use `na.rm = TRUE`.
+
+## Can we get more concise?
+
+We could write a function to do this, like this, for `mean`:
+
+```{r}
+#| label: "partial-2"
+
+mean_na_rm <- \(x) mean(x, na.rm = TRUE) # lambda shorthand works here too
+
+organdata |>
+  group_by(consent_law, country) |>
+  summarize(across(where(is.numeric),
+                   list(mean = mean_na_rm, #<<
+                        sd = \(x) sd(x, na.rm = TRUE),
+                        median = \(x) median(x, na.rm = TRUE)))) |>
+    print(n = 3)
+
+```
+
+This works! There is a slightly more general way to do this, though.
+
+## Partial application of functions
+
+- The `purrr` package has a function called [`partial()`]{.fg-green} that lets you do this in a more general way.
+
+```{r}
+#| label: "partial-3"
+
+mean_na_rm <- partial(mean, na.rm = TRUE)
+median_na_rm <- partial(median, na.rm = TRUE)
+sd_na_rm <- partial(sd, na.rm = TRUE)
+
+```
+
+## Partial application of functions
+
+```{r}
+#| label: "partial-4"
+
+organdata |>
+  group_by(consent_law, country) |>
+  summarize(across(where(is.numeric),
+                   list(mean = mean_na_rm,
+                        sd = sd_na_rm,
+                        median = median_na_rm))) |>
+    print(n = 3)
+```
+
+This is called "partial application" and is quite handy. You can fix any number of function arguments. Usually the idea is just fix all of them except the first one, which is the one that will be supplied by `across()`. This sort of "purifies" the function a little.
+
+## Partial application of functions
+
+A minute ago we saw this:
+
+```{r}
+#| label: "partial-6"
+#| eval: false
+#| echo: true
+
+
+convert_agegrp <- function(x){
+    x <- stringr::str_remove(x, "\\(")  # Remove open paren
+    x <- stringr::str_remove(x, "\\[")  # Remove open bracket
+    x <- stringr::str_remove(x, "\\]")  # Remove close bracket
+    x <- stringr::str_replace(x, ",", "-") # Replace comma with dash
+    x <- stringr::str_replace(x, "-89", "+") # Replace -89 with +
+    regex <- "^(.*$)" # Matches everything in string to end of line
+    x <- stringr::str_replace(x, regex, "Age \\1") # Preface string with "Age"
+    x
+}
+
+```
+
+Nothing wrong with that, but imagine we had a lot of variables that involved versions of these operations but they were often slightly different. And if our regexps got complex we'd always have to have the comment next to them to know for sure what they did. We could use `partial()` to address this.
+
+## Partial application of functions
+
+```{r}
+#| label: "partial-7"
+
+remove_open_paren <- partial(stringr::str_remove, pattern = "\\(")
+remove_open_bracket <- partial(stringr::str_remove, pattern = "\\[")
+remove_close_bracket <- partial(stringr::str_remove, pattern = "\\]")
+replace_comma_with_dash <- partial(stringr::str_replace, pattern = ",", replacement = "-")
+
+```
+
+We do this once. In the simplest case we put these declarations at the top of our Quarto file or R script, but more usefully we put them in e.g. `R/data-cleaners.R` or, if we do a lot of this we make a package that has these functions in them, consistently named and tested so we know each one works.
+
+## Partial application of functions
+
+So when we have, e.g.,
+
+```{r}
+#| echo: false
+#| eval: true
+
+df <- tribble(
+  ~ id, ~agegrp,
+1, "Interval (43,55]",
+2, "Interval (55,66]",
+3, "Interval (66,89]",
+4, "Interval (31,43]",
+5, "Interval (43,55]",
+6, "Interval (43,55]",
+7, "Interval (43,55]",
+8, "Interval [18,31]",
+9, "Interval (66,89]",
+10, "Interval (55,66]"
+)
+
+```
+
+```{r}
+#| label: "partial-8"
+
+df
+```
+
+## Partial application of functions
+
+We could do ...
+
+```{r}
+#| label: "partial-9"
+
+df |>
+ mutate(agegrp = remove_open_paren(agegrp),
+        agegrp = remove_open_bracket(agegrp),
+        agegrp = remove_close_bracket(agegrp),
+        agegrp = replace_comma_with_dash(agegrp))
+```
+
+## Partial application of functions
+
+Or, bundle them into other functions that chain them together as needed:
+
+```{r}
+clean_agegrp <- function(x){
+  x <- remove_open_paren(x)
+  x <- remove_open_bracket(x)
+  x <- remove_close_bracket(x)
+  x <- replace_comma_with_dash(x)
+  x
+}
+
+df |>
+ mutate(agegrp = clean_agegrp(agegrp)) |>
+ print(n = 3)
+```
+
+Breaking down a complex function into smaller pieces can make it easier to understand, test, and maintain. You can also reuse the smaller pieces in other contexts, and assemble the pieces into specific functions.
+
+## Partial application of functions
+
+Or even:
+
+```{r}
+clean_agegrp <- function(x){
+  remove_open_paren(x) |>
+  remove_open_bracket() |>
+  remove_close_bracket() |>
+  replace_comma_with_dash()
+}
+
+df |>
+ mutate(agegrp = clean_agegrp(agegrp)) |>
+ print(n = 3)
+```
+
+You can see how this code is easier to read.
+
 
 # More about factors
 
