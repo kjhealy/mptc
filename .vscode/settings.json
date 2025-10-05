@@ -18,5 +18,11 @@
         "titleBar.inactiveBackground": "#0c274c99",
         "titleBar.inactiveForeground": "#e7e7e799"
     },
+    {
+    "[r]": {
+        "editor.formatOnSave": true,
+        "editor.defaultFormatter": "Posit.air-vscode"
+    }
+}
     "peacock.color": "#0c274c"
 }
