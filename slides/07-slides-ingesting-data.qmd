@@ -562,15 +562,17 @@ library(stringr) # it's back!
 
 nchs |>
   select(!(c(data_as_of:end_date, year, month))) |>
-  pivot_longer(covid_19_deaths:pneumonia_influenza_or_covid_19_deaths,
-               names_to = "outcome",
-               values_to = "n") |>
-  mutate(outcome = str_to_sentence(outcome),
-         outcome = str_replace_all(outcome, "_", " "),
-         outcome = str_replace(outcome, "(C|c)ovid 19", "COVID-19"))
+  pivot_longer(
+    covid_19_deaths:pneumonia_influenza_or_covid_19_deaths,
+    names_to = "outcome",
+    values_to = "n") |>
+  mutate(
+    outcome = str_to_sentence(outcome),
+    outcome = str_replace_all(outcome, "_", " "),
+    outcome = str_replace(outcome, "(C|c)ovid 19", "COVID-19"))
 ```
 
-`r chunq_reveal("06-getting-data-in-31", smallcode=TRUE, lcolw="50", rcolw="50", title = "If we wanted to ...")`
+`r chunq_reveal("06-getting-data-in-31", smallcode=TRUE, lcolw="40", rcolw="60", title = "If we wanted to ...")`
 
 ## If we wanted to ...
 
@@ -1575,9 +1577,11 @@ levels(gss_sub$degree)
 ```{r}
 #| label: "06-getting-data-in-69"
 gss_sub |>
-  mutate(degree_na = fct_explicit_na(degree)) |>
+  mutate(degree_na = fct_na_value_to_level(degree)) |>
   count(degree_na)
 ```
+
+There's also `fct_na_level_to_value()` to go the other way.
 
 ## More on [factors]{.fg-yellow}
 
