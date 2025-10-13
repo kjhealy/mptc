@@ -15,15 +15,6 @@ contributes:
         - "partials/before-bib.tex"
       include-in-header:
         - "include-in-header.tex"
-
-      # # Document styling
-      # geometry:
-      #   - top=10pc     # 10p0
-      #   - bottom=10pc  # 10p0
-      #   - left=11pc    # 11p0
-      #   - right=11pc   # 11p0
-      #   - heightrounded
-
       # Citations and links
       colorlinks: true
       linkcolor: DarkSlateBlue

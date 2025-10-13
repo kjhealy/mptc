@@ -48,11 +48,12 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-dplyr.html"></iframe-->
+
+<iframe class="slide-deck" id="quartoframe" src="../slides/07-slides-ingesting-data.html"></iframe>
 ```
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_buttons("/slides/05-slides-r-dplyr")
+slide_buttons("/slides/05-slides-r-ingesting-data")
 ```
 
 

@@ -315,11 +315,13 @@ What is my purpose in life?
 ## Navigating the tree
 
 ```{zsh}
+# Change directory (move up one level)
+cd ..
+
+# Down into files directory and list files
 cd files
 ls
-cd ..
 ```
-
 
 ## Navigating the tree
 
@@ -426,17 +428,9 @@ Executable permissions are irrelevant here because it's a text file.
 #| echo: false
 
 ## The kind of thing you can do in principle ... just use <tree -d -L 2> at the console though
-find . -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
+find ../ -type d -maxdepth 2 -print 2>/dev/null | awk '!/\.$/ {for (i=1;i<NF-1;i++){printf("│   ")}print "├── "$NF}'  FS='/'
 ```
 
-## Changing directories
-
-```{zsh}
-## Change directory and list files
-cd files
-ls
-cd ../slides
-```
 
 # Some shell tools
 
@@ -457,7 +451,14 @@ unzip mptc_text_examples.zip
 ## What are we working with
 
 ```{zsh}
-ls files/examples/
+#| echo: false
+
+## Need to temporarily copy files in to slides/
+cp -r ../files .
+```
+
+```{zsh}
+ls files/examples
 ```
 
 - These files are in my course site project, so your file path will be different! It will be wherever you unzipped the files and the folder will be called `mptc_text_examples` if you got it via `curl`, or `mptc_text_examples_main` if you got it from GitHub.
@@ -616,8 +617,8 @@ Again in this case it doesn't quite behave as you might think!
 `find` is for locating files and directories by name:
 
 ```{zsh}
-# Everything in the `files/` subdirectory
-find files
+# Everything in the `files/examples/` subdirectory
+find files/examples
 ```
 
 
@@ -625,10 +626,10 @@ find files
 
 We can use _globbing_ (or _wildcards_) to narrow our search:
 
-```{zsh}
-# Everything underneath the `files/` subdirectory
+```{.zsh}
+# Everything under the files/bib directory
 # whose name ends in `.csl`
-find files -name "*.csl"
+find files/bib -name "*.csl"
 ```
 
 
@@ -649,7 +650,7 @@ find . -name "*.xlsx"
 - The quoted semicolon `";"` or `\;` is required to end the line
 
 ```{zsh}
-find files -name "*.png" -exec echo rm {} ";"
+find . -name "*.png" -exec echo rm {} ";"
 ```
 
 If we omitted the `echo` here the found files really would be deleted one at a time.
@@ -662,7 +663,7 @@ We can also use `xargs` to act on search results:
 ```{zsh}
 # Everything underneath the `files/` subdirectory
 # whose name ends in `.png`
-find files -name "*.png"
+find . -name "*.png"
 ```
 
 Convert all these `png` files to `jpg`:
@@ -670,7 +671,7 @@ Convert all these `png` files to `jpg`:
 ```{zsh}
 # Convert everything underneath the `files/` subdirectory
 # whose name ends in `.png` to `.jpg` format, keeping the original files.
-find files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
+find . -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
 ```
 
 ## `find`
@@ -678,14 +679,14 @@ find files -name '*.png' -print0 | xargs -0 -r mogrify -format jpg
 Check:
 
 ```{zsh}
-find files -name '*.png'
-find files -name '*.jpg'
+find . -name '*.png'
+find . -name '*.jpg'
 ```
 
 Delete them (with another method of deletion):
 
 ```{zsh}
-find files  -name '*.jpg' -type f -delete
+find .  -name '*.jpg' -type f -delete
 ```
 
 ## Perspective
@@ -711,53 +712,56 @@ Obviously you will not be doing this sort of thing every day of the week. But yo
 
 ## Naming files
 
-Find all files in or below the project directory that end in `.qmd`:
-
 ```{zsh}
-find . -name "*.qmd"
+#| echo: false
+
+# Get rid of tmp files folder
+rm -rf files/
 ```
 
-
-## Naming files
-
-Find all files in or below the current directory that start with two characters followed by `-example` and end with any other number of characters:
+Change to the slides directory; find files that end in `.qmd`:
 
 ```{zsh}
-find . -name "??-example*"
+cd ../slides
+find . -name "*.qmd"
 ```
 
 
 ## Sort order
 
-```{zsh}
+```{.zsh}
 mkdir tmp
 touch tmp/{1..15}.txt
 ```
 
-See how these sort:
+See how these sort
 
-```{zsh}
+```{.zsh}
 ls tmp/
+
+1.txt  10.txt 11.txt 12.txt 13.txt 14.txt 15.txt 2.txt  3.txt  4.txt  5.txt  6.txt  7.txt  8.txt  9.txt
 ```
 
 Not what we want.
 
 ## Sort order
 
-```{zsh}
+```{.zsh}
 rm -f tmp/*.txt
 touch tmp/{01..15}.txt
 ls tmp/
+
+01.txt 02.txt 03.txt 04.txt 05.txt 06.txt 07.txt 08.txt 09.txt 10.txt 11.txt 12.txt 13.txt 14.txt 15.txt
 ```
 
 ## Sort order
 
-```{zsh}
+Also try:
+
+```{.zsh}
 rm -f tmp/*.txt
 touch tmp/{a..d}{01..03}.txt
 ls -l tmp/
-rm -rf tmp/
-rm -rf ../tmp/
 ```
 
 In general keep your names lower-case.
