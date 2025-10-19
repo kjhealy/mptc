@@ -626,7 +626,9 @@ find files/examples
 
 We can use _globbing_ (or _wildcards_) to narrow our search:
 
-```{.zsh}
+```{zsh}
+#| eval: false
+
 # Everything under the files/bib directory
 # whose name ends in `.csl`
 find files/bib -name "*.csl"
@@ -729,14 +731,18 @@ find . -name "*.qmd"
 
 ## Sort order
 
-```{.zsh}
+```{zsh}
+#| eval: false
+
 mkdir tmp
 touch tmp/{1..15}.txt
 ```
 
 See how these sort
 
-```{.zsh}
+```{zsh}
+#| eval: false
+
 ls tmp/
 
 1.txt  10.txt 11.txt 12.txt 13.txt 14.txt 15.txt 2.txt  3.txt  4.txt  5.txt  6.txt  7.txt  8.txt  9.txt
@@ -746,7 +752,9 @@ Not what we want.
 
 ## Sort order
 
-```{.zsh}
+```{zsh}
+#| eval: false
+
 rm -f tmp/*.txt
 touch tmp/{01..15}.txt
 ls tmp/
@@ -758,7 +766,9 @@ ls tmp/
 
 Also try:
 
-```{.zsh}
+```{zsh}
+#| eval: false
+
 rm -f tmp/*.txt
 touch tmp/{a..d}{01..03}.txt
 ls -l tmp/
@@ -779,7 +789,9 @@ In general keep your names lower-case.
 - Be consistent in your use of naming conventions
 - No need to get too clever, but ...
 
-```{.zsh}
+```{zsh}
+#| eval: false
+
 data_clean/
 data_raw/
 docs/
