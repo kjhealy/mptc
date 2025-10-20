@@ -65,6 +65,9 @@ website:
               file: "content/06-content-dplyr-and-more.qmd"
             - text: "07: Getting Data in and out of R"
               file: "content/07-content-ingesting-data.qmd"
+            - text: "08: Version Control and Git"
+              file: "content/08-content-git.qmd"
+
 
     - title: "Assignments"
       contents:
@@ -106,6 +109,8 @@ website:
               file: example/05-example-dplyr.qmd
             - text: "06: More dplyr"
               file: example/06-example-dplyr-and-more.qmd
+            - text: "08: Git and GitHub"
+              file: example/08-example-git.qmd
 
 
   page-footer:

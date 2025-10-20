@@ -1,5 +1,5 @@
 ---
-title: "07. Getting data in and out of R"
+title: "08. Version Control and Git"
 date: last-modified
 date-format: full
 ---
@@ -15,24 +15,30 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-We'll learn about importing and cleaning your data.
+We'll learn about backing up your work and keeping the most important parts in a version control sytem.
 
-## Required Reading
+## Reading
 
-- @wickham23:_r_data_scien.
+-   @bryanHappyGit Read *and work through* as much of this book as you can, but at least Chapters 1, 4 through 9, 11, and 12.
 
-[Read the text online.](https://r4ds.hadley.nz/). Read or review [Chapter 7](https://r4ds.hadley.nz/data-import) on importing data. Read [Chapter 20](https://r4ds.hadley.nz/spreadsheets) on Spreadsheets. Read or review [Chapter 17](https://r4ds.hadley.nz/datetimes.html) on dates and times, which will help with the assignment.
+## Optional but Recommended
 
+-   @evansLearningGit2024
 
+-   @sylor-miller21:_oh_shit_git.
 
+## Optional
+
+-   @chacon14:_pro_git
+
+## Examples
+
+[This week's examples and demos](/example/08-example-git.qmd).
 
 ## Assignment
 
-[This week's assignment](/assignment/07-assignment-fars.qmd).
-
 ## Slides
 
-```{=html}
 <script type="application/javascript">
 
 function resizeIFrameToFitContent( iFrame ) {
@@ -49,9 +55,8 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 </script>
 
-<iframe class="slide-deck" id="quartoframe" src="../slides/07-slides-ingesting-data.html"></iframe>
-```
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/06-slides.html"></iframe-->
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-slide_buttons("/slides/07-slides-ingesting-data")
+#slide_win_button("/slides/08-slides")
 ```

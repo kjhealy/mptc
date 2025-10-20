@@ -1,0 +1,139 @@
+---
+title: "Example 06: Version Control and `git`"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+
+## Cloning a Repo
+
+`git clone` puts the repo in your current folder.
+
+```{.zsh}
+❯ cd Documents/data/
+❯ git clone https://github.com/kjhealy/covid-project.git
+Cloning into 'covid-project'...
+remote: Enumerating objects: 23, done.
+remote: Counting objects: 100% (23/23), done.
+remote: Compressing objects: 100% (15/15), done.
+remote: Total 23 (delta 8), reused 22 (delta 7), pack-reused 0 (from 0)
+Receiving objects: 100% (23/23), 577.21 KiB | 5.77 MiB/s, done.
+Resolving deltas: 100% (8/8), done.
+
+❯ cd covid-project/
+❯ ls                                                                                                                    
+README.md      covid.Rproj    covidcases.qmd data
+```
+
+
+Now you have access to the full history and any branches, etc:
+
+```{.zsh}
+❯ git log --oneline
+06677f4 (HEAD -> main, origin/main, origin/HEAD) Load the US data
+4a77b2f (origin/figtest) Fixed the plot
+912aed7 Checking ggplot code
+6df6d6b Began writeup
+ef07721 Data and Rproj files
+f43f6f1 Added covidcases
+```
+
+
+## Status
+
+Having just cloned the repo we are up to date:
+
+```{.zsh}
+❯ git status
+On branch main
+Your branch is up to date with 'origin/main'.
+
+nothing to commit, working tree clean
+```
+
+
+## What branches exist
+
+```{.zsh}
+❯ git branch -a
+* main
+  remotes/origin/HEAD -> origin/main
+  remotes/origin/figtest
+  remotes/origin/main
+```
+
+The `*` shows the local branch we're on. There are also remote branches, notably the `figtest` one.
+
+We can check out a branch with `checkout` or `co`. 
+
+```{.zsh}
+❯ git co figtest
+branch 'figtest' set up to track 'origin/figtest'.
+Switched to a new branch 'figtest'
+```
+
+And go back to `main`: 
+
+```{.zsh}
+❯ git co main
+Switched to branch 'main'
+Your branch is up to date with 'origin/main'.
+```
+
+## Front Ends or Clients
+
+You don't have to access git from the command line. You can do it from inside RStudio, for instance:
+
+![The RStudio Git Pane](../assets/04-git/04-git-rstudio.png)
+
+The RStudio git client is pretty rudimentary. There are others, such as [GitKraken](https://www.gitkraken.com/), which is free; [Tower](https://www.git-tower.com/mac), which is not; and GitHub's [GitHub Desktop](https://github.com/apps/desktop), which is aimed at using git with GitHub specifically. 
+
+
+## Create a Repo on GitHub and Push To it: The long way
+
+The steps are:
+
+### While logged in to GitHub, in your browser:
+1. Create a repository on GitHub from <https://github.com/new>
+2. Choose a name, e.g. `sample_repo`.
+3. Choose whether it's public or private.
+4. Don't add a README, a `.gitignore` file, or a license. 
+5. Click "Create repository"
+
+The next page you'll see in the browser contains instructions for what to do next at your Terminal. They are:
+
+### If you are creating a local repository from scratch
+1. Create your project folder either manually or with RStudio
+2. Initialize a git repository, again either manually with `git init` or by checking the box in RStudio to use git. 
+3. Add files with `git add` and commit them with `git commit`
+4. Make sure you're on the `main` branch with `git branch -M main`
+5. Make git aware of the GitHub repo with `git remote add origin https://github.com/kjhealy/sample_repo.git` (your username/repo name will vary!)
+6. Push to the remote: `git push -u origin main`
+
+
+### If you already have a local git repo and want to add it to GitHub
+1. Make sure the empty repo name on github is the same as your local one. 
+2. Add the remote to your local repo: `git remote add origin https://github.com/kjhealy/sample_repo.git`
+3. Make sure you're working on the `main` branch: `git branch -M main`
+4. Push to the remote: `git push -u origin main`
+
+
+
+## Creating and populating a GitHub Repo directly from the Terminal
+
+If you use [GitHub's CLI tool](https://cli.github.com) you can make this process easier. 
+
+The CLI tool is called `gh`. If you already have a local repo and want to create, e.g. a GitHub copy of it, even when you have no repo of that name on GitHub yet, then from inside your project folder, do 
+
+```{.zsh}
+❯ gh repo create --private --source . --push
+```
+
+Don't forget that `.`, it means "from here". You can change `--private` to `--public` if you want.
+
