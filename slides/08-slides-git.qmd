@@ -141,82 +141,25 @@ Brian Friel, _Translations_, Act III.
 
 ## Sidenote: a VCS is a DAG
 
-```{r}
-#| echo: false
-#| out-width: "100%"
-
-library(dagitty)
-library(ggdag)
-
-dag <- dagify(z ~ y, y ~ x, y ~ u, outcome = "z",
-              exposure = "y",
-              coords = list(x=c(x=1, u=1, y=5, z=7),
-                            y=c(x=1.5, u=0.5, y=1, z=1)))
-
-ggdag::ggdag(dag, layout = "circle") + ggdag::theme_dag_blank(plot.caption = ggplot2::element_text(hjust = 1)) + ggdag::geom_dag_node(color="#1C222F") + ggdag::geom_dag_text(color="white") +
-  ggplot2::ggtitle("A Directed Acyclic Graph where the arrows mean 'Causes'") +
-  ggplot2::labs(caption = "") +
-  ggplot2::theme(plot.background = ggplot2::element_rect(fill = "#F4F4F4"))
-```
+![A causal diagram as a directed acyclic graph](../assets/04-git/git-causal-dag.svg){width=65%}
 
 You are going to see a _lot_ of diagrams like this in papers, talks, and seminars you're required to take.
 
 ## Sidenote: a VCS is a DAG
 
-```{r}
-#| echo: false
-#| out-width: "100%"
-
-dag <- dagify(Final ~ Draft, Draft ~ LitRev, LitRev ~ Theory,
-              Theory ~ Outline, Draft ~ Analysis, Analysis ~ Data,
-              Data ~ Outline,
-              outcome = "Final",
-              exposure = "Outline",
-              coords = list(
-  x=c(Outline=1, Theory=3, LitRev=4, Data=3, Analysis=4, Draft=5, Final=6),
-  y=c(Outline=1, Theory=1.5, LitRev=1.5, Data=0.5, Analysis=0.5, Draft=1,Final=1)))
-
-
-ggdag::ggdag(dag, layout = "circle") +
-  ggdag::theme_dag_blank(plot.caption = ggplot2::element_text(hjust = 1)) +
-  ggdag::geom_dag_node(color="#1C222F", size = ggplot2::rel(20)) +
-  ggdag::geom_dag_text(color="white", size = ggplot2::rel(3.1)) +
-  ggplot2::ggtitle("A Paper as a Directed Acyclic Graph where the Arrows mean 'Leads to'") +
-  ggplot2::labs(caption = "") +
-  ggplot2::theme(plot.background = ggplot2::element_rect(fill = "#F4F4F4"))
-```
-
+![Causal history of an imaginary paper where the arrow means 'led to'](../assets/04-git/git-paper-example.svg){width=65%}
 
 ## Sidenote: a VCS is a DAG
 
-```{r}
-#| echo: false
-#| out-width: "100%"
+![Causal history of an imaginary paper where the arrow means 'depends on'](../assets/04-git/git-paper-example-reverse.svg){width=65%}
 
-dag <- dagitty("dag {
-  Outline <- Theory
-  Outline <- Data
-  Data <- Analysis
-  Theory <- LitRev
-  LitRev <- Draft
-  Analysis <- Draft
-  Draft <- Final
-               }")
+## Sidenote: a VCS is a DAG
 
-coordinates( dag ) <-  list(
-  x=c(Outline=1, Theory=3, LitRev=4, Data=3, Analysis=4, Draft=5, Final=6),
-  y=c(Outline=1, Theory=1.5, LitRev=1.5, Data=0.5, Analysis=0.5, Draft=1,Final=1) )
+![History of mostly linear changes to an imaginary project](../assets/04-git/git-linear-history.svg){width=65%}
 
-dag <- ggdag::tidy_dagitty(dag)
+## Which brings us to ...
 
-ggdag::ggdag(dag, layout = "circle") +
-  ggdag::theme_dag_blank(plot.caption = ggplot2::element_text(hjust = 1)) +
-  ggdag::geom_dag_node(color="#1C222F", size = ggplot2::rel(20)) +
-  ggdag::geom_dag_text(color="white", size = ggplot2::rel(3.1)) +
-  ggplot2::ggtitle("A Paper as a Directed Acyclic Graph where the Arrows mean 'Depends on'") +
-  ggplot2::labs(caption = "") +
-  ggplot2::theme(plot.background = ggplot2::element_rect(fill = "#F4F4F4"))
-```
+![A portion of the git log for the gssr package](../assets/04-git/git-gssr-history.png){width=65%}
 
 
 ## Git
