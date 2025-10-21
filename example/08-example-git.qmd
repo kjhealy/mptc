@@ -27,7 +27,7 @@ Receiving objects: 100% (23/23), 577.21 KiB | 5.77 MiB/s, done.
 Resolving deltas: 100% (8/8), done.
 
 ❯ cd covid-project/
-❯ ls                                                                                                                    
+❯ ls
 README.md      covid.Rproj    covidcases.qmd data
 ```
 
@@ -70,7 +70,7 @@ nothing to commit, working tree clean
 
 The `*` shows the local branch we're on. There are also remote branches, notably the `figtest` one.
 
-We can check out a branch with `checkout` or `co`. 
+We can check out a branch with `checkout` or `co`.
 
 ```{.zsh}
 ❯ git co figtest
@@ -78,7 +78,7 @@ branch 'figtest' set up to track 'origin/figtest'.
 Switched to a new branch 'figtest'
 ```
 
-And go back to `main`: 
+And go back to `main`:
 
 ```{.zsh}
 ❯ git co main
@@ -92,7 +92,7 @@ You don't have to access git from the command line. You can do it from inside RS
 
 ![The RStudio Git Pane](../assets/04-git/04-git-rstudio.png)
 
-The RStudio git client is pretty rudimentary. There are others, such as [GitKraken](https://www.gitkraken.com/), which is free; [Tower](https://www.git-tower.com/mac), which is not; and GitHub's [GitHub Desktop](https://github.com/apps/desktop), which is aimed at using git with GitHub specifically. 
+The RStudio git client is pretty rudimentary. There are others, such as [GitKraken](https://www.gitkraken.com/), which is free; [Tower](https://www.git-tower.com/mac), which is not; and GitHub's [GitHub Desktop](https://github.com/apps/desktop), which is aimed at using git with GitHub specifically.
 
 
 ## Create a Repo on GitHub and Push To it: The long way
@@ -103,14 +103,14 @@ The steps are:
 1. Create a repository on GitHub from <https://github.com/new>
 2. Choose a name, e.g. `sample_repo`.
 3. Choose whether it's public or private.
-4. Don't add a README, a `.gitignore` file, or a license. 
+4. Don't add a README, a `.gitignore` file, or a license.
 5. Click "Create repository"
 
 The next page you'll see in the browser contains instructions for what to do next at your Terminal. They are:
 
 ### If you are creating a local repository from scratch
 1. Create your project folder either manually or with RStudio
-2. Initialize a git repository, again either manually with `git init` or by checking the box in RStudio to use git. 
+2. Initialize a git repository, again either manually with `git init` or by checking the box in RStudio to use git.
 3. Add files with `git add` and commit them with `git commit`
 4. Make sure you're on the `main` branch with `git branch -M main`
 5. Make git aware of the GitHub repo with `git remote add origin https://github.com/kjhealy/sample_repo.git` (your username/repo name will vary!)
@@ -118,22 +118,72 @@ The next page you'll see in the browser contains instructions for what to do nex
 
 
 ### If you already have a local git repo and want to add it to GitHub
-1. Make sure the empty repo name on github is the same as your local one. 
+1. Make sure the empty repo name on github is the same as your local one.
 2. Add the remote to your local repo: `git remote add origin https://github.com/kjhealy/sample_repo.git`
 3. Make sure you're working on the `main` branch: `git branch -M main`
 4. Push to the remote: `git push -u origin main`
 
 
+Don't forget that `.`, it means "from here". You can change `--private` to `--public` if you want.
+
+## Creating and populating a GitHub Repo with `usethis`
+
+From inside R or RStudio, you want to make a new quarto project, say at `~/Desktop/mptc-project`. You also want to use git and push it to GitHub.
+
+From wherever you are in R, use either `create_project()` or `create_quarto_project()`:
+
+```{r}
+#| eval: false
+usethis::create_quarto_project("~/Desktop/my-project")
+
+✔ Creating /Users/kjhealy/Desktop/my-project/.
+✔ Setting active project to "/Users/kjhealy/Desktop/my-project".
+✔ Writing my-project.Rproj.
+✔ Adding ".Rproj.user" to .gitignore.
+Creating project at /Users/kjhealy/Desktop/my-project:
+  - Created _quarto.yml
+  - Created .gitignore
+  - Created my-project.qmd
+✔ Opening /Users/kjhealy/Desktop/my-project/ in a new session.
+✔ Setting active project to "<no active project>".
+
+```
+
+`usethis::create_quarto_project()` wraps `quarto::quarto_create_project()`, making some assumptions about what you want. In addition to setting up the project, it creates a `.gitignore` file but does not initialize a git repo..
+
+RStudio will open a new session in that folder. Switch to that session.
+
+Next, from inside that new RStudio session, at the R console, do
+
+```{r}
+#| eval: false
+
+usethis::use_git()
+
+# By default will create a public repo; set private = TRUE for a private one
+usethis::use_github(private = TRUE)
+```
+
+And you're done. Now you can add, commit and push files from either the RStudio git pane or the command line.
 
 ## Creating and populating a GitHub Repo directly from the Terminal
 
-If you use [GitHub's CLI tool](https://cli.github.com) you can make this process easier. 
+This can be done either directly with the `git` command---as shown at the top of this page---or, for the case of GitHub specifically, with their [GitHub's CLI tool](https://cli.github.com).
 
-The CLI tool is called `gh`. If you already have a local repo and want to create, e.g. a GitHub copy of it, even when you have no repo of that name on GitHub yet, then from inside your project folder, do 
+The CLI tool is called `gh`. If you already have a local repo and you want to create, e.g. a GitHub copy of it, even when you have no repo of that name on GitHub yet, then from a Terminal window inside your project folder, do
 
-```{.zsh}
-❯ gh repo create --private --source . --push
+```{zsh}
+#| eval: false
+
+gh repo create --private --source . --push
 ```
 
-Don't forget that `.`, it means "from here". You can change `--private` to `--public` if you want.
+This will take the current folder (`--source .`), create a private repo on GitHub with the same name, and push the current contents to it.
 
+## Forking and cloning someone else's repo
+
+You can manually fork a repo on GitHub by clicking the "Fork" button at the top right of the page when you're viewing the repo in your browser.
+
+Then clone your fork to your local machine with `git clone`, as shown at the top of this page, or with `gh` by writing `gh repo clone USERNAME/REPO`, replacing `USERNAME` and `REPO` with the appropriate values.
+
+If you are working in R, `usesthis` again has functions that streamline this proces. You use `usethis::create_from_github()`. See the documentation at <https://usethis.r-lib.org/reference/create_from_github.html>. Pay attention to the `repo_spec`, `destdir`, and `fork` arguments.

@@ -63,7 +63,7 @@ library(flipbookr)
 
 ## Not Nearly Good Enough
 
-These services are good for a lot of things, and some of them are a _like_ backups in _some_ ways, but they are also [not really backups]{.fg-red}.
+These services are good for a lot of things, and some of them are _like_ backups in _some_ ways, but they are also [not really backups]{.fg-red}.
 
 ::: {.large}
 
@@ -119,8 +119,7 @@ Brian Friel, _Translations_, Act III.
 :::::
 
 ::::: {.fragment fragment-index=2}
-- There's a long history of software that can keep track of how files in projects have changed, and who did things to which files.
-- A tool like this is called a [_Version Control System_]{.fg-lblue} or a [_Revision Control System_]{.fg-lblue}.
+- There's a long history of software that can keep track of how files in projects have changed, and who did things to which files. A tool like this is called a [_Version Control System_]{.fg-lblue} or a [_Revision Control System_]{.fg-lblue}.
 :::::
 
 
@@ -139,21 +138,21 @@ Brian Friel, _Translations_, Act III.
 - [Merge these offshoots and branches back into the main line of the project as needed.]{.fg-red}
 - Figure out when a change that breaks something later got introduced earlier.
 
-## Sidenote: a VCS is a DAG
+## A VCS is a DAG
 
 ![A causal diagram as a directed acyclic graph](../assets/04-git/git-causal-dag.svg){width=65%}
 
 You are going to see a _lot_ of diagrams like this in papers, talks, and seminars you're required to take.
 
-## Sidenote: a VCS is a DAG
+## A VCS is a DAG
 
 ![Causal history of an imaginary paper where the arrow means 'led to'](../assets/04-git/git-paper-example.svg){width=65%}
 
-## Sidenote: a VCS is a DAG
+## A VCS is a DAG
 
 ![Causal history of an imaginary paper where the arrow means 'depends on'](../assets/04-git/git-paper-example-reverse.svg){width=65%}
 
-## Sidenote: a VCS is a DAG
+## A VCS is a DAG
 
 ![History of mostly linear changes to an imaginary project](../assets/04-git/git-linear-history.svg){width=65%}
 
@@ -164,11 +163,17 @@ You are going to see a _lot_ of diagrams like this in papers, talks, and seminar
 
 ## Git
 
+:::: {.columns}
+::: {.column width="65%"}
 - **Git** is the industry-standard DVCS. There are others, but it's the main one.
 - It's very powerful.
 - It's used to run the software development projects of gigantic corporations that must coordinate huge projects with contributions by hundreds or thousands of developers.
 - It makes professionals and amateurs alike cry on the regular. But there are a bunch of cry-minimizing ways of using and interacting with it.
+:::
+::: {.column width="30%"}
 
+:::
+::::
 
 
 ## Git

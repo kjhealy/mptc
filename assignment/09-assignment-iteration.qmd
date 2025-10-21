@@ -1,0 +1,20 @@
+---
+title: "Problem Set for Week 06"
+date: "2025-10-24"
+---
+
+
+## Required
+
+Fork this repository on GitHub and then clone it to your local machine:
+
+<https://github.com/kjhealy/mptc-gss>
+
+Then install the packages as described in the `mpts-gss.qmd` file and make sure everything is working properly.
+
+## Optional
+
+Have a go at the following exercises in [Chapter 25](https://r4ds.hadley.nz/functions) of _R for Data Science_:
+
+- [25.2.5, Vector functions](https://r4ds.hadley.nz/functions#exercises)
+- [25.3.5, Data Frame functions](https://r4ds.hadley.nz/functions#exercises-1)

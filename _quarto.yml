@@ -67,6 +67,9 @@ website:
               file: "content/07-content-ingesting-data.qmd"
             - text: "08: Version Control and Git"
               file: "content/08-content-git.qmd"
+            - text: "09: Iterating on Data and Models"
+              file: "content/09-content-iteration.qmd"
+
 
 
     - title: "Assignments"
@@ -90,6 +93,8 @@ website:
               file: assignment/05-assignment-dplyr.qmd
             - text: "07: FARS data exercise"
               file: assignment/07-assignment-fars.qmd
+            - text: "09: Iterating on the GSS"
+              file: assignment/09-assignment-iteration.qmd
 
 
     - title: "Examples"
@@ -111,6 +116,8 @@ website:
               file: example/06-example-dplyr-and-more.qmd
             - text: "08: Git and GitHub"
               file: example/08-example-git.qmd
+            - text: "09: Iteration"
+              file: example/09-example-iteration.qmd
 
 
   page-footer:
