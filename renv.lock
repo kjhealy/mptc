@@ -449,6 +449,28 @@
       "Maintainer": "Kirill Müller <kirill@cynkra.com>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
     },
+    "bmp": {
+      "Package": "bmp",
+      "Version": "0.3.1",
+      "Source": "Repository",
+      "Maintainer": "Gregory Jefferis <jefferis@gmail.com>",
+      "License": "GPL (>= 2)",
+      "Title": "Read Windows Bitmap (BMP) Images",
+      "Authors@R": "c(person(given = \"Gregory\", family = \"Jefferis\", role = c(\"aut\", \"cre\"), email = \"jefferis@gmail.com\", comment = c(ORCID = \"0000-0002-0587-9355\")) )",
+      "Description": "Reads Windows BMP format images. Currently limited to 8 bit greyscale images and 24,32 bit (A)RGB images. Pure R implementation without external dependencies.",
+      "Suggests": [
+        "pixmap",
+        "testthat"
+      ],
+      "Collate": "'read-bmp.R'",
+      "RoxygenNote": "7.3.2",
+      "Encoding": "UTF-8",
+      "URL": "https://github.com/jefferis/bmp",
+      "BugReports": "https://github.com/jefferis/bmp/issues",
+      "NeedsCompilation": "no",
+      "Author": "Gregory Jefferis [aut, cre] (ORCID: <https://orcid.org/0000-0002-0587-9355>)",
+      "Repository": "CRAN"
+    },
     "broom": {
       "Package": "broom",
       "Version": "1.0.10",
@@ -1337,6 +1359,30 @@
       "Author": "Dirk Eddelbuettel [aut, cre] (<https://orcid.org/0000-0001-6419-907X>), Antoine Lucas [ctb], Jarek Tuszynski [ctb], Henrik Bengtsson [ctb] (<https://orcid.org/0000-0002-7579-5165>), Simon Urbanek [ctb] (<https://orcid.org/0000-0003-2297-1732>), Mario Frasca [ctb], Bryan Lewis [ctb], Murray Stokely [ctb], Hannes Muehleisen [ctb], Duncan Murdoch [ctb], Jim Hester [ctb], Wush Wu [ctb] (<https://orcid.org/0000-0001-5180-0567>), Qiang Kou [ctb] (<https://orcid.org/0000-0001-6786-5453>), Thierry Onkelinx [ctb] (<https://orcid.org/0000-0001-8804-4216>), Michel Lang [ctb] (<https://orcid.org/0000-0001-9754-0393>), Viliam Simko [ctb], Kurt Hornik [ctb] (<https://orcid.org/0000-0003-4198-9911>), Radford Neal [ctb] (<https://orcid.org/0000-0002-2473-3407>), Kendon Bell [ctb] (<https://orcid.org/0000-0002-9093-8312>), Matthew de Queljoe [ctb], Dmitry Selivanov [ctb], Ion Suruceanu [ctb], Bill Denney [ctb], Dirk Schumacher [ctb], András Svraka [ctb], Sergey Fedorov [ctb], Will Landau [ctb] (<https://orcid.org/0000-0003-1878-3253>), Floris Vanderhaeghe [ctb] (<https://orcid.org/0000-0002-6378-6229>), Kevin Tappe [ctb], Harris McGehee [ctb], Tim Mastny [ctb], Aaron Peikert [ctb] (<https://orcid.org/0000-0001-7813-818X>), Mark van der Loo [ctb] (<https://orcid.org/0000-0002-9807-4686>), Chris Muir [ctb] (<https://orcid.org/0000-0003-2555-3878>), Moritz Beller [ctb] (<https://orcid.org/0000-0003-4852-0526>), Sebastian Campbell [ctb], Winston Chang [ctb] (<https://orcid.org/0000-0002-1576-2126>), Dean Attali [ctb] (<https://orcid.org/0000-0002-5645-3493>), Michael Chirico [ctb] (<https://orcid.org/0000-0003-0787-087X>), Kevin Ushey [ctb]",
       "Maintainer": "Dirk Eddelbuettel <edd@debian.org>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
+    },
+    "downloader": {
+      "Package": "downloader",
+      "Version": "0.4.1",
+      "Source": "Repository",
+      "Maintainer": "Winston Chang <winston@stdout.org>",
+      "Authors@R": "person(given = \"Winston\", family = \"Chang\", role = c(\"aut\", \"cre\"), email = \"winston@stdout.org\")",
+      "License": "GPL-2",
+      "Title": "Download Files over HTTP and HTTPS",
+      "Description": "Provides a wrapper for the download.file function, making it possible to download files over HTTPS on Windows, Mac OS X, and other Unix-like platforms. The 'RCurl' package provides this functionality (and much more) but can be difficult to install because it must be compiled with external dependencies. This package has no external dependencies, so it is much easier to install.",
+      "URL": "https://github.com/wch/downloader",
+      "Imports": [
+        "utils",
+        "digest"
+      ],
+      "Suggests": [
+        "testthat"
+      ],
+      "BugReports": "https://github.com/wch/downloader/issues",
+      "RoxygenNote": "7.3.2",
+      "NeedsCompilation": "no",
+      "Author": "Winston Chang [aut, cre]",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "Encoding": "UTF-8"
     },
     "dplyr": {
       "Package": "dplyr",
@@ -2766,6 +2812,59 @@
       "Maintainer": "Kirill Müller <kirill@cynkra.com>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
     },
+    "imager": {
+      "Package": "imager",
+      "Version": "1.0.5",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Image Processing Library Based on 'CImg'",
+      "Authors@R": "c(person(\"Simon\",\"Barthelme\",email=\"simon.barthelme@gipsa-lab.fr\",role=c(\"aut\")), person(\"David\",\"Tschumperle\",role=c(\"ctb\")), person(\"Jan\",\"Wijffels\",role=c(\"ctb\")), person(\"Haz Edine\",\"Assemlal\",role=c(\"ctb\")), person(\"Shota\",\"Ochi\",email=\"shotaochi1990@gmail.com\",role=c(\"ctb\")), person(\"Aaron\",\"Robotham\",email=\"aaron.robotham@uwa.edu.au\",role=c(\"cre\")), person(\"Rodrigo\",\"Tobar\",role=c(\"ctb\")))",
+      "Description": "Fast image processing for images in up to 4 dimensions (two spatial dimensions, one time/depth dimension, one colour dimension). Provides most traditional image processing tools (filtering, morphology, transformations, etc.) as well as various functions for easily analysing image data using R. The package wraps 'CImg', <http://cimg.eu>, a simple, modern C++ library for image processing.",
+      "License": "LGPL-3",
+      "Imports": [
+        "Rcpp (>= 1.0.0)",
+        "methods",
+        "stringr",
+        "png",
+        "jpeg",
+        "readbitmap",
+        "grDevices",
+        "purrr",
+        "downloader",
+        "igraph"
+      ],
+      "Depends": [
+        "R (>= 4.0.0)",
+        "magrittr"
+      ],
+      "URL": "https://asgr.github.io/imager/, https://github.com/asgr/imager/",
+      "BugReports": "https://github.com/asgr/imager/issues",
+      "SystemRequirements": "fftw3, libtiff, X11",
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "LazyData": "true",
+      "RoxygenNote": "7.3.2",
+      "Suggests": [
+        "Cairo",
+        "dplyr",
+        "ggplot2",
+        "knitr",
+        "magick",
+        "raster",
+        "rmarkdown",
+        "scales",
+        "testthat",
+        "spatstat.geom",
+        "webp"
+      ],
+      "VignetteBuilder": "knitr",
+      "Encoding": "UTF-8",
+      "NeedsCompilation": "yes",
+      "Author": "Simon Barthelme [aut], David Tschumperle [ctb], Jan Wijffels [ctb], Haz Edine Assemlal [ctb], Shota Ochi [ctb], Aaron Robotham [cre], Rodrigo Tobar [ctb]",
+      "Maintainer": "Aaron Robotham <aaron.robotham@uwa.edu.au>",
+      "Repository": "CRAN"
+    },
     "ini": {
       "Package": "ini",
       "Version": "0.3.1",
@@ -3545,6 +3644,35 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
     },
+    "myriad": {
+      "Package": "myriad",
+      "Version": "0.9.0.9000",
+      "Source": "GitHub",
+      "Title": "Myriad Pro themes for ggplot",
+      "Author": "Kieran Healy",
+      "Maintainer": "Kieran Healy <kjhealy@gmail.com>",
+      "Description": "Myriad Pro themes for ggplot.",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
+      "Imports": [
+        "dplyr",
+        "ggplot2",
+        "purrr",
+        "systemfonts",
+        "sysfonts"
+      ],
+      "License": "MIT License",
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "RoxygenNote": "7.3.3",
+      "RemoteType": "github",
+      "RemoteUsername": "kjhealy",
+      "RemoteRepo": "myriad",
+      "RemoteRef": "main",
+      "RemoteSha": "72b62b0a5482dfdf96223e48975892ce54f5b29c",
+      "RemoteHost": "api.github.com"
+    },
     "namer": {
       "Package": "namer",
       "Version": "0.1.9",
@@ -4186,6 +4314,34 @@
       "Author": "Hadley Wickham [trl, cre, cph], RStudio [cph], Sridhar Ratnakumar [aut], Trent Mick [aut], ActiveState [cph] (R/appdir.r, R/cache.r, R/data.r, R/log.r translated from appdirs), Eddy Petrisor [ctb], Trevor Davis [trl, aut], Gabor Csardi [ctb], Gregory Jefferis [ctb]",
       "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
+    },
+    "readbitmap": {
+      "Package": "readbitmap",
+      "Version": "0.1.5",
+      "Source": "Repository",
+      "License": "GPL (>= 2)",
+      "Title": "Simple Unified Interface to Read Bitmap Images (BMP,JPEG,PNG,TIFF)",
+      "Authors@R": "c( person(\"Gregory\",\"Jefferis\", email=\"jefferis@gmail.com\",  role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-0587-9355\")), person(\"Derek\", \"Ogle\", role = c(\"ctb\")), person(\"Simon\", \"Barthelme\", role = c(\"ctb\")) )",
+      "Description": "Identifies and reads Windows BMP, JPEG, PNG, and TIFF format bitmap images. Identification defaults to the use of the magic number embedded in the file rather than the file extension. Reading of JPEG and PNG image depends on libjpg and libpng libraries. See file INSTALL for details if necessary.",
+      "URL": "https://github.com/jefferis/readbitmap",
+      "BugReports": "https://github.com/jefferis/readbitmap/issues",
+      "SystemRequirements": "libjpeg, libpng",
+      "Imports": [
+        "bmp",
+        "jpeg",
+        "png",
+        "tiff"
+      ],
+      "Suggests": [
+        "pixmap",
+        "testthat"
+      ],
+      "RoxygenNote": "6.0.1",
+      "NeedsCompilation": "no",
+      "Author": "Gregory Jefferis [aut, cre] (<https://orcid.org/0000-0002-0587-9355>), Derek Ogle [ctb], Simon Barthelme [ctb]",
+      "Maintainer": "Gregory Jefferis <jefferis@gmail.com>",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "Encoding": "UTF-8"
     },
     "readr": {
       "Package": "readr",
@@ -5755,6 +5911,24 @@
       "Author": "Hadley Wickham [aut, cre], RStudio [cph, fnd]",
       "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
       "Repository": "https://packagemanager.posit.co/cran/latest"
+    },
+    "tiff": {
+      "Package": "tiff",
+      "Version": "0.1-12",
+      "Source": "Repository",
+      "Title": "Read and Write TIFF Images",
+      "Author": "Simon Urbanek <Simon.Urbanek@r-project.org> [aut, cre], Kent Johnson <kjohnson@akoyabio.com> [ctb]",
+      "Maintainer": "Simon Urbanek <Simon.Urbanek@r-project.org>",
+      "Depends": [
+        "R (>= 2.9.0)"
+      ],
+      "Description": "Functions to read, write and display bitmap images stored in the TIFF format. It can read and write both files and in-memory raw vectors, including native image representation.",
+      "License": "GPL-2 | GPL-3",
+      "SystemRequirements": "tiff and jpeg libraries",
+      "URL": "https://www.rforge.net/tiff/",
+      "NeedsCompilation": "yes",
+      "Repository": "https://packagemanager.posit.co/cran/latest",
+      "Encoding": "UTF-8"
     },
     "timechange": {
       "Package": "timechange",

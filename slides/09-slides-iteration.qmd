@@ -87,10 +87,11 @@ We often find ourselves in this situation. We know each file has the same struct
 
 How to read them all in?
 
-One traditional way, which we could do in R, is to write an explicit _loop_ that iterated over a vector of filenames, read each file, and then joined the results together in a tall rectangle.
+One traditional way, which we could do in R, is to write an explicit _loop_ that iterated over a vector of filenames, read each file, and then stack the results all together in a tall rectangle.
 
 ```r
-# Pseudocode
+## Pseudocode (i.e. will not really run)
+## Also, if you do write loops, do not use them to grow dataframes in this way.
 
 filenames <- c("01_79_congress.csv", "02_80_congress.csv", "03_81_congress.csv",
                 "04_82_congress.csv" [etc etc])
@@ -107,11 +108,9 @@ for(i in 1:length(filenames)) {
 
 ## Loops?
 
-::: {.incremental}
 - You may have noticed we have not written any loops, however.
 - While loops are still lurking there underneath the surface, what we will do instead is to take advantage of the combination of vectors and functions and _map_ one to the other in order to generate results.
 - Speaking loosely, think of [**`map()`**]{.fg-green} as a way of [iterating]{.fg-orange} without writing loops. You start with a vector of things. You feed it one thing at a time to some function. The function does whatever it does. You get back output that is the same length as your input, and of a specific type.
-:::
 
 
 ## Mapping is just a kind of iteration
@@ -464,13 +463,46 @@ out_conf |>
 - [Observation level]{.fg-orange}: [`augment()`]{.fg-green}
 - [Model level]{.fg-pink}: [`glance()`]{.fg-green}
 
+## Model output
+
+```r
+> summary(out)
+```
+
+```text
+Call:
+lm(formula = lifeExp ~ gdpPercap + log(pop) + continent, data = gapminder)
+
+Residuals:
+    Min      1Q  Median      3Q     Max
+-47.490  -4.614   0.250   5.293  26.094
+```
+
+```text
+Coefficients:
+                   Estimate Std. Error t value Pr(>|t|)
+(Intercept)       3.816e+01  2.050e+00  18.618  < 2e-16 ***
+gdpPercap         4.557e-04  2.345e-05  19.435  < 2e-16 ***
+log(pop)          6.394e-01  1.329e-01   4.810 1.64e-06 ***
+continentAmericas 1.308e+01  6.063e-01  21.579  < 2e-16 ***
+continentAsia     7.784e+00  5.810e-01  13.398  < 2e-16 ***
+continentEurope   1.695e+01  6.350e-01  26.691  < 2e-16 ***
+continentOceania  1.764e+01  1.779e+00   9.916  < 2e-16 ***
+---
+Signif. codes:  0 ‘***’ 0.001 ‘**’ 0.01 ‘*’ 0.05 ‘.’ 0.1 ‘ ’ 1
+
+Residual standard error: 8.336 on 1697 degrees of freedom
+Multiple R-squared:  0.585,	Adjusted R-squared:  0.5835
+F-statistic: 398.7 on 6 and 1697 DF,  p-value: < 2.2e-16
+```
 
 ## [Component]{.fg-lblue} level
 
-```text
-
+```r
 > summary(out)
+```
 
+```text
 Call:
 lm(formula = lifeExp ~ gdpPercap + log(pop) + continent, data = gapminder)
 
@@ -499,12 +531,21 @@ Multiple R-squared:  0.585,	Adjusted R-squared:  0.5835
 F-statistic: 398.7 on 6 and 1697 DF,  p-value: < 2.2e-16
 ```
 
+## [Component]{.fg-lblue} level
+
+```{r}
+#| label: "r 07-[Iterating]{.fg-green}-9again"
+tidy(out)
+```
+
+
 ## [Observation]{.fg-orange} level
 
-```text
-
+```r
 > summary(out)
+```
 
+```text
 Call:
 lm(formula = lifeExp ~ gdpPercap + log(pop) + continent, data = gapminder)
 ```
@@ -592,10 +633,11 @@ p_out
 
 ## [Model]{.fg-pink} level
 
-```text
-
+```r
 > summary(out)
+```
 
+```text
 Call:
 lm(formula = lifeExp ~ gdpPercap + log(pop) + continent, data = gapminder)
 
@@ -638,6 +680,18 @@ The usefulness of [`glance()`]{.fg-green} becomes clearer when dealing with ense
 
 ## Grouped analysis and [list columns]{.fg-orange}
 
+European countries in 1977:
+
+```{r}
+#| label: "r-07-eu"
+gapminder |>
+    filter(continent == "Europe", year == 1977)
+```
+
+Let's fit a simple model predicting life expectancy from GDP per capita for just these countries.
+
+## Grouped analysis and [list columns]{.fg-orange}
+
 ```{r}
 #| label: "r 07-[Iterating]{.fg-green}-20"
 eu77 <- gapminder |> filter(continent == "Europe", year == 1977)
@@ -650,6 +704,8 @@ fit <- lm(lifeExp ~ log(gdpPercap), data = eu77)
 
 summary(fit)
 ```
+
+What if we want to do this for every continent in every year?
 
 ## Grouped analysis and [list columns]{.fg-orange}
 
@@ -768,7 +824,7 @@ mw_pca
 
 ## PCA Helper function
 
-We could do this anonymously too.
+We could do this anonymously, with a lambda function, too.
 
 ```{r}
 do_pca <- function(df){
@@ -788,7 +844,7 @@ out_pca <- mw_pca |>
 out_pca
 ```
 
-## Tidier view
+## Tidier view, whole dataset
 
 ```{r}
 tidy_pca <- tidy(out_pca, matrix = "pcs")
@@ -846,6 +902,8 @@ mw_pca |>
 ## Tidy it
 
 ```{r}
+# broom has methods for different models, including prcomp, and they take
+# arguments specific to those models. Here we want the principal components.
 do_tidy <- function(pr){
     broom::tidy(pr, matrix = "pcs")
 }
@@ -935,6 +993,8 @@ out
 ```{r}
 #| echo: false
 #| message: false
+#| fig-width: 12
+#| fig-height: 7
 
 ggplot(data = out, aes(x = .fittedPC1,
                y = .fittedPC2,
