@@ -307,6 +307,14 @@ $presentation-h6-font-size: $presentation-font-size-root * 0.8;
   font-size: inherit;
 }
 
+// This handles cases where code is not in a .cell-output div but is in a chunk
+// like ```text
+.reveal pre code {
+  color: $my-dark-text;
+  background-color: $chunk-background;
+}
+
+
 // Table output from code cells
 
 .cell-output-display table {
