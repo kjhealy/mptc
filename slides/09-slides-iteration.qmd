@@ -1,5 +1,5 @@
 ---
-title: "Iterating on Data and Models"
+title: "Iterating on<br />Data and Models"
 subtitle: "Modern Plain Text Social Science<br />Week 09"
 format: kjhslides-revealjs
 engine: knitr
@@ -110,7 +110,7 @@ for(i in 1:length(filenames)) {
 
 - You may have noticed we have not written any loops, however.
 - While loops are still lurking there underneath the surface, what we will do instead is to take advantage of the combination of vectors and functions and _map_ one to the other in order to generate results.
-- Speaking loosely, think of [**`map()`**]{.fg-green} as a way of [iterating]{.fg-orange} without writing loops. You start with a vector of things. You feed it one thing at a time to some function. The function does whatever it does. You get back output that is the same length as your input, and of a specific type.
+- Speaking loosely, think of [**`map()`**]{.fg-green} as a way of [iterating]{.fg-orange} without explicitly writing loops. You start with a vector of things. You feed it one thing at a time to some function. The function does whatever it does. You get back output that is the same length as your input, and of a specific type.
 
 
 ## Mapping is just a kind of iteration
@@ -189,11 +189,20 @@ add_b(x = c(1, 99, 1000))
 
 ## [Iterating]{.fg-green} in a pipeline
 
-Some operations can't directly be vectorized in this way, which is why we need to manually iterate, or will want to write loops.
+Some operations can't directly be vectorized in this way, which is why we need to manually iterate, which will make us want to write loops.
+
+```{r}
+library(gapminder)
+
+# Not what we want in this case
+gapminder |> n_distinct()
+```
+
+When you find yourself saying "No, I meant *for each* ..."
 
 ```{r }
 #| label: "07-iterating-on-data-10"
-library(gapminder)
+
 gapminder |>
   summarize(country_n = n_distinct(country),
             continent_n = n_distinct(continent),
@@ -202,7 +211,7 @@ gapminder |>
             population_n = n_distinct(population))
 ```
 
-That's tedious to write! Computers are supposed to allow us to avoid that sort of thing.
+That's tedious to write! Computers are meant to let us avoid this sort of thing.
 
 ## [Iterating]{.fg-green} in a pipeline
 
@@ -232,6 +241,8 @@ You'd use [**across()**]{.fg-green}, like this:
 gapminder |>
   summarize(across(everything(), n_distinct))
 ```
+
+In this context, the function is applied across the specified columns and you're always getting a tibble back.
 
 ## [Iterating]{.fg-green} in a pipeline
 
@@ -295,7 +306,7 @@ result[[2]]
 
 ## [Iterating]{.fg-green} in a pipeline
 
-But we know [**`n_distinct()`**]{.fg-green} should always return an integer. So we use [**`map_int()`**]{.fg-green} instead of the generic [**`map()`**]{.fg-green}.
+But we know [**`n_distinct()`**]{.fg-green} should always return an integer. We just want a vector of integers back, not a list of them. So we use [**`map_int()`**]{.fg-green} instead of the generic [**`map()`**]{.fg-green}.
 
 
 ```{r }
@@ -304,9 +315,7 @@ gapminder |>
   map_int(n_distinct)
 ```
 
-::::: {.fragment fragment-index=1}
-The thing about the [**`map()`**]{.fg-green} family is that they can deal with all kinds of input types and output types.
-:::::
+The [**`map()`**]{.fg-green} family can deal with all kinds of input types and output types. We choose some specific variant of `map` based on two things: what (and how many) things we are feeding the function we're mapping, and what type of thing it should return.
 
 
 
@@ -449,21 +458,26 @@ out_conf |>
 
 ## Three ways to tidy
 
+::: {.large}
 - [Component level]{.fg-lblue}: [`tidy()`]{.fg-green}
-
+:::
 
 ## Three ways to tidy
 
+::: {.large}
 - [Component level]{.fg-lblue}: [`tidy()`]{.fg-green}
 - [Observation level]{.fg-orange}: [`augment()`]{.fg-green}
+:::
 
 ## Three ways to tidy
 
+::: {.large}
 - [Component level]{.fg-lblue}: [`tidy()`]{.fg-green}
 - [Observation level]{.fg-orange}: [`augment()`]{.fg-green}
 - [Model level]{.fg-pink}: [`glance()`]{.fg-green}
+:::
 
-## Model output
+## Model output again
 
 ```r
 > summary(out)
@@ -741,7 +755,7 @@ old_digits <- getOption("digits")
 options(digits = 3)
 ```
 
-Here we [**`map()`**]{.fg-green} a custom function to every row in the `data` column. Much more on this later.
+Here we [**`map()`**]{.fg-green} a custom function to every row in the `data` column.
 
 ```{r}
 #| label: "r 07-[Iterating]{.fg-green}-25"

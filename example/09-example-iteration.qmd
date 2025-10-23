@@ -89,6 +89,8 @@ my_adder(1:10, "c")
 
 ### Long Tall Sally
 
+We can treat a grayscale image as a matrix of pixel values. Each pixel has a brightness value between 0 (black) and 1 (white). An 800x600 pixel image can be represented as a matrix with 600 rows and 800 columns, where each entry in the matrix is the brightness value of the corresponding pixel.
+
 ```{r}
 # install.packages("imager")
 
