@@ -245,7 +245,7 @@ list(
   tar_target(deploy_site, {
     # Force dependencies
     site_ready <- site
-    pdfs_ready <- quarto_pdfs
+    #pdfs_ready <- quarto_pdfs
 
     # Run the deploy script if both deploy conditions are met
     # deploy_username and deploy_site are set in _variables.yml
