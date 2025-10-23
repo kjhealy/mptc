@@ -817,6 +817,134 @@ out_tidy |>
     sample_n(5)
 ```
 
+
+# Join us now for the <br />![](../assets/08-iterate/kh-popup.png){width=100px style="vertical-align: middle;"} Crossover Event ![](../assets/08-iterate/sv-popup.png){width=100px style="vertical-align: middle;"}<br /> of the Year
+
+## Bootstrapped ATT estimates
+
+```{r}
+library(WeightIt)
+library(MatchIt)
+data("lalonde", package = "MatchIt")
+lalonde
+```
+
+I heard you were working on these in Steve's class.
+
+## Bootstrapped ATT estimates
+
+```{r}
+n_replicates <- 1e3
+set.seed(22102026)
+
+m_orig <- matchit(treat ~ age + educ + race + married + nodegree + re74 + re75,
+    data = lalonde, method = "nearest",
+    estimand = "ATT")
+
+dr_orig <- lm(re78 ~ treat + age + educ + race + married + nodegree + re74 + re75,
+    data = lalonde, weights = m_orig$weights)
+
+dr_tidy <- tidy(dr_orig) |>
+    filter(term == "treat")
+dr_tidy
+```
+
+## Bootstrapped ATT estimates
+
+Tidily bootstrap our estimates.
+
+```{r}
+## Keep everything, do the matching and weighting inside the boot
+boot_out <- tibble(boot_id = 1:n_replicates) |>
+  mutate(
+    boot_data = map(boot_id, \(x) slice_sample(lalonde, #<<
+                                               n = nrow(lalonde),
+                                               replace = TRUE)),
+    match_obj = map(boot_data, \(bd) {  #<<
+      matchit(treat ~ age + educ + race + married + nodegree + re74 + re75,
+              data = bd,
+              method = "nearest",
+              estimand = "ATT")
+      }),
+    model = map2(boot_data, match_obj, \(bd, mo) { #<<
+      lm(re78 ~ treat + age + educ + race + married + nodegree + re74 + re75,
+         data = bd,
+         weights = mo$weights)
+      }),
+    coefs = map(model, tidy) #<<
+  )
+
+```
+
+Four `map()` calls including one to `map2()`. We could separately write named functions for the steps inside the mapping calls, but we use lambdas instead and write them on the fly.
+
+## Bootstrapped ATT estimates
+
+What we get:
+
+```{r}
+boot_out
+```
+
+## Bootstrapped ATT estimates
+
+Unnest the coefs column:
+
+```{r}
+boot_out |>
+  unnest(coefs)
+```
+
+## Bootstrapped ATT estimates
+
+```{r}
+# Simplest way to calculate bootstrap ci's; could get
+# much fancier using boot() or any number of other fns for the
+# bootstrap stage
+boot_tbl <- boot_out |>
+  unnest(coefs) |>
+  filter(term == "treat") |>
+  summarize(
+    boot_att = mean(estimate),
+    boot_se = sd(estimate),
+    boot_ci_lower = quantile(estimate, 0.025),
+    boot_ci_upper = quantile(estimate, 0.975)
+  )
+
+tinytable::tt(boot_tbl, digits = 3)
+```
+
+## Bootstrapped ATT estimates
+
+```{r}
+#| fig-cap: Distribution of Treatment Estimates
+#| fig-width: 8
+#| fig-height: 6
+#| output-location: slide
+
+tmp_tbl <- boot_tbl |>
+  mutate(y = 0.1)
+
+boot_out |>
+  unnest(coefs) |>
+  select(boot_id, term, estimate) |>
+  filter(term == "treat") |>
+  ggplot(mapping = aes(x = estimate, y = after_stat(scaled),
+        color = term, fill = term)) +
+  geom_vline(xintercept = 0, color = "gray30") +
+  geom_density(alpha = 0.5) +
+  geom_pointrange(data = tmp_tbl,
+    mapping = aes(x = boot_att, y = y, xmin = boot_ci_lower,
+        xmax = boot_ci_upper),
+    color = "gray20", size = rel(0.7), linewidth = rel(0.9),
+    inherit.aes = FALSE) +
+  labs(title = "Distribution of Bootstrapped Treatment Estimates",
+       subtitle = "Pointrange shows point estimate and 95% quantile range.",
+       x = "Bootstrap Estimate", y = "Scaled Density") +
+  guides(color = "none", fill = "none")
+```
+
+
 # Midwest PCA Example
 
 ## Midwest data
