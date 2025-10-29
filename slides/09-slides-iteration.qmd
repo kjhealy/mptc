@@ -14,6 +14,20 @@ date: last-modified
 ---
 
 
+```{r}
+#| label: setup
+#| include: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(flipbookr)
+```
+
+
 # [Iterating]{.fg-green} on data with [purrr]{.fg-yellow}
 
 ## Load the packages, as always
@@ -43,9 +57,12 @@ library(tidyverse) # your friend and mine
 
 ## The Core Idea
 
+
+::: {.large}
 - [Split]{.fg-lblue} or group the data into pieces
-- [Apply]{.fg-red} a function, i.e. act on the data in some way
+- [Apply]{.fg-red} a function, i.e. act on the data
 - [Combine]{.fg-green} the results back into a table
+:::
 
 ::::: {.fragment fragment-index=2}
 Sometimes we start out in a "split" state, as when we have multiple data files, and we need to read them in and then combine them.
@@ -92,7 +109,6 @@ One traditional way, which we could do in R, is to write an explicit _loop_ that
 ```r
 ## Pseudocode (i.e. will not really run)
 ## Also, if you do write loops, do not use them to grow dataframes in this way.
-
 filenames <- c("01_79_congress.csv", "02_80_congress.csv", "03_81_congress.csv",
                 "04_82_congress.csv" [etc etc])
 
@@ -102,22 +118,25 @@ for(i in 1:length(filenames)) {
       new_file <- read_file(filenames[i])
       collected_files <- append_to(collected_files, new_files)
 }
-
-
 ```
+
+A `for` loop initializes a counter and goes around and around, doing the thing and incrementing the counter until reaching a defined max value. A `while` loop keeps going until some condition is met.
+
 
 ## Loops?
 
 - You may have noticed we have not written any loops, however.
-- While loops are still lurking there underneath the surface, what we will do instead is to take advantage of the combination of vectors and functions and _map_ one to the other in order to generate results.
+- While loops are still lurking there underneath the surface, what we will do instead is to take advantage of the combination of functions and vectors (or tables) and apply or _map_ one to the other in order to generate results.
 - Speaking loosely, think of [**`map()`**]{.fg-green} as a way of [iterating]{.fg-orange} without explicitly writing loops. You start with a vector of things. You feed it one thing at a time to some function. The function does whatever it does. You get back output that is the same length as your input, and of a specific type.
-
+- The reason we do this is that it leads to code we can pipeline as a sequence of function calls.
 
 ## Mapping is just a kind of iteration
 
 ::: {.incremental}
 - The `purrr` package provides a big family of mapping functions. One reason there are a lot of them is that `purrr`, like the rest of the tidyverse, is picky about data types.
-- So in addition to the basic [**`map()`**]{.fg-green}, which always returns a _list_, we also have [**`map_chr()`**]{.fg-green}, [**`map_int()`**]{.fg-green}, [**`map_dbl()`**]{.fg-green}, [**`map_lgl()`**]{.fg-green} and others. They always return the data type indicated by their suffix, or die trying.
+- So in addition to the basic [**`map()`**]{.fg-green}, which always returns a _list_, we also have [**`map_chr()`**]{.fg-green}, [**`map_int()`**]{.fg-green}, [**`map_dbl()`**]{.fg-green}, [**`map_lgl()`**]{.fg-green} and others.
+- There are also variants for mapping over multiple inputs at once, like [**`map2()`**]{.fg-green}, for when we are passing two arugments to some function, and [**`pmap()`**]{.fg-green}, when we want to pass a list of any number of arguments.
+- The first part of the name tells you how many arguments are passing (1, 2, many). The part after the underscore tells you what type of output to expect. If there's no suffix, you get a list back. These functions return their promised type or die trying.
 :::
 
 ## Vectorized arithmetic again
@@ -136,7 +155,7 @@ a + b
 ```
 
 ::::: {.fragment fragment-index=1}
-R's vectorized rules add `b` to every element of `a`. In a sense, the [**`+`**]{.fg-green} operation can be thought of as a function that takes each element of `a` and does something with it. In this case "add `b`".
+R's vectorized rules add `b` to every element of `a`. The [**`+`**]{.fg-green} operation can be thought of as a function that takes each element of `a` and does something with it. In this case "add `b`". This is already a kind of iteration, in the sense that the operation recycles `b` down the vector `a` (unless they are the same length).
 :::::
 
 
@@ -147,8 +166,8 @@ We can make this explicit by writing a function:
 ```{r }
 #| label: "07-iterating-on-data-6"
 add_b <- function(x) {
-  b <- 1
-  x + b # for any x
+  b <- 1 # fixed
+  x + b  # for any valid x
 }
 ```
 
@@ -215,7 +234,7 @@ That's tedious to write! Computers are meant to let us avoid this sort of thing.
 
 ## [Iterating]{.fg-green} in a pipeline
 
-So how would we iterate this? What we want is to apply the [**`n_distinct()`**]{.fg-green} function to each column of `gapminder`, but in a way that still allows us to use pipelines and so on.
+So how would we iterate this? What we want is to apply the [**`n_distinct()`**]{.fg-green} function to each column of `gapminder`, but in a way that still allows us to use pipelines and so on. Here we leave out the names so we can see that the result is literally the same function being applied to each column.
 
 ```{r }
 #| label: "07-iterating-on-data-11"
@@ -234,7 +253,7 @@ Using [**`n_distinct()`**]{.fg-green} in this context is an idea I got from Rebe
 
 ## [Iterating]{.fg-green} in a pipeline
 
-You'd use [**across()**]{.fg-green}, like this:
+In reality you'd use [**across()**]{.fg-green}, like this:
 
 ```{r }
 #| label: "07-iterating-on-data-12"
@@ -242,7 +261,7 @@ gapminder |>
   summarize(across(everything(), n_distinct))
 ```
 
-In this context, the function is applied across the specified columns and you're always getting a tibble back.
+In this context, the function is applied across the specified columns; you're always getting a tibble back; and the names are taken care of automatically.
 
 ## [Iterating]{.fg-green} in a pipeline
 
@@ -391,38 +410,22 @@ out <- lm(formula = lifeExp ~ gdpPercap + log(pop) + continent,
 
 ## Tidy regression output with [broom]{.fg-yellow}
 
-We can't _do_ anything with this, programatically.
-
 ```{r}
 #| label: "r 07-[Iterating]{.fg-green}-3"
 summary(out)
 ```
 
+We can't do anything with this output, programatically. A summary like this is essentially a *printout*, once again a legacy of the teletype.
+
 # [Look inside]{.fg-lblue} [the box]{.fg-yellow}
-
-
-## Objects are To-Do List Bento Boxes
-
-
-```{r }
-#| label: "06-work-with-models-5"
-gapminder
-```
-
-## Fit a model
-
-```{r }
-#| label: "06-work-with-models-6"
-out <- lm(formula = lifeExp ~ gdpPercap + log(pop) + continent,
-          data = gapminder)
-
-summary(out)
-```
 
 ## Poke around inside
 
+What about the object created by `summary()`?
+
 ![Use the Object Inspector to take a look](../assets/09-broom/06_lm_object_schematic.png)
 
+There's a bunch of different stuff in here. It's a little awkward to work with directly all the time.
 
 ## Tidy regression output with [broom]{.fg-yellow}
 
@@ -436,9 +439,11 @@ library(broom)
 tidy(out)
 ```
 
-That's a _lot_ nicer. Now it's just a tibble. We know those.
+That's a _lot_ nicer. Now it's just a tibble. We know those. This is only a small piece of what's in the summary object, but we'll get to the rest in a minute.
 
 ## Tidy regression output with [broom]{.fg-yellow}
+
+`tidy()` has some optional arguments.
 
 ```{r}
 #| label: "r 07-[Iterating]{.fg-green}-11"
@@ -820,7 +825,7 @@ out_tidy |>
 
 # Join us now for the <br />![](../assets/08-iterate/kh-popup.png){width=100px style="vertical-align: middle;"} Crossover Event ![](../assets/08-iterate/sv-popup.png){width=100px style="vertical-align: middle;"}<br /> of the Year
 
-## Bootstrapped ATT estimates
+## ATT estimates
 
 ```{r}
 library(WeightIt)
@@ -831,7 +836,7 @@ lalonde
 
 I heard you were working on these in Steve's class.
 
-## Bootstrapped ATT estimates
+## ATT estimates
 
 ```{r}
 n_replicates <- 1e3

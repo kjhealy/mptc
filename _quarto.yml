@@ -69,6 +69,8 @@ website:
               file: "content/08-content-git.qmd"
             - text: "09: Iterating on Data and Models"
               file: "content/09-content-iteration.qmd"
+            - text: "10: Databases and APIs"
+              file: "content/10-content-databases.qmd"
 
 
 
@@ -95,6 +97,8 @@ website:
               file: assignment/07-assignment-fars.qmd
             - text: "09: Iterating on the GSS"
               file: assignment/09-assignment-iteration.qmd
+            - text: "10: Databases and APIs"
+              file: assignment/10-assignment-databases.qmd
 
 
     - title: "Examples"
@@ -118,6 +122,8 @@ website:
               file: example/08-example-git.qmd
             - text: "09: Iteration"
               file: example/09-example-iteration.qmd
+            - text: "10: Databases and APIs"
+              file: example/10-example-iteration.qmd
 
 
   page-footer:

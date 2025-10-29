@@ -1,0 +1,19 @@
+---
+title: "Assignment for Week 10: Databases and APIs"
+date: "2025-11-02"
+---
+
+
+## Read
+
+- Get a Census API key. See <https://api.census.gov/data/key_signup.html>.
+- Install the [`tidycensus`](https://walker-data.com/tidycensus/) package.
+- Install the `sf` package if you haven't already.
+- Read [Basic Usage of Tidycensus](https://walker-data.com/tidycensus/articles/basic-usage.html), which amongst other things will tell you what to do with the API key.
+- Read [Spatial Data with Tidycensus](https://walker-data.com/tidycensus/articles/spatial-data.html).
+- Read [Margins of Error in the ACS](https://walker-data.com/tidycensus/articles/margins-of-error.html).
+- Read [Other Cenus Bureau Datasets](https://walker-data.com/tidycensus/articles/other-datasets.html)
+
+## Do
+
+- Choose some Census geography smaller than a state---counties, tracts, or ZTCAs, for example. Find a Census variable---just one is fine---that you are interested in for those areas, either from the Decennial census or the ACS 5-year estimates. Download the data using `tidycensus::get_acs()` or `tidycensus::get_decennial()`. Try to make a couple of tables, graphs, or maps that illustrate something interesting about the variable you chose. Do all of this as an RStudio project with a Quarto document, use Git to version-control the project and put the resulting exercise (the `qmd` file, not an HTML or PDF) on GitHub.

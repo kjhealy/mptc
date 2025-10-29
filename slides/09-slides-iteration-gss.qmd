@@ -14,6 +14,20 @@ date: last-modified
 ---
 
 
+```{r}
+#| label: setup
+#| include: false
+
+library(kjhslides)
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+library(flipbookr)
+```
+
+
 # [Safely]{.fg-green} iterating with [purrr]{.fg-yellow} and [map]{.fg-yellow}
 
 ## Load the packages, as always
@@ -134,35 +148,80 @@ summary(out_all)
 tidy(out_all)
 ```
 
-## [**`group_map()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+## Iterating by year
 
-- Model each year
+```{r}
+#| eval: false
+#| echo: true
+out_yr <- gss_df |>
+  group_by(year) |>
+  nest() |>
+  mutate(
+    model = map(data, \(x) glm(fefam_n ~ age + sex + race, data = x,
+      family = "binomial", na.action = na.omit)),
+    tidied = tidy(model, conf.int = TRUE)
+  )
+```
+
+This will fail because `fefam` is not observed in every year.
+
+## [**`nest()`**], [**`map()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
 
 ```{r}
 #| label: 07b-iterating-safely-12
+
 out_yr <- gss_df |>
   group_by(year) |>
-  group_map_dfr(possibly(~ tidy(glm(fefam_n ~ age + sex + race,
-                       data = .x,
-                       family = "binomial",
-                       na.action = na.omit),
-                       conf.int = TRUE),
-                     otherwise = NULL))
-
-out_yr
+  nest(.key = "df") |>
+  mutate(
+    model = map(df, possibly(\(x, ...) tidy(glm(fefam_n ~ age + sex + race,
+                                                data = x,
+                                                family = "binomial",
+                                                na.action = na.omit)),
+                         otherwise = NULL)))
 
 ```
 
-## [**`group_map()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+## [**`nest()`**], [**`map()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+
+The underlying structure is this:
 
 ```{r}
 #| label: 07b-iterating-safely-13
 #| echo: true
 #| eval: false
+
 possibly(~ tidy(glm(...)), otherwise = NULL)
 ```
 
-## [**`group_map()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+## [**`group_modify()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+
+Using possibly with lambdas is confusing, though. It may be more intuitive to write this:
+
+```{r}
+safe_glm <- possibly(glm, otherwise = NULL)
+
+tidy_safe_glm <- function(...) {
+  tidy(safe_glm(...), conf.int = TRUE)
+}
+```
+
+This makes it a bit clearer what `possibly()` does. The `...` pass the arguments through.
+
+## [**`group_modify()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+
+This way we avoid nesting and just get to the tidied model directly:
+
+```{r}
+out_yr <- gss_df |>
+  group_by(year) |>
+  group_modify(\(x, ...) tidy_safe_glm(
+    fefam_n ~ age + sex + race, data = x,
+    family = "binomial", na.action = na.omit))
+
+out_yr
+```
+
 
 ```{r}
 #| label: 07b-iterating-safely-14
@@ -176,6 +235,9 @@ out_yr |>
   geom_line() +
   geom_pointrange()
 ```
+
+
+
 
 ## Survey-weighted estimates
 
@@ -212,6 +274,7 @@ gss_svy |>
 
 ## Survey-weighted estimates
 
+The entire dataset again.
 
 ```{r}
 #| label: 07b-iterating-safely-17
@@ -223,24 +286,40 @@ out_svy_all <- svyglm(fefam_n ~ age + sex + race,
 tidy(out_svy_all)
 ```
 
-## Survey-weighted estimates
+## A `possibly()` again
+
+```{r}
+safe_svy_glm <- possibly(svyglm, otherwise = NULL)
+
+tidy_svy_glm <- function(...){
+  tidy(safe_svy_glm(...))
+}
+```
+
+
+## Survey-weighted estimates, by year
+
+Unfortunately we can't use `group_map()` and `bind_rows()` here. We have to use `group_map_dfr()` and formula (`~`) notation in the `possibly()` call. Note the `.x` there, which is how the data frame gets passed in. (This used to be more common.) We also can't easily wrap the functions.
 
 ```{r}
 #| label: 07b-iterating-safely-18
 out_svy_yrs <- gss_svy |>
   group_by(year) |>
-  group_map_dfr(possibly(~ tidy(svyglm(fefam_n ~ age + sex + race,
-                       design = .x,
+  group_map_dfr(
+    possibly(~ tidy(
+      svyglm(fefam_n ~ age + sex + race, design = .x,
                        family = quasibinomial(),
                        na.action = na.omit),
                        conf.int = TRUE),
-                     otherwise = NULL))
+      otherwise = NULL
+      )
+  )
+
 
 out_svy_yrs
-
 ```
 
-## Survey-weighted estimates
+## Survey-weighted estimates, by year
 
 ```{r}
 #| label: 07b-iterating-safely-19
