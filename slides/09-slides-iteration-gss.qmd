@@ -165,7 +165,7 @@ out_yr <- gss_df |>
 
 This will fail because `fefam` is not observed in every year.
 
-## [**`nest()`**], [**`map()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+## **`nest()`**, **`map()`** and **`possibly()`**
 
 ```{r}
 #| label: 07b-iterating-safely-12
@@ -182,7 +182,7 @@ out_yr <- gss_df |>
 
 ```
 
-## [**`nest()`**], [**`map()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+## **`nest()`**, **`map()`** and **`possibly()`**
 
 The underlying structure is this:
 
@@ -194,7 +194,7 @@ The underlying structure is this:
 possibly(~ tidy(glm(...)), otherwise = NULL)
 ```
 
-## [**`group_modify()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+## **`group_modify()`** and **`possibly()`**
 
 Using possibly with lambdas is confusing, though. It may be more intuitive to write this:
 
@@ -208,7 +208,7 @@ tidy_safe_glm <- function(...) {
 
 This makes it a bit clearer what `possibly()` does. The `...` pass the arguments through.
 
-## [**`group_modify()`**]{.fg-green} and [**`possibly()`**]{.fg-green}
+## **`group_modify()`** and **`possibly()`**
 
 This way we avoid nesting and just get to the tidied model directly:
 
@@ -222,6 +222,7 @@ out_yr <- gss_df |>
 out_yr
 ```
 
+## **`group_modify()`** and **`possibly()`**
 
 ```{r}
 #| label: 07b-iterating-safely-14
@@ -257,7 +258,6 @@ gss_svy
 
 ```
 
----
 
 
 ## Survey-weighted estimates
@@ -286,7 +286,7 @@ out_svy_all <- svyglm(fefam_n ~ age + sex + race,
 tidy(out_svy_all)
 ```
 
-## A `possibly()` again
+## And `possibly()` again
 
 ```{r}
 safe_svy_glm <- possibly(svyglm, otherwise = NULL)
