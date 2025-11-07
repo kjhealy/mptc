@@ -223,7 +223,7 @@ Most of the time, even when we are using them, our computers sit around doing PR
 
 ```{r}
 ## How many cores do we have?
-parallell::detectCores()
+parallel::detectCores()
 ```
 
 Remember, processor clock cycles are _really fast_. They're measured in billions of cycles per second. We need to put those cores to work!
@@ -761,7 +761,7 @@ seameans_df
 
 ---
 
-![](../assets/10-parallel/10_four_oceans.png)
+![](../assets/10-parallel/10_global_mean.png)
 
 ---
 

@@ -123,7 +123,7 @@ website:
             - text: "09: Iteration"
               file: example/09-example-iteration.qmd
             - text: "10: Databases and APIs"
-              file: example/10-example-iteration.qmd
+              file: example/10-example-databases.qmd
 
 
   page-footer:
