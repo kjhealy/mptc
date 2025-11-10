@@ -158,7 +158,7 @@ For small tasks that's fine. But for bigger tasks it gets inefficient quickly.
 ::: {.smallcode}
 
 ```{r}
-## From Henrik Bengtsson's documentation for future/furr
+## From Henrik Bengtsson's documentation for future/furrr
 slow_sum <- function(x) {
   sum <- 0
   for (value in x) {
@@ -188,6 +188,10 @@ This sort of situation is _embarrassingly parallel_.
 ## That's Embarrassing
 
 When a task is embarrassingly parallel, and the number of pieces or groups is large enough or complex enough, then if we can do them at the same time then we should. There is some overhead---we have to keep track of where each piece was sent and when the results come back in---but if that's low enough in comparison to doing things serially, then we should parallelize the task.
+
+---
+
+![](../assets/10-parallel/10_amdahl_law.png)
 
 
 ## Multicore Computing
@@ -245,8 +249,11 @@ library(here)
 # Set up parallel processing
 library(mirai)
 
+status()
+
 # Summon daemons. Do not summon more daemons than you have cores. People often choose one less than the number of cores.
 daemons(15)
+
 status()
 
 ```
