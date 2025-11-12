@@ -1,0 +1,118 @@
+---
+title: "Problem Set 12: NYC Complaints Data"
+author: "<PUT YOUR NAME HERE>"
+date: "`r Sys.Date()`"
+format: html
+---
+
+```{r}
+#| label = "load-libraries-data",
+#| warning = FALSE,
+#| message = FALSE
+library(tidyverse)
+library(here)
+library(socviz)
+
+## Mapping
+library(sf)
+
+## Census
+## Make sure you have a census API key! You only need one.
+## https://api.census.gov/data/key_signup.html
+library(tidycensus)
+options(tigris_use_cache = TRUE)
+
+## Install the data package:
+## remotes::install_github("kjhealy/nycomplaints")
+library(nycomplaints)
+
+
+```
+
+# The dataset
+
+The dataset is documented [on its website](https://kjhealy.github.io/nycomplaints/). The source data is from [NYC Open Data](https://data.cityofnewyork.us/City-Government/NYC-Council-Constituent-Services/b9km-gdpy/about_data).
+
+Read the documentation before working with the data.
+
+# Explore the data
+
+## The complaints data:
+
+```{r}
+nycomplaints
+```
+
+
+## Two useful tables
+
+```{r}
+nyc_zips
+```
+
+
+```{r}
+census_vars
+```
+
+
+## 1. Create a zipcode-level base map
+
+The `nyzip_demog` table has demographic data for New York City by zip code, but it does not have map data (i.e. the polygon geometry). Use `get_acs()` from the `tidycensus` package to get the spatial data by ZCTA.
+
+Hints:
+
+- You should specify a year. Choose 2019.
+- The zip code tabulation area ("zcta") geography is what you want.
+- You only want data for New York State (NY).
+- You have to ask the Census API for data for some variable by the geography you want. You can use any variable you want, or more than one. Some sample ones are given in `acs_vars`.
+- If you get more than one variable, consider reshaping/pivoting the data to put those variables in columns. If you pivot the data you may find that you have to convert it to a tibble first and that while the result still has `geometry` column it is not recognized as an `sf` object. Look at `sf::st_as_sf()` to convert it back.
+- If you get data for New York State, you will get all the zip codes in the state. You only want data for the zip codes that are in NYC. But you know what those are.
+
+
+
+Additionally, this may be a good time to think about dividing your project up in to more than one file. For example, you could have one R script that does the work above to produce an object you could save, or that you source into this file. (See `?source`.)
+
+
+
+## Additional variables
+
+The ACS has a lot of data. Consider the *very* long list of variables here:
+
+```{r}
+## Table of all 2019 ACS variables:
+acs_vars <- load_variables(year = 2019, dataset = "acs5")
+```
+
+
+## Other information
+
+_Hint:_ You can use `st_drop_geometry()` to change a spatial table into a simple tibble:
+
+```{r}
+## See how the `geometry` column disappears
+zip_data |>
+  st_drop_geometry()
+```
+
+
+# Things to do
+
+## 1. Briefly Describe the Dataset
+
+- Summarize the `nycomplaints` tibble in a way you think is informative to you.
+
+## 2 Look at each column/variable in a little more detail
+
+- Explore the basic structure of the data, by e.g. writing code to summarize the variables or investigate aspects of them that seem interesting. You can also create some initial rough exploratory plots if you like, in addition to tables or other summaries. As you go, explain here what it is you are doing and why.
+
+## 3. Make some plots or maps
+
+- Following on from the tabular summarize, make some plots that you think show something interesting about the data. Make sure they look presentable and effective to you. Make a note about why you're doing each one. If you like, merge in data from elsewhere (e.g. from Census variables).
+
+
+## 4. Try to make one properly-polished plot or map
+
+- a. _Either_ choose one of the plots you've already made _or_ create a new plot or map using the data. Work it up to something more finished. Aim for something that is both properly informative and as polished as you can make it.
+
+- b. Try saving this plot or map using `ggsave()`. Create it as a PNG or PDF file. Make its dimensions (width and height) the right size for what you draw.

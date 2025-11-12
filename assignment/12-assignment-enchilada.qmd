@@ -1,0 +1,25 @@
+---
+title: "Week 12 Assignment: NYC Complaints"
+date: "2025-11-17"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+
+## A somewhat larger project
+
+```{r project-download, echo=FALSE, results="asis"}
+project_buttons("/projects/12-problem-set")
+```
+
+1. Launch the project by double-clicking on the `problem_set_12.Rproj` file.
+
+2. Once RStudio is running, take a look at the `analysis.Rmd` file.
+
+3. Make a git repository for this project; push it to github;
+
+4. Do the tasks in the Analysis file and keep track of your work (adding,
+committing, and pushing) as you go.

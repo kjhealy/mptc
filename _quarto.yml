@@ -71,6 +71,10 @@ website:
               file: "content/09-content-iteration.qmd"
             - text: "10: Databases and APIs"
               file: "content/10-content-databases.qmd"
+            - text: "11: Parallel Computing"
+              file: "content/11-content-parallel.qmd"
+            - text: "12: Build Systems, Environments, Packages"
+              file: "content/12-content-build.qmd"
 
 
 
@@ -99,6 +103,8 @@ website:
               file: assignment/09-assignment-iteration.qmd
             - text: "10: Databases and APIs"
               file: assignment/10-assignment-databases.qmd
+            - text: "12: The Whole Enchilada"
+              file: assignment/12-assignment-enchilada.qmd
 
 
     - title: "Examples"
