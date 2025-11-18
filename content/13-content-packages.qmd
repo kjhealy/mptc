@@ -1,0 +1,65 @@
+---
+title: "13. Packages and LLMs"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+Getting into the habit of packaging your work. Also, what LLMs can and cannot do for you right now.
+
+## Reading
+
+### Packages
+- @wickhambryan:2023, Introduction; Chapters 1-11, 16.
+
+### AI and LLMs
+- Vicki Boykis (2025). [How big are our embeddings now and why?](https://vickiboykis.com/2025/09/01/how-big-are-our-embeddings-now-and-why/)
+- Glyph (2025). [I Think I’m Done Thinking About genAI For
+Now.](https://blog.glyph.im/2025/06/i-think-im-done-thinking-about-genai-for-now.html)
+_Deciphering Glyph_.
+- Rob Napier (2025). [TIL:AI. Thoughts on
+AI](https://cocoaphony.micro.blog/2025/06/16/tilai-thoughts-on-ai.html). *Cocoaphony*.
+- Thomas Ptacek (2025). [My AI Skeptic Friends Are All
+Nuts](https://fly.io/blog/youre-all-nuts/). Fly.io.
+- Tristan Mahr (2025). [readtextgrid now uses C++ (and ChatGPT helped)](https://www.tjmahr.com/readtextgrid-cpp-llms/).
+- Ellmer Vignettes:
+    - [Programming with
+    Ellmer](https://ellmer.tidyverse.org/articles/programming.html)
+    - [Prompt Design](https://ellmer.tidyverse.org/articles/prompt-design.html)
+    - [Structured Data
+    Basics](https://ellmer.tidyverse.org/articles/structured-data.html)
+    - [Tool/Function Calling](https://ellmer.tidyverse.org/articles/tool-calling.html)
+
+## Slides
+
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+
+<!--iframe class="slide-deck" id="quartoframe" src="../slides/12-slides.html"></iframe-->
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+#slide_win_button("/slides/12-slides")
+```

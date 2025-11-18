@@ -73,10 +73,10 @@ website:
               file: "content/10-content-databases.qmd"
             - text: "11: Parallel Computing"
               file: "content/11-content-parallel.qmd"
-            - text: "12: Build Systems, Environments, Packages"
+            - text: "12: Helpers, Build Systems, Environments"
               file: "content/12-content-build.qmd"
-
-
+            - text: "13: Packages, and LLMs"
+              file: "content/13-content-packages.qmd"
 
     - title: "Assignments"
       contents:

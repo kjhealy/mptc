@@ -1,5 +1,5 @@
 ---
-title: "12. Build Systems, Environments, Packages"
+title: "12. Helpers, Build Systems, Environments"
 date: last-modified
 date-format: full
 ---
@@ -40,8 +40,8 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 </script>
 
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/11-slides-build.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/12-slides-buildenvs.html"></iframe>
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_win_button("/slides/11-slides-build")
+slide_win_button("/slides/12-slides-buildenvs")
 ```
