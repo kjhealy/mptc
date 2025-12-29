@@ -58,8 +58,8 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 </script>
 
-<!--iframe class="slide-deck" id="quartoframe" src="../slides/12-slides.html"></iframe-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/13-slides-packages-llms.html"></iframe>
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-#slide_win_button("/slides/12-slides")
+slide_win_button("/slides/13-slides-packages-llms")
 ```

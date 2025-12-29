@@ -127,7 +127,7 @@ The `pkgdown` package makes it easy to build a website for your package.
 
 ## Large Language Models
 
-- You should have a clear mental model of what LLMs are and how work.
+- You should have a clear mental model of what LLMs are and how they work.
 - Things continue to move fast in this area.
 - There are a lot of ways to incorporate them (or not) into your work.
 - Pick your analogy: Minion Army, Forklift at the Gym, Plagiarism Machine.
