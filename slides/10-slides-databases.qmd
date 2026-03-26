@@ -338,7 +338,11 @@ A hierarchical set of rules and criteria for ensuring the integrity of data stor
 
 Tries to eliminate various sources of error --- so-called Insertion, Update, and Deletion anomalies --- particularly ones that will pollute, damage, or corrupt things beyond the specific change.
 
-Redundancy and error are minimized by breaking the database up into a series of linked or related tables. Hence the term "relational database"
+Redundancy and error are minimized by breaking the database up into a series of
+linked  tables. Each table expresses a _relation_ of some kind, and we can
+deduce new relations (i.e. new tables) by writing statements in a query language
+that returns tables expressing that relation, and containing the records that
+satisfy the relation. Hence the term "relational database".
 
 ## Normal Forms
 

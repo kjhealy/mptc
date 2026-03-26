@@ -731,7 +731,7 @@ What if we want to do this for every continent in every year?
 ```{r}
 #| label: "r 07-[Iterating]{.fg-green}-22"
 
-df_nest<- gapminder |>
+df_nest <- gapminder |>
     group_by(continent, year) |>
     nest()
 
