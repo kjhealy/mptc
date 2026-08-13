@@ -40,16 +40,39 @@ source("R/tar_slides.R")
 source("R/tar_projects.R")
 source("R/tar_data.R")
 source("R/tar_calendar.R")
+source("R/tar_freeze.R")
 
-# Force the index, syllabus, and schedule pages to always re-render; bah
-# This works around targets not knowing about includes
-system("[ ! -e _freeze/index ] || rm -rf _freeze/index/")
-system("[ ! -e _freeze/schedule ] || rm -rf _freeze/schedule/")
-system("[ ! -e _freeze/syllabus ] || rm -rf _freeze/syllabus/")
-system("[ ! -e _site/index.html ] || rm -f _site/index.html")
-system("[ ! -e _site/schedule ] || rm -rf _site/schedule/")
-system("[ ! -e _site/syllabus ] || rm -rf _site/syllabus/")
+# Quarto hashes only the raw bytes of a .qmd, so an edit to an include, to a
+# source()d script, or to a spreadsheet read in a chunk leaves the page frozen
+# and silently stale. Scan every page for the dependencies that hash can't see
+# and invalidate only those pages whose real inputs have moved. See
+# R/tar_freeze.R.
+#
+# `extra` covers what a scan can't: data reached through tar_read(), and the
+# functions that shape it. Everything else is found by reading the .qmd files.
+freeze_deps <- build_freeze_deps(
+  rendered_qmds(),
+  extra = list(
+    "index" = c("data/schedule.xlsx", "R/tar_calendar.R"),
+    "syllabus/index" = c("data/schedule.xlsx", "R/tar_calendar.R"),
+    "schedule/index" = c("data/schedule.xlsx", "R/tar_calendar.R"),
+    # The old rm -rf hack missed this page entirely, so the resources table
+    # never refreshed when data_sources.xlsx changed
+    "content/index" = c("data/data_sources.xlsx", "R/tar_data.R")
+  )
+)
 
+bust_stale_freezes(freeze_deps)
+
+# Superseded by the stamped invalidation above. These ran unconditionally on
+# every sourcing of this file, which re-executed three pages on every build and
+# meant that even tar_outdated() deleted build artefacts.
+# system("[ ! -e _freeze/index ] || rm -rf _freeze/index/")
+# system("[ ! -e _freeze/schedule ] || rm -rf _freeze/schedule/")
+# system("[ ! -e _freeze/syllabus ] || rm -rf _freeze/syllabus/")
+# system("[ ! -e _site/index.html ] || rm -f _site/index.html")
+# system("[ ! -e _site/schedule ] || rm -rf _site/schedule/")
+# system("[ ! -e _site/syllabus ] || rm -rf _site/syllabus/")
 
 # Ensure deletion_candidates has at least one dummy dir, to keep target branching happy
 if (!fs::dir_exists(here::here("00_dummy_files"))) {
@@ -60,21 +83,28 @@ if (!fs::dir_exists(here::here("00_dummy_files/figure-revealjs"))) {
 }
 fs::file_create(here::here("00_dummy_files/figure-revealjs/00_dummy.png"))
 
+# flipbookr writes its figures to <deck>_files/figure-revealjs/ in the *working
+# directory* -- the project root -- rather than next to the slide that produced
+# them. The leftovers therefore only ever appear at the top level, and that is
+# the only place worth looking.
+#
+# The previous versions of these three functions globbed the whole tree and then
+# spared whatever matched the substrings "_site|_targets|example|assignment|
+# content". Anything else -- a *_files directory under assets/, files/,
+# staging/, projects/ or renv/ -- was handed to fs::dir_delete(). Nothing in the
+# project matches today, so this was latent rather than live, but a recursive
+# delete guarded by a substring denylist is a bad way to find that out.
+flipbookr_leftover_dirs <- function() {
+  as.character(fs::dir_ls(".", type = "directory", regexp = "_files$"))
+}
+
 get_flipbookr_orphans <- function() {
-  all_candidates <- fs::dir_ls(
-    glob = "*_files/figure-revealjs/*.png",
-    recurse = TRUE
-  )
-  all_candidates <- all_candidates[stringr::str_detect(
-    all_candidates,
-    "_site",
-    negate = TRUE
-  )]
-  if (length(all_candidates) == 0) {
+  figure_dirs <- fs::path(flipbookr_leftover_dirs(), "figure-revealjs")
+  figure_dirs <- figure_dirs[fs::dir_exists(figure_dirs)]
+  if (length(figure_dirs) == 0) {
     return(character(0))
-  } else {
-    return(all_candidates)
   }
+  as.character(fs::dir_ls(figure_dirs, glob = "*.png"))
 }
 
 # Put the orphans in _site/ *and* in _freeze
@@ -100,32 +130,25 @@ relocate_orphans <- function(file) {
 }
 
 
-get_leftover_dirs <- function(
-  excludes = "_site|_targets|example|assignment|content"
-) {
-  # the figure-revealjs subdirs will all have been moved
-  deletion_candidates <- fs::dir_ls(glob = "*_files", recurse = TRUE)
-  deletion_candidates <- deletion_candidates[stringr::str_detect(
-    deletion_candidates,
-    excludes,
-    negate = TRUE
-  )]
-  if (length(deletion_candidates) == 0) {
-    return(character(0))
-  } else {
-    return(deletion_candidates)
-  }
+get_leftover_dirs <- function() {
+  # the figure-revealjs subdirs will all have been moved by now
+  flipbookr_leftover_dirs()
 }
 
 remove_leftover_dirs <- function(dirs) {
-  if (length(dirs) == 0) {
+  if (length(dirs) == 0 || is.null(dirs)) {
     return(character(0))
   }
-  if (is.null(dirs)) {
-    return(character(0))
-  } else {
-    fs::dir_delete(dirs)
+  # Belt and braces ahead of a recursive delete: refuse anything that isn't a
+  # top-level *_files directory, whatever the caller thinks it's passing
+  unsafe <- dirs[fs::path_dir(dirs) != "." | !stringr::str_ends(dirs, "_files")]
+  if (length(unsafe) > 0) {
+    cli::cli_abort(c(
+      "Refusing to delete unexpected {.arg dirs}.",
+      x = "Not {?a/} top-level {.file *_files} director{?y/ies}: {.file {unsafe}}."
+    ))
   }
+  fs::dir_delete(dirs)
 }
 
 ## THE MAIN PIPELINE ----
@@ -138,20 +161,32 @@ list(
   # uses system2() to zip the folder and returns a path to keep targets happy
   # with `format = "file"`
   #
-  # The main index.qmd page loads project_zips as a target to link it as a dependency
-  #
   # Use tar_force() and always run this because {targets} seems to overly cache
   # the results of list.dirs()
+  #
+  # The scan has to carry a digest of each folder's *contents*, and it has to
+  # happen inside the forced target. Branching on folder names alone meant a
+  # name never changed, so editing a file inside a project folder left its .zip
+  # untouched. Computing the digest in a downstream target doesn't help either:
+  # that target only re-runs when the names change, so it never gets to look.
   tar_force(
-    project_paths,
-    list.dirs(here_rel("projects"), full.names = FALSE, recursive = FALSE),
+    project_manifest,
+    {
+      list.dirs(here_rel("projects"), full.names = FALSE, recursive = FALSE) |>
+        purrr::map(project_contents) |>
+        purrr::list_rbind()
+    },
     force = TRUE
   ),
-  tar_target(project_files, project_paths, pattern = map(project_paths)),
+  tar_target(
+    project_files,
+    project_manifest,
+    pattern = map(project_manifest)
+  ),
   tar_target(
     project_zips,
     {
-      zippy(project_files, "projects")
+      zippy(project_files$folder, "projects")
     },
     pattern = map(project_files),
     format = "file"
@@ -187,7 +222,18 @@ list(
   # tar_quarto(readme, here_rel("README.qmd")),
 
   ## Build site ----
-  tar_quarto(site, path = ".", quiet = FALSE),
+  #
+  # extra_files picks up what `quarto inspect` doesn't report as project input:
+  # the slide/site theme and the images. Neither affects code execution, so the
+  # freeze cache is no obstacle -- they just need to invalidate `site` so that
+  # Quarto is re-run at all. This mattered less when the old rm -rf lines forced
+  # `site` to rebuild on every single invocation.
+  tar_quarto(
+    site,
+    path = ".",
+    extra_files = c("_extensions", "assets"),
+    quiet = FALSE
+  ),
 
   tar_files(rendered_slides, {
     # Force dependencies
@@ -198,6 +244,9 @@ list(
 
   ## Fix any flipbookr leftover files
   tar_files(flipbookr_orphans, {
+    # Force dependencies: the orphans don't exist until the site has rendered,
+    # so without this targets is free to look for them too early and find none
+    site_ready <- site
     # Flipbooks created in the top level
     get_flipbookr_orphans()
   }),
@@ -230,14 +279,20 @@ list(
     get_leftover_dirs()
   }),
 
-  tar_invalidate(empty_dirs),
-
+  # Always re-run the cleanup. This used to be a tar_invalidate(empty_dirs) call
+  # sitting in the pipeline list, which deleted the target's metadata as a side
+  # effect of *sourcing* this file. Any sourcing not followed by a successful
+  # build of empty_dirs -- tar_outdated(), tar_visnetwork(), an interrupted run,
+  # a fresh clone -- then made the next sourcing fail outright, because the name
+  # it wanted to invalidate was no longer in the metadata. Saying "always run"
+  # with a cue is declarative and touches nothing on disk.
   tar_target(
     empty_dirs,
     {
       remove_leftover_dirs(flipbookr_dirs)
     },
-    pattern = map(flipbookr_dirs)
+    pattern = map(flipbookr_dirs),
+    cue = tar_cue(mode = "always")
   ),
 
   ## Upload site ----

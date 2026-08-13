@@ -32,7 +32,7 @@ school:
 
 deploy:
   user: "kjhealy"
-  site: true
+  site: false
 
 schedule:
   wk01: 2025-08-25

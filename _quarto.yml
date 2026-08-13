@@ -4,6 +4,7 @@ project:
     - "files/"
     - "projects/"
     - "pdf_slides/"
+    - "slides/*.pdf"
   preview:
     port: 27514
   render:
