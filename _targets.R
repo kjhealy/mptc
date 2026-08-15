@@ -6,7 +6,7 @@ suppressPackageStartupMessages(library(tidyverse))
 ## it'll take forever otherwise
 library(crew)
 tar_option_set(
-  controller = crew_controller_local(workers = 15)
+  controller = crew_controller_local(workers = 16)
 )
 
 
