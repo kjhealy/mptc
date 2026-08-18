@@ -13,14 +13,14 @@ instructor:
 course:
   number: "SOCIOL 703"
   title: "Modern Plain Text Computing"
-  semester: "Fall 2025"
-  days: "Mondays"
-  time: "10:05am--12:35pm"
+  semester: "Fall 2026"
+  days: "Tuesdays"
+  time: "1:25pm--3:55pm"
   location: "Erwin Square Plaza 746"
-  dates: "08/25/2025 -- 11/25/2025"
+  dates: "08/25/2025 -- 11/24/2025"
   github: "https://www.github.com/kjhealy/mptc"
   url: "https://mptc.io"
-  copyright_year: "2025"
+  copyright_year: "2026"
 
 university:
   name: Duke University
@@ -35,17 +35,17 @@ deploy:
   site: false
 
 schedule:
-  wk01: 2025-08-25
-  wk02: 2025-09-01
-  wk03: 2025-09-08
-  wk04: 2025-09-15
-  wk05: 2025-09-22
-  wk06: 2025-09-29
-  wk07: 2025-10-06
-  wk08: 2025-10-13
-  wk09: 2025-10-20
-  wk10: 2025-10-27
-  wk11: 2025-11-03
-  wk12: 2025-11-10
-  wk13: 2025-11-17
-  wk14: 2025-11-24
+  wk01: 2026-08-25
+  wk02: 2026-09-01
+  wk03: 2026-09-08
+  wk04: 2026-09-15
+  wk05: 2026-09-22
+  wk06: 2026-09-29
+  wk07: 2026-10-06
+  wk08: 2026-10-13
+  wk09: 2026-10-20
+  wk10: 2026-10-27
+  wk11: 2026-11-03
+  wk12: 2026-11-10
+  wk13: 2026-11-17
+  wk14: 2026-11-24

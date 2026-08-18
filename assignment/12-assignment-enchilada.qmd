@@ -1,6 +1,6 @@
 ---
 title: "Week 12 Assignment: NYC Complaints"
-date: "2025-11-17"
+date: "2025-11-20"
 ---
 
 ```{r setup, include=FALSE}
@@ -17,7 +17,7 @@ project_buttons("/projects/12-problem-set")
 
 1. Launch the project by double-clicking on the `problem_set_12.Rproj` file.
 
-2. Once RStudio is running, take a look at the `analysis.Rmd` file.
+2. Once RStudio is running, take a look at the `analysis.qmd` file.
 
 3. Make a git repository for this project; push it to github;
 

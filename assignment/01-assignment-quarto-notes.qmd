@@ -1,6 +1,6 @@
 ---
 title: "Assignment 01: Quarto Notes"
-date: "2025-08-29"
+date: "2025-08-28"
 ---
 
 ```{r setup, include=FALSE}

@@ -1,6 +1,6 @@
 ---
 title: "Problem Set for Week 09"
-date: "2025-10-24"
+date: "2025-10-23"
 ---
 
 

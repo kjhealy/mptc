@@ -1,6 +1,6 @@
 ---
 title: "Problem Set for Week 06"
-date: "2025-10-05"
+date: "2025-10-09"
 ---
 
 ```{r setup, include=FALSE}

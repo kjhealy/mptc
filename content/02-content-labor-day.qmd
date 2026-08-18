@@ -1,5 +1,5 @@
 ---
-title: "02. Labor Day"
+title: "02. Finding Data and Filing it"
 date-format: full
 ---
 
@@ -14,7 +14,7 @@ slide_details <- tibble::tribble(
 
 ## This week ...
 
-Because of the Labor Day holiday, there is no class this week. However, there is an assignment due on Friday, September 5.
+There is an assignment due on Friday, September 4th.
 
 ## Assignments
 

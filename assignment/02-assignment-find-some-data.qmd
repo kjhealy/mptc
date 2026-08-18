@@ -1,6 +1,6 @@
 ---
 title: "Assignment 02: Find Some Data"
-date: "2025-09-05"
+date: "2025-09-04"
 ---
 
 ```{r setup, include=FALSE}
@@ -9,21 +9,32 @@ source(here::here("R", "slide-things.R"))
 ```
 
 
-There is no class this week, because of the Labor Day holiday. However, there is an assignment due on Friday, September 5.
+To do data analysis, we need some data.
 
 ## Task 1: Data Sources
 
-Look at the [list of practice data sources](https://mptc.io/content/) on the course website. Pick one of the data sources. Alternatively, find a similar source for yourself that you are interested in. From there, choose one table from that source and download the data to your computer.
+Look at the [list of practice data sources](https://mptc.io/content/) on the
+course website. Pick one of the data sources. Alternatively, find a similar
+source for yourself that you are actually interested in. It doesn't have to be
+something you already know how to use or work with. Indeed, it's probably better
+if it isn't. In any case, choose at least one table from that source and
+download the data to your computer.
 
 ## Task 2: Set up a Project
 
-Set up a new R project in RStudio, and save the data file in a subdirectory of that project named `data`. Create a new Quarto document in the project, and write a short paragraph about the data you downloaded, saying what format you think it is in, what it contains, and what you think you could learn from it.
+Set up a new R project in RStudio, and save the data file in a subdirectory of
+that project named `data`. Create a new Quarto document in the project, and
+write a short paragraph about the data you downloaded, saying what format you
+think it is in, how you obtained it, what it contains, what you think you
+could learn from it, and why you find that interesting.
 
 ## Task 3: Submit Your Work
 
-Compress or zip-up the entire project directory and submit it to the Assignment drop box on Canvas.
+Compress or zip-up the entire project directory and submit it to the Assignment
+drop box on Canvas.
 
-To do this on Mac OS, in the Finder, select the folder, right click (that is, hold down the Control key and click), and choose "Compress".
+To do this on Mac OS, in the Finder, select the folder, right click (that is,
+hold down the Control key and click), and choose "Compress".
 
 ```{r zip-mac, echo=FALSE, out.width="50%"}
 knitr::include_graphics(here::here("assets", "00-site", "compress-mac-1.png"), error = FALSE)
