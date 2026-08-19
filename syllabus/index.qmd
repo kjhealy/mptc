@@ -123,7 +123,7 @@ Submit assignments via Canvas.
 may do so. We'll discuss them, their uses, and their limitations as we go. These
 tools are new, powerful, and changing very fast. They play an increasing role in
 many aspects of the work we do, especially insofar as it touches on how we write
-and work with code and how we manage some of the mundane tasks associated with
+and work with code and how we accomplish some of the mundane tasks associated with
 managing data. But if you use them for an assigment when I asked you not to, you
 will get an F for the course. I am not joking. The point of this seminar---the
 whole reason it is required---is for you to learn how to do some things for
