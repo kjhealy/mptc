@@ -1,6 +1,6 @@
 ---
 title: "Assignment 00: Installation"
-date: "2025-08-25"
+date: "2026-08-25"
 ---
 
 ```{r setup, include=FALSE}
@@ -21,21 +21,30 @@ We will be working with the most recent stable versions of R and RStudio, as wel
 Begin by installing R (<http://cloud.r-project.org>). Choose the version appropriate for your computing platform:
 
 
-- If you use macOS with an Apple Silicon processor (i.e. an M-series processor), then install [R for macOS's Apple Silicon build](https://cloud.r-project.org/bin/macosx/big-sur-arm64/base/R-4.5.1-arm64.pkg). This version does not work on older, Intel-based Macs.
+- If you use macOS with an Apple Silicon processor (i.e. an M-series processor), then install [R for macOS's Apple Silicon build](https://cran.r-project.org/bin/macosx/sonoma-arm64/base/R-4.6.1-arm64.pkg). This version does not work on older, Intel-based Macs.
 
-- If you use macOS with an Intel processor, then install [R for macOS's Intel build](https://cloud.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.5.1-x86_64.pkg).
+- If you use macOS with an Intel processor, then install [R for macOS's Intel
+build](https://cran.r-project.org/bin/macosx/big-sur-x86_64/base/R-4.6.1-x86_64.pkg).
+Note that if you're using an Intel Mac you should *strongly* consider investing
+in *any* Mac with an Apple Silicon chip.
 
-- If you use Microsoft Windows, then install [R for Windows](https://cloud.r-project.org/bin/windows/base/R-4.5.1-win.exe).
+- If you use Microsoft Windows, then install [R for Windows](https://cran.r-project.org/bin/windows/base/R-4.6.1-win.exe).
 
 - If you use Linux, [choose your distribution](https://cloud.r-project.org/bin/linux/) and install the R package for it.
 
 ### Install RStudio on your computer
 
-- If you use macOS (whether Apple Silicon or Intel), [install this version of RStudio](https://download1.rstudio.org/electron/macos/RStudio-2025.05.1-513.dmg).
+- If you use macOS (whether Apple Silicon or Intel), [install this version of RStudio](https://download1.rstudio.org/electron/macos/RStudio-2026.08.1-195.dmg).
 
-- If you use Windows, [install this version of RStudio](https://download1.rstudio.org/electron/windows/RStudio-2025.05.1-513.exe).
+- If you use Windows, [install this version of RStudio](https://download1.rstudio.org/electron/windows/RStudio-2026.08.1-195.exe).
 
-- If you use Linux, [choose your distribution from the download page](https://posit.co/download/rstudio-desktop/).
+- If you use Linux, [choose your distribution from the download page](https://docs.posit.co/ide/user/#rstudio-ide-oss-downloads).
+
+RStudio isn't required for the course. You can use a different IDE or text
+editor if you like (such as e.g.
+[Positron](https://positron.posit.co/download.html), or
+[VSCode](https://code.visualstudio.com/download), or whatever you like). But
+we'll use RStudio in class.
 
 ### Installing some additional packages
 
@@ -78,10 +87,12 @@ If you do not have one already, create a GitHub account and obtain a GitHub Pers
 Here are some things we will not use immediately, but which you should install now anyway.
 
 ### Both macOS and Windows
+
 - Manage your references with [Zotero](https://www.zotero.org/). Zotero is a free, open-source reference manager that works well with R and RStudio. It is available for all major operating systems. The sooner you start using it to manage your references, the better.
 - In addition to Zotero, you should also install the [Zotero Better BibTeX plugin](https://retorque.re/zotero-better-bibtex/). This plugin allows you to export your Zotero libraries in a format that works well with R and RStudio. It also means you can use Zotero to automatically manage and update your bibliographical files in Quarto documents rather than having to edit a .bib file by hand.
 
-## macOS
+### macOS
+
 - If you are on a Mac, install the Developer Command Line Tools if this did not happen already when you installed `git`. To install the command line tools, open a terminal window and type
 
 ```{bash}
@@ -95,9 +106,11 @@ then hit return. You will see a dialog box asking you to install the command lin
 
 - Install [Homebrew](https://brew.sh/), a package manager for macOS. Homebrew is useful for installing and managing command-line tools.
 
+- Consider installing [Oh My Zsh](https://ohmyz.sh/) to make your terminal look a little nicer and get a more useful command prompt.
 
-## Windows
+### Windows
+
 - Install the [Windows Terminal](https://aka.ms/terminal) if you don't already have it.
 - Then install the [WinGet](https://learn.microsoft.com/en-us/windows/package-manager/winget/) package manager if you don't already have it.
-- Use WinGet to install [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.5). Windows comes installed with an older version of PowerShell (version 5). You can't remove it, but can install the newer version (version 7) and choose it as your default shell.
+- Use WinGet to install [PowerShell 7](https://learn.microsoft.com/en-us/powershell/scripting/install/installing-powershell-on-windows?view=powershell-7.6). Windows comes installed with an older version of PowerShell (version 5). You can't remove it, but can install the newer version (version 7) and choose it as your default shell.
 - Consider installing [Oh My Posh](https://ohmyposh.dev/docs/installation/windows) to make your terminal look a little nicer and get a more useful command prompt.

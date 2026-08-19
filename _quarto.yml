@@ -54,9 +54,9 @@ website:
           contents:
             - text: "01: Doing Your Work Properly"
               file: content/01-content-doing-your-work.qmd
-            - text: "02: Labor Day"
-              file: "content/02-content-labor-day.qmd"
-            - text: "03: The File System and the Shell"
+            - text: "02: The File System"
+              file: "content/02-content-file-system.qmd"
+            - text: "03: The Shell"
               file: "content/03-content-shell.qmd"
             - text: "04: Using R to look at data"
               file: "content/04-content-r.qmd"
@@ -96,14 +96,22 @@ website:
               file: assignment/03-assignment-shell.qmd
             - text: "03b: Shell Exercise"
               file: assignment/03-assignment-shell-2.qmd
+            - text: "04: "
+              file: assignment/04-assignment-.qmd
             - text: "05: dplyr"
               file: assignment/05-assignment-dplyr.qmd
+            - text: "06: "
+              file: assignment/06-assignment-.qmd
             - text: "07: FARS data exercise"
               file: assignment/07-assignment-fars.qmd
+            - text: "08: "
+              file: assignment/08-assignment-.qmd
             - text: "09: Iterating on the GSS"
               file: assignment/09-assignment-iteration.qmd
             - text: "10: Databases and APIs"
               file: assignment/10-assignment-databases.qmd
+            - text: "11: "
+              file: assignment/11-assignment-.qmd
             - text: "12: The Whole Enchilada"
               file: assignment/12-assignment-enchilada.qmd
 
@@ -117,6 +125,8 @@ website:
           contents:
             - text: "01: A Tiny Project"
               file: example/01-example-oecd.qmd
+            - text: "02: "
+              file: example/02-example-.qmd
             - text: "03: The Shell"
               file: example/03-example-shell.qmd
             - text: "04: Graphing with ggplot"
@@ -125,12 +135,18 @@ website:
               file: example/05-example-dplyr.qmd
             - text: "06: More dplyr"
               file: example/06-example-dplyr-and-more.qmd
+            - text: "07: "
+              file: example/07-example-.qmd
             - text: "08: Git and GitHub"
               file: example/08-example-git.qmd
             - text: "09: Iteration"
               file: example/09-example-iteration.qmd
             - text: "10: Databases and APIs"
               file: example/10-example-databases.qmd
+            - text: "11: "
+              file: example/11-example-.qmd
+            - text: "12: "
+              file: example/12-example-.qmd
 
 
   page-footer:

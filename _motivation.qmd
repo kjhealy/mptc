@@ -4,6 +4,41 @@ As researchers and scholars we depend on software to get our work done. But ofte
 
 All of that is bad. This course is meant to help. The coding and data analysis tools we have are powerful, but the way the work tends to run against the grain of the devices we use most often: our phones. As a rule, apps on your phone hide their implementation details from you. They do not want you to worry too much about where things are stored, or how things are accomplished, or what happens if you need to do the same thing again later. They don't talk to each other much, either. The fragmented and multifacted tasks associated with scholarly research, meanwhile, make distinctive demands on software. Most of them have to do with the need for *control* over what you are doing, and especially the importance of having a *record* of what you did that you can revisit and *reproduce* if needed. They also need to let us  track down and diagnose errors. And they must assist us in pulling disparate pieces of a project together into a presentable final product like a talk, an article, or a book. This can be a tricky process to think about and manage in a systematic way.
 
-To address these challenges, modern technical computing platforms provide us with a suite of powerful, modular, [composable](https://en.wikipedia.org/wiki/Function_composition_(computer_science)) tools and techniques. The bad news is that they are not magic; they cannot do our thinking for us. The good news is that they are stable and reliable. Many are supported by helpful communities. Most are developed and improved in the open. Almost all are available for free. Nearly without exception, they tend to work through the medium of explicit, structured instructions written out in plain text. In other words they work by having you write some code, in the broadest sense. People who do research involving structured data of any kind should become familiar with these tools. Lack of familiarly with the basics encourages bad habits and unhealthy attitudes ranging from misplaced contempt to creeping despair.
+To address these challenges, modern technical computing platforms provide us
+with a suite of powerful, modular,
+[composable](https://en.wikipedia.org/wiki/Function_composition_(computer_science))
+tools and techniques. The bad news is that they are not magic; they cannot do
+our thinking for us. The good news is that they are stable and reliable. Many
+are supported by helpful communities. Most are developed and improved in the
+open. Almost all are available for free. Nearly without exception, they tend to
+work through the medium of explicit, structured instructions written out in
+plain text. In other words they work by having you write some code, in the
+broadest sense. People who do research involving structured data of any kind
+should become familiar with these tools. Lack of familiarly with the basics
+encourages bad habits and unhealthy attitudes ranging from misplaced contempt to
+creeping despair.
 
-Throughout the seminar we will move back and forth between two perspectives. First, we will learn about *specific tools* and tricks associated with using them. Concretely we will learn how to use the file system, the terminal, a text editor, and a programming language and development environment oriented to the analysis of tabular data. At this level we will focus on examples that come up in our everyday work. But second, we will try to develop a *way of thinking* about what we are doing. We don't need to learn every tool in the box right away. There are far too many of them to even try, in any case. Rather, we will try to understand why these tools work the way they do, and why the approach they embody is so useful. In the process we will cultivate an attitude of determined curiosity that will help us notice and solve problems in our work as they (inevitably) arise, even when they are (undeniably) frustrating.
+Within the past few years---really, within the past eighteen months---it has
+become possible to integrate this toolset with software agents powered by large
+language models (LLMs). These agents are remarkably powerful and often quite
+strange. We are still figuring out how they can best be used in our work. At a
+minimum, we know that we do *not* want to simply hand over all parts of the
+research process to a robot and believe everything it tells us about what it
+produces. But it's also true that, at least in the short run, these tools offer
+tremendous leverage for many tasks. So we'll be exploring the scope and
+limits of that leverage this semester. But to do that we will need some good
+intuition for what the robot is doing and, just as importantly, a solid
+understanding of the tools that we are allowing it to use.
+
+Throughout the seminar we will move back and forth between two perspectives.
+First, we will learn about *specific tools* and tricks associated with using
+them. Concretely we will learn how to use the file system, the terminal, a text
+editor, and a programming language and development environment oriented to the
+analysis of tabular data. At this level we will focus on examples that come up
+in our everyday work. But second, we will try to develop a *way of thinking*
+about what we are doing. We don't need to learn every tool in the box right
+away. There are far too many of them to even try, in any case. Rather, we will
+try to understand why these tools work the way they do, and why the approach
+they embody is so useful. In the process we will cultivate an attitude of
+determined curiosity that will help us notice and solve problems in our work as
+they (inevitably) arise, even when they are (undeniably) frustrating.

@@ -6,7 +6,7 @@ author:
     affiliations:
       - id: duke
         name: Duke University
-date: "2025-08-16"
+date: "2026-08-19"
 date-format: long
 format:
   html:
@@ -25,11 +25,12 @@ library(pander)
 
 # About this course
 
-This course is an introduction to modern plain-text methods of data
-analysis, data management, and coding. It is required for first-year
-graduate students in the Sociology department. It introduces a collection of computing tools and techniques that are widely used in the department, the discipline, across the social sciences, and beyond. We
-will learn to use these tools and also learn why they exist and why they
-are important for producing work that is reliable, reproducible, and
+This course is an introduction to modern plain-text methods of data analysis,
+data management, and coding. It is required for first-year graduate students in
+the Sociology department. It introduces a collection of computing tools and
+techniques that are widely used in the department, across the social sciences,
+and beyond. We will learn to use these tools and also learn why they exist and
+why they are important for producing work that is reliable, reproducible, and
 open to inspection.
 
 {{< include ../_motivation.qmd >}}
@@ -65,9 +66,11 @@ manage the engine-room of R itself. It is also freely available.
 
 # Website, Canvas, and Slack
 
-The course website is at <https://mptc.io>. Each week, slides, readings,
-and other class material will be posted there along with additional
-examples and the problem set due the following week. We will use Duke's Learning CMS, Canvas, for submission of assignments and to host some readings. There is also a Slack workspace for the course. Details about joining it will be provided via email.
+The course website is at <https://mptc.io>. Each week, slides, readings, and
+other class material will be posted there along with additional examples and the
+problem set due the following week. We will use Duke's Learning CMS, Canvas, for
+submission of assignments and to host some readings. There is also a Slack
+workspace for the course. Details about joining it will be provided via email.
 
 # Weekly Schedule
 
@@ -77,16 +80,37 @@ The schedule is shown in @tbl-schedule. It is subject to change.
 
 # Expectations
 
-This is a graduate seminar. I take it for granted that you have a basic interest in the material, an enthusiastic attitude toward participation, and a respectful attitude to everyone in the room. I expect you to attend each meeting, do the required reading and assignments thoroughly and on time, and participate actively. Participating actively means contributing to class discussion and problem-solving, something that involves both speaking and listening. Do not silently wander off during class, as if the person speaking in front of you was on a screen. Each class meeting will have a short break in the middle.
+This is a graduate seminar. I take it for granted that you have a basic interest
+in the material, an enthusiastic attitude toward participation, and a respectful
+attitude to everyone in the room. I expect you to attend each meeting, do the
+required reading and assignments thoroughly and on time, and participate
+actively. Participating actively means contributing to class discussion and
+problem-solving, something that involves both speaking and listening. Do not
+silently wander off during class, as if the person speaking in front of you was
+on a screen. Each class meeting will have a short break in the middle.
 
-The main purpose of the first year graduate sequence is to teach you some core things about the field that are either required for you to do good work, or extremely useful toward that end, but which you do not already know. This has some implications that might not be immediately obvious. First, I am not making you read or do things in order to waste your time or haze you in some weird fashion. Second, your role in the class is to try to learn things you don't already know and not, for example, to try to impress me, your peers, or yourself with how clever you are. Third, this point also applies to my role as the instructor. Fourth, the people in the room---including me---are not your competitors or enemies; they are your interlocutors. Academic disciplines are just highly-structured, long-running conversations involving specialized show-and-tell and question-and-answer formats. This is where you start learning what the conversation topics are, what you need to know in order to make something useful, and how to begin making your own contributions. So please, trust the process. Everything will go better if you do.
+The main purpose of the first year graduate sequence is to teach you some core
+things about the field that are either required for you to do good work, or
+extremely useful toward that end, but which you do not already know. This has
+some implications that might not be immediately obvious. First, I am not making
+you read or do things in order to waste your time or haze you in some weird
+fashion. Second, your role in the class is to try to learn things you don't
+already know and not, for example, to try to impress me, your peers, or yourself
+with how clever you are. Third, this point also applies to my role as the
+instructor. Fourth, the people in the room---including me---are not your
+competitors or enemies; they are your interlocutors. Academic disciplines are
+just highly-structured, long-running conversations involving specialized
+show-and-tell and question-and-answer formats. This is where you start learning
+what the conversation topics are, what you need to know in order to make
+something useful, and how to begin making your own contributions. So please,
+trust this process. Everything will go better if you do.
 
 # Required work and assessment
 
-Weekly **Class Participation** (50% of final grade) and **Assignments**
-(50% of final grade) will let you reflect on the reading and practice
-your skills. Assignments due by end of day the *Friday after* the class they
-are assigned. Submit assignments via Canvas.
+Weekly **Class Participation** (50% of final grade) and **Assignments** (50% of
+final grade) will let you reflect on the reading and practice your skills.
+Assignments due by end of day the *Friday* after the class they are assigned.
+Submit assignments via Canvas.
 
 # Course policies
 
@@ -95,7 +119,17 @@ are assigned. Submit assignments via Canvas.
     that is possible.
 -   Do the assigned readings in advance of class.
 -   Submit problem sets, or other assignments, on time.
--   Do not use AI tools to complete assignments unless I explicitly say that you may do so. We'll discuss them, their uses, and their limitations by the end of the course. But if you use them before then for an assigment, you will get an F for the course. I am not joking. The point of this seminar---the whole reason it is required---is for you to learn how to do things for yourself, and to understand what it is you are doing. When it comes to writing scripts or navigating documentation or debugging bits of code, AI can be very handy once you know what you are doing. But first you have to know what you are doing.
+-   Do not use AI tools to complete assignments unless I explicitly say that you
+may do so. We'll discuss them, their uses, and their limitations as we go. These
+tools are new, powerful, and changing very fast. They play an increasing role in
+many aspects of the work we do, especially insofar as it touches on how we write
+and work with code and how we manage some of the mundane tasks associated with
+managing data. But if you use them before then for an assigment, you will get an
+F for the course. I am not joking. The point of this seminar---the whole reason
+it is required---is for you to learn how to do some things for yourself, and to
+understand what it is you are doing. By the end of the course we will likely be
+using AI tools of various kinds to help us out, because AI can be very handy
+once you know what you are doing. But first you have to know what you are doing.
 
 
 # Duke community standard
