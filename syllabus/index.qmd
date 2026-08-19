@@ -124,12 +124,13 @@ may do so. We'll discuss them, their uses, and their limitations as we go. These
 tools are new, powerful, and changing very fast. They play an increasing role in
 many aspects of the work we do, especially insofar as it touches on how we write
 and work with code and how we manage some of the mundane tasks associated with
-managing data. But if you use them before then for an assigment, you will get an
-F for the course. I am not joking. The point of this seminar---the whole reason
-it is required---is for you to learn how to do some things for yourself, and to
-understand what it is you are doing. By the end of the course we will likely be
-using AI tools of various kinds to help us out, because AI can be very handy
-once you know what you are doing. But first you have to know what you are doing.
+managing data. But if you use them for an assigment when I asked you not to, you
+will get an F for the course. I am not joking. The point of this seminar---the
+whole reason it is required---is for you to learn how to do some things for
+yourself, and to understand what it is you are doing. By the end of the course
+we will likely be using AI tools of various kinds to help us out, because AI can
+be very handy once we know what we are doing. But first we have to know what
+we are doing.
 
 
 # Duke community standard
