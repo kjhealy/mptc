@@ -33,7 +33,7 @@ PDFs of all these readings are available on Canvas.
 
 ## Assignments
 
-- This week (and only this week) there are _two_ assignments. [Assignment 00](/assignment/00-assignment-install-r-github.qmd) is, as it were, the zeroth assignment and is due on the first day of class. [Assignment 01](/assignment/01-assignment-quarto-notes.qmd) is the first regular assignment and is due Friday, August 29th.
+- This week (and only this week) there are _two_ assignments. [Assignment 00](/assignment/00-assignment-install-r-github.qmd) is, as it were, the zeroth assignment and is due on the first day of class. [Assignment 01](/assignment/01-assignment-quarto-notes.qmd) is the first regular assignment and is due Friday, August 28th.
 
 ## Slides
 
