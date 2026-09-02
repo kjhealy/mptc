@@ -1,6 +1,6 @@
 ---
 title: "Assignment 01: Quarto Notes"
-date: "2026-08-28"
+date: "2026-08-30"
 ---
 
 ```{r setup, include=FALSE}
@@ -13,13 +13,23 @@ This is the first regular assignment for the course.
 
 ## Task 1: Write up your notes for the first class meeting
 
-You should have taken notes during the first class meeting. If you didn't, you should take notes now, as soon as possible afterwards. Make notes in a Quarto file within the `mptc` project folder you made. Choose a file name for your notes and, in the first paragraph of the notes, explain your choice of file name and what you think a sensible organization strategy for the `mptc` project folder would be. In addition, tell me where exactly on your computer the `mptc` project is, and why it is there.
+You should have taken notes during the first class meeting. If you are taking
+notes in something other than Quarto, that's fine. If you didn't take notes at
+all, you should think about starting to take notes. What I want you to do is
+make a Quarto file within some RStudio project. (Loose advice: I like to have a
+"scratch" folder, in the sense of a
+[scratchpad](https://en.wikipedia.org/wiki/Scratchpad), where I can create
+single-use script files or one-off quick documents that are not yet projects.)
+Choose a name for this file and, in the file itself explain your choice of file
+name. In addition, tell me where exactly on your computer the this file is, and
+why it is there.
 
-For the remainder of the notes, write up or include whatever you want to recall
-or have questions about from the first class meeting. You can include
-screenshots, code snippets, bibliographical references, or whatever else you think would be
-useful for you.
+For the remainder of the quarto file, feel free to write up or include whatever
+you want from the first class meeting. Or, use it to practice the rudiments of
+RMarkdown based on the content of the second batch of slides from Week 1. You
+can include code snippets, bibliographical references, experiments with document
+structure or formatting, or whatever else you think would be useful for you.
 
 ## Task 2: Render your notes to PDF and submit it to Canvas
 
-Create a PDF version of your notes. There will be a Canvas assignment where you can upload the PDF file.
+Create a PDF version of your file. There will be a Canvas assignment where you can upload the PDF file.

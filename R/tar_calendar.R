@@ -23,6 +23,30 @@ format_days <- function(date, day2, date_end) {
   )
 }
 
+# One of the three icons in a schedule row. The path in schedule.xlsx says where
+# a week's page *will* live, which is not the same as it being written yet: the
+# spreadsheet is filled in for the whole term up front. So link the icon only
+# once the .qmd is actually in the repo, and grey it out until then, rather than
+# pointing students at a 404. Weeks light up as their pages are added; nothing
+# in the spreadsheet has to change week to week.
+schedule_icon <- function(path, icon) {
+  page <- here::here(paste0(
+    stringr::str_remove(dplyr::coalesce(path, ""), "^/"),
+    ".qmd"
+  ))
+  linked <- !is.na(path) & unname(fs::file_exists(page))
+
+  ifelse(
+    linked,
+    glue::glue(
+      '<a href="{path}.qmd"><i class="fa-solid {icon} fa-lg"></i></a>'
+    ),
+    glue::glue(
+      '<font color="#e9ecef"><i class="fa-solid {icon} fa-lg"></i></font>'
+    )
+  )
+}
+
 # Read the schedule xlsx file and create/format columns for displaying on the
 # schedule page. Returns a data frame with all rows tidyr::nested by group to make it
 # easier to display the schedule by group
@@ -43,15 +67,9 @@ build_schedule_for_page <- function(schedule_file) {
     dplyr::mutate(var_deadline = ifelse(!is.na(deadline),
                                         glue::glue('&emsp;&emsp;<small>(Submit by {deadline})</small>'),
                                         glue::glue(""))) |>
-    dplyr::mutate(var_content = ifelse(!is.na(content),
-                                       glue::glue('<a href="{content}.qmd"><i class="fa-solid fa-book-open-reader fa-lg"></i></a>'),
-                                       glue::glue('<font color="#e9ecef"><i class="fa-solid fa-book-open-reader fa-lg"></i></font>'))) |>
-    dplyr::mutate(var_example = ifelse(!is.na(example),
-                                       glue::glue('<a href="{example}.qmd"><i class="fa-solid fa-laptop-code fa-lg"></i></a>'),
-                                       glue::glue('<font color="#e9ecef"><i class="fa-solid fa-laptop-code fa-lg"></i></font>'))) |>
-    dplyr::mutate(var_assignment = ifelse(!is.na(assignment),
-                                          glue::glue('<a href="{assignment}.qmd"><i class="fa-solid fa-pen-ruler fa-lg"></i></a>'),
-                                          glue::glue('<font color="#e9ecef"><i class="fa-solid fa-pen-ruler fa-lg"></i></font>'))) |>
+    dplyr::mutate(var_content = schedule_icon(content, "fa-book-open-reader")) |>
+    dplyr::mutate(var_example = schedule_icon(example, "fa-laptop-code")) |>
+    dplyr::mutate(var_assignment = schedule_icon(assignment, "fa-pen-ruler")) |>
     dplyr::mutate(col_date = format_days(date, day2, date_end)) |>
     dplyr::mutate(col_title = glue::glue('{var_title}{var_deadline}{var_note}')) |>
     dplyr::mutate(col_content = var_content,

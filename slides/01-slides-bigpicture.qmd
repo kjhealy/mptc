@@ -41,13 +41,13 @@ library(flipbookr)
 
 :::: {.columns}
 
-::: {.column width="45%"}
+::: {.column width="65%"}
 
 ![](../assets/01-file-system/01_stock_happy_people_computer_2.png){width=100%}
 
 :::
 
-::: {.column width="45%" .right .incremental}
+::: {.column width="35%" .right .incremental}
 
 :::: {.fragment fragment-index=1}
 ### [No.]{.fg-red}
@@ -67,14 +67,14 @@ library(flipbookr)
 
 :::: {.columns}
 
-::: {.column width="45%"}
+::: {.column width="65%"}
 
 
 ![](../assets/01-file-system/01_stock_happy_woman_computer_2.png)
 
 :::
 
-::: {.column width="45%" .right}
+::: {.column width="35%" .right}
 
 :::: {.fragment fragment-index=1}
 ### [Also no.]{.fg-red}
@@ -171,8 +171,8 @@ Also it's weirdly satisfying once you get into it.
 ::: {.column width="45%"}
 
 - It's a file!
-- Of a particular type (a PDF)
-- You can't easily edit it
+- Of a particular type (a PDF).
+- You can't easily edit it.
 - It has a title, author, sections, a figure, tables, references, a footnote, and a bibliography.
 - That is, it has many of the elements of a scholarly paper, in miniature.
 
@@ -207,8 +207,8 @@ Also it's weirdly satisfying once you get into it.
 ::: {.column width="45%"}
 
 - It's also a file!
-- Of a particular type (still a PDF)
-- You still can't easily edit it
+- Of a particular type (still a PDF).
+- You still can't easily edit it.
 - It has all the stuff in the original version _plus_ a bunch of code that we can now see that was not shown before.
 
 :::
@@ -243,7 +243,15 @@ It's a folder on your computer with a bunch of files in it.
 
 ## (Sound of Engine Trying to Start)
 
-This slide is up because we are installing the required software by following the instructions handed out earlier. In other words, we are discovering the inevitable idiosyncrasies of everyone's individual setup, the vagaries of various operating systems, the intrinsic difficulty of following documented steps in a procedure, the hidden bits of implicit knowledge or not-fully-articulated steps that are nevertheless necessary, the high prevalence of ordinary error and failure in everyday life, and the awful grip of chance on human affairs in general.
+This slide is up because we are installing the required software by following
+the detailed instructions handed out earlier. In other words, we are discovering
+the inevitable idiosyncrasies of everyone's individual setup; the vagaries of
+various operating systems; the intrinsic difficulty of following documented
+steps, or a recipe, or a procedure, indeed the philosophical impossibility of
+the idea of "following a rule" as such; the hidden bits of implicit knowledge or
+not-fully-articulated steps that are nevertheless necessary for success; the
+high prevalence of ordinary error and failure in everyday life; and the awful
+grip of chance on human affairs.
 
 ## Main Ideas
 
@@ -264,12 +272,14 @@ This slide is up because we are installing the required software by following th
 ::: {.large}
 
 - We're going to back up and go through these pieces slowly.
-- Keep in mind why we're doing it. (We want to reliably produce a scholarly paper).
+- Keep in mind why we're doing it. (We want to write a piece of scholarship to
+show other people; we want to be able to edit it as we are writing it; we want to
+be able to reproduce it later if needed.)
 - Also start thinking about why the tools we're using might look like this.
 
 :::
 
-# Two Revolutions in Computing
+# Three Revolutions in Computing
 
 
 ## What everyday computing is now
@@ -300,7 +310,7 @@ This slide is up because we are installing the required software by following th
 
 ::: {.large}
 
-[[_Multi-tasking_]{.fg-orange}: I mean, “Making different specialized applications and resources work together in the service of a single but multi-dimensional project”, not “Checking social media while also listening to a talk and waiting for an update from the school nurse.”]{.larger .center .absolute top="30%"}
+[[_\*Multi-tasking_]{.fg-orange}: I mean, “Making different specialized applications and resources work together in the service of a single but multi-dimensional project”, not “Checking social media while also listening to a talk and waiting for an update from the school nurse.”]{.larger .center .absolute top="30%"}
 
 :::
 
@@ -366,6 +376,16 @@ This slide is up because we are installing the required software by following th
  The most important thing is to be able to [_confidently know and clearly show what it was that you did_]{.fg-red} in the service of doing your work properly.
 
 :::
+
+### &nbsp;
+
+::: {.large .left}
+
+ Work, remember, that [_you are responsible for_]{.fg-red}.
+
+:::
+
+
 
 ## "Office" vs "Engineering" approaches
 
@@ -454,5 +474,50 @@ The challenge of "Knowing and Showing" gives rise to questions like these:
 :::{.huge .center}
 ::::{.absolute top="10%"}
 [Each approach generates solutions to its own problems]{.fg-red}
+::::
+:::
+
+# Wait, what's the third revolution?
+
+## The robots kinda work now
+
+:::: {.columns}
+::: {.column width="40%"}
+  ![](../assets/01-file-system/01_robot_solid.png){width="100%"}
+
+:::
+
+::: {.column width="60%"}
+
+LLMs and "AI" in general are huge [force-multipliers]{.fg-red} for the kind of computing
+people like us do a lot of. They give you _leverage_. In engineering, in
+finance, and in general, having tremendous amounts of leverage
+
+- makes a lot of things much faster.
+- makes a lot of things more fun.
+- makes a lot of things way weirder.
+- makes a lot of things very dangerous.
+
+:::
+::::
+
+## The robots kinda work now
+
+- One reason the robots kinda work now is that they offer an action loop
+that---astonishingly---can be addressed and reply in natural language, and
+that can use and usefully respond to the output of many more specific, often
+older and more specialized tools.
+
+- To effectively use this loop, we need a good theory of what we are doing when
+we talk to the robot, a good understanding of the tools it is permitted to use,
+and a solid grasp of what talking to the robot and letting it use tools can do
+in combination (up to and including destroying your computer and/or your
+career).
+
+---
+
+:::{.huge .center}
+::::{.absolute top="10%"}
+[You don't learn how to do a thing by not doing it]{.fg-blue}
 ::::
 :::

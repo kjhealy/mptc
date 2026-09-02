@@ -1,0 +1,95 @@
+---
+title: "03. Using R to look at data"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+We'll spend most of the rest of the semester working in R. Time to learn it! We
+will learn some basics of R mostly via drawing graphs of our data.
+
+## Required Reading
+
+- @wickham23:_r_data_scien.
+
+[Read the text online.](https://r4ds.hadley.nz/) Complete as much of the "[Whole
+Game](https://r4ds.hadley.nz/whole-game)" section as you can, i.e. Chapters 1-8.
+(They are short.) Use the R project for your chosen data, create a new project,
+or add a Quarto document to your existing class notes project, and try doing
+some of the examples and code in the Whole Game section using data of your own,
+or the dataset you chose from last week's assignment. Don't worry if things
+don't go as expected, but do make a note of what you found difficult or
+confusing so we can discuss it in seminar.
+
+- @healyDataVisualizationPractical2027 Read Chapters 1 to 4. There's a good deal
+of overlap with Wickham et al and with the slides.
+
+I've also put the slides up in advance, as we will be working more interactively
+in class starting this week. So work through the slides alongside the reading.
+Again, there's a subtantial amount of overlap between the readings and the
+slides. Hopefully the repetition will help you get the gist of how the language
+works. Practice is the best way to learn, though. Ask questions in the Slack if
+you run into anything you don't understand, or come to class ready to ask.
+
+## Examples
+
+[R basics and ggplot examples.](/example/03-example-ggplot.qmd)
+
+## Assignment
+
+
+## Slides
+
+The "R and Quarto" slides repeat some of the material from the first week, just
+for convenience, and then move on to the introduction to R and ggplot.
+
+```{=html}
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+<iframe class="slide-deck" id="quartoframe" src="../slides/03-slides-r-and-quarto.html"></iframe>
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/03-slides-r-and-quarto")
+```
+
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/03-slides-ggplot-1.html"></iframe>
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+slide_buttons("/slides/03-slides-ggplot-1")
+```
+
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/03-slides-ggplot-2.html"></iframe>
+```
+
+```{r show-slide-tabs3, echo=FALSE, results="asis"}
+slide_buttons("/slides/03-slides-ggplot-2")
+```

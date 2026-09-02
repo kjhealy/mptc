@@ -1,6 +1,6 @@
 ---
 title: "Files & the File System"
-subtitle: "Modern Plain Text Computing<br />Week 03a"
+subtitle: "Modern Plain Text Computing<br />Week 02"
 format: kjhslides-revealjs
 engine: knitr
 filters:
@@ -46,7 +46,7 @@ library(flipbookr)
 
 ::: {.column width="35%"}
 
-You very likely have never used one of these. Perhaps you've never even seen one in real life.
+You very likely have never used one of these. Maybe you've never even seen one in real life.
 
 :::
 

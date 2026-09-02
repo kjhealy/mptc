@@ -1,6 +1,5 @@
 ---
-title: "03. The File System and the Shell"
-date: last-modified
+title: "02. The File System and the Shell"
 date-format: full
 ---
 
@@ -19,10 +18,6 @@ A shell is how we talk to the operating system; it is the thing that executes pr
 
 The shell's interface is a _command interpreter_. Languages like R and Python work in the same way when you are writing them. We will also see how the shell implements its own version of the sort of thing you may have already seen when using R, namely, many single-purpose commands (more or less equivalent to R's functions) that can be chained or pipelined together into sequences that can do quite complex tasks one piece at a time.
 
-## Readings
-
-_After_ you have completed this week's [assignment](/assignment/03-assignment-shell.qmd), read the first chapter of @barrett22:_effic_linux.
-
 
 ## Two Videos
 
@@ -34,18 +29,22 @@ _After_ you have completed this week's [assignment](/assignment/03-assignment-sh
 
 <iframe width="560" height="315" src="https://www.youtube.com/embed/tc4ROCJYbm0?si=gVXYm4heKI5WoRQ-&amp;start=296" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
 
-## Examples
 
-[This week's examples and demos](/example/03-example-shell.qmd).
+## Reading
+
+- @kernighanUNIXHistoryMemoir2019 Excerpts. (PDF is on Canvas.)
+- @ritchieUNIXTimeSharingSystem1974 Read sections 1 to 3.5 and 8. (PDF is on Canvas.)
+
+## Assignments
+
+There is an assignment due on Sunday, September 6th.
+
+- [Assignment 02: Find Some Data](/assignment/02-assignment-find-some-data.qmd)
 
 
-## Assignment, parts 1 and 2
-
-[This week's assignment, part 1](/assignment/03-assignment-shell.qmd).
-
-[This week's assignment, part 2](/assignment/03-assignment-shell-2.qmd).
 
 ## Slides
+
 
 ```{=html}
 <script type="application/javascript">
@@ -63,18 +62,19 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
-<!-- <iframe class="slide-deck" id="quartoframe" src="../slides/03-slides-filesystem.html"></iframe> -->
-```
+<iframe class="slide-deck" id="quartoframe" src="../slides/02-slides-filesystem.html"></iframe
 
+
+```
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-# slide_buttons("/slides/03-slides-filesystem")
+slide_buttons("/slides/02-slides-filesystem")
 ```
 
 
 ```{=html}
-<!-- <iframe class="slide-deck" id="quartoframe" src="../slides/03-slides-shell.html"></iframe> -->
+<iframe class="slide-deck" id="quartoframe" src="../slides/02-slides-shell.html"></iframe
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-# slide_buttons("/slides/03-slides-shell")
+slide_buttons("/slides/02-slides-shell")
 ```

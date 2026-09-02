@@ -1,6 +1,6 @@
 ---
 title: "Make Some Graphs"
-subtitle: "Modern Plain Text Social Science<br />Week 04"
+subtitle: "Modern Plain Text Social Science<br />Week 03"
 format: kjhslides-revealjs
 engine: knitr
 filters:

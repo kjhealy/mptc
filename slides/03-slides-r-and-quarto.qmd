@@ -1,6 +1,6 @@
 ---
 title: "R and Quarto"
-subtitle: "Modern Plain Text Social Science<br />Week 04"
+subtitle: "Modern Plain Text Social Science<br />Week 03"
 format: kjhslides-revealjs
 engine: knitr
 filters:
@@ -272,16 +272,6 @@ Notebook-style documents like Quarto files are great as part of larger projects.
 - After some orientation to what's where, you will learn best by _doing_.
 - Software is a pain, but you won't crash the car or burn your house down.
 
----
-
-:::{.huge}
-TYPE OUT<br />YOUR CODE<br />[BY HAND]{.fg-orange}
-:::
-
----
-
-![Samuel Beckett](../assets/04-r/04_beckett_fail_better.png){fig-align="center" width=90%}
-
 
 # Getting O[r]{.fg-green}iented
 
@@ -307,6 +297,20 @@ TYPE OUT<br />YOUR CODE<br />[BY HAND]{.fg-orange}
 [**Combine**]{.fg-green}
 
 :::
+
+## Split, Apply, Combine
+
+A fundamental pattern in data analysis:
+
+- [**Split**]{.fg-lblue} the table of data by some grouping (e.g. by continent, by year, etc)
+- [**Apply**]{.fg-red} some function or action to each group (e.g., count the number of rows,
+take a mean, fit a model, whatever)
+- [**Combine**]{.fg-green} the result into a new table that has the same number of _rows_ as
+there were _groups_ that we split the data into.
+
+The tricks are that the _split_ step can be nested in various ways; the _apply_
+step can be as complex as we like; and the _combine_ step can create a new table
+that we pass on to some other function for processing.
 
 ## Before we start
 
@@ -353,7 +357,7 @@ gapminder |>
 ```
 
 
-## Loading the tidyverse libraries
+## Loading the tidyverse packages
 
 ```{.r}
 library(tidyverse)
@@ -727,7 +731,7 @@ help(mean)
 ```
 
 
-- How to read an R help page?
+- From _Data Visualization_: [How to read an R help page?](https://socviz.co/09-appendix.html#how-to-read-an-r-help-page)
 
 ## What functions usually do
 
@@ -831,6 +835,19 @@ c(1:20) |> mean() |> summary() |> names() |>  length()
 ```
 
 Read this operator as "_[**and then**]{.fg-green}_"
+
+Write it by typing `|` followed by `>`. Or, much better, do it in a single
+action by pressing `Cmd + Shift + M` on your Mac, or `Ctrl + Shift + M` on
+Windows.
+
+(That's three keys, the `Command` key, the `Shift` key and the `M` key. Hold
+down `Command` and `Shift` with your left hand, and press `M` with your right
+hand.)
+
+Depending on your RStudio settings, this shortcut will insert either the
+magrittr pipe (`%>%`) or the native base R pipe (`|>`). If you see the magrittr
+pipe, it by going to Tools > Global Options > Code and toggling the option for
+the native pipe.
 
 ## Use the pipe operator: [|>]{.fg-green}
 

@@ -1,8 +1,15 @@
 ---
 title: "The File System & the Shell"
-subtitle: "Modern Plain Text Computing<br />Week 03b"
+subtitle: "Modern Plain Text Computing<br />Week 02"
 format: kjhslides-revealjs
 engine: knitr
+# The `find`/`mogrify` demo below runs `find .`, deletes every .jpg it
+# finds, and ends with `rm -rf files/`. Pin execution to slides/ so those
+# commands stay inside this directory and cannot reach the project root,
+# which the project-wide `execute-dir: project` would otherwise make them do.
+knitr:
+  opts_knit:
+    root.dir: "."
 filters:
   - invert-h1
   - include-code-files
@@ -258,8 +265,7 @@ echo "Hello there"
 - A shell waits for commands. When you supply them, it does what you tell it, or tells the relevant bit of the operating system to do what you said. Then it tells you what happened, and waits for the next command.
 - This way of interacting with a computer is sometimes called a _REPL_ or Read-Eval-Print Loop.
 - Python and R work this way as well. They are sometimes called _interpreted_ languages, meaning code is sent to an interpreter (the Python or R program) that runs it.
-- This is distinct from languages that must be _compiled_ into executable machine code before they are run. Languages like C, Go, and Rust are in this category.
-- (This distinction does not really stand up to detailed scrutiny with modern languages.)
+- This is distinct from languages that must be _compiled_ into executable machine code before they are run. Languages like C, Go, and Rust are in this category. (This distinction does not really stand up to detailed scrutiny with modern languages.)
 
 :::
 

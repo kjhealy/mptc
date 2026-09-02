@@ -9,55 +9,55 @@ DTSTART;VALUE=DATE:20260825
 DTEND;VALUE=DATE:20260826
 SUMMARY:(Week 1) Big Picture: Doing your work properly
 DESCRIPTION:https://mptc.io/content/01-content-doing-your-work.html
-DTSTAMP:20260819T151750Z
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-8238ddde-58be-4a69-bd92-b0c0fb679cc8
 DTSTART;VALUE=DATE:20260901
 DTEND;VALUE=DATE:20260902
-SUMMARY:(Week 2) Finding data and storing it
-DESCRIPTION:https://mptc.io/content/02-content-file-system.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 2) The file system and the shell
+DESCRIPTION:https://mptc.io/content/02-content-file-system-and-shell.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-19e728ee-19b3-40df-88a6-f06f3ec187cf
 DTSTART;VALUE=DATE:20260908
 DTEND;VALUE=DATE:20260909
-SUMMARY:(Week 3) The shell and the terminal
-DESCRIPTION:https://mptc.io/content/03-content-shell.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 3) Using R to look at data
+DESCRIPTION:https://mptc.io/content/03-content-r-and-ggplot.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-2e3d4ba7-8fc6-4275-8652-033741105fed
 DTSTART;VALUE=DATE:20260915
 DTEND;VALUE=DATE:20260916
-SUMMARY:(Week 4) Using R to look at data
-DESCRIPTION:https://mptc.io/content/04-content-r.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 4) Tidy data and dplyr
+DESCRIPTION:https://mptc.io/content/04-content-dplyr.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-7a35789c-9f7a-4d07-b6e4-8459842558bf
 DTSTART;VALUE=DATE:20260922
 DTEND;VALUE=DATE:20260923
-SUMMARY:(Week 5) Tidy data and dplyr
-DESCRIPTION:https://mptc.io/content/05-content-dplyr.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 5) More on dplyr, tidyr, and related packages
+DESCRIPTION:https://mptc.io/content/05-content-dplyr-and-more.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-82af633d-2f53-43cf-b160-23a892bff144
 DTSTART;VALUE=DATE:20260929
 DTEND;VALUE=DATE:20260930
-SUMMARY:(Week 6) More on dplyr, tidyr, and related packages
-DESCRIPTION:https://mptc.io/content/06-content-dplyr-and-more.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 6) Ingesting and cleaning data
+DESCRIPTION:https://mptc.io/content/06-content-ingesting-data.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-dbf00017-39f4-4728-9f2d-cb95cb59791c
 DTSTART;VALUE=DATE:20261006
 DTEND;VALUE=DATE:20261007
-SUMMARY:(Week 7) Ingesting and cleaning data
-DESCRIPTION:https://mptc.io/content/07-content-ingesting-data.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 7) Version Control: git and GitHub
+DESCRIPTION:https://mptc.io/content/07-content-git.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-b314b6b0-14e4-4fb3-83d7-4b15a2f9ca77
@@ -65,54 +65,54 @@ DTSTART;VALUE=DATE:20261013
 DTEND;VALUE=DATE:20261014
 SUMMARY:No class (Fall break)
 DESCRIPTION:
-DTSTAMP:20260819T151750Z
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-1dabbe49-1169-46f0-a08c-ea66577abedb
 DTSTART;VALUE=DATE:20261020
 DTEND;VALUE=DATE:20261021
-SUMMARY:(Week 9) Version Control: git and GitHub
-DESCRIPTION:https://mptc.io/content/08-content-git.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 9) Iterating on Data and Models
+DESCRIPTION:https://mptc.io/content/08-content-iteration.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-a21a90f7-a9e4-4f93-9fa7-fd63a9ee9c0a
 DTSTART;VALUE=DATE:20261027
 DTEND;VALUE=DATE:20261028
-SUMMARY:(Week 10) Iterating on Data and Models
-DESCRIPTION:https://mptc.io/content/09-content-iteration.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 10) Databases and APIs
+DESCRIPTION:https://mptc.io/content/09-content-databases.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-8643438b-e03b-4885-900d-921f49516b34
 DTSTART;VALUE=DATE:20261103
 DTEND;VALUE=DATE:20261104
-SUMMARY:(Week 11) Databases and APIs
-DESCRIPTION:https://mptc.io/content/10-content-databases.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 11) Parallel Computing
+DESCRIPTION:https://mptc.io/content/10-content-parallel.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-e533b99f-b013-4a74-b083-0149b2cb3391
 DTSTART;VALUE=DATE:20261110
 DTEND;VALUE=DATE:20261111
-SUMMARY:(Week 12) Parallel Computing
-DESCRIPTION:https://mptc.io/content/11-content-parallel.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 12) Helpers, build systems, and environments
+DESCRIPTION:https://mptc.io/content/11-content-build.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-c17c3cac-8319-454d-96c8-3f7d055f17ca
 DTSTART;VALUE=DATE:20261117
 DTEND;VALUE=DATE:20261118
-SUMMARY:(Week 13) Helpers, build systems, and environments
-DESCRIPTION:https://mptc.io/content/12-content-build.html
-DTSTAMP:20260819T151750Z
+SUMMARY:(Week 13) Packages, and LLMs
+DESCRIPTION:https://mptc.io/content/12-content-packages.html
+DTSTAMP:20260902T143938Z
 END:VEVENT
 BEGIN:VEVENT
 UID:ical-b80e027d-fcf6-4efa-8ae1-c8b2069447df
 DTSTART;VALUE=DATE:20261124
 DTEND;VALUE=DATE:20261125
-SUMMARY:(Week 14) Packages, and LLMs
-DESCRIPTION:https://mptc.io/content/13-content-packages.html
-DTSTAMP:20260819T151750Z
+SUMMARY:TBD
+DESCRIPTION:
+DTSTAMP:20260902T143938Z
 END:VEVENT
 END:VCALENDAR
