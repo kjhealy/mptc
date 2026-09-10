@@ -1,5 +1,5 @@
 ---
-title: "Assignment 02: Find Some Data"
+title: "Assignment WK02: Find Some Data"
 date: "2026-09-06"
 ---
 

@@ -1,5 +1,5 @@
 ---
-title: "Assignment 00: Installation"
+title: "Assignment WK00: Installation"
 date: "2026-08-25"
 ---
 

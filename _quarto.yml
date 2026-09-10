@@ -59,13 +59,13 @@ website:
               file: "content/02-content-file-system-and-shell.qmd"
             - text: "03: Using R to look at data"
               file: "content/03-content-r-and-ggplot.qmd"
+            - text: "04: Using dplyr to work with tables"
+              file: "content/04-content-r-and-dplyr.qmd"
             # Weeks not yet written. An entry here for a file that doesn't exist
             # renders as a broken sidebar link, so each stays commented out until
             # its page lands. (The schedule page greys its icons out by itself --
             # see schedule_icon() in R/tar_calendar.R -- but a Quarto sidebar
             # can't be conditional.)
-            # - text: "04: Tidy Data and dplyr"
-            #   file: "content/04-content-dplyr.qmd"
             # - text: "05: More on dplyr"
             #   file: "content/05-content-dplyr-and-more.qmd"
             # - text: "06: Getting Data in and out of R"
@@ -96,11 +96,11 @@ website:
               file: assignment/01-assignment-quarto-notes.qmd
             - text: "02: Find Some Data"
               file: assignment/02-assignment-find-some-data.qmd
+            - text: "04: UK Election Data"
+              file: assignment/04-assignment-uk-election.qmd
             # Not yet written -- see the note in the Content sidebar above.
             # - text: "03: "
             #   file: assignment/03-assignment-.qmd
-            # - text: "04: dplyr"
-            #   file: assignment/04-assignment-dplyr.qmd
             # - text: "05: "
             #   file: assignment/05-assignment-.qmd
             # - text: "06: FARS data exercise"
@@ -130,9 +130,9 @@ website:
               file: example/02-example-file-system-and-shell.qmd
             - text: "03: Graphing with ggplot"
               file: example/03-example-ggplot.qmd
+            - text: "04: Tables and dplyr"
+              file: example/04-example-dplyr.qmd
             # Not yet written -- see the note in the Content sidebar above.
-            # - text: "04: Tables and dplyr"
-            #   file: example/04-example-dplyr.qmd
             # - text: "05: More dplyr"
             #   file: example/05-example-dplyr-and-more.qmd
             # - text: "06: "
