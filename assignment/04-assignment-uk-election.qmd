@@ -1,6 +1,6 @@
 ---
 title: "Assignment WK04: UK Election Data"
-date: last-modified
+date: "2026-09-15"
 ---
 
 Create a `qmd` file for this assignment; make sure you can render it to HTML or

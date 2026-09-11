@@ -11,7 +11,7 @@ knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
 
 
 
-# Crosstabs
+# Crosstabulations
 
 ```{r}
 library(tidyverse)
@@ -38,6 +38,8 @@ gss_sm |>
   tally()
 ```
 
+## Groups are nested; order matters
+
 Notice the difference:
 
 ```{r}
@@ -46,7 +48,7 @@ gss_sm |>
   tally()
 ```
 
-Seems similar, but now try:
+The Ns are the same but the logical grouping is not. Now try:
 
 ```{r}
 # Religion within bigregion;
@@ -77,7 +79,16 @@ gss_sm |>
   pivot_wider(names_from = religion, values_from = n)
 ```
 
+We'll learn more about pivoting next week.
 
+NB There are functions and whole packages dedicated to making crosstabs (including tidy crosstabs) just with a single
+simplified call, e.g.
+[`janitor::tabyl()`](https://cran.r-project.org/web/packages/janitor/vignettes/tabyls.html)
+or more extravagantly [`crosstable`](https://danchaltiel.github.io/crosstable/).
+But that's not our focus here.
+
+
+## Behavior of groups with `summarize()` and `mutate()`
 
 ```{r}
 # Bigregion within religion
@@ -86,6 +97,7 @@ gss_sm |>
   tally()
 ```
 
+
 Consider the difference between this:
 
 ```{r}
@@ -93,6 +105,7 @@ Consider the difference between this:
 gss_sm |>
   group_by(religion, bigregion) |>
   tally() |>
+  # Summarize
   summarize(group_total = sum(n))
 ```
 
@@ -104,12 +117,12 @@ And this:
 gss_sm |>
   group_by(religion, bigregion) |>
   tally() |>
+  # Mutate
   mutate(group_total = sum(n))
 ```
 
 
-
-As many dimensions as we wish:
+As many nested grouping dimensions as we wish:
 
 ```{r}
 gss_sm |>
@@ -118,7 +131,7 @@ gss_sm |>
 ```
 
 
-Equivalently, but the result is not grouped:
+Equivalently, but the result is *not* grouped:
 
 ```{r}
 gss_sm |>

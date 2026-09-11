@@ -23,6 +23,11 @@ We'll learn about the core of working with data: doing things to rectangular tab
 
 [Read the text online.](https://r4ds.hadley.nz/) Review or redo [Chapter 3](https://r4ds.hadley.nz/data-transform) and [Chapter 5](https://r4ds.hadley.nz/data-tidy); read and work through as much of [Chapters 12-14](https://r4ds.hadley.nz/transform) as you can.
 
+
+- @healyDataVisualizationPractical2027 Review Chapter 4 and read the first main
+section of Chapter 5,
+[Use Pipes to Summarize Data](https://socviz.co/05-more-on-geoms.html#piping).
+
 - Next, read the vignettes that come with `dplyr`. (In R packages, a vignette is like and extended example or tutorial.) These are available on your computer because you've installed the package. But you can also read them online. Note that tidyverse vignettes do not use the base pipe, `|>`, they use the magrittr pipe, `%>%` instead. But for our purposes they are equivalent.
 
 Read the following vignettes that come with `dplyr`, in the order listed:
