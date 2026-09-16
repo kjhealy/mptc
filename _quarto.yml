@@ -61,27 +61,25 @@ website:
               file: "content/03-content-r-and-ggplot.qmd"
             - text: "04: Using dplyr to work with tables"
               file: "content/04-content-r-and-dplyr.qmd"
+            - text: "05: Tidying, Reshaping, and Ingesting Data"
+              file: "content/05-content-r-tidying-and-ingesting.qmd"
             # Weeks not yet written. An entry here for a file that doesn't exist
             # renders as a broken sidebar link, so each stays commented out until
             # its page lands. (The schedule page greys its icons out by itself --
             # see schedule_icon() in R/tar_calendar.R -- but a Quarto sidebar
             # can't be conditional.)
-            # - text: "05: More on dplyr"
-            #   file: "content/05-content-dplyr-and-more.qmd"
-            # - text: "06: Getting Data in and out of R"
-            #   file: "content/06-content-ingesting-data.qmd"
-            # - text: "07: Version Control and Git"
-            #   file: "content/07-content-git.qmd"
-            # - text: "08: Iterating on Data and Models"
-            #   file: "content/08-content-iteration.qmd"
-            # - text: "09: Databases and APIs"
-            #   file: "content/09-content-databases.qmd"
-            # - text: "10: Parallel Computing"
-            #   file: "content/10-content-parallel.qmd"
-            # - text: "11: Helpers, Build Systems, Environments"
-            #   file: "content/11-content-build.qmd"
-            # - text: "12: Packages, and LLMs"
-            #   file: "content/12-content-packages.qmd"
+            # - text: "06: Version Control and Git"
+            #   file: "content/06-content-git.qmd"
+            # - text: "07: Iterating on Data and Models"
+            #   file: "content/07-content-iteration.qmd"
+            # - text: "08: Databases and APIs"
+            #   file: "content/08-content-databases.qmd"
+            # - text: "09: Parallel Computing"
+            #   file: "content/09-content-parallel.qmd"
+            # - text: "10: Helpers, Build Systems, Environments"
+            #   file: "content/10-content-build.qmd"
+            # - text: "11: Packages, and LLMs"
+            #   file: "content/11-content-packages.qmd"
 
     - title: "Assignments"
       contents:
@@ -98,23 +96,23 @@ website:
               file: assignment/02-assignment-find-some-data.qmd
             - text: "04: UK Election Data"
               file: assignment/04-assignment-uk-election.qmd
+            - text: "05: FARS Data Exercise"
+              file: assignment/05-assignment-fars.qmd
             # Not yet written -- see the note in the Content sidebar above.
             # - text: "03: "
             #   file: assignment/03-assignment-.qmd
-            # - text: "05: "
-            #   file: assignment/05-assignment-.qmd
-            # - text: "06: FARS data exercise"
-            #   file: assignment/06-assignment-fars.qmd
-            # - text: "07: "
-            #   file: assignment/07-assignment-.qmd
-            # - text: "08: Iterating on the GSS"
-            #   file: assignment/08-assignment-iteration.qmd
-            # - text: "09: Databases and APIs"
-            #   file: assignment/09-assignment-databases.qmd
-            # - text: "10: "
-            #   file: assignment/10-assignment-.qmd
-            # - text: "11: The Whole Enchilada"
-            #   file: assignment/11-assignment-enchilada.qmd
+            # - text: "06: "
+            #   file: assignment/06-assignment-.qmd
+            # - text: "07: Iterating on the GSS"
+            #   file: assignment/07-assignment-iteration.qmd
+            # - text: "08: Databases and APIs"
+            #   file: assignment/08-assignment-databases.qmd
+            # - text: "09: "
+            #   file: assignment/09-assignment-.qmd
+            # - text: "10: The Whole Enchilada"
+            #   file: assignment/10-assignment-enchilada.qmd
+            # - text: "11: "
+            #   file: assignment/11-assignment-.qmd
 
 
     - title: "Examples"
@@ -132,17 +130,17 @@ website:
               file: example/03-example-ggplot.qmd
             - text: "04: Tables and dplyr"
               file: example/04-example-dplyr.qmd
+            - text: "05: More dplyr and tidyr"
+              file: example/05-example-tidying-and-ingesting.qmd
             # Not yet written -- see the note in the Content sidebar above.
-            # - text: "05: More dplyr"
-            #   file: example/05-example-dplyr-and-more.qmd
-            # - text: "06: "
-            #   file: example/06-example-.qmd
-            # - text: "07: Git and GitHub"
-            #   file: example/07-example-git.qmd
-            # - text: "08: Iteration"
-            #   file: example/08-example-iteration.qmd
-            # - text: "09: Databases and APIs"
-            #   file: example/09-example-databases.qmd
+            # - text: "06: Git and GitHub"
+            #   file: example/06-example-git.qmd
+            # - text: "07: Iteration"
+            #   file: example/07-example-iteration.qmd
+            # - text: "08: Databases and APIs"
+            #   file: example/08-example-databases.qmd
+            # - text: "09: "
+            #   file: example/09-example-.qmd
             # - text: "10: "
             #   file: example/10-example-.qmd
             # - text: "11: "

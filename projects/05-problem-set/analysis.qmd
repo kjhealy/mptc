@@ -1,5 +1,5 @@
 ---
-title: "Week 05 Problem Set: Dogs of New York"
+title: "Week 06 Problem Set: Traffic Fatalities"
 author: "<PUT YOUR NAME HERE>"
 date: "`r Sys.Date()`"
 format: html
@@ -10,81 +10,81 @@ format: html
 #| warning = FALSE,
 #| message = FALSE
 library(tidyverse)
+library(here)
+library(socviz)
 ```
 
-# Dogs of New York
 
-This data comes from New York City's Open Data initiative.
+The data are from the Federal Accident Reporting System run by the National Highway Traffic Safety Administration. We have two datasets. 
 
-We load the data as a package. If you get a message saying there's no such package, then run this line of code at the console _once_:  `remotes::install_github("kjhealy/nycdogs")`. Then it should be available.
+# First Table
+
+The first table was downloaded from this URL: <https://www-fars.nhtsa.dot.gov/States/StatesCrashesAndAllVictims.aspx>. At the time of writing, it's the table labeled "Person Killed, by STATE and Age Group - State : USA, Year : 2023". I downloaded the Excel file and very slightly cleaned it up. It is in the `data/` folder of this project as `fars-persons-killed-by-state-and-age-2023.csv`. 
+
+First we read in the data:
 
 ```{r}
-library(nycdogs)
+df_state <- read_csv(here("data", "fars-persons-killed-by-state-and-age-2023.csv"))
 
-nyc_license
+df_state
 ```
 
-The data are structured like this: each _row_ contains the license record for a dog in a particular year. The columns are as follows:
 
-`animal_name` --- Name of dog.
-`animal_gender` --- Sex of dog.
-`animal_birth_year` --- Birth year
-`breed_rc` --- Breed of dog (simplier categories).
-`borough` --- Borough of owner. (Some boroughs are approximate due to zip codes.)
-`zip_code` --- Zip code of owner.
-`license_issued_date` --- Date license issued
-`license_expired_date` --- Date license expired
-`extract_year` --- Year record was extracted
+## Task 1: Cleaning
 
-
-# Tasks
-
-## 1. A first look at the data.
-
-You'll use `group_by()` and `summarize()`, or `tally()` to answer these questions.
-
-- a. Write some code to count the number of records there are for each extract year, and now many records are missing a value for the extract year.
+A. The Age categories are spread across the columns, from `< 5` to `Unknown`. Get them into long format so that your dataset consists of four columns named `state`, `age` and `count`, and `total`. Make sure the capitalization is correct (i.e. all lower case).
 
 ```{r}
 
 ```
 
-- b. How many distinct dog breeds are there in the data?
+B. Clean the `age` column to remove white space in the age categories and replace the `--` with `-`. Also make sure `<` and `>` do not have any whitespace before or after them. 
 
 
-- c. Are there any notable differences in the ratio of male to female dogs in the city as a whole? What about by borough?
+
+## Task 2: Counting
 
 
-- d. Here are the first ten rows of the data again:
+A. Filter the data to show the count by state for ages five to nine
 
-```{r}
-nyc_license
-```
+B. Make a table showing the count for each state of victims aged nine and under as single total. That is, we want the sum of ages nine and under as a single number, shown for each state. Do we lose any observations? Should we expect to? Why or why not?
 
-Row 8 shows a Labrador named Chewbacca. Are there any other dogs in the data that have the names of major Star Wars characters?
 
-- e. In class we saw some problems with the `animal_name` column, where there seemed to be typos and misspellings and so on. Are there any similar sorts of problems with the `borough` column or the `zip_code` column? (Hint: remember we subset rows with `filter()`)
+# Second Table
 
-## 2. Some Crosstabs
-
-- a. What were the Top 5 dog names in each borough in 2016?
+The second dataset also comes from FARS. It has daily counts of road accident fatalities for people aged seventeen and under, for the years 2009 to 2018. 
 
 ```{r}
+df_daily <- read_csv(here("data", "fars0-17daily.csv"))
 
+df_daily
 ```
 
-- b. What were the Top 5 dog breeds in the whole city in 2018, in terms of the total number of dogs?
 
-- c. What were the Top 5 dog breeds in the whole city in 2018, as a percentage of all dogs?
+## Task 3. Examine, clean, and reshape `df_daily`
 
-- d. What were the Top 5 dog breeds in each borough in 2018, in terms of the total number of dogs in each borough?
+A. Take a look at the data. Some of the rows need to be removed. Which ones? Remove them as you see fit.
 
-- c. Redo this table to show the top 5 dog breeds in each borough in 2018, this time as a percentage of all dogs in the borough.
+B. Make it so that the `month` column has the correct month in every row. Hint: look at the documentation for the `tidyr::fill()` function to help you here. 
 
-## 3. A Graph
+C. Get the counts into long format with a column named `year` containing the year and a column named `count` containing the fatality counts. 
 
-- a. Make a table of the top 10 dog *names* in each borough in 2018
+## Task 4. Dates
 
-- b. Make a graph with this table. First think about how best to graph it. Consider either `geom_col()` and `geom_point()`. Add a title and label the axes. Facet the graph by borough.
+D. Can you use the day, month, and year columns to make a new column called `date` that is actually of type `date`?
 
-- c. Can you make it so that only the dog names in each borough are shown for that borough's facet?
+- Hint: the `ymd()` function in `lubridate` can intelligently parse date strings. Use `paste` to construct one of the form year-month-day. 
+
+E. Do any dates fail to parse? Can you identify why?
+
+## Task 5.  Trends
+
+Now that you've gotten the data in shape, explore it. Can you find any interesting patterns or trends?
+
+
+
+
+
+
+
+

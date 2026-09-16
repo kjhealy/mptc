@@ -37,18 +37,11 @@ kjh_set_slide_theme()
 
 # [dplyr]{.fg-lblue} is your toolkit for tabular data
 
----
+## Reasoning about your code
 
-:::{.huge}
- So let's<br />play with<br />some [data]{.fg-red}
-:::
+![Rubber Ducky](../assets/04-r/04_rubber_duck.jpg){fig-align="center" width=90%}
 
-
-::: aside
- woohoo!
-:::
-
-## Load our libraries
+## Load our packages
 
 
 ```{r}
@@ -165,7 +158,8 @@ Not all of these are attached when we do `library(tidyverse)`
 ## For each [action]{.fg-orange} there's a [function]{.fg-green}
 
 ::: {.incremental}
-- [**Subset**]{.fg-orange} has one function for rows and one for columns. We **`filter()`** rows and **`select()`** columns.
+- [**Subset**]{.fg-orange} has one action for rows and one for columns. We
+**`filter()`** or **`filter_out()`** rows and **`select()`** columns.
 - [**Group**]{.fg-orange} using  **`group_by()`**.
 - [**Mutate**]{.fg-orange} tables (i.e. add new columns, or re-make existing ones) using **`mutate()`**.
 - [**Summarize**]{.fg-orange} tables (i.e. perform aggregating calculations) using **`summarize()`**.
@@ -184,6 +178,56 @@ gss_sm
 ::::: {.fragment fragment-index=1}
 Notice how the tibble already tells us a lot.
 :::::
+
+## Two-way tables: Row percents
+
+```{r}
+#| label: "05-work-with-dplyr-and-geoms-3"
+#| echo: FALSE
+gss_sm |>
+  select(bigregion, religion) |>
+  drop_na() |>
+  janitor::tabyl(bigregion, religion) |>
+  janitor::adorn_totals(where = "col") |>
+  janitor::adorn_percentages() |>
+  janitor::adorn_pct_formatting(affix_sign = FALSE) |>
+  knitr::kable()
+
+```
+
+## Two-way tables: Column percents
+
+```{r}
+#| label: "05-work-with-dplyr-and-geoms-4"
+#| echo: FALSE
+
+gss_sm |>
+  select(bigregion, religion) |>
+  drop_na() |>
+  janitor::tabyl(bigregion, religion) |>
+  janitor::adorn_totals(where = "row") |>
+  janitor::adorn_percentages(denominator = "col") |>
+  janitor::adorn_pct_formatting(affix_sign = FALSE) |>
+  knitr::kable()
+```
+
+## Two-way tables: Full marginals
+
+```{r}
+#| label: "05-work-with-dplyr-and-geoms-5"
+#| echo: FALSE
+
+gss_sm |>
+  select(bigregion, religion) |>
+  drop_na() |>
+  janitor::tabyl(bigregion, religion) |>
+  janitor::adorn_percentages(denominator = "all") |>
+  janitor::adorn_pct_formatting(affix_sign = FALSE) |>
+  knitr::kable()
+```
+
+
+
 
 ## Summarizing a Table
 
@@ -261,7 +305,7 @@ gss_sm |>
   group_by(bigregion, religion) |>
   summarize(total = n()) |>
   mutate(freq = total / sum(total),
-           pct = round((freq*100), 1))
+         pct = round((freq*100), 1))
 ```
 
 
@@ -279,7 +323,7 @@ gss_sm |>
   group_by(bigregion, religion) |> #<<
   summarize(total = n()) |>
   mutate(freq = total / sum(total),
-           pct = round((freq*100), 1))
+         pct = round((freq*100), 1))
 ```
 
 Groups are carried forward till summarized or explicitly ungrouped. Summary calculations are done on the innermost group, which "disappears". (It becomes the rows in the summary table.)
@@ -293,7 +337,7 @@ gss_sm |>
   group_by(bigregion, religion) |>
   summarize(total = n()) |>
   mutate(freq = total / sum(total),
-           pct = round((freq*100), 1)) #<<
+         pct = round((freq*100), 1)) #<<
 ```
 
 
@@ -308,7 +352,7 @@ gss_sm |>
   group_by(bigregion, religion) |> #<<
   summarize(total = n()) |> #<<
   mutate(freq = total / sum(total),
-           pct = round((freq*100), 1))
+         pct = round((freq*100), 1))
 ```
 
 We're going to be doing this [**`group_by()`**]{.fg-green} ... [**`n()`**]{.fg-green} step a lot. Some shorthand for it would be useful.
@@ -679,7 +723,7 @@ gss_sm |>
             mean_age = mean(age, na.rm = TRUE),
             mean_kids = mean(childs, na.rm = TRUE)) |>
   mutate(pct = n/sum(n)*100) |>
-  filter(race !="Other") |>
+  filter_out(race == "Other") |>
   drop_na() |>
   ggplot(mapping = aes(x = mean_kids, y = degree)) + # Some ggplot ...
   geom_col() + facet_grid(sex ~ race) +
@@ -698,7 +742,7 @@ gss_sm |>
     mean_age = mean(age, na.rm = TRUE),
     mean_kids = mean(childs, na.rm = TRUE)) |>
   mutate(pct = n/sum(n)*100) |>
-  filter(race !="Other") |>
+  filter_out(race =="Other") |>
   drop_na() |>
   summarize(grp_totpct = sum(pct))
 ```
@@ -802,9 +846,22 @@ organdata |>
   filter(!(country %in% my_countries)) #<<
 ```
 
-Also a bit awkward. There's no built-in "Not in" operator.
+Also a bit awkward. But! There's now a built-in "Not in" operator: `%notin%`.
+
+## Negating [`%in%`]{.fg-pink}
+
+```{r}
+#| label: "03a-dplyr-basics-38b"
+my_countries <- c("Australia", "Canada", "United States", "Ireland")
+
+organdata |>
+  filter(country %notin% my_countries) #<<
+```
+
 
 ## A custom operator
+
+Operators are just functions. We can make custom operators if we want:
 
 ```{r}
 #| label: "03a-dplyr-basics-39"
@@ -812,7 +869,8 @@ Also a bit awkward. There's no built-in "Not in" operator.
 ```
 
 ::: aside
-The backticks are special here because we need to name an operator.
+The backticks are special here because we need to name an operator rather than a
+regular object.
 :::
 
 ```{r}
@@ -972,7 +1030,11 @@ organdata |>
 
 ## Name new columns with [**`.names`**]{.fg-green}
 
-In tidyverse functions, arguments that begin with a "`.`" generally have it in order to avoid confusion with existing items, or sometimes are "pronouns" referring to e.g. "the name of the thing we're currently talking about as we evaluate this function". The `.` doesn't have any special meaning beyond that.
+In tidyverse functions, arguments that begin with a "`.`" generally have it in
+order to avoid confusion with existing column names, or sometimes, especially in
+older code, they are "pronouns" referring to e.g. "the name of the thing we're
+currently talking about as we evaluate this function". The `.` doesn't have any
+special meaning beyond that.
 
 
 
@@ -1186,11 +1248,13 @@ We write our function. It's just the expression we originally wrote, wrapped up.
 ```{r}
 #| label: "03b-dplyr-basics-10"
 get_daily_count <- function(count, date){
-  count - lag(count, order_by = date)
+  count - dplyr::lag(count, order_by = date)
 }
 ```
 
-This function has no generality, error-handling, or anything else. It's a once-off.
+This function has no generality, error-handling, or anything else. It's a
+once-off. It assumes it will be handed a `count` vector and `date` vector in the
+right format.
 
 ## Writing our own [functions]{.fg-orange}
 
@@ -1309,7 +1373,7 @@ gss_sm |>
 - Count up rows with [`n()`]{.fg-green}, [`tally()`]{.fg-green} or [`count()`]{.fg-green}
 - Calculate quantities with [`sum()`]{.fg-green}, [`mean()`]{.fg-green}, [`min()`]{.fg-green}, etc
 - Subset rows with logical expressions or [`slice`]{.fg-green} functions
-- Conditionally select columns by name directly, with [`%in%`]{.fg-green} or [`%nin%`]{.fg-green}, or with tidy selectors like [`starts_with()`]{.fg-green}, [`ends_with()`]{.fg-green}, [`contains()`]{.fg-green}
+- Conditionally select columns by name directly, with [`%in%`]{.fg-green} or [`%notin%`]{.fg-green}, or with tidy selectors like [`starts_with()`]{.fg-green}, [`ends_with()`]{.fg-green}, [`contains()`]{.fg-green}
 - Conditionally select columns by _type_ with [`where()`]{.fg-green} and some criterion, e.g. [`where(is.numeric)`]{.fg-green}
 - Conditionally select and then _act_ on columns with [`across(where(`]{.fg-green}[`<condition>`]{.fg-orange}[`),`]{.fg-green} [`<action>`]{.fg-orange}[`)`]{.fg-green}
 
@@ -1370,7 +1434,7 @@ gss_sm |>
 By default the result is an _ungrouped_ tibble, whereas with `group_by()` ... `summarize()` the result would still be grouped by `bigregion` at the end. To prevent unexpected results, you can't use `.by` on tibble that's already grouped.
 :::
 
-## Data as implicitly first
+## In tidy pipelines, data is implicitly first
 
 This code:
 

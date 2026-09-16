@@ -1,0 +1,158 @@
+---
+title: "Example 05: More dplyr and tidyr"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+```
+
+
+```{r}
+library(tidyverse)
+library(nycdogs)
+library(socviz)
+```
+
+## Using `across()` to apply functions to multiple columns
+
+```{r}
+gss_sm
+```
+
+Let's summarize the age, childs, and sibs columns.
+
+```{r}
+gss_sm |>
+  summarize(
+    age_mean = mean(age, na.rm = TRUE),
+    age_sd = sd(age, na.rm = TRUE),
+    childs_mean = mean(childs, na.rm = TRUE),
+    childs_sd = sd(childs, na.rm = TRUE),
+    sibs_mean = mean(sibs, na.rm = TRUE),
+    sibs_sd = sd(sibs, na.rm = TRUE)
+  )
+```
+
+This is tedious and we have to name all the columns we create, which is error-prone. We can use `across()` to apply the same functions to multiple columns at once.
+
+```{r}
+gss_sm |>
+  summarize(
+    across(c(age, childs, sibs),
+           list(mean = \(x) mean(x, na.rm = TRUE),
+                sd = \(x) sd(x, na.rm = TRUE)))
+  )
+```
+
+We can also use `where()` to select columns based on their type. Here we summarize all numeric columns. First we drop `id` because it's just a row-identifier and it doesn't make sense to summarize it. We drop `year`, `ballot`, and the weight variables for similar reasons. We use a tidy selector to find the weight variables, and negate with `-` before the `c()` to drop the slected columns. Then in the summarize statement we use `where(is.numeric)` to select all remaining columns that are numeric.
+
+```{r}
+gss_sm |>
+  select(-c(id, ballot, year, starts_with("wts"))) |>
+  summarize(
+    across(where(is.numeric),
+           list(mean = \(x) mean(x, na.rm = TRUE),
+                sd = \(x) sd(x, na.rm = TRUE)))
+  )
+```
+
+This will of course work with grouping variables as well. Here we also add a count of the number of rows in each group:
+
+```{r}
+gss_sm |>
+  select(-c(id, ballot, year, starts_with("wts"))) |>
+  group_by(bigregion, degree) |>
+  summarize(
+    n = n(),
+    across(
+      where(is.numeric),
+      list(mean = \(x) mean(x, na.rm = TRUE), sd = \(x) sd(x, na.rm = TRUE))
+    )
+  ) |>
+  print(n = Inf) # n = Inf means "Print every row to the console"
+```
+
+See how, when we do this, we don't put the `n()` call in the `across()`? That's
+because `n()` is not a function that we are applying across all the numeric
+variables. We're just counting the number of rows within the group, which will
+not change no matter how many summary statistics we calculate for variables
+within each group.
+
+## Per-Operation Grouping
+
+As an aside, consider the difference between doing it with a separate
+`group_by()` line, as above, and doing the same thing with `summarize(.by =
+c(...) ...)`:
+
+```{r}
+gss_sm |>
+  select(-c(id, ballot, year, starts_with("wts"))) |>
+  summarize(
+    .by = c(bigregion, degree),
+    n = n(),
+    across(
+      where(is.numeric),
+      list(mean = \(x) mean(x, na.rm = TRUE), sd = \(x) sd(x, na.rm = TRUE))
+    )
+  ) |>
+  print(n = Inf)
+```
+
+
+The values for any particular row are the same, but the row-order may not be.
+
+
+## Summarizing columns while pivoting
+
+```{r }
+#| label: "04-tidy-data-19"
+
+# Some made-up data
+dfstrat <- read_csv(here::here("data", "dfstrat.csv"))
+dfstrat
+```
+
+This is a simulated sample of a 1,000 people in eight survey strata, with
+measured sex, race, and education characteristics. For simplicity we just have
+two categories within each measure. We have an income measure for each person.
+So we have e.g. sex x race x educ combinations of categories and we want to know
+things about average income within various categories.
+
+Let’s say we want to transform this to a wider format, specifically by widening
+the `educ` column, so we end up with columns for both the HS and BA categories.
+While we do so we also want to calculate both the mean of income and the total n
+within each group, still within strata, while holding on to the sex and race
+classifcations. We "over-group" the sex and race categories, and then have
+education within stratum:
+
+```{r}
+dfstrat |>
+  group_by(sex, race, stratum, educ) |>
+  summarize(
+    mean_inc = mean(income),
+    n = n()
+  ) |>
+  pivot_wider(names_from = (educ), values_from = c(mean_inc, n)) |>
+  ungroup()
+```
+
+Here we end up with sex-by-race-by-stratum in the rows, and the income-by-education means, and income-by-education Ns, in their own columns.
+
+Again, consider the difference between that and the `.by ...` way:
+
+```{r}
+#| label: "04-tidy-data-20"
+dfstrat |>
+    summarize(.by = c(sex, race, stratum, educ),
+              mean_inc = mean(income),
+              n = n()) |>
+    pivot_wider(names_from = (educ),
+                values_from = c(mean_inc, n))
+```
+
+The values in any particular cells are the same, but the row order may be
+different, and also the column order (thanks to the way the pivot interacts with
+the per-operation grouping).

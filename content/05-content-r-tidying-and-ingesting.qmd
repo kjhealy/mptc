@@ -1,0 +1,75 @@
+---
+title: "05. Tidying, Reshaping, and Ingesting Data"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+More on dplyr: using  `across()` to apply functions to multiple columns at once;
+using `case_when()` to create new variables based on conditions; reshaping data
+with `pivot_longer()`;  importing and cleaning your data from plain-text and
+foreign binary formats.
+
+## Required Reading
+
+- @bromanDataOrganizationSpreadsheets2018
+- @wickham23:_r_data_scien. Read [Chapter 7](https://r4ds.hadley.nz/data-import) on importing data. Read [Chapter 20](https://r4ds.hadley.nz/spreadsheets) on Spreadsheets. Read or review [Chapter 17](https://r4ds.hadley.nz/datetimes.html) on dates and times.
+
+### `tidyr`
+
+- [Tidy data](https://tidyr.tidyverse.org/articles/tidy-data.html)
+- [Pivoting](https://tidyr.tidyverse.org/articles/pivot.html)
+- (Optional.) [Rectangling](https://tidyr.tidyverse.org/articles/rectangle.html)
+
+### `stringr`
+
+- [Regular expressions](https://stringr.tidyverse.org/articles/regular-expressions.html)
+- Read the help page for `str_detect()`: `?stringr::str_detect`, which can also be found [here](https://stringr.tidyverse.org/reference/str_replace.html). Work through the examples one at a time and make a note of any that seem confusing.
+
+
+## Examples
+
+[This week's examples.](/example/05-example-tidying-and-ingesting.qmd)
+
+
+## Assignment
+
+[This week's assignment.](/assignment/05-assignment-tidying.qmd)
+
+## Slides
+
+```{=html}
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+```
+
+```{=html}
+<!--<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe>-->
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+# slide_buttons("/slides/05-slides-r-reshaping-data")
+```
