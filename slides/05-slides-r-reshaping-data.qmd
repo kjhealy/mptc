@@ -163,7 +163,7 @@ library(palmerpenguins)
 penguins |>
   group_by(species, island, year) |>
   summarize(bill = round(mean(bill_length_mm, na.rm = TRUE),2)) |>
-  knitr::kable()
+  tinytable::tt()
 ```
 
 ## Untidy data: common for good reasons
@@ -177,7 +177,7 @@ penguins |>
   group_by(species, island, year) |>
   summarize(bill = round(mean(bill_length_mm, na.rm = TRUE), 2)) |>
   pivot_wider(names_from = year, values_from = bill) |>
-  knitr::kable()
+  tinytable::tt()
 ```
 
 ::: aside
@@ -289,22 +289,32 @@ edu |>
   pivot_longer(elem4:coll4, names_to = "education", values_to = "n")
 ```
 
-## Let's [recode()]{.fg-green} it while we're here
+## Let's [`recode_values()`]{.fg-green} while we're here
 
+::: {.smallcode}
 ```{r }
 #| label: "04-tidy-data-13"
 edu |>
   pivot_longer(elem4:coll4, names_to = "education", values_to = "n") |>
-  mutate(education = recode(education,
-                            elem4 = "Elementary 4", elem8 = "Elementary 8",
-                            hs3 = "High School 3", hs4 = "High School 4",
-                            coll3 = "College 3", coll4 = "College 4"))
+  mutate(
+    education = recode_values(
+      education,
+      "elem4" ~ "Elementary 4",
+      "elem8" ~ "Elementary 8",
+      "hs3" ~ "High School 3",
+      "hs4" ~ "High School 4",
+      "coll3" ~ "College 3",
+      "coll4" ~ "College 4"
+    )
+  )
 
 ```
+:::
 
-- The argument order of [**`recode()`**]{.fg-green} is inconsistent with other tidyverse functions and it may be superceded in the future.
+- When recoding _all_ the values in a vector, use
+[**`recode_values()`**]{.fg-green}. When _partially_ recoding a vector, use [**`replace_values()`**]{.fg-green}.
 
-## [pivot_longer()]{.fg-green} implies [pivot_wider()]{.fg-green}
+## [`pivot_longer()`]{.fg-green} implies [`pivot_wider()`]{.fg-green}
 
 ```{r }
 #| label: "04-tidy-data-14"
@@ -313,7 +323,7 @@ gapminder
 
 But they're not symmetric operations!
 
-## [pivot_longer()]{.fg-green} implies [pivot_wider()]{.fg-green}
+## [`pivot_longer()`]{.fg-green} implies [`pivot_wider()`]{.fg-green}
 
 ```{r }
 #| label: "04-tidy-data-15"
@@ -376,7 +386,7 @@ write_csv(dfstrat, here::here("data", "dfstrat.csv"))
 
 # Separate and Unite
 
-## [separate()]{.fg-green} and [unite()]{.fg-green} columns
+## [`separate()`]{.fg-green} and [`unite()`]{.fg-green} columns
 
 ```{r }
 #| label: "04-tidy-data-21"
@@ -393,7 +403,7 @@ df
 
 ```
 
-## [separate()]{.fg-green} and [unite()]{.fg-green} columns
+## [`separate()`]{.fg-green} and [`unite()`]{.fg-green} columns
 
 ```{r }
 #| label: "04-tidy-data-21a"
@@ -451,7 +461,7 @@ gss_sm |>
     separate(racedeg, sep = "\\.", into = c("race", "degree"))
 ```
 
-`r chunq_reveal("04-tidy-data-24",  lcolw="50", rcolw="50", smallcode = TRUE, title = "Separate and unite")`
+`r chunq_reveal("04-tidy-data-24",  lcolw="40", rcolw="60", smallcode = TRUE, title = "Separate and unite")`
 
 This one is a bit trickier, and our first glimpse of a _regular expression_.
 
@@ -478,7 +488,7 @@ billboard |>
   )
 ```
 
-## Example: parse fns
+## Example: parse functions
 
 ```{r}
 billboard  |>
@@ -491,13 +501,13 @@ billboard  |>
   )
 ```
 
-## Example: many vars in cols
+## Example: many vars in columns
 
 ```{r}
 who
 ```
 
-## Example: many vars in cols
+## Example: many vars in columns
 
 ```{r}
 who  |>
@@ -510,7 +520,7 @@ who  |>
 ```
 
 
-## Example: many vars in cols
+## Example: many vars in columns
 
 ::: {.smallcode}
 ```{r}
@@ -520,9 +530,9 @@ who |>
     names_to = c("diagnosis", "gender", "age"),
     names_pattern = "new_?(.*)_(.)(.*)",
     names_transform = list(
-      gender = ~ readr::parse_factor(.x, levels = c("f", "m")),
-      age = ~ readr::parse_factor(
-        .x,
+      gender = \(x) readr::parse_factor(x, levels = c("f", "m")),
+      age = \(x) readr::parse_factor(
+        x,
         levels = c("014", "1524", "2534", "3544", "4554", "5564", "65"),
         ordered = TRUE
       )
@@ -716,7 +726,7 @@ bikes_tib <- tibble(bikes = bikes$data$en$feeds) |>
 bikevec <- bikes_tib$url |>
   set_names(bikes_tib$name)
 
-## Available feeds
+## Available feeds as a labeled vector
 bikevec
 ```
 

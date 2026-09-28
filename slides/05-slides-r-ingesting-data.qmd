@@ -372,7 +372,7 @@ nchs |>
 #| label: "06-getting-data-in-20"
 nchs |>
   select(Year, Month, State) |>
-  filter(!is.na(Year)) #<<
+  filter_out(is.na(Year)) #<<
 ```
 
 - It really has been read in as a completely empty column.
@@ -518,7 +518,7 @@ dim(nchs)
 
 nchs |>
   select(year, month, state) |>
-  filter(!is.na(year)) #<<
+  filter_out(is.na(year)) #<<
 ```
 
 ## Now let's look again
@@ -700,7 +700,7 @@ df |>
 # 3
 df |>
   # Anonymous function \(x)
-  filter(!if_all(everything(), \(x) is.na(x)))
+  filter_out(if_all(everything(), \(x) is.na(x)))
 
 # 4 Convenience function from janitor
 df |>
@@ -877,7 +877,9 @@ organdata |>
 
 ## Cleaning a table
 
-- With that in mind ... Some marketing data
+- With that in mind ... Some marketing data:
+
+[https://kjhealy.co/rfm_table.csv](https://kjhealy.co/rfm_table.csv)
 
 ![](../assets/07-ingest/07_rfm_table.png)
 

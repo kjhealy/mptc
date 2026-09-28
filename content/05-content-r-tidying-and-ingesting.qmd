@@ -44,7 +44,7 @@ foreign binary formats.
 
 ## Assignment
 
-[This week's assignment.](/assignment/05-assignment-tidying.qmd)
+[This week's assignment.](/assignment/05-assignment-fars.qmd)
 
 ## Slides
 
@@ -66,10 +66,32 @@ window.addEventListener('DOMContentLoaded', function(e) {
 </script>
 ```
 
+### Tidying and reshaping data
+
 ```{=html}
-<!--<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe>-->
+<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-reshaping-data.html"></iframe>
 ```
 
 ```{r show-slide-tabs2, echo=FALSE, results="asis"}
-# slide_buttons("/slides/05-slides-r-reshaping-data")
+slide_buttons("/slides/05-slides-r-reshaping-data")
+```
+
+### Regular Expressions intro
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-search-and-edit-text.html"></iframe>
+```
+
+```{r show-slide-tabs3, echo=FALSE, results="asis"}
+slide_buttons("/slides/05-slides-r-search-and-edit-text")
+```
+
+### Ingesting data
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/05-slides-r-ingesting-data.html"></iframe>
+```
+
+```{r show-slide-tabs4, echo=FALSE, results="asis"}
+slide_buttons("/slides/05-slides-r-ingesting-data")
 ```

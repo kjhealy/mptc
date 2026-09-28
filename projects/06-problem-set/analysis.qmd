@@ -1,0 +1,29 @@
+---
+title: "MPTC Week 06 Problem Set: Increasingly Annoying Datasets"
+author: "<PUT YOUR NAME HERE>"
+date: "`r Sys.Date()`"
+format: html
+---
+
+```{r}
+#| label = "load-libraries-data",
+#| warning = FALSE,
+#| message = FALSE
+library(tidyverse)
+```
+
+# Six Real And Increasingly Annoying Datasets
+
+The `data/` folder contains a number of files. Try to import each of them without error and tidy them up.
+
+## `street_tree_planting.csv`
+
+## `countries.csv`
+
+## `sample_data.csv`
+
+## `AK1.xlsx`
+
+## `data-GDC8h.csv`
+
+## `table004.xlsx`

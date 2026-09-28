@@ -1,0 +1,21 @@
+---
+title: "Assignment WK06: Increasingly annoying datasets"
+date: "2026-09-29"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+## Download and launch this week's problem set.
+
+```{r project-download, echo=FALSE, results="asis"}
+project_buttons("/projects/06-problem-set")
+```
+
+1. Launch the project by double-clicking on the `06-problem-set.Rproj` file.
+
+2. Once RStudio is running, take a look at the `analysis.qmd` file. Do the tasks it asks.
+
+3. Save your project and bring it to class.
