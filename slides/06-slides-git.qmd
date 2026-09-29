@@ -36,6 +36,28 @@ library(flipbookr)
 
 ![](../assets/04-git/04_four_rules.png){width=100%}
 
+## Recent news
+
+![](../assets/04-git/04-excel-multiple-cells.jpeg){width=100%}
+
+## Although, in fairness ...
+
+```{r}
+#| message: false
+#| include: false
+library(tidyverse)
+library(gapminder)
+```
+
+```{r}
+gapminder |>
+    group_by(continent, year) |>
+    nest()
+```
+
+(Next week, when we do some stuff on iteration with the `map()` family of
+functions we'll see why we might want something like this.)
+
 # Keep Backups
 
 ## You Need Backups That Are
@@ -78,7 +100,13 @@ These services are good for a lot of things, and some of them are _like_ backups
 
 - E.g., [Backblaze](https://www.backblaze.com/cloud-backup/pricing).
 
-- If ensuring that you have [access to months or years of your work]{.fg-lblue} in the event your laptop gets stolen, is left behind in an airport, "just stops working", is accidentally dropped in the bath, or is found submerged in a foot of water after a hurricane^[All things that have happened to people I know personally.] is [*not*]{.fg-red} worth nine bucks a month to you, perhaps reconsider the value of your time, your personal risk tolerance, and your career choices.
+- If ensuring that you have [access to months or years of your work]{.fg-lblue}
+in the event your laptop gets stolen, is left behind in an airport, "just stops
+working", is accidentally dropped in the bath, or is found submerged in a foot
+of water after a hurricane^[All things that have happened to people I know
+personally.] is [*not*]{.fg-red} worth nine bucks a month to you, perhaps
+reconsider your personal risk tolerance, the implicit value you place on your
+time, and your career choices.
 
 ::: {.large}
 - ["When it comes to losing your data, the universe tends toward maximum irony. Don’t push it."]{.fg-pink} --- Jamie Zawinski
@@ -158,7 +186,7 @@ You are going to see a _lot_ of diagrams like this in papers, talks, and seminar
 
 ## Which brings us to ...
 
-![A portion of the git log for the gssr package](../assets/04-git/git-gssr-history.png){width=65%}
+![A portion of the git log for the gssr package](../assets/04-git/04-git-gss-log-gitu.png){width=65%}
 
 
 ## Git
@@ -178,19 +206,23 @@ You are going to see a _lot_ of diagrams like this in papers, talks, and seminar
 
 ## Git
 
-::::: {.fragment fragment-index=1}
-- We can start by using a _very small fraction_ of git's functionality. This can be enough to get by for a long time and is _way_ better than nothing.
-:::::
+:::: {.columns}
+::: {.column width="55%"}
+
+We can start by using a _very small fraction_ of git's functionality. This can be enough to get by for a long time and is _way_ better than nothing.
+
+As projects get more complex---with multiple contributors to multiple tasks---then git offers a way of working that can help bring order to this complexity, and leave a record in its wake.
+
+Again, Git is the standard for basically _everything_ that gets done in the world of technical computing. All software development is done in this way, or something functionally the same as it.
+:::
+::: {.column width="45%"}
+
+![](../assets/04-git/04-git-not-like-that.png)
+
+:::
+::::
 
 
-::::: {.fragment fragment-index=2}
-- As projects get more complex---with multiple contributors to multiple tasks---then git offers a way of working that can help bring order to this complexity, and leave a record in its wake.
-:::::
-
-
-::::: {.fragment fragment-index=3}
-- Again, Git is the standard for basically _everything_ that gets done in the world of technical computing. All software development is done in this way, or something functionally the same as it.
-:::::
 
 # Git as a Logbook
 
