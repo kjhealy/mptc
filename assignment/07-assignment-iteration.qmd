@@ -1,0 +1,27 @@
+---
+title: "Assignment WK07: The Census API"
+date: "2026-10-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+source(here::here("R", "slide-things.R"))
+```
+
+
+1. Get a Census API Key: [Use your name and email address in this form.](https://api.census.gov/data/key_signup.html)
+
+2. Install the [`tidycensus`](https://walker-data.com/tidycensus/) package. Read
+at least about [basic usage of
+tidycensus](https://walker-data.com/tidycensus/articles/basic-usage.html),though you should also look at [Spatial Data in
+Tidycensus](https://walker-data.com/tidycensus/articles/spatial-data.html) and
+[Margins of Error in the
+ACS](https://walker-data.com/tidycensus/articles/margins-of-error.html), and
+[Other Census Bureau
+Datasets](https://walker-data.com/tidycensus/articles/other-datasets.html).
+Additional detail can be found in @walker23:_analy_us_census_data.
+
+3. Work through some examples of getting and graphing data from the Census in the "Basic
+Usage" and "Spatial Data" sections of the tidycensus documentation. Find
+something interesting about the U.S. as a whole, or about counties within a
+state of your choice. Bring the results to class.

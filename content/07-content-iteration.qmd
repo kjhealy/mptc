@@ -1,0 +1,52 @@
+---
+title: "07. Iterating on Data and Models"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+Repeatedly doing things to data and repeatedly doing things to models using  functional programming patterns.
+
+## Reading
+
+- @wickham23:_r_data_scien.
+
+[Read the text online](https://r4ds.hadley.nz/). Read [Chapter 25](https://r4ds.hadley.nz/functions) on functions and [Chapter 26](https://r4ds.hadley.nz/iteration) on iteration.
+
+There's also reading attached to the assignment.
+
+## Examples
+
+## Assignment
+
+[This week's assignment](/assignment/07-assignment-iteration.qmd) doesn't
+involve any iteration or function-writing, but is some preparation for it.
+
+
+## Slides
+
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>

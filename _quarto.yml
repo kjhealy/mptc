@@ -65,13 +65,13 @@ website:
               file: "content/05-content-r-tidying-and-ingesting.qmd"
             - text: "06: Version Control and Git"
               file: "content/06-content-git.qmd"
+            - text: "07: Iterating on Data and Models"
+              file: "content/07-content-iteration.qmd"
             # Weeks not yet written. An entry here for a file that doesn't exist
             # renders as a broken sidebar link, so each stays commented out until
             # its page lands. (The schedule page greys its icons out by itself --
             # see schedule_icon() in R/tar_calendar.R -- but a Quarto sidebar
             # can't be conditional.)
-            # - text: "07: Iterating on Data and Models"
-            #   file: "content/07-content-iteration.qmd"
             # - text: "08: Databases and APIs"
             #   file: "content/08-content-databases.qmd"
             # - text: "09: Parallel Computing"
@@ -100,11 +100,11 @@ website:
               file: assignment/05-assignment-fars.qmd
             - text: "06: Increasingly Annoying Datasets"
               file: assignment/06-assignment-cleaning.qmd
+            - text: "07: The Census API"
+              file: assignment/07-assignment-iteration.qmd
             # Not yet written -- see the note in the Content sidebar above.
             # - text: "03: "
             #   file: assignment/03-assignment-.qmd
-            # - text: "07: Iterating on the GSS"
-            #   file: assignment/07-assignment-iteration.qmd
             # - text: "08: Databases and APIs"
             #   file: assignment/08-assignment-databases.qmd
             # - text: "09: "
