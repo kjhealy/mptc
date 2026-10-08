@@ -10,15 +10,6 @@ knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
 library(tidyverse)
 library(here)
 library(socviz)
-
-## ---
-## This code is not necessary to reproduce the example
-library(myriad)
-import_myriad_semi()
-import_myriad_condensed()
-theme_set(theme_myriad_semi())
-## ---
-
 ```
 
 ```{r}
