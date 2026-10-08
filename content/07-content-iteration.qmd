@@ -27,6 +27,8 @@ There's also reading attached to the assignment.
 
 ## Examples
 
+[This week's examples.](/example/07-example-iteration.qmd)
+
 ## Assignment
 
 [This week's assignment](/assignment/07-assignment-iteration.qmd) doesn't
@@ -50,3 +52,24 @@ window.addEventListener('DOMContentLoaded', function(e) {
     } );
 
 </script>
+
+
+### Iterating on data and models
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/07-slides-iteration.html"></iframe>
+```
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_buttons("/slides/07-slides-iteration")
+```
+
+### Iterating safely
+
+```{=html}
+<iframe class="slide-deck" id="quartoframe" src="../slides/07b-slides-iteration-gss.html"></iframe>
+```
+
+```{r show-slide-tabs2, echo=FALSE, results="asis"}
+slide_buttons("/slides/07b-slides-iteration-gss")
+```

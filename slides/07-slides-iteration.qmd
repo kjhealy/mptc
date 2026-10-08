@@ -120,15 +120,35 @@ for(i in 1:length(filenames)) {
 }
 ```
 
-A `for` loop initializes a counter and goes around and around, doing the thing and incrementing the counter until the counter reaches a predefined maximum value. A `while` loop keeps going indefinitely until some condition is met.
-
+A `for` loop initializes a counter, a variable, and then loops around and around, doing the thing and incrementing the counter until the counter reaches a predefined maximum value. A `while` loop keeps going indefinitely until some condition is met.
 
 ## Loops?
 
 - You may have noticed we have not written any loops, however.
 - While loops are still lurking there underneath the surface, what we will do instead is to take advantage of the combination of functions and vectors (or tables) and _apply_ or _map_ one to the other in order to generate results.
 - Speaking loosely, think of [**`map()`**]{.fg-green} as a way of [iterating]{.fg-orange} without explicitly writing loops. You start with a vector or list of something. You feed it one element at a time to some function. The function does whatever it does. You get back output that is the same length as your input, and of a specific type.
-- The reason we do this is that it leads to code we can pipeline as a sequence of function calls.
+- The reason we do this is that it leads to `|>` code we can `|>`pipeline as a
+`|>`sequence of `|>`function calls.
+
+## Remember
+
+- Functions take actions on objects.
+- They take _in_ objects of a certain kind (tibbles, model objects, other
+classes of list, vectors of various types)
+- They _do something_ to those objects, or pieces of them
+- They may _return_ objects of the same or different kinds
+
+## Our Goal
+
+- We want some abstractions that allow us to do things repeatedly to objects, or
+parts of objects, in a way that may depend on one or more variables changing as
+we go.
+
+- We want to know with confidence what kinds of output the actions we take will
+result in, and whether it succeeded.
+
+- We want to be able to manage these pieces and the actions we take on them in
+an efficient, tidy way.
 
 ## Mapping is just a kind of iteration
 
@@ -342,9 +362,9 @@ The [**`map()`**]{.fg-green} family can deal with all kinds of input types and o
 
 ```{r }
 #| label: "07-iterating-on-data-17"
-filenames <- dir(path = here("files", "examples", "congress"),
-                 pattern = "*.csv",
-                 full.names = TRUE)
+
+filenames <- fs::dir_ls(path = here("files", "examples", "congress"),
+                 glob = "*.csv")
 
 filenames[1:15] # Just displaying the first 15, to save slide space
 
@@ -420,7 +440,7 @@ summary(out)
 
 We can't do anything with this output, programatically. A summary like this is essentially a *printout*, once again a legacy of the teletype.
 
-# [Look inside]{.fg-lblue} [the box]{.fg-yellow}
+# [Look inside]{.fg-lblue} [the box]{.fg-yellow} {background-image="../assets/04-r/02_r_object_bento_box.png" background-size="cover"}
 
 ## Poke around inside
 
@@ -802,7 +822,7 @@ out_tidy <- gapminder |>
     group_by(continent, year) |>
     nest() |>
     mutate(model = map(data, fit_ols),
-           tidied = map(model, tidy)) |>
+           tidied = map(model, tidy)) |>#<<
     unnest(cols = c(tidied)) |>
     filter(term %nin% "(Intercept)" &
            continent %nin% "Oceania")

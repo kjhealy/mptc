@@ -134,9 +134,9 @@ website:
               file: example/05-example-tidying-and-ingesting.qmd
             - text: "06: Git and GitHub"
               file: example/06-example-git.qmd
+            - text: "07: Functions and Iteration"
+              file: example/07-example-iteration.qmd
             # Not yet written -- see the note in the Content sidebar above.
-            # - text: "07: Iteration"
-            #   file: example/07-example-iteration.qmd
             # - text: "08: Databases and APIs"
             #   file: example/08-example-databases.qmd
             # - text: "09: "

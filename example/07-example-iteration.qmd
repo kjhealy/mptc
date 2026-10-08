@@ -26,7 +26,10 @@ library(broom)
 ```
 
 
-## Functions
+## Writing Functions
+
+I mentioned in class that my add function didn't have any error handling or
+guard clauses. Here's an example of why it's worth adding them.
 
 ```{r}
 my_adder <- function(x, add = 1) {
@@ -79,3 +82,9 @@ my_adder(1:10, 5)
 
 my_adder(1:10, "c")
 ```
+
+
+One small point here: resist using `else` in clauses like this. Just use `if` to
+check a condition and if it fails, exit the function. The "happy path" is one
+that passes your guard clauses. Other paths should exit with an informative
+message.
