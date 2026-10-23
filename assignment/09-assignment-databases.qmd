@@ -1,0 +1,132 @@
+---
+title: "Assignment WK09: Databases and APIs"
+date: "2026-10-20"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(fig.align = "center")
+```
+
+## More than one table
+
+Up to now almost everything we have done has involved a single table of data.
+Real data rarely arrives that way. Instead it is usually spread across several
+tables, each describing one kind of thing, and linked to one another by
+_keys_. This is the basic idea behind a relational database. When we understand
+how tables are linked, we can _join_ them in various ways.
+
+## Read
+
+- Read the section on [Joining data frames](https://moderndive.com/v2/03-wrangling.html#sec-joins) in _ModernDive_.
+- Read [Chapter 19, Joins](https://r4ds.hadley.nz/joins) in @wickham23:_r_data_scien.
+
+## Setup
+
+Install the `nycflights23` package. It contains data on every flight that
+departed one of New York City's three main airports (JFK, LaGuardia, and
+Newark) in 2023, along with some related tables.
+
+```{r}
+#| eval: false
+install.packages("nycflights23")
+```
+
+Make a new Quarto project for this assignment. In your document, load the
+packages you will need:
+
+```{r}
+#| eval: false
+library(tidyverse)
+library(nycflights23)
+```
+
+The package provides five tables:
+
+| Table      | One row per ...                            |
+|------------|--------------------------------------------|
+| `flights`  | Flight departing NYC in 2023               |
+| `airlines` | Airline (carrier)                          |
+| `airports` | Airport                                    |
+| `planes`   | Airplane                                   |
+| `weather`  | Hour of weather observations at each NYC airport |
+
+## Do
+
+### 1. Get to know the tables
+
+Look at each of the five tables using `glimpse()` and by printing them. For
+each table, write a sentence saying what one row represents.
+
+### 2. Find the keys
+
+A _primary key_ is a column (or set of columns) that uniquely identifies each
+row in a table. For `airlines`, `airports`, `planes`, and `weather`, figure out
+what the primary key is. Check your answer by counting: if a column is a
+primary key, no value of it should appear more than once. For example,
+
+```{r}
+#| eval: false
+airlines |>
+  count(carrier) |>
+  filter(n > 1)
+```
+
+should return a table with no rows. Note that the primary key of `weather`
+needs more than one column.
+
+A _foreign key_ is a column in one table that refers to the primary key of
+another. The `flights` table contains several foreign keys. Identify them, and
+say which table each one points to. Note that a foreign key does not always
+have the same name as the primary key it refers to.
+
+Then draw a diagram---by hand is fine---showing the five tables as boxes and the
+keys that connect them as lines.
+
+### 3. Joins
+
+The `flights` table records each airline only as a two-letter code. Use
+`left_join()` to add the full airline names from `airlines` to `flights`. Then
+count the number of flights by airline name and sort the result. Which airline
+flew the most flights out of New York in 2023?
+
+### 4. Joining when the key names differ
+
+Add information about each flight's destination airport from `airports`. The
+destination is recorded in the `dest` column of `flights`, but the matching
+column in `airports` is called `faa`. Use `join_by()` to tell `left_join()`
+how the columns correspond:
+
+```{r}
+#| eval: false
+flights |>
+  left_join(airports, join_by(dest == faa))
+```
+
+What are the ten most common destinations, by airport name?
+
+### 5. Rows that don't match
+
+Not every key in one table will have a match in the other. Use `anti_join()`
+to find the destination codes in `flights` that do not appear in `airports`.
+Do the same for tail numbers (`tailnum`) in `flights` that do not appear in
+`planes`. Roughly what proportion of flights have no matching plane?
+
+Now compare `left_join()` with `inner_join()` when joining `flights` to
+`planes`. How many rows does each result have? Explain the difference in a
+sentence or two.
+
+### 6. Name clashes
+
+Join `planes` to `flights` by `tailnum`. Both tables have a column called
+`year`, but they mean different things. What does each one mean? What happens
+to these columns in the joined table? Use the `suffix` argument of
+`left_join()` to give them more informative names. Then use the result to
+calculate the average age of the planes flown by each airline.
+
+### 7. Joining on more than one key
+
+Each row of `weather` describes conditions at one airport during one hour.
+Join `weather` to `flights` using the two columns that together identify a
+row of `weather`: `origin` and `time_hour`. Then make a graph that shows
+something about how departure delays relate to some aspect of the weather,
+such as precipitation, visibility, or wind speed.

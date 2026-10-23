@@ -1866,6 +1866,55 @@
       "Maintainer": "Hadley Wickham <hadley@posit.co>",
       "Repository": "CRAN"
     },
+    "duckdb": {
+      "Package": "duckdb",
+      "Version": "1.5.5",
+      "Source": "Repository",
+      "Title": "DBI Package for the DuckDB Database Management System",
+      "Authors@R": "c( person(\"Hannes\", \"Mühleisen\", , \"hannes@cwi.nl\", role = \"aut\", comment = c(ORCID = \"0000-0001-8552-0029\")), person(\"Mark\", \"Raasveldt\", , \"mark.raasveldt@cwi.nl\", role = \"aut\", comment = c(ORCID = \"0000-0001-5005-6844\")), person(\"Kirill\", \"Müller\", , \"kirill@cynkra.com\", role = \"cre\", comment = c(ORCID = \"0000-0002-1416-3412\")), person(\"Stichting DuckDB Foundation\", role = \"cph\"), person(\"Apache Software Foundation\", role = \"cph\"), person(\"PostgreSQL Global Development Group\", role = \"cph\"), person(\"The Regents of the University of California\", role = \"cph\"), person(\"Cameron Desrochers\", role = \"cph\"), person(\"Victor Zverovich\", role = \"cph\"), person(\"RAD Game Tools\", role = \"cph\"), person(\"Valve Software\", role = \"cph\"), person(\"Rich Geldreich\", role = \"cph\"), person(\"Tenacious Software LLC\", role = \"cph\"), person(\"The RE2 Authors\", role = \"cph\"), person(\"Google Inc.\", role = \"cph\"), person(\"Facebook Inc.\", role = \"cph\"), person(\"Steven G. Johnson\", role = \"cph\"), person(\"Jiahao Chen\", role = \"cph\"), person(\"Tony Kelman\", role = \"cph\"), person(\"Jonas Fonseca\", role = \"cph\"), person(\"Lukas Fittl\", role = \"cph\"), person(\"Salvatore Sanfilippo\", role = \"cph\"), person(\"Art.sy, Inc.\", role = \"cph\"), person(\"Oran Agra\", role = \"cph\"), person(\"Redis Labs, Inc.\", role = \"cph\"), person(\"Melissa O'Neill\", role = \"cph\"), person(\"PCG Project contributors\", role = \"cph\") )",
+      "Description": "The DuckDB project is an embedded analytical data management system with support for the Structured Query Language (SQL). This package includes all of DuckDB and an R Database Interface (DBI) connector.",
+      "License": "MIT + file LICENSE",
+      "URL": "https://r.duckdb.org/, https://github.com/duckdb/duckdb-r",
+      "BugReports": "https://github.com/duckdb/duckdb-r/issues",
+      "Depends": [
+        "DBI",
+        "R (>= 4.2.0)"
+      ],
+      "Imports": [
+        "methods",
+        "utils"
+      ],
+      "Suggests": [
+        "adbcdrivermanager",
+        "arrow (>= 13.0.0)",
+        "bit64",
+        "callr",
+        "clock",
+        "DBItest",
+        "dbplyr",
+        "dplyr",
+        "nanoarrow",
+        "rlang",
+        "sf",
+        "testthat (>= 3.0.0)",
+        "tibble",
+        "vctrs",
+        "wk",
+        "withr"
+      ],
+      "Biarch": "true",
+      "Config/build/compilation-database": "false",
+      "Config/build/never-clean": "true",
+      "Config/comment/compilation-database": "Generate manually with pkgload:::generate_db() for faster pkgload::load_all()",
+      "Config/testthat/edition": "3",
+      "Encoding": "UTF-8",
+      "SystemRequirements": "xz (for building from source)",
+      "Config/roxygen2/version": "8.0.0.9000",
+      "NeedsCompilation": "yes",
+      "Author": "Hannes Mühleisen [aut] (ORCID: <https://orcid.org/0000-0001-8552-0029>), Mark Raasveldt [aut] (ORCID: <https://orcid.org/0000-0001-5005-6844>), Kirill Müller [cre] (ORCID: <https://orcid.org/0000-0002-1416-3412>), Stichting DuckDB Foundation [cph], Apache Software Foundation [cph], PostgreSQL Global Development Group [cph], The Regents of the University of California [cph], Cameron Desrochers [cph], Victor Zverovich [cph], RAD Game Tools [cph], Valve Software [cph], Rich Geldreich [cph], Tenacious Software LLC [cph], The RE2 Authors [cph], Google Inc. [cph], Facebook Inc. [cph], Steven G. Johnson [cph], Jiahao Chen [cph], Tony Kelman [cph], Jonas Fonseca [cph], Lukas Fittl [cph], Salvatore Sanfilippo [cph], Art.sy, Inc. [cph], Oran Agra [cph], Redis Labs, Inc. [cph], Melissa O'Neill [cph], PCG Project contributors [cph]",
+      "Maintainer": "Kirill Müller <kirill@cynkra.com>",
+      "Repository": "CRAN"
+    },
     "e1071": {
       "Package": "e1071",
       "Version": "1.7-17",
@@ -4165,6 +4214,22 @@
       "Maintainer": "Charlie Gao <charlie.gao@posit.co>",
       "Repository": "CRAN"
     },
+    "ncdf4": {
+      "Package": "ncdf4",
+      "Version": "1.24",
+      "Source": "Repository",
+      "Date": "2025-03-25",
+      "Title": "Interface to Unidata netCDF (Version 4 or Earlier) Format Data Files",
+      "Authors@R": "person(given=\"David\", family=\"Pierce\", email=\"dpierce@ucsd.edu\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"0000-0002-2453-9030\"))",
+      "Description": "Provides a high-level R interface to data files written using Unidata's netCDF library (version 4 or earlier), which are binary data files that are portable across platforms and include metadata information in addition to the data sets.  Using this package, netCDF files (either version 4 or \"classic\" version 3) can be opened and data sets read in easily.  It is also easy to create new netCDF dimensions, variables, and files, in either version 3 or 4 format, and manipulate existing netCDF files.  This package replaces the former ncdf package, which only worked with netcdf version 3 files.  For various reasons the names of the functions have had to be changed from the names in the ncdf package.  The old ncdf package is still available at the URL given below, if you need to have backward compatibility.  It should be possible to have both the ncdf and ncdf4 packages installed simultaneously without a problem.  However, the ncdf package does not provide an interface for netcdf version 4 files.",
+      "SystemRequirements": "netcdf library version 4.1 or later",
+      "License": "GPL (>= 3)",
+      "URL": "https://cirrus.ucsd.edu/~pierce/ncdf/",
+      "NeedsCompilation": "yes",
+      "Author": "David Pierce [aut, cre] (<https://orcid.org/0000-0002-2453-9030>)",
+      "Maintainer": "David Pierce <dpierce@ucsd.edu>",
+      "Repository": "CRAN"
+    },
     "numDeriv": {
       "Package": "numDeriv",
       "Version": "2016.8-1.1",
@@ -4183,6 +4248,45 @@
       "URL": "http://optimizer.r-forge.r-project.org/",
       "NeedsCompilation": "no",
       "Repository": "CRAN"
+    },
+    "nyc": {
+      "Package": "nyc",
+      "Version": "1.4.7",
+      "Source": "GitHub",
+      "Type": "Package",
+      "Title": "NYC ggplot themes",
+      "Authors@R": "person( \"Kieran\", \"Healy\", role = c(\"aut\", \"cre\"), email = \"kjhealy@gmail.com\", comment = c(ORCID = \"https://orcid.org/0000-0001-9114-981X\") )",
+      "Description": "Provides ggplot2 NYC MTA themes (Broadway and Subway).",
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "Depends": [
+        "R (>= 4.1.0)"
+      ],
+      "Imports": [
+        "cli",
+        "dplyr",
+        "ggplot2",
+        "grid",
+        "scales",
+        "stringr",
+        "systemfonts",
+        "sysfonts",
+        "purrr"
+      ],
+      "License": "MIT + file LICENSE",
+      "Suggests": [
+        "testthat (>= 3.0.0)"
+      ],
+      "Config/testthat/edition": "3",
+      "Config/roxygen2/version": "8.1.1",
+      "Author": "Kieran Healy [aut, cre] (ORCID: <https://orcid.org/0000-0001-9114-981X>)",
+      "Maintainer": "Kieran Healy <kjhealy@gmail.com>",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "kjhealy",
+      "RemoteRepo": "nyc",
+      "RemoteRef": "main",
+      "RemoteSha": "47a2b996cb99c7419953c87e4dfd11dc8d852a10"
     },
     "nycdogs": {
       "Package": "nycdogs",
@@ -4211,6 +4315,71 @@
       "RemoteRef": "main",
       "RemoteSha": "d9ff8b0c495a169ea08df45a756a72d40aa14deb",
       "Remotes": "kjhealy/nyczips"
+    },
+    "nycflights13": {
+      "Package": "nycflights13",
+      "Version": "1.0.2",
+      "Source": "Repository",
+      "Title": "Flights that Departed NYC in 2013",
+      "Authors@R": "c(person(given = \"Hadley\", family = \"Wickham\", role = c(\"aut\", \"cre\"), email = \"hadley@rstudio.com\"), person(given = \"RStudio\", role = \"cph\"))",
+      "Description": "Airline on-time data for all flights departing NYC in 2013. Also includes useful 'metadata' on airlines, airports, weather, and planes.",
+      "License": "CC0",
+      "URL": "https://github.com/hadley/nycflights13",
+      "BugReports": "https://github.com/hadley/nycflights13/issues",
+      "Depends": [
+        "R (>= 3.2)"
+      ],
+      "Imports": [
+        "tibble"
+      ],
+      "Suggests": [
+        "dplyr"
+      ],
+      "Encoding": "UTF-8",
+      "LazyData": "true",
+      "LazyDataCompression": "bzip2",
+      "RoxygenNote": "7.1.1",
+      "NeedsCompilation": "no",
+      "Author": "Hadley Wickham [aut, cre], RStudio [cph]",
+      "Maintainer": "Hadley Wickham <hadley@rstudio.com>",
+      "Repository": "CRAN"
+    },
+    "nycmaps": {
+      "Package": "nycmaps",
+      "Version": "0.0.4",
+      "Source": "GitHub",
+      "Title": "A collection of sf objects and related tibbles for making maps of New York City",
+      "Authors@R": "person(\"Kieran\", \"Healy\", , \"kjhealy@gmail.com\", role = c(\"aut\", \"cre\"), comment = c(ORCID = \"https://orcid.org/0000-0001-9114-981X\"))",
+      "Description": "Simple features boundary files for New York City across various administrative and Census geographies.",
+      "License": "MIT + file LICENSE",
+      "Encoding": "UTF-8",
+      "Roxygen": "list(markdown = TRUE)",
+      "Depends": [
+        "R (>= 3.5)"
+      ],
+      "Suggests": [
+        "terra (>= 1.7.0)",
+        "testthat (>= 3.0.0)",
+        "tibble (>= 3.0.0)"
+      ],
+      "LazyData": "true",
+      "LazyDataCompression": "xz",
+      "URL": "https://kjhealy.github.io/nycmaps/, https://github.com/kjhealy/nycmaps",
+      "BugReports": "https://github.com/kjhealy/nycmaps/issues",
+      "Config/testthat/edition": "3",
+      "Imports": [
+        "cli",
+        "sf"
+      ],
+      "Config/roxygen2/version": "8.1.1",
+      "Author": "Kieran Healy [aut, cre] (ORCID: <https://orcid.org/0000-0001-9114-981X>)",
+      "Maintainer": "Kieran Healy <kjhealy@gmail.com>",
+      "RemoteType": "github",
+      "RemoteHost": "api.github.com",
+      "RemoteUsername": "kjhealy",
+      "RemoteRepo": "nycmaps",
+      "RemoteRef": "main",
+      "RemoteSha": "6332c7838aa0a54a186ee5d3ad76f6342884f0f1"
     },
     "nycomplaints": {
       "Package": "nycomplaints",
@@ -5627,7 +5796,7 @@
     },
     "sf": {
       "Package": "sf",
-      "Version": "1.1-2",
+      "Version": "1.1-3",
       "Source": "Repository",
       "Title": "Simple Features for R",
       "Authors@R": "c(person(given = \"Edzer\", family = \"Pebesma\", role = c(\"aut\", \"cre\"), email = \"edzer.pebesma@uni-muenster.de\", comment = c(ORCID = \"0000-0001-8049-7069\")), person(given = \"Roger\", family = \"Bivand\", role = \"ctb\", comment = c(ORCID = \"0000-0003-2392-6140\")), person(given = \"Etienne\", family = \"Racine\", role = \"ctb\"), person(given = \"Michael\", family = \"Sumner\", role = \"ctb\"), person(given = \"Ian\", family = \"Cook\", role = \"ctb\"), person(given = \"Tim\", family = \"Keitt\", role = \"ctb\"), person(given = \"Robin\", family = \"Lovelace\", role = \"ctb\"), person(given = \"Hadley\", family = \"Wickham\", role = \"ctb\"), person(given = \"Jeroen\", family = \"Ooms\", role = \"ctb\", comment = c(ORCID = \"0000-0002-4035-0289\")), person(given = \"Kirill\", family = \"M\\u00fcller\", role = \"ctb\"), person(given = \"Thomas Lin\", family = \"Pedersen\", role = \"ctb\"), person(given = \"Dan\", family = \"Baston\", role = \"ctb\"), person(given = \"Dewey\", family = \"Dunnington\", role = \"ctb\", comment = c(ORCID = \"0000-0002-9415-4582\")), person(given = \"Alexandre\", family = \"Courtiol\", role = \"ctb\", comment = c(ORCID = \"0000-0003-0637-2959\")) )",
@@ -5653,7 +5822,6 @@
       ],
       "Suggests": [
         "blob",
-        "nanoarrow",
         "covr",
         "dplyr (>= 1.0.0)",
         "ggplot2",
@@ -5663,6 +5831,7 @@
         "mapview",
         "Matrix",
         "microbenchmark",
+        "nanoarrow",
         "odbc",
         "pbapply",
         "pillar",
@@ -5696,9 +5865,10 @@
       "Encoding": "UTF-8",
       "Config/testthat/edition": "2",
       "Config/needs/coverage": "XML",
+      "Config/roxygen2/markdown": "TRUE",
+      "Config/roxygen2/version": "8.1.0",
       "SystemRequirements": "GDAL (>= 2.0.1), GEOS (>= 3.4.0), PROJ (>= 4.8.0), sqlite3",
       "Collate": "'RcppExports.R' 'init.R' 'import-standalone-s3-register.R' 'crs.R' 'bbox.R' 'read.R' 'db.R' 'sfc.R' 'sfg.R' 'sf.R' 'bind.R' 'wkb.R' 'wkt.R' 'plot.R' 'geom-measures.R' 'geom-predicates.R' 'geom-transformers.R' 'transform.R' 'proj.R' 'sp.R' 'grid.R' 'arith.R' 'tidyverse.R' 'tidyverse-vctrs.R' 'cast_sfg.R' 'cast_sfc.R' 'graticule.R' 'datasets.R' 'aggregate.R' 'agr.R' 'maps.R' 'join.R' 'sample.R' 'valid.R' 'collection_extract.R' 'jitter.R' 'sgbp.R' 'spatstat.R' 'stars.R' 'crop.R' 'gdal_utils.R' 'nearest.R' 'normalize.R' 'sf-package.R' 'defunct.R' 'z_range.R' 'm_range.R' 'shift_longitude.R' 'make_grid.R' 's2.R' 'terra.R' 'geos-overlayng.R' 'break_antimeridian.R'",
-      "Config/roxygen2/version": "8.0.0",
       "NeedsCompilation": "yes",
       "Author": "Edzer Pebesma [aut, cre] (ORCID: <https://orcid.org/0000-0001-8049-7069>), Roger Bivand [ctb] (ORCID: <https://orcid.org/0000-0003-2392-6140>), Etienne Racine [ctb], Michael Sumner [ctb], Ian Cook [ctb], Tim Keitt [ctb], Robin Lovelace [ctb], Hadley Wickham [ctb], Jeroen Ooms [ctb] (ORCID: <https://orcid.org/0000-0002-4035-0289>), Kirill Müller [ctb], Thomas Lin Pedersen [ctb], Dan Baston [ctb], Dewey Dunnington [ctb] (ORCID: <https://orcid.org/0000-0002-9415-4582>), Alexandre Courtiol [ctb] (ORCID: <https://orcid.org/0000-0003-0637-2959>)",
       "Maintainer": "Edzer Pebesma <edzer.pebesma@uni-muenster.de>",
@@ -6350,6 +6520,50 @@
       "Maintainer": "William Michael Landau <will.landau.oss@gmail.com>",
       "Repository": "CRAN"
     },
+    "terra": {
+      "Package": "terra",
+      "Version": "1.9-34",
+      "Source": "Repository",
+      "Type": "Package",
+      "Title": "Spatial Data Analysis",
+      "Date": "2026-06-18",
+      "Depends": [
+        "R (>= 3.5.0)",
+        "methods"
+      ],
+      "Suggests": [
+        "parallel",
+        "tinytest",
+        "ncdf4",
+        "sf (>= 0.9-8)",
+        "igraph",
+        "deldir",
+        "XML",
+        "leaflet (>= 2.2.1)",
+        "htmlwidgets",
+        "future",
+        "future.apply"
+      ],
+      "LinkingTo": [
+        "Rcpp"
+      ],
+      "Imports": [
+        "Rcpp (>= 1.0-10)"
+      ],
+      "SystemRequirements": "C++17, GDAL (>= 2.2.3), GEOS (>= 3.4.0), PROJ (>= 4.9.3), TBB, sqlite3",
+      "Encoding": "UTF-8",
+      "Language": "en-US",
+      "Maintainer": "Robert J. Hijmans <r.hijmans@gmail.com>",
+      "Description": "Methods for spatial data analysis with vector (points, lines, polygons) and raster (grid) data. Methods for vector data include geometric operations such as intersect and buffer. Raster methods include local, focal, global, zonal and geometric operations. The predict and interpolate methods facilitate the use of regression type (interpolation, machine learning) models for spatial prediction, including with satellite remote sensing data. Processing of very large files is supported. See the manual and tutorials on <https://rspatial.org/> to get started.",
+      "License": "GPL (>= 3)",
+      "URL": "https://rspatial.org/, https://rspatial.github.io/terra/",
+      "BugReports": "https://github.com/rspatial/terra/issues",
+      "LazyLoad": "yes",
+      "Authors@R": "c( person(\"Robert J.\", \"Hijmans\", role=c(\"cre\", \"aut\"),   email=\"r.hijmans@gmail.com\", comment=c(ORCID=\"0000-0001-5872-2872\")),\t\t\t person(\"Andrew\", \"Brown\", role=\"aut\", comment=c(ORCID=\"0000-0002-4565-533X\")), person(\"Márcia\", \"Barbosa\", role=\"aut\", comment=c(ORCID=\"0000-0001-8972-7713\")), person(\"Krzysztof\", \"Dyba\", role=\"ctb\", comment=c(ORCID=\"0000-0002-8614-3816\")), person(\"Roger\", \"Bivand\", role=\"ctb\", comment=c(ORCID=\"0000-0003-2392-6140\")), person(\"Michael\", \"Chirico\", role=\"ctb\", comment=c(ORCID=\"0000-0003-0787-087X\")), person(\"Emanuele\", \"Cordano\", role=\"ctb\",comment=c(ORCID=\"0000-0002-3508-5898\")), person(\"Edzer\", \"Pebesma\", role=\"ctb\", comment=c(ORCID=\"0000-0001-8049-7069\")), person(\"Barry\", \"Rowlingson\", role=\"ctb\", comment=c(ORCID=\"0000-0002-8586-6625\")), person(\"Michael D.\", \"Sumner\", role=\"ctb\", comment=c(ORCID=\"0000-0002-2471-7511\")))",
+      "NeedsCompilation": "yes",
+      "Author": "Robert J. Hijmans [cre, aut] (ORCID: <https://orcid.org/0000-0001-5872-2872>), Andrew Brown [aut] (ORCID: <https://orcid.org/0000-0002-4565-533X>), Márcia Barbosa [aut] (ORCID: <https://orcid.org/0000-0001-8972-7713>), Krzysztof Dyba [ctb] (ORCID: <https://orcid.org/0000-0002-8614-3816>), Roger Bivand [ctb] (ORCID: <https://orcid.org/0000-0003-2392-6140>), Michael Chirico [ctb] (ORCID: <https://orcid.org/0000-0003-0787-087X>), Emanuele Cordano [ctb] (ORCID: <https://orcid.org/0000-0002-3508-5898>), Edzer Pebesma [ctb] (ORCID: <https://orcid.org/0000-0001-8049-7069>), Barry Rowlingson [ctb] (ORCID: <https://orcid.org/0000-0002-8586-6625>), Michael D. Sumner [ctb] (ORCID: <https://orcid.org/0000-0002-2471-7511>)",
+      "Repository": "CRAN"
+    },
     "textshaping": {
       "Package": "textshaping",
       "Version": "1.0.5",
@@ -6457,6 +6671,30 @@
       "NeedsCompilation": "yes",
       "Author": "Kirill Müller [aut, cre] (ORCID: <https://orcid.org/0000-0002-1416-3412>), Hadley Wickham [aut], Romain Francois [ctb], Jennifer Bryan [ctb], Posit Software, PBC [cph, fnd] (ROR: <https://ror.org/03wc8by49>)",
       "Maintainer": "Kirill Müller <kirill@cynkra.com>",
+      "Repository": "CRAN"
+    },
+    "tictoc": {
+      "Package": "tictoc",
+      "Version": "1.2.1",
+      "Source": "Repository",
+      "Title": "Functions for Timing R Scripts, as Well as Implementations of \"Stack\" and \"StackList\" Structures",
+      "Author": "Sergei Izrailev",
+      "Maintainer": "Sergei Izrailev <sizrailev@jabiruventures.com>",
+      "Description": "Code execution timing functions 'tic' and 'toc' that can be nested. One can record all timings while a complex script is running, and examine the values later. It is also possible to instrument the timing calls with custom callbacks. In addition, this package provides class 'Stack', implemented as a vector, and class 'StackList', which is a stack implemented as a list, both of which support operations 'push', 'pop', 'first_element', 'last_element' and 'clear'.",
+      "URL": "https://github.com/jabiru/tictoc",
+      "Depends": [
+        "R (>= 2.15)",
+        "methods"
+      ],
+      "License": "Apache License (== 2.0) | file LICENSE",
+      "Copyright": "Copyright (C) Collective, Inc. | file inst/COPYRIGHTS",
+      "Encoding": "UTF-8",
+      "RoxygenNote": "7.2.3",
+      "Suggests": [
+        "testthat (>= 3.0.0)"
+      ],
+      "Config/testthat/edition": "3",
+      "NeedsCompilation": "no",
       "Repository": "CRAN"
     },
     "tidycensus": {

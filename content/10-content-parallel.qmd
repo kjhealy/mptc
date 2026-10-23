@@ -1,0 +1,48 @@
+---
+title: "10. Parallel Computing"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+Sometimes, embarrassing is good. Like when a task is embarrassingly parallel.
+
+## Required Reading
+
+- Charlie Gao, Hadley Wickham, Davis Vaughan, and Lionel Henry. 2025. "[Parallel processing in purrr 1.1.0](https://tidyverse.org/blog/2025/07/purrr-1-1-0-parallel/)." _Tidyverse Blog_, July 10.
+
+This post introduces `in_parallel()`, the new way of running `purrr`'s `map()` functions in parallel, using `mirai` as the back end. It's what we'll use in class.
+
+## Slides
+
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+
+<!-- <iframe class="slide-deck" id="quartoframe" src="../slides/10-slides-parallel.html"></iframe> -->
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+#slide_win_button("/slides/10-slides-parallel")
+```
