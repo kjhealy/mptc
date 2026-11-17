@@ -1,0 +1,53 @@
+---
+title: "12. Models, Harnesses, and Tools"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+What a Large Language Model is, and what it is not. We separate the model from the _harness_ that runs it, look at how tool use lets a model check and improve its own output, and compare subscription-based and API-based access. Then we look at R packages that connect R to LLMs, in particular `btw`, which lets a coding agent like Claude Code read R documentation, inspect your data, and run code in your R session.
+
+## Required Reading
+
+These short posts by Hadley Wickham cover the main ideas:
+
+- "[What is an agent?](https://substack.hadley.nz/p/what-is-an-agent)"
+- "[Your LLM can't math (and that's ok)](https://substack.hadley.nz/p/your-llm-cant-math-and-thats-ok)"
+- "[A coding agent is six functions in a trenchcoat](https://substack.hadley.nz/p/a-coding-agent-is-six-functions-in)"
+- "[Auto mode knows it's dangerous (and does it anyway)](https://substack.hadley.nz/p/auto-mode-knows-its-dangerous-and)"
+
+Also look at the documentation for the [`btw`](https://posit-dev.github.io/btw/) and [`ellmer`](https://ellmer.tidyverse.org) packages.
+
+## Slides
+
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+
+<iframe class="slide-deck" id="quartoframe" src="../slides/12-slides-llms.html"></iframe>
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_win_button("/slides/12-slides-llms")
+```

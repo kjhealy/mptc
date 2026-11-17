@@ -1,5 +1,11 @@
 ---
 title: "Modern Plain Text Computing"
+image: assets/00-site/00-pdp11-card.jpg
+image-alt: "The front panel of a scale replica of a DEC PDP-11/70, with its lights on."
+open-graph:
+  description: "A seminar about the tools you'll use every day but no-one teaches."
+twitter-card:
+  description: "A seminar about the tools you'll use every day but no-one teaches."
 ---
 
 ```{r set-dependencies, include=FALSE}

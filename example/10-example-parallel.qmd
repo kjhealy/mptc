@@ -1,0 +1,172 @@
+---
+title: "Example 10: Parallel iteration with `in_parallel()`"
+engine: knitr
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(here)
+library(socviz)
+```
+
+## Load our packages
+
+```{r}
+#| label: "10-example-01"
+#| message: TRUE
+library(here)      # manage file paths
+library(socviz)    # data and some useful functions
+library(tidyverse) # your friend and mine
+library(mirai)     # parallel workers for purrr
+```
+
+## A slow task
+
+A bootstrap draws many random samples from the data, with replacement. It then
+calculates the same statistic on each sample. Each sample is independent of the
+others, so the task is easy to divide among several processes.
+
+This function draws one bootstrap sample from `organdata`. It fits a model of
+the donor rate on consent law and returns the coefficient for presumed consent.
+The `Sys.sleep()` call adds a quarter of a second, to make the function slow.
+
+```{r}
+#| label: "10-example-02"
+boot_coef <- function(i, data) {
+  boot_sample <- dplyr::slice_sample(data, prop = 1, replace = TRUE)
+  fit <- stats::lm(donors ~ consent_law, data = boot_sample)
+  Sys.sleep(0.25)
+  tibble::tibble(rep = i, estimate = stats::coef(fit)[["consent_lawPresumed"]])
+}
+
+boot_coef(1, organdata)
+```
+
+The function refers to package functions with `::`, for example
+`dplyr::slice_sample()`. The parallel workers do not automatically load our
+packages. The `::` prefix tells each worker where to find the function.
+
+## Run it sequentially
+
+First, we run 24 replicates with an ordinary `map()`. Each replicate takes at
+least 0.25 seconds, so this takes at least six seconds.
+
+```{r}
+#| label: "10-example-03"
+system.time(
+  seq_out <- map(1:24, \(i) boot_coef(i, organdata)) |>
+    list_rbind()
+)
+```
+
+## Start the workers
+
+`daemons()` from the `mirai` package starts a set of background R processes.
+These processes are the workers. Do not start more workers than the number of
+cores in your computer. Here we use four workers, or fewer if the computer has
+fewer cores.
+
+The `seed` argument makes the random numbers in the workers reproducible.
+
+```{r}
+#| label: "10-example-04"
+n_workers <- min(4, parallel::detectCores() - 1)
+
+daemons(n_workers, seed = 1234)
+
+status()$connections
+```
+
+## Which process does the work?
+
+`Sys.getpid()` returns the ID number of the R process that runs it. In an
+ordinary `map()`, each call runs in our own R session. So each call returns the
+same number.
+
+```{r}
+#| label: "10-example-05"
+map_int(1:8, \(x) Sys.getpid()) |>
+  unique()
+```
+
+When we put the function inside `in_parallel()`, `purrr` sends each call to a
+worker. Each call can return a different number.
+
+```{r}
+#| label: "10-example-06"
+map_int(1:8, in_parallel(\(x) Sys.getpid())) |>
+  unique()
+```
+
+## Run it in parallel
+
+Next, we run the bootstrap with `in_parallel()`. The workers do not see the
+objects in our session. So we must give them each object that the function
+needs. Here, the function needs `boot_coef()` and `organdata`. We supply them
+as named arguments to `in_parallel()`.
+
+```{r}
+#| label: "10-example-07"
+system.time(
+  par_out <- map(
+    1:24,
+    in_parallel(
+      \(i) boot_coef(i, organdata),
+      boot_coef = boot_coef,
+      organdata = organdata
+    )
+  ) |>
+    list_rbind()
+)
+```
+
+The time is approximately the sequential time divided by the number of workers.
+There's some overhead. Each worker must also start and receive the data, so the
+gain is a little smaller than that.
+
+## A common error
+
+If we do not supply an object, the workers cannot find it. The map stops with
+an error.
+
+```{r}
+#| label: "10-example-08"
+#| error: TRUE
+map(1:4, in_parallel(\(i) boot_coef(i, organdata)))
+```
+
+## Look at the results
+
+The parallel version gives one row per replicate, the same as the sequential
+version. The random samples are different, so the estimates are different.
+They have approximately the same distribution.
+
+```{r}
+#| label: "10-example-09"
+bind_rows(
+  Sequential = seq_out,
+  Parallel = par_out,
+  .id = "method"
+) |>
+  summarize(
+    mean = mean(estimate),
+    sd = sd(estimate),
+    .by = method
+  )
+```
+
+## Stop the workers
+
+When the parallel work is complete, stop the workers. This releases the
+processes and their memory.
+
+```{r}
+#| label: "10-example-10"
+daemons(0)
+```
+
+If you do not call `daemons()` first, `in_parallel()` has no workers to use.
+In that case `map()` runs each call in your own session, one at a time. This is
+nice because it means the same code can run in parallel or serially (e.g. on
+different machines).

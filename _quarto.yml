@@ -30,6 +30,11 @@ description-meta: "A seminar about the tools you'll use every day but no-one tea
 website:
   title: "Modern Plain Text Computing"
   site-url: "https://mptc.io"
+  image: /assets/00-site/00-pdp11-card.jpg
+  image-alt: "The front panel of a scale replica of a DEC PDP-11/70, with its lights on."
+  open-graph: true
+  twitter-card:
+    card-style: summary_large_image
   repo-url: "https://github.com/kjhealy/mptc"
   navbar:
     pinned: true
@@ -71,15 +76,15 @@ website:
               file: "content/09-content-databases.qmd"
             - text: "10: Parallel Computing"
               file: "content/10-content-parallel.qmd"
+            - text: "11: Build Systems, Environments, and Packages"
+              file: "content/11-content-buildenvs.qmd"
+            - text: "12: Models, Harnesses, and Tools"
+              file: "content/12-content-llms.qmd"
             # Weeks not yet written. An entry here for a file that doesn't exist
             # renders as a broken sidebar link, so each stays commented out until
             # its page lands. (The schedule page greys its icons out by itself --
             # see schedule_icon() in R/tar_calendar.R -- but a Quarto sidebar
             # can't be conditional.)
-            # - text: "10: Helpers, Build Systems, Environments"
-            #   file: "content/10-content-build.qmd"
-            # - text: "11: Packages, and LLMs"
-            #   file: "content/11-content-packages.qmd"
 
     - title: "Assignments"
       contents:
@@ -136,11 +141,10 @@ website:
               file: example/07-example-iteration.qmd
             - text: "09: Databases and APIs"
               file: example/09-example-databases.qmd
-            # Not yet written -- see the note in the Content sidebar above.
-            # - text: "10: "
-            #   file: example/10-example-.qmd
-            # - text: "11: "
-            #   file: example/11-example-.qmd
+            - text: "10: Parallel Iteration with in_parallel()"
+              file: example/10-example-parallel.qmd
+            - text: "11: A targets Pipeline"
+              file: example/11-example-buildenvs.qmd
 
 
   page-footer:

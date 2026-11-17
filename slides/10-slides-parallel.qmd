@@ -396,7 +396,7 @@ source(here("R", "functions.R"))
 
 # Data collection starts in September 1981
 first_yr <- paste0("1981", sprintf('%0.2d', 9:12))
-yrs <- 1982:2024
+yrs <- 1982:2026
 months <- sprintf('%0.2d', 1:12)
 subdirs <- c(first_yr, paste0(rep(yrs, each = 12), months))
 

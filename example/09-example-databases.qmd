@@ -1,0 +1,538 @@
+---
+title: "Example 09: Databases and APIs"
+engine: knitr
+---
+
+```{r}
+#| echo: false
+
+knitr::opts_chunk$set(engine.opts = list(zsh = "-l"))
+library(tidyverse)
+library(here)
+library(socviz)
+
+```
+
+
+# [Working with<br />]{.fg-yellow} [`tidycensus`]{.fg-lblue}
+
+## Load our packages
+
+
+```{r}
+#| label: "05-work-with-dplyr-and-geoms-1"
+#| message: TRUE
+library(here)       # manage file paths
+library(socviz)     # data and some useful things, especially %notin%
+library(tidyverse)  # your friend and mine
+
+library(scales)     # Convenient scale labels
+library(tidycensus) # Tidily talk to the Census
+library(sf)         # Draw maps with ggplot
+
+# Don't needlessly download geometries files multiple times
+options(tigris_use_cache = TRUE)
+
+
+```
+
+## Census Data
+
+- Make sure you have a Census API key. Load it after you load `tidycensus`
+
+```r
+library(tidycensus)
+
+census_api_key("1234567890987654321")
+```
+
+- Get one from <https://api.census.gov/data/key_signup.html>
+
+
+## Decennial Census Variables
+
+There are a _lot_ of them:
+
+```{r}
+census_vars <- load_variables(year = 2010,
+                              dataset = "sf1",
+                              cache = TRUE)
+
+census_vars
+```
+
+
+Median Age by State:
+
+```{r}
+age10 <- get_decennial(geography = "state",
+                       variables = "P013001",
+                       year = 2010)
+
+age10
+```
+
+
+## Some County Data for North Carolina
+
+```{r}
+# Census variable names
+popvars <- c("P005003", "P005004", "P005006", "P004003")
+
+
+# Get a county-level dataset for NC with these variables
+# The summary value is the total population.
+nc <- get_decennial(geography = "county",
+                    variables = popvars,
+                    year = 2010,
+                    summary_var = "P001001",
+                    state = "NC") |>
+  mutate(pct = 100 * (value / summary_value))
+
+nc
+```
+
+
+
+We can do this a little more elegantly:
+
+```{r}
+# Census variable names
+popvars <- tribble(
+  ~variable, ~name,
+  "P005003", "nh_white",
+  "P005004", "nh_black",
+  "P005006", "nh_asian",
+  "P004003", "hispanic")
+
+popvars
+```
+
+```{r}
+# Get a county-level dataset for NC with these variables
+# The summary value is the total population.
+nc <- get_decennial(geography = "county",
+                    variables = popvars$variable, #<<
+                    year = 2010,
+                    summary_var = "P001001",
+                    state = "NC") |>
+  mutate(pct = 100 * (value / summary_value))
+
+nc
+```
+
+
+```{r}
+nc |>
+  left_join(popvars, by = "variable") |>
+  relocate(name, .after = variable) |>
+  select(-variable) |>
+  pivot_wider(names_from = name,
+              names_glue = "{name}_{.value}",
+              values_from = c(value, pct)) |>
+  mutate(NAME = str_remove(NAME, " County.*"))
+```
+
+Put it in an object:
+
+```{r}
+#| label: "reveal-nccensus-obj"
+#| eval: TRUE
+#| include: FALSE
+nc_wide <- nc |>
+  left_join(popvars, by = "variable") |>
+  relocate(name, .after = variable) |>
+  select(-variable) |>
+  pivot_wider(names_from = name,
+              names_glue = "{name}_{.value}",
+              values_from = c(value, pct)) |>
+  mutate(NAME = str_remove(NAME, " County.*"))
+```
+
+
+Now we have:
+
+```{r}
+nc_wide
+```
+
+## Top 20 Counties by Percent Hispanic
+
+```{r}
+#| label: "codefig-hispanicplot"
+#| message: FALSE
+#| fig.width: 4.8
+#| fig.height: 5
+#| output-location: column
+nc_wide |>
+  slice_max(order_by = hispanic_pct, n = 20) |>
+  ggplot(mapping = aes(x = hispanic_pct,
+                       y = reorder(NAME, hispanic_pct))) +
+  geom_point() +
+  labs(x = "Percent Hispanic",
+       y = NULL,
+       title = "North Carolina Counties")
+
+```
+
+## Log population vs Percent Hispanic
+
+```{r}
+#| label: "codefig-hispvpop"
+#| message: FALSE
+#| fig.width: 4.8
+#| fig.height: 4.5
+#| output-location: column
+nc_wide |>
+  ggplot(mapping = aes(x = summary_value,
+                       y = hispanic_pct)) +
+  geom_point() +
+  scale_x_log10(labels = label_number(scale_cut = cut_short_scale())) +
+  labs(x = "Log Population",
+       y = "Percent Hispanic",
+       title = "North Carolina Counties")
+
+```
+
+## Log population vs Percent Black
+
+```{r}
+#| label: "codefig-blackvpop"
+#| message: FALSE
+#| fig.width: 4.8
+#| fig.height: 4.5
+#| output-location: column
+nc_wide |>
+  ggplot(mapping = aes(x = summary_value,
+                       y = nh_black_pct)) +
+  geom_point() +
+  scale_x_log10(labels = label_number(scale_cut = cut_short_scale())) +
+  labs(x = "Log Population",
+       y = "Percent Black",
+       title = "North Carolina Counties")
+
+```
+
+## Percent White vs Percent Black
+
+```{r}
+#| label: "codefig-blackvwhite"
+#| message: FALSE
+#| fig.width: 4.8
+#| fig.height: 4.5
+#| output-location: column
+nc_wide |>
+  ggplot(mapping = aes(x = nh_white_pct,
+                       y = nh_black_pct)) +
+  geom_point() +
+  labs(x = "Percent White",
+       y = "Percent Black",
+       title = "North Carolina Counties")
+
+```
+
+
+## Population Pyramids
+
+We can ask the Census for its estimates of the age breakdown of the population, using the `get_estimates()` function.
+
+```{r}
+usa <- get_estimates(
+    geography = "us",
+    product = "characteristics",
+    breakdown = c("SEX", "AGEGROUP"),
+    breakdown_labels = TRUE,
+    year = 2019
+  )
+
+usa
+```
+
+
+
+## Population Pyramids
+
+```{r}
+usa_pyr <- usa |>
+  filter(AGEGROUP %notin% "All ages",
+         str_detect(AGEGROUP, "Age"),
+         SEX %notin% "Both sexes") |>
+  mutate(value = ifelse(SEX == "Male", -value, value))
+
+usa_pyr
+```
+
+Default:
+
+```{r}
+#| label: "codefig-usapyrbasic"
+#| message: FALSE
+#| fig.width: 6
+#| fig.height: 5.5
+#| output-location: column
+usa_pyr |>
+  ggplot(mapping = aes(x = value,
+                       y = AGEGROUP,
+                       fill = SEX)) +
+  geom_col(width = 0.95, alpha = 0.75) +
+  labs(x = "Count",
+       y = NULL,
+       title = "US Population Pyramid")
+```
+
+
+Fix the scales:
+
+```{r}
+#| label: "codefig-usapyr"
+#| message: FALSE
+#| fig.width: 6
+#| fig.height: 5.5
+#| output-location: column
+usa_pyr |>
+  ggplot(mapping = aes(x = value,
+                       y = AGEGROUP,
+                       fill = SEX)) +
+  geom_col(width = 0.95, alpha = 0.75) +
+  # In the two scale functions we use \(x) label_number()
+  # and \(x) str_remove_all() as anonymous functions.
+  scale_x_continuous(
+    labels = \(x) label_number(scale = 0.001, suffix = "k")(abs(x))) +
+  scale_y_discrete(
+    labels = \(x) str_remove_all(x, "Age | years")) +
+  labs(x = "Count",
+       y = NULL,
+       title= "US Population Pyramid") +
+  theme(legend.position = "bottom")
+```
+
+
+# ARCOS Opioid Data
+
+This example shows the results of setting up the ARCOS data as a duckdb database. Unlike most of the other examples we are not actually rendering this live on these pages because I do not want to include the >40GB ARCOS raw data file in the course repository. 
+
+First we take a look at a sample of the data; just the first thousand rows:
+
+```{.r}
+library(DBI) # will be autoloaded by dbplyr too
+library(dbplyr)
+library(here)
+
+## Testing df
+tmp <- read_tsv(here::here("raw", "arcos_all_washpost_noquotes.tsv"), n_max = 1000)
+#> Rows: 1000 Columns: 16
+#> ── Column specification ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────
+#> Delimiter: "\t"
+#> chr  (14): BUYER_DEA_NO, BUYER_BUS_ACT, BUYER_NAME, BUYER_ADDL_CO_INFO, BUYER_ADDRESS1, BUYER_ADDRESS2, BUYER_CITY, BUYER_COUNTY, REPOR...
+#> dbl   (1): BUYER_ZIP
+#> date  (1): date_iso
+#> 
+#> ℹ Use `spec()` to retrieve the full column specification for this data.
+#> ℹ Specify the column types or set `show_col_types = FALSE` to quiet this message.
+```
+
+We're going to import the `date_iso` column directly as a date by creating a custom class for it.
+
+```{.r}
+raw_colclasses <- rep("character", length(colnames(tmp)))
+names(raw_colclasses) <- colnames(tmp)
+
+## Hand-rolled date converter
+setClass("myDate")
+setAs("character", "myDate", function(from) as.Date(from, format="%Y-%m-%d"))
+
+
+raw_colclasses[which(colnames(tmp) %in% "date_iso")] <- "myDate"
+raw_colclasses
+#>          BUYER_DEA_NO         BUYER_BUS_ACT            BUYER_NAME    BUYER_ADDL_CO_INFO        BUYER_ADDRESS1        BUYER_ADDRESS2 
+#>           "character"           "character"           "character"           "character"           "character"           "character" 
+#>            BUYER_CITY             BUYER_ZIP          BUYER_COUNTY         REPORTER_NAME              date_iso          Product_Name 
+#>           "character"           "character"           "character"           "character"              "myDate"           "character" 
+#> Combined_Labeler_Name  Revised_Company_Name       Reporter_family           BUYER_STATE 
+#>  
+```
+
+When we import the data to duckdb in a moment we'll use this `raw_colclasses` vector to set the column classes for duckdb's `duckdb_read_csv()` function. 
+
+First we need to open a connection and say where the database file will exist. 
+
+```{.r}
+# Raw data
+path <- here::here("raw", "arcos_all_washpost_noquotes.tsv")
+
+# DB connection
+con <- dbConnect(duckdb::duckdb(),
+                 dbdir = here("db", "arcos.duckdb"),
+                 read_only = FALSE)
+```
+
+Now we read in the data using duckdb's CSV reader. It's parallelized and very fast. It will index all the columns by default.
+
+```{.r}
+## tictoc just to time things
+tictoc::tic("Read DB")
+duckdb::duckdb_read_csv(con, "arcos", path,
+                        delim = "\t",
+                        lower.case.names = TRUE,
+                        colClasses = raw_colclasses)
+#> Warning in duckdb::duckdb_read_csv(con, "arcos", path, delim = "\t", lower.case.names = TRUE, : Arguments passed to ... are currently not
+#> used
+tictoc::toc()
+#> Read DB: 27.477 sec elapsed
+```
+
+This takes about 30 seconds on an MacBook Pro M3 Max with 128GB of RAM. On a Mac Mini with an M2 Pro processor and 16GB of RAM it takes about 80 seconds. 
+
+Now we can create a pseudo-table of our data. As a matter of convention we'll use the `_db` prefix for objects that refer to the database but have not been materialized. 
+
+```{.r}
+
+## Check
+df_db <- tbl(con, "arcos")
+
+df_db
+#> # Source:   table<arcos> [?? x 16]
+#> # Database: DuckDB v1.1.1 [root@Darwin 24.0.0:R 4.4.1//Users/kjhealy/Documents/data/arcos_opioids_test/db/arcos.duckdb]
+#>    buyer_dea_no buyer_bus_act  buyer_name  buyer_addl_co_info buyer_address1 buyer_address2 buyer_city buyer_zip buyer_county reporter_name
+#>    <chr>        <chr>          <chr>       <chr>              <chr>          <chr>          <chr>      <chr>     <chr>        <chr>        
+#>  1 BC2511980    PRACTITIONER   COLEMAN, P… NA                 FAA C/O AMERI… PSC 801 BOX 41 LONDON     9498      NA           DIAMOND PHAR…
+#>  2 BC2511980    PRACTITIONER   COLEMAN, P… NA                 FAA C/O AMERI… PSC 801 BOX 41 LONDON     9498      NA           DIAMOND PHAR…
+#>  3 BC2462719    CHAIN PHARMACY CARR-GOTTS… CARRS PHARMACY #1… 1501 E HUFFMA… NA             ANCHORAGE  99511     ANCHORAGE    MCKESSON COR…
+#>  4 AM3167120    PRACTITIONER   MERCHANT, … NA                 3710 WOODLAND… SUITE 1100     ANCHORAGE  99517     ANCHORAGE    DRX PHARMACE…
+#>  5 AM3167120    PRACTITIONER   MERCHANT, … NA                 3710 WOODLAND… SUITE 1100     ANCHORAGE  99517     ANCHORAGE    DRX PHARMACE…
+#>  6 BH6074431    PRACTITIONER   HALL, ROBE… NA                 3801 LAKE OTI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#>  7 BH6074431    PRACTITIONER   HALL, ROBE… NA                 3801 LAKE OTI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#>  8 BH6074431    PRACTITIONER   HALL, ROBE… NA                 3801 LAKE OTI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#>  9 BJ5538371    PRACTITIONER   JOHNSTON, … ALASKA  SPINE INS… 3801 UNIVERSI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#> 10 BM9540320    PRACTITIONER   MERCHANT, … NA                 1301 HUFFMAN … SUITE 205      ANCHORAGE  99515     ANCHORAGE    DRX PHARMACE…
+#> # ℹ more rows
+#> # ℹ 6 more variables: date_iso <date>, product_name <chr>, combined_labeler_name <chr>, revised_company_name <chr>, reporter_family <chr>,
+#> #   buyer_state <chr>
+
+```
+
+
+## Tabulating the Data
+
+Now that our data are read in we can in many ways treat it just as if it existed as an ordinary tibble, even though it isn't one. 
+
+How many rows do we have in our table anyway?
+
+```{.r}
+## How many rows?
+df_db |> count() 
+#> # Source:   SQL [1 x 1]
+#> # Database: DuckDB v1.1.1 [root@Darwin 24.0.0:R 4.4.1//Users/kjhealy/Documents/data/arcos_opioids_test/db/arcos.duckdb]
+#>           n
+#>       <dbl>
+#> 1 178598026
+
+```
+
+That's 178,598,026 rows.
+
+We can create new columns in the table. Not all functions are supported for this kind of operation.
+
+```{.r}
+## We could extract year and month from date using sql directly
+# df_db <- df_db |>
+#   mutate(year = sql("year(date_iso)"), 
+#          month = sql("month(date_iso)"))  
+
+## But we can now do the same thing using lubridate
+## (Previously one couldn't do this)
+df_db <- df_db |>
+  mutate(year = lubridate::year(date_iso), 
+         month = lubridate::month(date_iso))  
+         
+df_db
+#> # Source:   SQL [?? x 18]
+#> # Database: DuckDB v1.1.1 [root@Darwin 24.0.0:R 4.4.1//Users/kjhealy/Documents/data/arcos_opioids_test/db/arcos.duckdb]
+#>    buyer_dea_no buyer_bus_act  buyer_name  buyer_addl_co_info buyer_address1 buyer_address2 buyer_city buyer_zip buyer_county reporter_name
+#>    <chr>        <chr>          <chr>       <chr>              <chr>          <chr>          <chr>      <chr>     <chr>        <chr>        
+#>  1 BC2511980    PRACTITIONER   COLEMAN, P… NA                 FAA C/O AMERI… PSC 801 BOX 41 LONDON     9498      NA           DIAMOND PHAR…
+#>  2 BC2511980    PRACTITIONER   COLEMAN, P… NA                 FAA C/O AMERI… PSC 801 BOX 41 LONDON     9498      NA           DIAMOND PHAR…
+#>  3 BC2462719    CHAIN PHARMACY CARR-GOTTS… CARRS PHARMACY #1… 1501 E HUFFMA… NA             ANCHORAGE  99511     ANCHORAGE    MCKESSON COR…
+#>  4 AM3167120    PRACTITIONER   MERCHANT, … NA                 3710 WOODLAND… SUITE 1100     ANCHORAGE  99517     ANCHORAGE    DRX PHARMACE…
+#>  5 AM3167120    PRACTITIONER   MERCHANT, … NA                 3710 WOODLAND… SUITE 1100     ANCHORAGE  99517     ANCHORAGE    DRX PHARMACE…
+#>  6 BH6074431    PRACTITIONER   HALL, ROBE… NA                 3801 LAKE OTI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#>  7 BH6074431    PRACTITIONER   HALL, ROBE… NA                 3801 LAKE OTI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#>  8 BH6074431    PRACTITIONER   HALL, ROBE… NA                 3801 LAKE OTI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#>  9 BJ5538371    PRACTITIONER   JOHNSTON, … ALASKA  SPINE INS… 3801 UNIVERSI… SUITE 300      ANCHORAGE  99508     ANCHORAGE    DRX PHARMACE…
+#> 10 BM9540320    PRACTITIONER   MERCHANT, … NA                 1301 HUFFMAN … SUITE 205      ANCHORAGE  99515     ANCHORAGE    DRX PHARMACE…
+#> # ℹ more rows
+#> # ℹ 8 more variables: date_iso <date>, product_name <chr>, combined_labeler_name <chr>, revised_company_name <chr>, reporter_family <chr>,
+#> #   buyer_state <chr>, year <dbl>, month <dbl>
+         
+```
+
+Now we have `year` and `month` as their own columns.
+
+We can try out counts and other summary operations without materializing them:
+
+```{.r}
+## Count, but not really, yet
+tictoc::tic("Pretend counting")
+by_state_yr_db <- df_db |>
+  count(buyer_state, year, month)
+tictoc::toc()
+#> Pretend counting: 0.014 sec elapsed
+
+## This object is still not real, 
+## or "materialized" NB the ?? in the rows
+## (the counts shown are correct though)
+by_state_yr_db
+#> # Source:   SQL [?? x 4]
+#> # Database: DuckDB v1.1.1 [root@Darwin 24.0.0:R 4.4.1//Users/kjhealy/Documents/data/arcos_opioids_test/db/arcos.duckdb]
+#>    buyer_state  year month     n
+#>    <chr>       <dbl> <dbl> <dbl>
+#>  1 AL           2012     7 58027
+#>  2 AL           2007    12 40010
+#>  3 AL           2010     6 53036
+#>  4 AL           2012     4 54197
+#>  5 AL           2010    10 47835
+#>  6 AL           2007     1 39079
+#>  7 AL           2008     5 42683
+#>  8 AL           2011     5 52198
+#>  9 AL           2006     7 36516
+#> 10 AL           2006     4 34656
+#> # ℹ more rows
+
+```
+
+
+And when we are ready we materialize the results with `collect()`. With data of this size, these operations are orders of magnitude faster than regular dplyr would be.
+
+```{.r}
+tictoc::tic("For reals counting")
+by_state_yr <- by_state_yr_db |>
+  collect()
+tictoc::toc()
+#> For reals counting: 0.175 sec elapsed
+
+by_state_yr
+#> # A tibble: 4,635 × 4
+#>    buyer_state  year month     n
+#>    <chr>       <dbl> <dbl> <dbl>
+#>  1 AL           2010    12 53201
+#>  2 AL           2009     3 44807
+#>  3 AL           2009    11 43733
+#>  4 AL           2011     4 49788
+#>  5 AL           2010     1 41560
+#>  6 AL           2012     5 59970
+#>  7 AL           2011     7 49985
+#>  8 AL           2008     4 42716
+#>  9 AL           2008     7 45914
+#> 10 AL           2007    10 43320
+#> # ℹ 4,625 more rows
+
+## Lots of data
+by_state_yr |> 
+  summarize(tot = sum(n))
+#> # A tibble: 1 × 1
+#>         tot
+#>       <dbl>
+#> 1 178598026
+
+```
+

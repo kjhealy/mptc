@@ -1,0 +1,672 @@
+---
+title: "Models, Harnesses, and Tools"
+subtitle: "Modern Plain Text Social Science<br />Week 12"
+format: kjhslides-revealjs
+engine: knitr
+filters:
+  - invert-h1
+  - line-highlight
+  - include-code-files
+author:
+  - name: Kieran Healy
+    affiliation: "Duke University"
+date: last-modified
+editor_options:
+  chunk_output_type: console
+---
+
+
+```{r}
+#| label: "packages"
+#| include: FALSE
+library(flipbookr)
+library(here)
+library(tidyverse)
+library(kjhslides)
+```
+
+
+```{r}
+#| label: "setup"
+#| include: FALSE
+
+kjh_register_tenso()
+kjh_set_knitr_opts()
+kjh_set_slide_theme()
+
+```
+
+
+# [Models]{.fg-pink}, [Harnesses]{.fg-green}, and [Tools]{.fg-yellow}
+
+## Load the packages, as always
+
+```{r}
+#| label: "12-llms-01"
+#| message: TRUE
+library(here)      # manage file paths
+library(socviz)    # data and some useful functions
+library(tidyverse) # your friend and mine
+library(btw)       # describe R things to LLMs
+```
+
+## Overview
+
+1. What a Large Language Model actually is
+2. The difference between the [**model**]{.fg-pink} and its [**harness**]{.fg-green}
+3. [**Tools**]{.fg-blue}, and why they make the output better
+4. [**Subscription**]{.fg-lblue} vs [**API**]{.fg-orange} access
+5. Bringing R to the LLM with `btw`
+6. Working with agents safely
+
+# The [Model]{.fg-pink}
+
+## What an LLM is
+
+- A very large function: [text in]{.fg-lblue}, [text out]{.fg-green}
+- Strictly, _tokens_ in, a probability distribution over the _next_ token out. Sample one, append it, repeat.
+- Trained on an enormous amount of text (including a great deal of R code), then tuned to follow instructions and hold a conversation.
+- Its weights are fixed after training. Its knowledge stops at a _training cutoff_.
+
+## What an LLM is [not]{.fg-red}
+
+On its own, the model _cannot_:
+
+- Run code
+- Look anything up
+- Read your files
+- Know today's date
+- Remember your last conversation
+- Learn anything, in the sense we usually use that word.
+
+When a chat app seems to do these things, the work is being done [outside the model]{.fg-blue}.
+
+## The model as a web API
+
+You send a JSON request:
+
+```{.json}
+POST https://api.anthropic.com/v1/messages
+
+{
+  "model": "claude-...",
+  "max_tokens": 1024,
+  "system": "You are a helpful assistant.",
+  "messages": [
+    {"role": "user", "content": "What's the median of 3, 5, 10, and 12?"}
+  ]
+}
+```
+
+## The model as a web API
+
+And you get JSON back:
+
+```{.json}
+{
+  "role": "assistant",
+  "content": [
+    {"type": "text", "text": "The median is 7.5."}
+  ],
+  "stop_reason": "end_turn",
+  "usage": {"input_tokens": 31, "output_tokens": 9}
+}
+```
+
+Note the `usage` field. Tokens are the unit of both [cost]{.fg-orange} and [capacity]{.fg-orange}.
+
+## It is [stateless]{.fg-pink}
+
+- The model keeps no record of the conversation between requests.
+- So every request has to carry the [_whole conversation so far_]{.fg-green}.
+- The "Pachinko Machine" picture.
+- The "memory" in a chat window is just the prior turns being re-sent each time.
+- Consequences:
+  - Long conversations cost more per message, and get slower.
+  - There is a hard ceiling: the _context window_.
+  - Quality degrades as the context fills up with irrelevant material.
+
+## Some vocabulary
+
+- [**Turn**]{.fg-lblue}: one message, from either the user or the assistant.
+- [**Context**]{.fg-lblue}: everything sent to the model in a single request: system prompt, prior turns, tool definitions, tool results.
+- [**Tool**]{.fg-lblue}: a function the model can _ask_ to have run.
+- [**Round**]{.fg-lblue}: everything that happens between your request and the final answer. Possibly many turns.
+
+## The model alone is [confidently wrong]{.fg-red} about some things
+
+Ask a bare model, with no tools, to multiply two eight-digit numbers.
+
+It will produce a number. The number will have the right number of digits, and the right first few digits. It will look entirely plausible.
+
+```{r}
+#| label: "12-llms-02"
+x <- 20598162
+y <- 83106206
+
+format(x * y, big.mark = ",", scientific = FALSE)
+```
+
+One bare model answered `1,711,067,239,026,172`, which is close but wrong.
+
+## Why the model gets this wrong
+
+- The model produces _plausible continuations_. For arithmetic on numbers it has never seen, plausible is not the same as correct.
+- The same thing happens with R code:
+  - Arguments that don't exist, or that used to exist
+  - Superseded idioms: `%>%`, `gather()`/`spread()`, `aes_string()`, `size` for line widths
+  - Functions from packages newer than the training cutoff simply aren't known
+- A better model helps less here than [giving the model a way to check its answer]{.fg-green}.
+
+# The [Harness]{.fg-green}
+
+## The model and the harness
+
+- "Claude" the _app_ is not the same thing as "Claude" the _model_.
+- A [**harness**]{.fg-green} is the program wrapped around the model. It:
+  - Manages the conversation and re-sends it
+  - Writes a system prompt
+  - Reads context files from disk
+  - Tells the model what tools exist
+  - [_Runs_]{.fg-blue} the tools the model asks for
+  - Enforces permissions
+  - Gives you an interface
+
+## Harnesses you may have met
+
+- **claude.ai** and the Claude Desktop app
+- **Claude Code**, in the terminal or inside an editor like VS Code or Positron
+- Other coding agents: Codex, Gemini CLI, Positron Assistant, GitHub Copilot
+- **ellmer**, an R package: your R session becomes the harness
+
+The same underlying model behaves very differently in each, because the harness decides what the model sees and what it can do.
+
+## Where things live
+
+```{.markdown}
+  You  <──────>  Harness  <──── JSON over HTTPS ────>  Model
+                    ▲
+                    │
+                    ▼
+          Tools: files, R, shell, web
+```
+
+- The [harness]{.fg-green} holds the system prompt, context files, conversation history, and tool definitions. It runs the tools.
+- It may run on your machine (Claude Code, `ellmer`) or on a server (claude.ai).
+- The [model]{.fg-pink} only ever receives text, and only ever returns text.
+(A consequence of this: there is no more "secret", "underlying", or
+"lower-level" language that "programmers" or Anthropic, or whomever, speak to
+the model in. It's all just natural-language text top to bottom.)
+
+## Who does what
+
+| Component                            | Provided by |
+|:-------------------------------------|:------------|
+| Predicting the next token            | Model       |
+| System prompt                        | Harness     |
+| Re-sending earlier turns             | Harness     |
+| Reading `CLAUDE.md` / `AGENTS.md`     | Harness     |
+| Describing the available tools        | Harness     |
+| Actually running a tool               | Harness     |
+| Asking you for permission             | Harness     |
+
+Most of the differences you notice day to day are [harness]{.fg-green} differences.
+
+## Context files are just text
+
+This course's repository has an `AGENTS.md` file. Part of it:
+
+```{.markdown}
+# Constraints
+
+- Some datasets used may be very large. Do NOT attempt to ingest them in
+  order to inspect them. Use the available local tools (R and its packages;
+  the package APIs that allow the data to be queried, your plugins and
+  skills, etc). You may extract very small samples (<1000 rows) from data
+  files if it's necessary.
+
+- The user will handle git and other version control matters.
+```
+
+The harness pastes this into the context at the start of every session, which is how "project memory" works.
+
+# [Tools]{.fg-yellow}
+
+## What a tool is
+
+- A function that the [harness]{.fg-green} runs on the [model's]{.fg-pink} behalf.
+- The model sees only three things about it:
+  1. A [name]{.fg-blue}
+  2. A [description]{.fg-blue}, in plain English
+  3. A [schema]{.fg-blue} for its arguments
+- The model emits a structured request: "call `read_file` with `path = 'R/clean.R'`".
+- The harness runs it and sends the result back as text, in the next request.
+
+## Read tools and write tools
+
+- [**Read tools**]{.fg-lblue} observe the world: list files, read a file, read a help page, describe a data frame, check `git status`.
+- [**Write tools**]{.fg-orange} change the world: write or edit a file, run a shell command, make a commit.
+
+## The loop
+
+```{mermaid}
+%%| fig-width: 10
+sequenceDiagram
+  participant U as You
+  participant H as Harness
+  participant M as Model
+  U->>H: "Plot donors by year for each country"
+  H->>M: prompt + tool definitions
+  M->>H: tool request: describe organdata
+  H->>M: tool result: columns, types, ranges
+  M->>H: tool request: run this ggplot code
+  H->>M: tool result: error, no column 'donor'
+  M->>H: tool request: run the corrected code
+  H->>M: tool result: success
+  M->>H: final answer
+  H->>U: "Here's the plot ..."
+```
+
+## Agents
+
+> An agent is an LLM, in a harness, that calls tools repeatedly in a loop.
+
+The loop: [**read**]{.fg-lblue}, [**act**]{.fg-orange}, [**read again**]{.fg-lblue} to check what happened, decide what to do next.
+
+::: aside
+Hadley Wickham, "[What is an agent?](https://substack.hadley.nz/p/what-is-an-agent)"
+:::
+
+## A tool is just a function
+
+Here's a calculator. It evaluates an expression in an environment that contains only arithmetic.
+
+```{r}
+#| label: "12-llms-03"
+calculator <- function(code) {
+  math_env <- new.env(parent = emptyenv())
+  ops <- c("+", "-", "*", "/", "^", "(", "sqrt", "exp", "log")
+  walk(ops, \(op) assign(op, get(op, envir = baseenv()), envir = math_env))
+  eval(parse(text = code), envir = math_env)
+}
+
+calculator("20598162 * 83106206") |>
+  format(big.mark = ",", scientific = FALSE)
+```
+
+## A tool is just a function
+
+And because of how it's built, it can't do anything else:
+
+```{r}
+#| label: "12-llms-04"
+#| error: TRUE
+calculator("read.csv('secrets.csv')")
+```
+
+Give the model this tool, describe it as "_use this for any arithmetic, since you can't reliably compute it yourself_", and it gets the multiplication right.
+
+## What the model sees of a tool
+
+Here is one of the tools in the `btw` package, as the model receives it:
+
+```{r}
+#| label: "12-llms-05"
+help_tool <- btw_tools("btw_tool_docs_help_page")[[1]]
+
+help_tool@description
+
+help_tool@arguments@properties |>
+  map_chr(\(p) p@description) |>
+  str_trunc(70)
+```
+
+That text is [_all_]{.fg-blue} the model knows about this tool, so the descriptions have to be written carefully.
+
+## Why tools improve the output
+
+1. [**Ground truth instead of plausible guesses.**]{.fg-green} A calculator. The help page for the version of `dplyr` _you actually have installed_.
+2. [**Current information.**]{.fg-green} Today's date. Package release notes. The web.
+3. [**Verification.**]{.fg-green} Run the code. Run the tests. Render the document. Look at the error. Try again.
+4. [**Acting, not just suggesting.**]{.fg-green} Edit the file directly, instead of handing you a snippet to paste.
+
+Of the four, verification matters most: a model that can check its own work is much more reliable than one that can't.
+
+## Tools also [manage]{.fg-yellow} the output
+
+- An **edit** tool that replaces one exact span of text fails and complains if the text isn't found. That's safer than having the model rewrite a whole file from memory.
+- **Structured output**: constrain the response to some schema, so you get a data frame back, not prose.
+- **Deterministic steps should use deterministic tools.** Don't ask a model to format code. Run `air format .`
+- A context-file instruction ("_always run `air`_") is a request. A
+[_hook_]{.fg-orange} that mechanically runs `air` every time a file is saved is
+a much stronger guarantee.
+
+## A coding agent is a handful of tools
+
+1. Read a file
+2. Write a file
+3. Edit part of a file
+4. List files
+5. Search across files
+6. Run a shell command
+
+Only 1, 2, and 6 are strictly essential. Claude Code's built-in tools are essentially these, plus web search and fetch, and the ability to start sub-agents.
+
+::: aside
+Hadley Wickham, "[A coding agent is six functions in a trenchcoat](https://substack.hadley.nz/p/a-coding-agent-is-six-functions-in)"
+:::
+
+# [Subscription]{.fg-lblue} vs [API]{.fg-orange}
+
+## Two ways to pay for the same models
+
+|                | [Subscription]{.fg-lblue}                    | [API]{.fg-orange}                          |
+|:---------------|:---------------------------------------------|:-------------------------------------------|
+| You pay        | A flat monthly fee                           | Per token, input and output                |
+| Limits         | Usage caps that reset over time windows      | Rate limits, plus spend limits you set     |
+| Credentials    | Log in with your account                     | An API key, e.g. `ANTHROPIC_API_KEY`       |
+| Harness        | Anthropic's: claude.ai, Desktop, Claude Code | Anything: Claude Code, `ellmer`, your own  |
+| Good for       | Interactive work                             | Programs, pipelines, batch jobs, apps      |
+
+## API keys for your own code
+
+- A subscription login is for use with the provider's own apps.
+- If [_your_ code]{.fg-blue} calls the model directly, it needs an [API key]{.fg-orange}. That includes `ellmer::chat_anthropic()` and `btw::btw_client()`.
+- API keys are secrets.
+  - Keep them in `~/.Renviron`, never in a script. There are fancier ways to
+  manage this too.
+  - Never commit them to git.
+  - Set a spend limit in the console.
+
+## Two directions
+
+[**Bring the LLM to R**]{.fg-orange}
+
+- `ellmer` in your R session. R _is_ the harness.
+- Needs an API key.
+- Good for using an LLM as part of an analysis, e.g. classifying 10,000 open-ended survey responses.
+
+[**Bring R to the LLM**]{.fg-lblue}
+
+- An existing harness, like Claude Code, calls R through tools.
+- Works with a subscription.
+- Good for interactive work: writing, checking, and fixing code with your data and your packages.
+
+## For reference: R as the harness
+
+This needs an API key, so we won't run it today. The whole harness is about a dozen lines.
+
+```{.r}
+library(ellmer)
+
+chat <- chat_anthropic()   # needs ANTHROPIC_API_KEY
+
+chat$register_tool(tool(
+  calculator,
+  description = "Evaluate a mathematical expression. Use this for any
+    arithmetic, since you can't reliably compute it yourself.",
+  arguments = list(code = type_string("An expression, e.g. '1 + 2 * 3'."))
+))
+
+chat$chat("What's 20598162 * 83106206?")
+#> ◯ [tool call] calculator(code = "20598162 * 83106206")
+#> ● #> 1711835094393372
+#> 20598162 × 83106206 = 1,711,835,094,393,372.
+```
+
+::: aside
+After Hadley Wickham, "[Your LLM can't math (and that's ok)](https://substack.hadley.nz/p/your-llm-cant-math-and-thats-ok)"
+:::
+
+# [Bringing R to the LLM]{.fg-lblue}
+
+## The Model Context Protocol (MCP)
+
+- A standard way for a harness to discover and call tools provided by some other program.
+- The harness is the MCP [**client**]{.fg-green}. The program providing tools is an MCP [**server**]{.fg-blue}.
+- Write the server once and it works with any client: Claude Code, Claude Desktop, Positron, VS Code.
+- If R can run an MCP server, any of these harnesses can use R as a tool.
+
+## The `btw` package
+
+"By the way, here's some context." A toolkit for describing R things to LLMs.
+
+Three ways to use it:
+
+1. [**`btw()`**]{.fg-blue} at the console: copies a description to the clipboard, for pasting into any chat.
+2. [**`btw_mcp_server()`**]{.fg-blue}: serves R tools to Claude Code, Claude Desktop, etc.
+3. [**`btw_client()`**]{.fg-blue}: an `ellmer` chat with `btw` tools. Needs an API key.
+
+Modes 1 and 2 work with a subscription.
+
+## Mode 1: `btw()` at the console
+
+```{r}
+#| label: "12-llms-06"
+organ_small <- organdata |>
+  select(country, year, donors, consent_law)
+
+btw(organ_small, clipboard = FALSE)
+```
+
+Interactively, `btw(organ_small)` puts this on your clipboard, ready to paste into claude.ai.
+
+## Mode 1: `btw()` at the console
+
+You can mix objects, documentation, and your question:
+
+```{.r}
+btw(
+  organ_small,
+  dplyr::across,
+  vignette("colwise", "dplyr"),
+  "Using across(), get the mean and sd of every numeric column by consent_law."
+)
+#> ✔ btw copied to the clipboard!
+```
+
+- The model gets your [actual column names and types]{.fg-green}, not guesses.
+- It gets the help page from [your installed version]{.fg-green} of `dplyr`.
+- This is crude, but it works with any chat interface, and it's much better than giving the model no context.
+
+## Mode 2: `btw` as an MCP server
+
+Tell Claude Code about it, once, from the terminal:
+
+```{.zsh}
+claude mcp add -s user r-btw -- Rscript -e \
+  "btw::btw_mcp_server(list('docs', 'env', 'sessioninfo', 'cran'))"
+```
+
+Check that it's connected:
+
+```{.zsh}
+claude mcp list
+#> r-btw: Rscript -e btw::btw_mcp_server(...) - ✔ Connected
+```
+
+Now, in every Claude Code session, the model can call R's help system, inspect data frames, check installed packages, and search CRAN.
+
+## Choosing tool groups
+
+```{r}
+#| label: "12-llms-07"
+btw_tools() |>
+  map(\(t) tibble(group = t@annotations$btw_group, tool = t@name)) |>
+  list_rbind() |>
+  summarize(tools = n(), .by = group)
+```
+
+- Claude Code already has its own file, search, and shell tools. Don't duplicate them.
+- `docs`, `env`, `sessioninfo`, and `cran` are a good start. Add `pkg` if you write packages.
+- `btw_tool_run_r` is opt-in. Name it explicitly to let the model run R code.
+
+## Docs in the loop
+
+Ask a model about `purrr::in_parallel()`, added in mid-2025. Without tools, it may not know it exists, or may confidently invent arguments. With `btw`, it calls a tool instead:
+
+:::{.smallcode}
+
+```{r}
+#| label: "12-llms-08"
+help_lines <- btw_tool_docs_help_page("in_parallel", "purrr")@value |>
+  str_split_1("\n")
+
+help_lines[str_which(help_lines, "#### Usage"):length(help_lines)] |>
+  head(16) |>
+  writeLines()
+```
+
+:::
+
+## Connecting to your [live]{.fg-yellow} R session
+
+- By default, the MCP server runs in its own fresh R process. It can't see the objects in your console.
+- To share your session, run this in your interactive R console (RStudio or Positron):
+
+```{.r}
+btw::btw_mcp_session()
+```
+
+- Now the `env` tools describe _your_ data frames, and `run_r` runs in _your_ session.
+- The model calls `list_r_sessions` and `select_r_session` to find it.
+- If Claude Code was already running, reconnect with `/mcp`.
+
+## An interactive workflow
+
+In your R console:
+
+```{.r}
+library(tidyverse)
+library(socviz)
+
+organ_small <- organdata |>
+  select(country, year, donors, consent_law)
+
+btw::btw_mcp_session()
+```
+
+In Claude Code:
+
+```{.markdown}
+Using `organ_small` in my R session, make a faceted line plot of donors
+by year for each country, grouped by consent_law. Use current ggplot2
+conventions. Run the code to check that it works before showing it to me.
+```
+
+## The tool calls, step by step
+
+| Step | Tool call                               | What it does                                |
+|:----:|:----------------------------------------|:----------------------------------------------|
+| 1    | `select_r_session`                       | Attaches to your console                    |
+| 2    | `btw_tool_env_describe_data_frame`       | Real column names, types, ranges              |
+| 3    | `btw_tool_docs_help_page` (`ggplot2`)    | Current arguments, e.g. `linewidth` not `size` |
+| 4    | `btw_tool_run_r`                         | Runs the code; sees warnings and errors       |
+| 5    | `btw_tool_run_r` (again)                 | Fixes the problem and re-checks               |
+| 6    | _Final answer_                            | Code that has actually been run               |
+
+The plot appears in your session's plot pane, because the code ran in _your_ session.
+
+## Why this beats copy-and-paste
+
+- [Documentation]{.fg-green} from the versions you have installed.
+- [Data]{.fg-green}: actual names and types, without uploading the data itself.
+- [Verification]{.fg-green}: code is run before you see it.
+- [Iteration]{.fg-green}: you keep working in your console; the model works alongside it on the same objects.
+- [Package work]{.fg-green}: with the `pkg` group, the model can `document()`, `test()`, and `check()` in the loop.
+
+## The `btw` command-line tool
+
+Some harnesses can't use MCP, or you want to keep tool definitions out of the context. `btw` also ships a CLI.
+
+```{.r}
+btw::install_btw_cli()
+```
+
+```{.zsh}
+btw docs topics purrr
+btw docs help dplyr::across
+btw pkg test
+```
+
+Any agent with a shell tool can call it. The installer offers a _skill_ telling the agent the CLI exists.
+
+## Context files and skills
+
+- [**Context files**]{.fg-blue}: `CLAUDE.md` or `AGENTS.md` at the root of a project. Standing instructions: style rules, project layout, things to avoid.
+- [**Skills**]{.fg-blue}: folders of instructions (and sometimes scripts) that the harness loads only when relevant. Cheap until needed.
+- R packages can ship skills. `btw_skill_install_package()` installs them; `btw_skill_install_project()` does it for all of a project's dependencies.
+- Again, these are plain-text files. A skill is just a Markdown file full of
+instructions written in English.
+- Widely used skills can be kept in you `~/.claude` folder; the Agent knows how
+to install them. Project-specific ones can be kept in the equivalent folder of
+the project and versioned with git like everything else in it.
+
+# Working [safely]{.fg-red}
+
+## Agents act
+
+- Acting on your behalf is what makes an agent useful, and it also means its
+mistakes have real consequences. You're letting it use your computer.
+- Harnesses offer [permission modes]{.fg-blue}: ask before every action; allow edits but ask about commands; plan only; or decide automatically.
+- [Sandboxes]{.fg-blue} restrict which files and which network hosts a command can touch.
+
+## "Auto" doesn't mean "careful"
+
+Hadley Wickham asked two coding agents in auto mode to install a tool via `curl ... | sh`, i.e. run a script from the internet without reading it.
+
+- Both recognized this was risky.
+- Both ran it anyway, because the user had asked.
+- One disabled its own sandbox when the sandbox got in the way.
+
+The model's judgment is not an effective security device.
+
+::: aside
+"[Auto mode knows it's dangerous (and does it anyway)](https://substack.hadley.nz/p/auto-mode-knows-its-dangerous-and)"
+:::
+
+## What sort of data are you analyzing?
+
+- Even with tool calls and local evaluation, you're still talking to a model
+that is on someone else's computer, and not just code but also data may be
+exchanged between you and it.
+
+- Are you comfortable with this? Are you _permitted_ to do this? What are the
+rules (licensing; IRB-related; MOUs; federal law ...) governing data sharing?
+What are the terms under which you are using the Agent? Does the company providing
+the agent assert the right to treat any communication with you as future
+training data?
+
+## Practical safeguards
+
+- [**git is your safety net.**]{.fg-green} Commit before you let an agent
+loose. Use basic branch discipline. Read the diff afterwards.
+- Keep secrets out of reach. `.Renviron` for keys, not scripts.
+- Large datasets: tell the agent to _query_ it (with `duckdb`, `arrow`,
+`dbplyr`), not read it.
+- Think about developing your code on dummy or synthetic data. There are a
+number of useful R packages for this: `messy`, `faux`, `synthpop`, `charlatan`,
+`missMethods`.
+- Start with read-only tools. Add write tools as you gain confidence.
+- Prefer narrow tools with simple inputs to "run anything".
+
+## Implications for your work
+
+- The model's output is a draft. [Your judgment]{.fg-blue} is the check. Also,
+you are still responsible for everything.
+- It's important to bear this in mind because you are definitely going to be
+tempted to be lazy, and just tell the robot to do everything.
+- Verification matters _more_ now, not less: tests, rendering, `targets` pipelines.
+- An LLM's responses are not reproducible, but the code it writes is reproducible once you've read and committed it.
+- The things this course has covered (plain text, the shell, scripts, Quarto, git, build systems, packages) are what make a project legible to an agent.
+
+## Reading
+
+There's loads of LLM stuff in general, but here are some of Hadley's R-specific posts:
+
+- Hadley Wickham, "[What is an agent?](https://substack.hadley.nz/p/what-is-an-agent)"
+- Hadley Wickham, "[Your LLM can't math (and that's ok)](https://substack.hadley.nz/p/your-llm-cant-math-and-thats-ok)"
+- Hadley Wickham, "[A coding agent is six functions in a trenchcoat](https://substack.hadley.nz/p/a-coding-agent-is-six-functions-in)"
+- Hadley Wickham, "[Auto mode knows it's dangerous (and does it anyway)](https://substack.hadley.nz/p/auto-mode-knows-its-dangerous-and)"
+- `btw`: <https://posit-dev.github.io/btw/>
+- `ellmer`: <https://ellmer.tidyverse.org>

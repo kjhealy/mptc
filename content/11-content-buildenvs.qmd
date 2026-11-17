@@ -1,0 +1,54 @@
+---
+title: "11. Helpers, Build Systems, Environments, and Packages"
+date: last-modified
+date-format: full
+---
+
+```{r slides, echo=FALSE, include=FALSE}
+source(here::here("R", "slide-things.R"))
+
+slide_details <- tibble::tribble(
+  ~youtube_id,   ~title, ~slide, ~active,
+  "", "", "1", TRUE)
+
+```
+
+## This week ...
+
+As projects grow, they need more structure. We look at some helpers that make day-to-day work easier (`reprex`, `air`, `usethis`), at making tables, and at the tools that keep a growing project in order: build systems like `make` and `targets`, reproducible package environments with `renv`, and R packages as a way to bundle functions and data.
+
+## Required Reading
+
+- @wickham23:_r_packag. [Read the text online](https://r-pkgs.org). Read the [Introduction](https://r-pkgs.org/introduction.html) and [The Whole Game](https://r-pkgs.org/whole-game.html), which builds a small package from start to finish.
+- @landau22:_r. [Read the manual online](https://books.ropensci.org/targets/). Read the [Walkthrough](https://books.ropensci.org/targets/walkthrough.html) chapter.
+- The `renv` [introductory vignette](https://rstudio.github.io/renv/articles/renv.html).
+
+## Examples
+
+[This week's example](/example/11-example-buildenvs.qmd) builds a small
+`targets` pipeline in a temporary directory, runs it, and then changes one step
+to show that `targets` rebuilds only what is out of date.
+
+## Slides
+
+<script type="application/javascript">
+
+function resizeIFrameToFitContent( iFrame ) {
+
+   iFrame.width  = document.getElementById("quarto-document-content").clientWidth;
+   iFrame.height  = (document.getElementById("quarto-document-content").clientWidth * 0.5625)
+}
+
+window.addEventListener('DOMContentLoaded', function(e) {
+
+    var iFrame = document.getElementById( 'quartoframe' );
+    resizeIFrameToFitContent( iFrame );
+    } );
+
+</script>
+
+<iframe class="slide-deck" id="quartoframe" src="../slides/11-slides-buildenvs.html"></iframe>
+
+```{r show-slide-tabs, echo=FALSE, results="asis"}
+slide_win_button("/slides/11-slides-buildenvs")
+```

@@ -23,6 +23,13 @@ Sometimes, embarrassing is good. Like when a task is embarrassingly parallel.
 
 This post introduces `in_parallel()`, the new way of running `purrr`'s `map()` functions in parallel, using `mirai` as the back end. It's what we'll use in class.
 
+## Examples
+
+[This week's example](/example/10-example-parallel.qmd) runs a small
+bootstrap two times. The first run uses an ordinary `map()`. The second run
+uses `in_parallel()` with a set of `mirai` workers. The example also shows the
+most common error: a worker cannot find an object that you did not supply.
+
 ## Slides
 
 <script type="application/javascript">
@@ -41,8 +48,8 @@ window.addEventListener('DOMContentLoaded', function(e) {
 
 </script>
 
-<!-- <iframe class="slide-deck" id="quartoframe" src="../slides/10-slides-parallel.html"></iframe> -->
+<iframe class="slide-deck" id="quartoframe" src="../slides/10-slides-parallel.html"></iframe>
 
 ```{r show-slide-tabs, echo=FALSE, results="asis"}
-#slide_win_button("/slides/10-slides-parallel")
+slide_win_button("/slides/10-slides-parallel")
 ```

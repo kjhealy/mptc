@@ -1,0 +1,185 @@
+---
+title: "Example 11: A pipeline"
+engine: knitr
+---
+
+```{r}
+#| include: false
+library(tidyverse)
+library(here)
+library(socviz)
+```
+
+## Load our packages
+
+```{r}
+#| label: "11-example-01"
+#| message: TRUE
+library(here)      # manage file paths
+library(socviz)    # data and some useful functions
+library(tidyverse) # your friend and mine
+library(targets)   # pipelines
+```
+
+## A scratch project
+
+A `targets` project has two parts: a script, `_targets.R`, that defines the
+pipeline, and a data store, `_targets/`, where the results are kept. Normally
+both live at the top of your project folder. Here we put them in a temporary
+directory, so as not to break this website.
+
+```{r}
+#| label: "11-example-02"
+pipeline_dir <- fs::dir_create(fs::path_temp("organ_pipeline"))
+pipeline_script <- fs::path(pipeline_dir, "_targets.R")
+pipeline_store <- fs::path(pipeline_dir, "_targets")
+```
+
+## Write the pipeline
+
+`tar_script()` writes its contents to a `_targets.R` file. The pipeline takes
+the `organdata` data, drops missing values, summarizes donor rates by country,
+fits a model, and draws a figure. Each step is a _target_.
+
+```{r}
+#| label: "11-example-03"
+tar_script(
+  {
+    library(targets)
+    tar_option_set(packages = c("dplyr", "ggplot2", "socviz"))
+
+    list(
+      tar_target(organ_raw, organdata),
+      tar_target(
+        organ_clean,
+        organ_raw |>
+          filter(!is.na(donors), !is.na(gdp))
+      ),
+      tar_target(
+        donor_summary,
+        organ_clean |>
+          summarize(
+            mean_donors = mean(donors),
+            sd_donors = sd(donors),
+            .by = c(country, consent_law)
+          )
+      ),
+      tar_target(
+        donor_model,
+        lm(donors ~ gdp + consent_law, data = organ_clean)
+      ),
+      tar_target(
+        donor_plot,
+        ggplot(
+          donor_summary,
+          aes(
+            x = mean_donors,
+            y = reorder(country, mean_donors),
+            color = consent_law
+          )
+        ) +
+          geom_pointrange(
+            aes(
+              xmin = mean_donors - sd_donors,
+              xmax = mean_donors + sd_donors
+            )
+          ) +
+          labs(
+            x = "Donors per million population",
+            y = NULL,
+            color = "Consent law"
+          )
+      )
+    )
+  },
+  script = pipeline_script,
+  ask = FALSE
+)
+```
+
+## What's in the pipeline?
+
+`tar_manifest()` lists the targets and the command for each one.
+
+```{r}
+#| label: "11-example-04"
+tar_manifest(script = pipeline_script) |>
+  select(name)
+```
+
+## Run it
+
+`tar_make()` runs every target that is out of date. The first time through,
+that's all of them.
+
+```{r}
+#| label: "11-example-05"
+tar_make(script = pipeline_script, store = pipeline_store)
+```
+
+## Read the results
+
+Results are stored on disk. `tar_read()` fetches them.
+
+```{r}
+#| label: "11-example-06"
+tar_read(donor_model, store = pipeline_store) |>
+  broom::tidy()
+```
+
+```{r}
+#| label: "11-example-07"
+#| fig-width: 8
+#| fig-height: 6
+tar_read(donor_plot, store = pipeline_store)
+```
+
+## Run it again
+
+Nothing has changed, so nothing needs to be rebuilt.
+
+```{r}
+#| label: "11-example-08"
+tar_outdated(script = pipeline_script, store = pipeline_store)
+
+tar_make(script = pipeline_script, store = pipeline_store)
+```
+
+## Change one step
+
+Now we edit the pipeline so that the model also includes `pubhealth`. We
+rewrite the script with one line changed.
+
+```{r}
+#| label: "11-example-09"
+pipeline_script |>
+  read_lines() |>
+  str_replace(
+    fixed("donors ~ gdp + consent_law"),
+    "donors ~ gdp + pubhealth + consent_law"
+  ) |>
+  write_lines(pipeline_script)
+```
+
+`targets` works out that only the model is affected. The data, the summary,
+and the plot don't depend on it, so they stay as they are.
+
+```{r}
+#| label: "11-example-10"
+tar_outdated(script = pipeline_script, store = pipeline_store)
+
+tar_make(script = pipeline_script, store = pipeline_store)
+```
+
+```{r}
+#| label: "11-example-11"
+tar_read(donor_model, store = pipeline_store) |>
+  broom::tidy()
+```
+
+## Clean up
+
+```{r}
+#| label: "11-example-12"
+fs::dir_delete(pipeline_dir)
+```
